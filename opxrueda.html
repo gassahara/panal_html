@@ -1,0 +1,1248 @@
+<! DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>TICKETS</title>
+    <STYLE>
+      iframe {
+	  width: 250px;
+	  height: 50px;
+	  border-width: 0;
+      }
+      a {
+	  text-decoration: none;
+	  color: blue;
+	  font-weight: bolder;
+      }
+      p, span {
+	  color: #d2a059;
+	  font-family: Sans-Serif;
+	  font-size: 18pt;
+      }
+      td {
+	  font-size: 20pt; padding: 5; text-align: center;
+      }
+      input {
+	  font-family: Sans-Serif;
+	  font-size: 18pt;
+	  
+      }
+      .color {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        border: 1px solid black;
+      }
+    </STYLE>
+    <script src="openpgpjs/dist/openpgp.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      var pubkey=`-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+=5EZI
+-----END PGP PUBLIC KEY BLOCK-----`;
+
+      var encrypted=new Uint8Array();
+      var passw="";
+      var t=null;
+      var scro=null;
+      var iv=new Uint8Array();
+      var remotepath="http://localhost";
+      var esperaencrgrados=null;
+      var longitud=0;
+      var latitud=0;
+      var c=0;
+      var errores=null;
+      var ci=0;
+      var pk_global_full=null;
+      var previo=null;
+      var numeros=[];
+      var fechas=[];
+      var bets=[];
+      var show=null;
+      var rsaPublicKey=null;
+
+      const colors = [
+	  ["red", "#FF0000"],
+	  ["green", "#00FF00"],
+	  ["blue", "#0000FF"],
+	  ["yellow", "#FFFF00"],
+	  ["purple", "#800080"],
+	  ["orange", "#FFA500"],
+	  ["pink", "#FFC0CB"],
+	  ["brown", "#A52A2A"],
+	  ["gray", "#808080"],
+	  ["black", "#000000"],
+	  ["white", "#FFFFFF"],
+	  ["cyan", "#00FFFF"],
+	  ["magenta", "#FF00FF"],
+	  ["olive", "#808000"],
+	  ["navy", "#000080"],
+	  ["teal", "#008080"],
+	  ["gold", "#FFD700"],
+	  ["beige", "#F5F5DC"],
+	  ["khaki", "#F0E68C"],
+	  ["coral", "#FF7F50"],
+      ];
+      var colour=null;
+      var regprocessed=null;
+      var init_OTProcessed=null;
+      var resource_index=null
+      function setColour(coloor){
+	  colour=coloor;
+	  console.log({colour});
+      }
+      function importSecretKey(rawKeyz) {
+	  return window.crypto.subtle.importKey(
+	      "raw",
+	      rawKeyz,
+	      "AES-CTR",
+	      true,
+	      ["encrypt", "decrypt"]
+	  );
+      }
+
+      async function generateKey(buzon) {
+	  return new Promise((resolve)=>{
+	      const options = {
+		  userIDs: [{ name: ""+buzon, email: 'test@server.com' }],
+		  type: 'rsa',
+		  rsaBits: 4096,
+		  format: 'armored'
+	      };
+	      openpgp.generateKey(options).then((privateKey, publicKey)=>{
+		  resolve( [privateKey, publicKey] );
+	      });
+	  });
+      }
+
+      var rawKey="";
+      var kkey=0;
+
+      function modalwarning() {
+	  
+      }
+      function aleatoria() {
+	  var longitudcadenaaleatoria=Math.random() * (260 - 35) + 35;
+	  var cadenaaleatoria="";
+	  var letra=47;
+	  while(longitudcadenaaleatoria>=0) {
+ 	      while(letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='/'||String.fromCharCode(letra)=='*'||String.fromCharCode(letra)=='+'||String.fromCharCode(letra)==';'||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+	      cadenaaleatoria=cadenaaleatoria+String.fromCharCode(letra);
+	      longitudcadenaaleatoria--;
+	      letra=47;
+	  }
+	  return cadenaaleatoria;
+      }
+
+      function userPassword() {
+	  return new Promise((resolve)=>{
+	      if(document.getElementById('usuario').value.length<8) {
+		  document.getElementById("modaltext").innerHTML="Username Must Be At Least 8 Characters Long";
+		  document.getElementById("modal").style.display="block";
+		  resolve({error: "Username Must Be At Least 8 Characters Long"});
+		  return false;
+	      }
+	      if(document.getElementById('passphrase').value.length<10) {
+		  document.getElementById("modaltext").innerHTML="Password Must Be At Least 10 Characters Long";
+		  document.getElementById("modal").style.display="block";
+		  resolve({error: "Password Must Be At Least 10 Characters Long"});
+		  return false;
+	      }
+	      if(colour==null || colour=="" || colour.length<2) {
+		  resolve({error: "Please Select a Color"});
+		  return false;
+	      }
+	      console.log({colour});
+	      digestMessage(document.getElementById('usuario').value).then((userh)=>{
+		  digestMessage(userh+colour).then((username)=>{
+		      digestMessage(document.getElementById('passphrase').value).then((pwdh)=>{
+			  digestMessage(pwdh+colour).then((pwdt)=>{
+			      digestMessage(colour+pwdt+username).then((indice)=>{
+				  digestMessage(indice).then((hash_indice)=>{
+				      var bytes = new Uint8Array(16);
+				      for (var ci=0; ci < 16; ci++) bytes[ci] = parseInt(pwdt.substr( (ci * 2) + 32, 2), 16);
+				      var retArray=new Array(hash_indice, userh, pwdt, bytes);
+				      resolve(retArray);
+				  });
+			      });
+			  });
+		      });
+		  });
+	      });
+	  });
+      }
+      
+      function pon(obj) {
+	  divs=0;
+	  while(divs<document.getElementsByTagName("div").length ) {
+	      document.getElementsByTagName("div")[divs].style.display="none";
+	      divs++;
+	  }
+	  document.getElementById(obj).style.display='';
+      }
+      function isArray(obj) {
+	  return Object.prototype.toString.call(obj) === '[object Array]';
+      }
+
+      async function RSA_decr(encryptedu, rsaPrivateKey, rsaPublicKey) {
+	  return new Promise(async (resolve)=>{
+	      const { data: decrypted, signatures } = await openpgp.decrypt({
+		  encryptedu,
+		  verificationKeys: rsaPublicKey, // optional
+		  decryptionKeys: rsaPrivateKey
+	      });
+	      resolve(decrypted);
+	  });
+      }
+      async function decr(encryptedu, iv) {
+	  return new Promise((reslv)=>{
+	      userPassword().then((rawKey)=>{
+		  setOTP_SRC().then((response_array)=>{
+		      importSecretKey(rawKey[3]).then(async (kkey)=>{
+			  var yy=0;
+			  var x=0;
+			  var iv2=new Uint8Array(16);
+			  var zz=iv.length;
+			  var bufferc=new Uint8Array(encryptedu[0].length);
+			  var bb="";
+			  var paraevaluar="";
+			  while(yy<zz) {
+			      x=0;
+			      while(x<iv[yy].length) {
+				  iv2[x]=iv[yy][x];
+				  x++;
+			      }
+			      x=0;
+			      while(x<bufferc.length) {
+				  bufferc[x]=encryptedu[yy][x];
+				  x++;
+			      }
+			      ciphertext = await window.crypto.subtle.decrypt(
+				  {
+				      name: "AES-CTR",
+				      counter:iv2,
+				      length: 128
+				  },
+				  kkey,
+				  bufferc
+			      );
+			      const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+			      c=0;
+			      bb="";
+			      while(c<buffer.length) {
+				  if(buffer[c]!=0) bb+=String.fromCharCode(buffer[c]);
+				  c++;
+			      }
+			      paraevaluar+=bb;
+			      yy++;
+			  }
+			  reslv(paraevaluar);
+		      });
+		  });
+	      });  
+	  });
+      }
+
+      async function digestMessage(message) {
+	  const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+	  const hashBuffer = await crypto.subtle.digest('SHA-512', msgUint8);           // hash the message
+	  const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+	  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+	  return hashHex;
+      }
+      //-----------------------------------------------
+
+      async function undaleyeval(encryptedu){
+	  if(!esperaencr) {
+	      var paraevaluar="";
+	      if(encryptedu) {
+		  const { data:verified } = await openpgp.verify({
+		      message: await openpgp.message.readArmored(encryptedu),
+		      publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+		  });
+		  var vi=0;
+		  var decrypted="";
+		  while(vi<verified.length){
+		      decrypted+=String.fromCharCode(verified[vi]);
+		      vi++;
+		  }
+		  errores=".";
+		  prefix_iv=null;
+		  console.log(decrypted);
+		  eval(decrypted);
+		  var iv_undale="";
+		  if(errores!="." || !prefix_iv ) {
+		      document.getElementById("response").innerHTML=errores;
+		      espera=false;
+		      return decrypted;
+		  } else {
+		      iv_undale=prefix_iv;
+		      encryptedu=prefix_buf;
+		      var yy=0;
+		      var x=0;
+		      var iv2=new Uint8Array(16);
+		      var zz=iv_undale.length;
+		      var bufferc=new Uint8Array(encryptedu[0].length);
+		      var bb="";
+		      while(yy<zz) {
+			  x=0;
+			  while(x<iv_undale[yy].length) {
+			      iv2[x]=iv_undale[yy][x];
+			      x++;
+			  }
+			  x=0;
+			  while(x<bufferc.length) {
+			      bufferc[x]=encryptedu[yy][x];
+			      x++;
+			  }
+ 			  rawKey=await userPassword();
+			  kkey= await importSecretKey(rawKey);
+			  ciphertext = await window.crypto.subtle.decrypt(
+			      {
+				  name: "AES-CTR",
+				  counter:iv2,
+				  length: 128
+			      },
+			      kkey,
+			      bufferc
+			  );
+			  const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+			  c=0;
+			  bb="";
+			  while(c<buffer.length) {
+			      if(buffer[c]!=0) bb+=String.fromCharCode(buffer[c]);
+			      c++;
+			  }
+			  paraevaluar+=bb;
+			  yy++;
+		      }
+		      espera=false;
+		      return(paraevaluar);
+		  }
+		  
+	      } else {
+		  espera=false;
+		  return null;
+	      }
+	  }
+	  espera=false;
+      }
+      // ------ - - - - - -
+      async function undale(encryptedu){
+	  if(encryptedu && !esperaencr) {
+	      const { data:verified } = await openpgp.verify({
+		  message: await openpgp.message.readArmored(encryptedu),
+		  publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+	      });
+	      var vi=0;
+	      var decrypted="";
+	      while(vi<verified.length){
+		  decrypted+=String.fromCharCode(verified[vi]);
+		  vi++;
+	      }
+	      errores=".";
+	      document.getElementById("response").style.display="";
+	      document.getElementById("response").innerHTML="<PRE>"+decrypted+"</PRE>";
+	      eval(decrypted);
+	      var iv_u="";
+	      if(errores!=".") {
+		  document.getElementById("response").innerHTML=errores;
+	      } else {
+		  iv_u=prefix_iv;
+		  encryptedu=prefix_buf;
+		  var yy=0;
+		  var x=0;
+		  var iv2=new Uint8Array(16);
+		  var zz=iv_u.length;
+		  var bufferc=new Uint8Array(encryptedu[0].length);
+		  var bb="";
+		  while(yy<zz) {
+		      x=0;
+		      while(x<iv_u[yy].length) {
+			  iv2[x]=iv_u[yy][x];
+			  x++;
+		      }
+		      x=0;
+		      while(x<bufferc.length) {
+			  bufferc[x]=encryptedu[yy][x];
+			  x++;
+		      }
+		      rawKey=await userPassword();
+		      kkey= await importSecretKey(rawKey);
+		      ciphertext = await window.crypto.subtle.decrypt(
+			  {
+			      name: "AES-CTR",
+			      counter:iv2,
+			      length: 128
+			  },
+			  kkey,
+			  bufferc
+		      );
+		      const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+		      c=0;
+		      bb="";
+		      while(c<buffer.length) {
+			  bb+=String.fromCharCode(buffer[c]);
+			  c++;
+		      }
+		      document.getElementById("response").innerHTML+="<PRE>"+bb+"</PRE>";
+		      yy++;
+		  }
+	      }
+	  } else return null;
+      }
+      async function datosn() {
+	  let cb=0;
+	  let cadena="";
+	  while(cb<bytes.length) {
+	      cadena+=bytes[cb];
+	      cb++;
+	      if(c<bytes.length) cadena+=",";
+	  }
+	  cadena+="};/*"+aleatoria()+'*'+'/'+"\nchar *email=" + '"' + document.getElementById("usuario").value + '"' + ";\n/*"+aleatoria()+" */";
+	  cadena+="/*"+aleatoria()+'*'+'/'+"\nchar numeros[" + numeros.length + "]={";		      
+	  let hb=0;
+	  while(hb<numeros.length) {
+	      cadena+=numeros[hb];
+	      hb++;
+	      if(hb<numeroslen) cadena+=",";
+	  }
+	  cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
+	  cadena+="/*"+aleatoria()+'*'+'/'+"\nlong dates[" + fechas.length + "]={";
+	  hb=0;
+	  while(hb<fechas.length) {
+	      cadena+=fechas[hb];
+	      hb++;
+	      if(hb<fechaslen) cadena+=",";
+	  }
+	  cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
+	  cadena+="/*"+aleatoria()+'*'+'/'+"\ndouble bets[" + bets.length + "]={";
+	  hb=0;
+	  while(hb<bets.length) {
+	      cadena+=bets[hb];
+	      hb++;
+	      if(hb<betslen) cadena+=",";
+	  }
+	  cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
+	  alert(cadena);
+	  encr(cadena);
+      }
+      var t3=null;
+      function insertacode(texto, code) {
+	  if(texto.indexOf("(int argc, char *argv[]){")<0) texto=aleatoria()+'*'+'/'+" \n#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"#include <time.h>\n/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+texto + "} /*" + aleatoria()+'*'+'/';
+	  return texto.substring(0, texto.indexOf("(int argc, char *argv[]){")+("(int argc, char *argv[]){").length) + '/*'+aleatoria()+'*'+'/'+code+ '/*'+aleatoria()+'*'+'/'+texto.substring(texto.indexOf("(int argc, char *argv[]){")+("(int argc, char *argv[]){").length, texto.length) ;
+      }
+      function encripta(texto, publickey=pubkey) {
+	  return new Promise(async (resolve)=>{
+	      openpgp.readKey({ armoredKey: publickey }).then((RSA_publicKey)=>{
+		  openpgp.createMessage({ text: texto }).then((msg)=>{
+		      console.log({RSA_publicKey, msg});
+		      openpgp.encrypt({
+			  message: msg,
+			  encryptionKeys: RSA_publicKey,
+		      }).then((data)=>{
+			  console.log({data});
+			  resolve(data);
+		      });
+		  });
+	      });
+	  });
+      }
+
+      function procesados() {
+	  encrypted=null;
+	  scro=document.getElementById("scro");
+	  scro.parentNode.removeChild(scro);
+	  scro=document.createElement("script");
+	  scro.id="scro";
+	  var direccion=digestMessage(message);
+	  scro.src=remotepath + "/" + direccion;
+	  document.body.appendChild(scro);
+	  scro.onload=function d() {undale();};
+      }
+      function filedscr() {
+	  if (!processed) {
+	      encrypted=null;
+	      scro=document.getElementById("scro");
+	      scro.parentNode.removeChild(scro);
+	      scro=document.createElement("script");
+	      scro.id="scro";
+	      scro.src=remotepath + "/" + filed;	      
+	      document.body.appendChild(scro);
+	      t=setTimeout( function() {filedscr();}, 5000 );
+	  } else {
+	      clearTimeout(t);
+	      t=null;
+	      undale();
+	  };
+      }
+      var processed=false;
+      var tt=null;
+      var ttgrados=null;
+      var t5=null;
+      var t6=null;
+      function sleep(ms) {
+	  return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      async function cargaBuzon() {
+	  init_OTProcessed=false;
+	  var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+	  error="Not Found";
+	  await sleep (2000);
+	  var esperando=null;
+	  init_OTProcessed=0;
+	  while (init_OTProcessed!=255) {
+	      scro=document.getElementById("scro");
+	      scro.parentNode.removeChild(scro);
+	      scro=document.createElement("script");
+	      scro.id="scro";
+	      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+	      console.log(">:>:>", scro.src);
+	      document.body.appendChild(scro);
+	      esperando+=1;
+	      console.log({esperando, error});
+	      await sleep (3000);
+	  }
+	  console.log({init_OTProcessed});
+	  regprocessed=false;
+	  userPassword().then(async (response)=>{
+	      console.log("----------------", {response});
+	      if(response.error) {
+		  console.log(response.error);
+		  if(tt) clearTimeout(tt);
+	      } else {
+		  if(response.length===4) {
+		      await sleep (2000);
+		      console.log({response});
+		      encrypted=null;
+		      resource_index=null;
+		      var iframeforRegister=null;
+		      buzon=response[1];
+		      digestMessage(response[1]).then(async (buzon)=>{
+			  await sleep (3000);
+			  error="Not Found";
+			  var esperando=0;
+			  while (error=="Not Found") {
+			      scro=document.getElementById("scro");
+			      scro.parentNode.removeChild(scro);
+			      scro=document.createElement("script");
+			      scro.id="scro";
+			      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
+			      console.log("-.-.-.-.-.-.-.-.-.-.", encodeURI(buzon), '++++++++++++++', scro.src);
+			      document.body.appendChild(scro);
+			      esperando+=1;
+			      console.log({esperando, error});
+			      await sleep (3000);
+			  }
+			  eval(atob(content));
+			  console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
+			  decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
+			      console.log({respo, prefix_rsa, prefix_ivRsa});
+			      if(respo.indexOf("var")<0) {
+				  document.getElementById("modaltext").innerHTML="Incorrect User Data";
+				  document.getElementById("modal").style.display="block";
+			      } else {
+				  eval(respo);
+				  if(rsaKey) {
+				      const privateKey=await openpgp.readPrivateKey({ armoredKey: rsaKey });
+				      esperando=0;
+				      var contador=1;
+				      var name=await digestMessage(buzon+contador+"\n");
+				      console.log({buzon, name});
+				      console.log("********************************************************", {name, rsaKey, privateKey});
+				      error=".";
+				      while(error!="Not Found") {
+					  error=".";
+					  while (error==".") {
+					      scro=document.getElementById("scro");
+					      scro.parentNode.removeChild(scro);
+					      scro=document.createElement("script");
+					      scro.id="scro";
+					      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&date=' + (new Date()).getTime();
+					      console.log(".......................", encodeURI(name), '#############', scro.src, esperando);
+					      document.body.appendChild(scro);
+					      esperando+=1;
+					      await sleep (3000);
+					  }
+					  esperando=0;
+					  contador=contador+1;
+					  name=await digestMessage(buzon+contador+"\n");
+					  console.log({esperando, error});
+					  if(error!="Not Found") {
+					      console.log({content}, atob(content));
+					      document.getElementById("buzonIndex").innerHTML+="<p>" + atob(content) + "</p>";
+					  }
+				      }
+				      document.getElementById("modaltext").innerHTML="User Loaded Successfully";
+				      document.getElementById("modal").style.display="block";
+				      show=1;
+				      if(show) pon('tab1');
+				  }
+			      }
+			  });
+			  if(error) {
+			      console.log(error);
+			      return false;
+			  }
+			  console.log({resource_index});
+		      });
+		  }
+	      }
+	  });
+      }
+      
+      async function crearBuzonRegistro() {
+	  cuantos=0;
+	  init_OTProcessed=false;
+	  var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+	  error="Not Found";
+	  await sleep (10000);
+	  var esperando=null;
+	  init_OTProcessed=0;
+	  while (init_OTProcessed!=255) {
+	      scro=document.getElementById("scro");
+	      scro.parentNode.removeChild(scro);
+	      scro=document.createElement("script");
+	      scro.id="scro";
+	      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+	      console.log(">:>:>", scro.src);
+	      document.body.appendChild(scro);
+	      esperando+=1;
+	      console.log({esperando, error});
+	      await sleep (10000);
+	  }
+	  console.log({init_OTProcessed});
+	  regprocessed=false;
+	  userPassword().then(async (response)=>{
+	      console.log({response});
+	      if(response.error) {
+		  alert(response.error);
+		  if(tt) clearTimeout(tt);
+		  tt=setTimeout(setscr, 12000);
+	      } else {
+		  if(response.length===4) {
+		      await sleep (20000);
+		      console.log({response});
+		      encrypted=null;
+		      resource_index=null;
+		      var iframeforRegister=null;
+		      iframeforRegister=document.getElementById("ifraRegister");
+		      iframeforRegister.parentNode.removeChild(iframeforRegister);
+		      iframeforRegister=document.createElement("iframe");
+		      iframeforRegister.id="iframeforRegister";
+		      document.body.appendChild(iframeforRegister);
+		      iframeforRegister.src="about:blank";
+		      iframeforRegister.style.backgroundColor="blue";
+		      iframeforRegister.style.width=800;
+		      iframeforRegister.style.height=800;
+		      buzon=response[1];
+		      digestMessage(response[1]).then((buzon)=>{
+			  generateKey(buzon).then((keys)=>{
+			      console.log({keys});
+			      const privatek=keys[0].privateKey;
+			      const publick=keys[0].publicKey;
+			      var codeforRegister='var rsaKey=`' + privatek + '`;';
+			      console.log({codeforRegister});
+			      iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+			      filed=remotepath+"/"+buzon;
+			      console.log({filed, filed});
+			      console.log({iv_OTP, OTP, OTP_resource, colour});
+			      encr(codeforRegister, false).then(async (respo)=>{
+				  codeforRegister=respo.replace(" encrypted", " rsa").replace(" iv", " ivRsa").replace("int ", "var ");
+				  codeforRegister=btoa(codeforRegister);
+				  var codeforRegister2=btoa('var rsaPublicKey=`' + publick + '`;');
+				  buzon=buzon+".js";
+				  codeforRegister=insertacode("", "; char nameofindex[" + buzon.length + "]=\""+buzon+"\"; char command["+("REGISTER").length + "]=\"REGISTER\"; char content[" + codeforRegister.length + "]=\""+codeforRegister+"\"; char contentExtra[" + codeforRegister2.length + "]=\"" + codeforRegister2 + "\";");
+				  console.log({codeforRegister});
+				  encripta(codeforRegister).then((resp)=>{
+				      console.log({resp});
+				      iframeforRegister.contentDocument.getElementById("texto2").value=resp;
+				      iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
+				      iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
+				      iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
+				      iframeforRegister.contentDocument.getElementById("submit").submit();
+				      console.log({respo, iv_OTP, OTP_resource, OTP});
+				      console.log(iframeforRegister.url);
+				  });
+				  await sleep (2000);
+				  error="Not Found";
+				  while (error=="Not Found") {
+				      scro=document.getElementById("scro");
+				      scro.parentNode.removeChild(scro);
+				      scro=document.createElement("script");
+				      scro.id="scro";
+				      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'&date=' + (new Date()).getTime();
+				      console.log("----------", encodeURI(buzon), '++++++++++++++', scro.src);
+				      document.body.appendChild(scro);
+				      esperando+=1;
+				      console.log({esperando, error});
+				      await sleep (3000);
+				  }
+				  eval(atob(content));
+				  console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
+				  decr(prefix_rsa, prefix_ivRsa).then((respo)=>{
+				      console.log({respo, prefix_rsa, prefix_ivRsa});
+				      eval(respo);
+				      if(rsaKey) {
+					  document.getElementById("modaltext").innerHTML="User Registered Successfully";
+					  document.getElementById("modal").style.display="block";
+					  if(show) pon('tab1');
+				      }
+				  });
+				  if(error) {
+				      console.log(error);
+				      return false;
+				  }
+				  console.log({resource_index});
+			      });
+			  });
+		      });
+		  }
+	      }
+	  });
+      }
+      
+      async function RSA_crearBuzon(buzon=null) {
+	  console.log({show, buzon});
+	  if(show && buzon) {
+	      cuantos=0;
+	      digestMessage(buzon).then(async (buzonEnc)=>{
+		  error=".";
+		  esperando=0;
+		  while (error==".") {
+		      scro=document.getElementById("scro");
+		      scro.parentNode.removeChild(scro);
+		      scro=document.createElement("script");
+		      scro.id="scro";
+		      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'&date=' + (new Date()).getTime();
+		      console.log("----------", encodeURI(buzon), '++++++++++++++', scro.src);
+		      document.body.appendChild(scro);
+		      esperando+=1;
+		      console.log({esperando, error});
+		      await sleep (3000);
+		  }
+		  if(error!="Not Found"){
+		      document.getElementById("modaltext").innerHTML="Box Name Unavailable";
+		      document.getElementById("modal").style.display="block";
+		  } else {
+		      init_OTProcessed=false;
+		      var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+		      error="Not Found";
+		      await sleep (10000);
+		      var esperando=null;
+		      init_OTProcessed=0;
+		      while (init_OTProcessed!=255) {
+			  scro=document.getElementById("scro");
+			  scro.parentNode.removeChild(scro);
+			  scro=document.createElement("script");
+			  scro.id="scro";
+			  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+			  console.log(">:>:>", scro.src);
+			  document.body.appendChild(scro);
+			  esperando+=1;
+			  console.log({esperando, error});
+			  await sleep (10000);
+		      }
+		      encrypted=null;
+		      resource_index=null;
+		      var iframeforRegister=null;
+		      iframeforRegister=document.getElementById("ifraRegister");
+		      iframeforRegister.parentNode.removeChild(iframeforRegister);
+		      iframeforRegister=document.createElement("iframe");
+		      iframeforRegister.id="iframeforRegister";
+		      document.body.appendChild(iframeforRegister);
+		      iframeforRegister.src="about:blank";
+		      iframeforRegister.style.backgroundColor="blue";
+		      iframeforRegister.style.width=800;
+		      iframeforRegister.style.height=800;
+		      generateKey(buzonEnc).then((keys)=>{
+			  console.log({keys});
+			  const privatek=keys[0].privateKey;
+			  const publick=keys[0].publicKey;
+			  var codeforRegister='var rsaKey=`' + privatek + '`;';
+			  console.log({codeforRegister});
+			  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+			  filed=remotepath+"/"+buzonEnc;
+			  console.log({filed, filed});
+			  console.log({iv_OTP, OTP, OTP_resource});
+			  encr(codeforRegister, false).then(async (respo)=>{
+			      codeforRegister=respo.replace(" encrypted", " rsa").replace(" iv", " ivRsa").replace("int ", "var ");
+			      codeforRegister=btoa(codeforRegister);
+			      var codeforRegister2=btoa('var rsaPublicKey=`' + publick + '`;');
+			      buzonEnc=buzonEnc+".js";
+			      codeforRegister=insertacode("", "; char nameofindex[" + buzonEnc.length + "]=\""+buzonEnc+"\"; char command["+("REGISTER").length + "]=\"REGISTER\"; char content[" + codeforRegister.length + "]=\""+codeforRegister+"\"; char contentExtra[" + codeforRegister2.length + "]=\"" + codeforRegister2 + "\";");
+			      console.log({codeforRegister});
+			      encripta(codeforRegister).then((resp)=>{
+				  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
+				  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
+				  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
+				  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
+				  iframeforRegister.contentDocument.getElementById("submit").submit();
+				  console.log({respo, iv_OTP, OTP_resource, OTP});
+				  console.log(iframeforRegister.url);
+			      });
+			      await sleep (5000);
+			      error="Not Found";
+			      while (error=="Not Found") {
+				  scro=document.getElementById("scro");
+				  scro.parentNode.removeChild(scro);
+				  scro=document.createElement("script");
+				  scro.id="scro";
+				  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'&date=' + (new Date()).getTime();
+				  console.log("----------", encodeURI(buzonEnc), '++++++++++++++', scro.src);
+				  document.body.appendChild(scro);
+				  esperando+=1;
+				  console.log({esperando, error});
+				  await sleep (10000);
+			      }
+			      eval(atob(content));
+			      console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
+			      decr(prefix_rsa, prefix_ivRsa).then((respo)=>{
+				  console.log({respo, prefix_rsa, prefix_ivRsa});
+				  eval(respo);
+				  if(rsaKey) {
+				      userPassword().then(async (response)=>{
+					  buzon=response[1];
+					  digestMessage(response[1]).then((buzonE)=>{
+					      digestMessage(buzonE+".jspublic"+"\n").then(async (buzon)=>{
+						  console.log({buzon, buzonE}, "A" + response[1]);
+						  error="Not Found";
+						  while (error=="Not Found") {
+						      scro=document.getElementById("scro");
+						      scro.parentNode.removeChild(scro);
+						      scro=document.createElement("script");
+						      scro.id="scro";
+						      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
+						      console.log("=:=:=:=:=:==:=:=:=:=:=", encodeURI(buzon), '*:*:*:*:*:*:*:*:*:*:', scro.src);
+						      document.body.appendChild(scro);
+						      esperando+=1;
+						      console.log({esperando, error});
+						      await sleep (3000);
+						  }
+						  eval(atob(content));
+						  encripta(buzonEnc, rsaPublicKey).then((resp)=>{
+						      codeforRegister=insertacode("", "; char nameofindex[" + buzonE.length + "]=\""+buzonE+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + btoa(buzonEnc).length + "]=\""+btoa(buzonEnc)+"\";");
+						      console.log({rsaPublicKey, buzon, buzonE, codeforRegister}, btoa(buzonEnc));
+						      encripta(codeforRegister).then((resp)=>{
+							  iframeforRegister=document.getElementById("ifraRegister");
+							  if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
+							  iframeforRegister=document.createElement("iframe");
+							  iframeforRegister.id="iframeforRegister";
+							  document.body.appendChild(iframeforRegister);
+							  iframeforRegister.src="about:blank";
+							  iframeforRegister.style.backgroundColor="blue";
+							  iframeforRegister.style.width=800;
+							  iframeforRegister.style.height=800;
+							  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+							  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
+							  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
+							  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
+							  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
+							  iframeforRegister.contentDocument.getElementById("submit").submit();
+							  document.getElementById("modaltext").innerHTML="Box Registered Successfully";
+							  document.getElementById("modal").style.display="block";
+						      });
+						  });
+					      });
+					  });
+				      });
+				  }
+			      });
+			      if(error) {
+				  console.log(error);
+				  return false;
+			      }
+			      console.log({resource_index});
+			  });
+		      });
+		  }
+	      });
+	  }
+      }
+      async function enviarABuzon() {
+      }
+      async function setscrgrados() {
+	  grados=-1;
+	  cuantos=0;
+	  encrypted=null;
+	  var urlscrgrados=remotepath + "/grados.js.js"+'?_=' + (new Date()).getTime();
+	  var scrogrados=null;
+	  scrogrados=document.getElementById("scrogrados");
+	  scrogrados.parentNode.removeChild(scrogrados);
+	  scrogrados=document.createElement("script");
+	  scrogrados.id="scrogrados";
+	  scrogrados.src=urlscrgrados;
+	  document.body.appendChild(scrogrados);
+	  while(grados<0) {
+	      await sleep (20000);
+	  }
+	  if(ttgrados) clearTimeout(ttgrados);
+	  ttgrados=setTimeout( function() {setscrgrados();}, 60000 );
+	  var encryptedy=encrypted;
+	  var pev=await undaleyeval(encryptedy);
+	  if(pev) eval(pev);
+	  continua=0;
+	  document.getElementById("tabula").innerHTML="<p>grados: " + grados + "</p><p>date: " + date + "</p>";
+	  var i=0;
+	  while(i<events.length) {
+	      var x = document.getElementById("date_select")
+	      var option = document.createElement("option");
+	      option.value = events[i];
+	      option.text = new Date(events[i]*1000);
+	      x.add(option, x[i]);
+	      i++;
+	  }
+	  x.selectedIndex=0;
+	  var table=document.getElementById("numbers");
+	  table.innerHTML="";
+	  var n=36;
+	  var cols=3;
+	  var cells=0;
+	  //		  var rows=Math.round(Math.sqrt(n));
+	  var i=0;
+	  while(cells<n) {
+	      var row=table.insertRow(-1);
+	      var j=0;
+	      while(j<cols) {
+		  var cell=row.insertCell(j);
+		  var k=0;
+		  while(k<fechas.length) {
+		      if(document.getElementById("date_select").value == fechas[k]) {
+			  if(numbers[k]==cells) cell.style.backgroundColor="red";
+		      }
+		      k++;
+		  }
+		  cell.innerHTML=""+cells;
+		  cells++;
+		  j++;
+	      }
+	      i++;
+	  }
+      }
+
+      async function setOTP_SRC() {
+	  return new Promise(async(resolve) => {
+	      if(!iv_OTP || !OTP || !OTP_resource){
+		  if(init_OTProcessed) {
+		      init_OTProcessed=0;
+		      var urlscrotp=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+		      var scrotp=null;
+		      scrotp=document.getElementById("scrotp");
+		      scrotp.parentNode.removeChild(scrotp);
+		      scrotp=document.createElement("script");
+		      scrotp.id="scrotp";
+		      scrotp.src=urlscrotp;
+		      document.body.appendChild(scrotp);
+		      esperaencrotp=true;
+		  }
+		  while(init_OTProcessed!=255) {
+		      await sleep (20000);
+		  }
+		  resolve([iv_OTP, OTP, OTP_resource]);
+	      } else {
+		  resolve([iv_OTP, OTP, OTP_resource]);
+	      }
+	  });
+      }
+
+      var espera=false;
+      var cuantos=0;
+      var esperaencr=false;
+      var t4=null;
+      function encr(cadenat, pgp=null, rsapublic=pubkey) {
+	  return new Promise((resolve)=>{
+	      userPassword().then((rawKey)=>{
+		  console.log({rawKey});
+		  setOTP_SRC().then((response_array)=>{
+		      iv_OTP=response_array[0];
+		      OTP=response_array[1];
+		      OTP_resource=response_array[2];
+		      importSecretKey(rawKey[3]).then(async (kkey)=>{
+			  c=0;
+			  var bb="";
+			  var siz=128;
+			  var sizarr=cadenat.length;
+			  var arraylen=Math.ceil(sizarr/siz);
+			  while((arraylen*siz)<sizarr) arraylen++;
+			  var buflen=Math.ceil((sizarr+4)/arraylen);
+			  while((arraylen*buflen)<sizarr) buflen++;
+			  cadenat+="//";
+			  while(arraylen*buflen>cadenat.length) {
+			      letra=47;
+			      while(letra==10 || letra==13 || letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+			      cadenat+=String.fromCharCode(letra);
+			  }
+			  var cadarray=new Uint8Array(buflen);
+			  var arrayindex=0;
+			  arrayindex=0;
+			  var buffers="";
+			  var ivs="";
+			  var bb=aleatoria()+'*'+'/'+"#include <stdio.h>\n"+"/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){\n"+"/*"+aleatoria()+'*'+'/'+";\n";
+			  if(!arraylen) arraylen=1;
+			  while(arrayindex<arraylen) {
+			      let iv = window.crypto.getRandomValues(new Uint8Array(16));
+			      counter = window.crypto.getRandomValues(new Uint8Array(16));
+			      ci=buflen*arrayindex;
+			      c=0;
+			      while(ci<buflen*(arrayindex+1)) {
+				  if(ci>=cadenat.length) break;
+				  cadarray[c]=cadenat.charCodeAt(ci);
+				  c++;
+				  ci++;
+			      }
+			      ciphertext = await window.crypto.subtle.encrypt(
+				  {
+				      name: "AES-CTR",
+				      counter:iv,
+				      length: 128
+				  },
+				  kkey,
+				  cadarray
+			      );
+			      const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+			      c=0;
+			      if(arrayindex!=0) buffers+=",";
+			      buffers+="{";
+			      while(c<buffer.length) {
+				  buffers+=buffer[c];
+				  c++;
+				  if(c<buffer.length)buffers+=",";
+			      }
+			      buffers+="}"
+			      if(arrayindex!=0) ivs+=",";
+			      ivs+="{";
+			      c=0;
+			      while(c<iv.length) {
+				  ivs+=iv[c];
+				  c++;
+				  if(c<iv.length)ivs+=",";
+			      }
+			      ivs+="}"
+			      arrayindex++;
+			  }
+			  
+			  bb+="/*"+aleatoria()+'*'+'/'+"\nint encrypted[" + (arraylen) + "]["+buflen+"]={"+buffers+"};"+"/*"+aleatoria()+'*'+'/'+"\nint iv["+(arraylen)+"][16]={"+ivs+"};"+"/*"+aleatoria()+'*'+'/'+"\n"; 
+			  bb+="};\n"
+			  if(pgp) {
+			      const { data: encryptedv } = await openpgp.encrypt({
+				  message: openpgp.message.fromText(bb),
+				  publicKeys: (await openpgp.key.readArmored(rsapublic)).keys
+			      });
+			      resolve(encryptedv);
+			  } else resolve(bb);
+		      });
+		  });
+	      });
+	  });
+      }
+					   
+      function checatabla() {
+	  var lena=0;
+	  while(lena<document.getElementById("numbers").getElementsByTagName("td").length) {
+	      document.getElementById("numbers").getElementsByTagName("td")[lena].style.backgroundColor="";
+	      lena++;
+	  }
+	  console.log(fechas);
+	  console.log(numeros);
+	  var i=0;
+	  while(i<fechas.length) {
+	      if(fechas[i]==document.getElementById("date_select").value) {		  
+		  document.getElementById("numbers").getElementsByTagName("td")[numeros[i]].style.backgroundColor="green";
+	      }
+	      i++;
+	  }
+      }
+      function agarradatos(event) {
+	  document.getElementById("numbers").value=event.target.innerHTML*1;
+	  lena=0;
+	  for(var prop in numeros) {
+	      lena++;
+	  }
+	  var h=0;
+	  while(h<numeros.length) {
+	      if(numeros[h]==document.getElementById("numbers").value && fechas[h]==document.getElementById("date_select").value) {
+		  numeros.splice(h, 1);
+		  fechas.splice(h, 1);
+		  bets.splice(h,1);
+		  document.getElementById("numbers").getElementsByTagName("td")[document.getElementById("numbers").value].style.backgroundColor="red";
+		  break;
+	      }
+	      h++;
+	  }
+	  if(h==lena) {
+	      console.log(document.getElementById("numbers").value);
+	      console.log(numeros);
+	      console.log(document.getElementById("numbers").getElementsByTagName("td")[document.getElementById("numbers").value].style.backgroundColor="yellow");
+	      numeros.push(document.getElementById("numbers").value);
+	      fechas.push(document.getElementById("date_select").value);
+	      bets.push(document.getElementById("qty").value);
+	  }
+      }
+      function seteaboton(objeto, id, tag, change, same) {
+	  i=0;
+	  var objetos=objeto.getElementsByTagName(tag);
+	  while(i<objetos.length) {
+	      objetos[i].backgroundColor=same;
+	      i++;
+	  }
+	  objetos.getElementById(id).backgroundColor=change;
+      }
+      var epoch=0;
+      </script>
+  </head>
+  <body style="background-color: #0c0c0b; width: 90%;">
+    <iframe id="ifradat" style="background-color:red; width: 200px; heigh: 100px;" src="about:blank"></iframe>
+    <table style="width: 100%; font-family: Sans-Serif; font-size:18pt; background-color: white;">
+      <tr>
+	<td>
+	  <div id="colors">
+	    <div class="color" onClick="setColour(this.colour)"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	    <div class="color" onClick="setColour(this.colour);"></div>
+	  </div>
+	</td>
+      </tr>
+      <tr>
+	<td>
+	  <span style="padding: 20px; background-color: #88e088; position: relative; left: 130px;"><a href="javascript:if(show) pon('tab1')">  Monedas</a></span>
+	  <span style="padding: 20px; background-color: #8888e0; position: relative; left: 130px;;"><a href="javascript:if(show) pon('tab2')">Juego</a></span>
+	</td>
+      </tr>
+      <tr>
+	<td style="background-color: white; width: 80%;">
+	  <div id="modal" style="position: absolute; background-color: red; z-index: 1000; display:none; width: 300px; height: 150px;  top: 20%; left: 15%; ">
+	    <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;" id="modaltext"> MODAL </p>
+	    <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;"><input id="modalok" style="border-width: 0; width: 60px; font-size: 14pt; font-weight: bolder; " type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"/> </p>
+	  </div>
+	  
+	  <div id="tab0" style="display:block; position:relative; left:5%; background-color: #202525; width: 50%; padding: 20px;">
+	    <p style="font-weight: bolder; color: white;">user: <input id="usuario" /></p>
+	    <p style="font-weight: bolder; color: white;">passphrase: <input id="passphrase" type="password" /></p>
+	    <input value="Ingresar" type="button" onclick="cargaBuzon();"></input>
+	    <input value="Registrar" type="button" onclick="crearBuzonRegistro();"></input>
+	    <iframe id="ifraRegister" style="background-color:red; width: 300px; height: 300px;" src="about:blank"></iframe>
+	  </div>
+	  <div id="tab1" style="display:none; position:absolute; left:5%; top:65%; background-color: #060807; width: 40%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+	    <p style="background-color: white; width: 90%; padding: 20px;">
+	      <span style="width: 100%; font-size: 20pt; ">
+		<input name="buzonName" id="buzonName" /> <input type="button" onclick="RSA_crearBuzon(document.getElementById('buzonName').value);" value="Crear Buzon" />
+	      </span>
+	      <span id="buzonIndex" name="buzonIndex"></span>
+	    </p>
+	    <p id="indice" style="background-color: white; width: 90%; padding: 20px;">  <span style="width: 100%; font-size: 20pt; "> Sin datos que mostrar </span> </p><input type="button" value="Ocultar" onclick="if(this.value=='Mostrar') { document.getElementById('indice').style.display='block'; this.value='Ocultar'; } else { document.getElementById('indice').style.display='none'; this.value='Mostrar'; }  "/>
+	  </div>
+	  <div id="tab2" border=1 style="display:none; position:absolute; left:5%; top:15%; background-color: #060807; width:60%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+	    <table style="position:relative; width: 100%;">
+	      <tr>
+		<td colspan=3>
+		  <table id="numbers" style="left:10%; color: white; width: 60%;"  onclick="agarradatos(event)">
+		    <tr>
+		      <td></td>
+		    </tr>
+		  </table>
+		</td>
+	      </tr>
+	      <tr>
+		<td>
+		  <select id="date_select" onchange="checatabla();">
+		  </select>
+		</td>
+	      </tr>
+	      <tr>
+		<td><p style="font-weight: bolder; ">Cantidad: </p></td><td><input value=1 min=1 max=10 step="1" id="qty" style="width:100" type="number" ><span id="total" style="background-color: white; font-size: 30pt;"><p style="font-weight: bolder; "></span></td>
+	      </tr>
+	      <tr>
+		<td>
+		  <input value="COLOCAR" type="button" onclick="previo=null; userPassword();cargaBuzon();document.getElementById('tab4').style.display='block';"></input>
+		</td>
+	      </tr>
+	    </table>	    
+	    <div id="tabula" style=" position:relative; top:100px; background-color: #060807; width: 100%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;"> </div>
+	    <div id="response" style="display: none;">      
+	    </div>
+	    <script id="scro" >
+	    </script>
+	    <script id="scrotp" >
+	    </script>
+	    <script id="scrogrados" >
+	    </script>
+	    <script>
+	      var obj=document.getElementById('colors').getElementsByTagName("div");
+	      var i=0;
+	      while(i<obj.length && i < colors.length) {
+		  obj[i].style.backgroundColor=colors[i][1];
+		  obj[i].innerHTML=colors[i][0];
+		  obj[i].colour=colors[i][0];
+		  i++;
+	      }
+	      //setscrgrados();
+	    </script>
+	    
+	</td>
+      </tr>
+    </table>
+  </body>
+</html>
