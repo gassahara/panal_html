@@ -230,12 +230,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  return Object.prototype.toString.call(obj) === '[object Array]';
       }
 
-      async function RSA_decr(encryptedu, rsaPrivateKey, rsaPublicKey) {
+      async function RSA_decr(encryptedu, rsaPrivateKey, rsa_PublicKey) {
 	  return new Promise(async (resolve)=>{
 	      const { data: decrypted, signatures } = await openpgp.decrypt({
 		  encryptedu,
-		  verificationKeys: rsaPublicKey, // optional
-		  decryptionKeys: rsaPrivateKey
+		  verificationKeys: rsa_PublicKey, // optional
+		  decryptionKeys: rsa_PrivateKey
 	      });
 	      resolve(decrypted);
 	  });
@@ -566,72 +566,185 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      buzon=response[1];
 		      digestMessage(response[1]).then(async (buzon)=>{
 			  await sleep (3000);
-			  error="Not Found";
+			  error=".";
 			  var esperando=0;
-			  while (error=="Not Found") {
+			  while (error==".") {
 			      scro=document.getElementById("scro");
 			      scro.parentNode.removeChild(scro);
 			      scro=document.createElement("script");
 			      scro.id="scro";
 			      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
-			      console.log("-.-.-.-.-.-.-.-.-.-.", encodeURI(buzon), '++++++++++++++', scro.src);
+			      console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
 			      document.body.appendChild(scro);
 			      esperando+=1;
 			      console.log({esperando, error});
 			      await sleep (3000);
 			  }
-			  eval(atob(content));
-			  console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
-			  decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
-			      console.log({respo, prefix_rsa, prefix_ivRsa});
-			      if(respo.indexOf("var")<0) {
-				  document.getElementById("modaltext").innerHTML="Incorrect User Data";
-				  document.getElementById("modal").style.display="block";
-			      } else {
-				  eval(respo);
-				  if(rsaKey) {
-				      const privateKey=await openpgp.readPrivateKey({ armoredKey: rsaKey });
-				      esperando=0;
-				      var contador=1;
-				      var name=await digestMessage(buzon+contador+"\n");
-				      console.log({buzon, name});
-				      console.log("********************************************************", {name, rsaKey, privateKey});
-				      error=".";
-				      while(error!="Not Found") {
-					  error=".";
-					  while (error==".") {
-					      scro=document.getElementById("scro");
-					      scro.parentNode.removeChild(scro);
-					      scro=document.createElement("script");
-					      scro.id="scro";
-					      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&date=' + (new Date()).getTime();
-					      console.log(".......................", encodeURI(name), '#############', scro.src, esperando);
-					      document.body.appendChild(scro);
-					      esperando+=1;
-					      await sleep (3000);
-					  }
-					  esperando=0;
-					  contador=contador+1;
-					  name=await digestMessage(buzon+contador+"\n");
-					  console.log({esperando, error});
-					  if(error!="Not Found") {
-					      console.log({content}, atob(content));
-					      document.getElementById("buzonIndex").innerHTML+="<p>" + atob(content) + "</p>";
-					  }
-				      }
-				      document.getElementById("modaltext").innerHTML="User Loaded Successfully";
+			  if(error=="Not Found") {
+			      document.getElementById("modaltext").innerHTML="Incorrect User Data";
+			      document.getElementById("modal").style.display="block";
+			  } else {
+			      eval(atob(content));
+			      console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
+			      decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
+				  console.log({respo, prefix_rsa, prefix_ivRsa});
+				  if(respo.indexOf("var")<0) {
+				      document.getElementById("modaltext").innerHTML="Incorrect User Data";
 				      document.getElementById("modal").style.display="block";
-				      show=1;
-				      if(show) pon('tab1');
+				  } else {
+				      eval(respo);
+				      if(rsaKey) {
+					  const privateKey=await openpgp.readPrivateKey({ armoredKey: rsaKey });
+					  esperando=0;
+					  var contador=1;
+					  var name=await digestMessage(buzon+""+contador);
+					  name=name+".js";
+					  console.log({buzon, name, contador});
+					  console.log("********************************************************", {name, rsaKey, privateKey});
+					  error=".";
+					  while(error!="Not Found") {
+					      error=".";
+					      while (error==".") {
+						  scro=document.getElementById("scro");
+						  scro.parentNode.removeChild(scro);
+						  scro=document.createElement("script");
+						  scro.id="scro";
+						  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&date=' + (new Date()).getTime();
+						  console.log(".......................", encodeURI(name), '#############', scro.src, esperando);
+						  document.body.appendChild(scro);
+						  esperando+=1;
+						  await sleep (3000);
+					      }
+					      if(error!="Not Found") {
+						  console.log({name, content}, atob(content));
+						  document.getElementById("buzonIndex").innerHTML+="<p>" + atob(content) + "</p>";
+					      }
+					      esperando=0;
+					      contador=contador+1;
+					      name=await digestMessage(buzon+""+contador);
+					      name=name+".js";
+					      console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", {name, buzon, contador, esperando, error, name});
+					  }
+					  document.getElementById("modaltext").innerHTML="User Loaded Successfully";
+					  document.getElementById("modal").style.display="block";
+					  show=1;
+					  if(show) pon('tab1');
+				      }
 				  }
-			      }
-			  });
-			  if(error) {
-			      console.log(error);
-			      return false;
+			      });
 			  }
-			  console.log({resource_index});
 		      });
+						     
+		  }
+	      }
+	  });
+      }
+      
+      async function RSA_cargaBuzon(buzon) {
+	  init_OTProcessed=false;
+	  var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+	  error="Not Found";
+	  await sleep (2000);
+	  var esperando=null;
+	  init_OTProcessed=0;
+	  while (init_OTProcessed!=255) {
+	      scro=document.getElementById("scro");
+	      scro.parentNode.removeChild(scro);
+	      scro=document.createElement("script");
+	      scro.id="scro";
+	      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+	      console.log(">:>:>", scro.src);
+	      document.body.appendChild(scro);
+	      esperando+=1;
+	      console.log({esperando, error});
+	      await sleep (3000);
+	  }
+	  console.log({init_OTProcessed});
+	  regprocessed=false;
+	  userPassword().then(async (response)=>{
+	      console.log("----------------", {response});
+	      if(response.error) {
+		  console.log(response.error);
+		  if(tt) clearTimeout(tt);
+	      } else {
+		  if(response.length===4) {
+		      await sleep (2000);
+		      console.log({response});
+		      encrypted=null;
+		      resource_index=null;
+		      var iframeforRegister=null;
+		      buzon=response[1];
+		      digestMessage(response[1]).then(async (buzon)=>{
+			  await sleep (3000);
+			  error=".";
+			  var esperando=0;
+			  while (error==".") {
+			      scro=document.getElementById("scro");
+			      scro.parentNode.removeChild(scro);
+			      scro=document.createElement("script");
+			      scro.id="scro";
+			      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
+			      console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
+			      document.body.appendChild(scro);
+			      esperando+=1;
+			      console.log({esperando, error});
+			      await sleep (3000);
+			  }
+			  if(error=="Not Found") {
+			      document.getElementById("modaltext").innerHTML="Incorrect User Data";
+			      document.getElementById("modal").style.display="block";
+			  } else {
+			      eval(atob(content));
+			      console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
+			      decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
+				  console.log({respo, prefix_rsa, prefix_ivRsa});
+				  if(respo.indexOf("var")<0) {
+				      document.getElementById("modaltext").innerHTML="Incorrect User Data";
+				      document.getElementById("modal").style.display="block";
+				  } else {
+				      eval(respo);
+				      if(rsaKey) {
+					  const privateKey=await openpgp.readPrivateKey({ armoredKey: rsaKey });
+					  esperando=0;
+					  var contador=1;
+					  var name=await digestMessage(buzon+""+contador);
+					  name=name+".js";
+					  console.log({buzon, name, contador});
+					  console.log("********************************************************", {name, rsaKey, privateKey});
+					  error=".";
+					  while(error!="Not Found") {
+					      error=".";
+					      while (error==".") {
+						  scro=document.getElementById("scro");
+						  scro.parentNode.removeChild(scro);
+						  scro=document.createElement("script");
+						  scro.id="scro";
+						  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&date=' + (new Date()).getTime();
+						  console.log(".......................", encodeURI(name), '#############', scro.src, esperando);
+						  document.body.appendChild(scro);
+						  esperando+=1;
+						  await sleep (3000);
+					      }
+					      if(error!="Not Found") {
+						  console.log({name, content}, atob(content));
+						  document.getElementById("buzonIndex").innerHTML+="<p>" + atob(content) + "</p>";
+					      }
+					      esperando=0;
+					      contador=contador+1;
+					      name=await digestMessage(buzon+""+contador);
+					      name=name+".js";
+					      console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", {name, buzon, contador, esperando, error, name});
+					  }
+					  document.getElementById("modaltext").innerHTML="User Loaded Successfully";
+					  document.getElementById("modal").style.display="block";
+					  show=1;
+					  if(show) pon('tab1');
+				      }
+				  }
+			      });
+			  }
+		      });
+						     
 		  }
 	      }
 	  });
@@ -732,6 +845,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      if(rsaKey) {
 					  document.getElementById("modaltext").innerHTML="User Registered Successfully";
 					  document.getElementById("modal").style.display="block";
+					  show=1;
 					  if(show) pon('tab1');
 				      }
 				  });
@@ -750,6 +864,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       
       async function RSA_crearBuzon(buzon=null) {
 	  console.log({show, buzon});
+	  var buzoname=buzon;
 	  if(show && buzon) {
 	      cuantos=0;
 	      digestMessage(buzon).then(async (buzonEnc)=>{
@@ -787,15 +902,15 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  document.body.appendChild(scro);
 			  esperando+=1;
 			  console.log({esperando, error});
-			  await sleep (10000);
+			  await sleep (3000);
 		      }
 		      encrypted=null;
 		      resource_index=null;
 		      var iframeforRegister=null;
 		      iframeforRegister=document.getElementById("ifraRegister");
-		      iframeforRegister.parentNode.removeChild(iframeforRegister);
+		      if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
 		      iframeforRegister=document.createElement("iframe");
-		      iframeforRegister.id="iframeforRegister";
+		      iframeforRegister.id="ifraRegister";
 		      document.body.appendChild(iframeforRegister);
 		      iframeforRegister.src="about:blank";
 		      iframeforRegister.style.backgroundColor="blue";
@@ -811,8 +926,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  filed=remotepath+"/"+buzonEnc;
 			  console.log({filed, filed});
 			  console.log({iv_OTP, OTP, OTP_resource});
-			  encr(codeforRegister, false).then(async (respo)=>{
-			      codeforRegister=respo.replace(" encrypted", " rsa").replace(" iv", " ivRsa").replace("int ", "var ");
+			  encripta(codeforRegister, rsaPublicKey).then(async (respo)=>{
 			      codeforRegister=btoa(codeforRegister);
 			      var codeforRegister2=btoa('var rsaPublicKey=`' + publick + '`;');
 			      buzonEnc=buzonEnc+".js";
@@ -827,7 +941,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  console.log({respo, iv_OTP, OTP_resource, OTP});
 				  console.log(iframeforRegister.url);
 			      });
-			      await sleep (5000);
+			      await sleep (2000);
 			      error="Not Found";
 			      while (error=="Not Found") {
 				  scro=document.getElementById("scro");
@@ -839,7 +953,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  document.body.appendChild(scro);
 				  esperando+=1;
 				  console.log({esperando, error});
-				  await sleep (10000);
+				  await sleep (3000);
 			      }
 			      eval(atob(content));
 			      console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
@@ -866,14 +980,16 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      await sleep (3000);
 						  }
 						  eval(atob(content));
-						  encripta(buzonEnc, rsaPublicKey).then((resp)=>{
-						      codeforRegister=insertacode("", "; char nameofindex[" + buzonE.length + "]=\""+buzonE+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + btoa(buzonEnc).length + "]=\""+btoa(buzonEnc)+"\";");
+						  const rsaPublicKeyread = await openpgp.readKey({ armoredKey: rsaPublicKey });
+						  encripta(buzonEnc, rsaPublicKeyread).then((resp)=>{
+						      var content=btoa("name="+buzoname+",address="+buzonEnc);
+						      codeforRegister=insertacode("", "; char nameofindex[" + buzonE.length + "]=\""+buzonE+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + content.length + "]=\""+content+"\";");
 						      console.log({rsaPublicKey, buzon, buzonE, codeforRegister}, btoa(buzonEnc));
-						      encripta(codeforRegister).then((resp)=>{
+						      encripta(codeforRegister).then(async (resp)=>{
 							  iframeforRegister=document.getElementById("ifraRegister");
 							  if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
 							  iframeforRegister=document.createElement("iframe");
-							  iframeforRegister.id="iframeforRegister";
+							  iframeforRegister.id="ifraRegister";
 							  document.body.appendChild(iframeforRegister);
 							  iframeforRegister.src="about:blank";
 							  iframeforRegister.style.backgroundColor="blue";
@@ -885,8 +1001,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
 							  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
 							  iframeforRegister.contentDocument.getElementById("submit").submit();
+							  await sleep (5000);
 							  document.getElementById("modaltext").innerHTML="Box Registered Successfully";
 							  document.getElementById("modal").style.display="block";
+							  cargaBuzon();
 						      });
 						  });
 					      });
