@@ -230,14 +230,18 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  return Object.prototype.toString.call(obj) === '[object Array]';
       }
 
-      async function RSA_decr(encryptedu, rsaPrivateKey, rsa_PublicKey) {
+      async function RSA_decrypt(encryptedu, rsaPrivateKey, rsaPublicKey) {
 	  return new Promise(async (resolve)=>{
-	      const { data: decrypted, signatures } = await openpgp.decrypt({
-		  encryptedu,
-		  verificationKeys: rsa_PublicKey, // optional
-		  decryptionKeys: rsa_PrivateKey
+	      const message = await openpgp.readMessage({
+		  armoredMessage: encryptedu // parse armored message
 	      });
-	      resolve(decrypted);
+	      openpgp.decrypt({
+		  message,
+		  verificationKeys: rsaPublicKey, // optional
+		  decryptionKeys: rsaPrivateKey
+	      }).then(({ data: decrypted, signatures })=>{
+		  resolve(decrypted);
+	      });
 	  });
       }
       async function decr(encryptedu, iv) {
@@ -616,8 +620,24 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  await sleep (3000);
 					      }
 					      if(error!="Not Found") {
-						  console.log({name, content}, atob(content));
-						  document.getElementById("buzonIndex").innerHTML+="<p>" + atob(content) + "</p>";
+						  var cadena=atob(content);
+						  console.log({name, content}, atob(content), {cadena});
+						  if(cadena.indexOf("name=")>=0 && cadena.indexOf("address=")>=0) {
+						      var nameBox=cadena.substring(cadena.indexOf("name=")+("name=").length, cadena.length);
+						      if(nameBox.indexOf(",")>=0) {
+							  nameBox=nameBox.substring(0, nameBox.indexOf(","));
+						      }else{
+							  nameBox=nameBox.substring(0, nameBox.length);
+						      }
+						      var addressBox=cadena.substring(cadena.indexOf("address=")+("address=").length, cadena.length);
+						      if(addressBox.indexOf(",")>=0) {
+							  addressBox=addressBox.substring(0, addressBox.indexOf(","));
+						      }else{
+							  addressBox=addressBox.substring(0, addressBox.length);
+						      }
+						      console.log({nameBox, addressBox});
+						      document.getElementById("buzonIndex").innerHTML+="<p>" + atob(content) + "<input type=\"button\" onclick='RSA_cargaBuzon(\""+addressBox.trim()+"\",\""+nameBox.trim() +"\");' value=\""+nameBox+"\" /></p>";
+						  }
 					      }
 					      esperando=0;
 					      contador=contador+1;
@@ -640,114 +660,137 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  });
       }
       
-      async function RSA_cargaBuzon(buzon) {
+      async function RSA_cargaBuzon(address, buzon) {
 	  init_OTProcessed=false;
-	  var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-	  error="Not Found";
-	  await sleep (2000);
-	  var esperando=null;
-	  init_OTProcessed=0;
-	  while (init_OTProcessed!=255) {
+	  error=".";
+	  var msg=null;
+	  while (error==".") {
 	      scro=document.getElementById("scro");
 	      scro.parentNode.removeChild(scro);
 	      scro=document.createElement("script");
 	      scro.id="scro";
-	      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-	      console.log(">:>:>", scro.src);
+	      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime();
+	      console.log(".......................", encodeURI(address), '#############', scro.src, esperando);
 	      document.body.appendChild(scro);
 	      esperando+=1;
-	      console.log({esperando, error});
 	      await sleep (3000);
 	  }
-	  console.log({init_OTProcessed});
-	  regprocessed=false;
-	  userPassword().then(async (response)=>{
-	      console.log("----------------", {response});
-	      if(response.error) {
-		  console.log(response.error);
-		  if(tt) clearTimeout(tt);
-	      } else {
-		  if(response.length===4) {
-		      await sleep (2000);
-		      console.log({response});
-		      encrypted=null;
-		      resource_index=null;
-		      var iframeforRegister=null;
-		      buzon=response[1];
-		      digestMessage(response[1]).then(async (buzon)=>{
-			  await sleep (3000);
-			  error=".";
-			  var esperando=0;
-			  while (error==".") {
-			      scro=document.getElementById("scro");
-			      scro.parentNode.removeChild(scro);
-			      scro=document.createElement("script");
-			      scro.id="scro";
-			      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
-			      console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
-			      document.body.appendChild(scro);
-			      esperando+=1;
-			      console.log({esperando, error});
-			      await sleep (3000);
-			  }
-			  if(error=="Not Found") {
-			      document.getElementById("modaltext").innerHTML="Incorrect User Data";
-			      document.getElementById("modal").style.display="block";
-			  } else {
-			      eval(atob(content));
-			      console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
-			      decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
-				  console.log({respo, prefix_rsa, prefix_ivRsa});
-				  if(respo.indexOf("var")<0) {
-				      document.getElementById("modaltext").innerHTML="Incorrect User Data";
-				      document.getElementById("modal").style.display="block";
-				  } else {
-				      eval(respo);
-				      if(rsaKey) {
-					  const privateKey=await openpgp.readPrivateKey({ armoredKey: rsaKey });
-					  esperando=0;
-					  var contador=1;
-					  var name=await digestMessage(buzon+""+contador);
-					  name=name+".js";
-					  console.log({buzon, name, contador});
-					  console.log("********************************************************", {name, rsaKey, privateKey});
-					  error=".";
-					  while(error!="Not Found") {
-					      error=".";
-					      while (error==".") {
-						  scro=document.getElementById("scro");
-						  scro.parentNode.removeChild(scro);
-						  scro=document.createElement("script");
-						  scro.id="scro";
-						  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&date=' + (new Date()).getTime();
-						  console.log(".......................", encodeURI(name), '#############', scro.src, esperando);
-						  document.body.appendChild(scro);
-						  esperando+=1;
-						  await sleep (3000);
-					      }
-					      if(error!="Not Found") {
-						  console.log({name, content}, atob(content));
-						  document.getElementById("buzonIndex").innerHTML+="<p>" + atob(content) + "</p>";
-					      }
-					      esperando=0;
-					      contador=contador+1;
-					      name=await digestMessage(buzon+""+contador);
-					      name=name+".js";
-					      console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", {name, buzon, contador, esperando, error, name});
-					  }
-					  document.getElementById("modaltext").innerHTML="User Loaded Successfully";
-					  document.getElementById("modal").style.display="block";
-					  show=1;
-					  if(show) pon('tab1');
-				      }
-				  }
-			      });
-			  }
-		      });
-						     
-		  }
+	  if(error!="Success") {
+	      document.getElementById("modaltext").innerHTML="Box Not Found";
+	      document.getElementById("modal").style.display="block";
+	  } else {
+	      msg=atob(content);
+	      console.log({msg});
+	      var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+	      error="Not Found";
+	      await sleep (2000);
+	      var esperando=null;
+	      init_OTProcessed=0;
+	      while (init_OTProcessed!=255) {
+		  scro=document.getElementById("scro");
+		  scro.parentNode.removeChild(scro);
+		  scro=document.createElement("script");
+		  scro.id="scro";
+		  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+		  console.log(">:>:>", scro.src);
+		  document.body.appendChild(scro);
+		  esperando+=1;
+		  console.log({esperando, error});
+		  await sleep (3000);
 	      }
-	  });
+	      console.log({init_OTProcessed});
+	      regprocessed=false;
+	      userPassword().then(async (response)=>{
+		  console.log("----------------", {response});
+		  if(response.error) {
+		      console.log(response.error);
+		      if(tt) clearTimeout(tt);
+		  } else {
+		      if(response.length===4) {
+			  await sleep (2000);
+			  console.log({response});
+			  encrypted=null;
+			  resource_index=null;
+			  var iframeforRegister=null;
+			  buzon=response[1];
+			  digestMessage(response[1]).then(async (buzon)=>{
+			      await sleep (3000);
+			      var esperando=0;
+			      error=".";
+			      while (error==".") {
+				  scro=document.getElementById("scro");
+				  scro.parentNode.removeChild(scro);
+				  scro=document.createElement("script");
+				  scro.id="scro";
+				  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
+				  console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
+				  document.body.appendChild(scro);
+				  esperando+=1;
+				  console.log({esperando, error});
+				  await sleep (3000);
+			      }
+			      if(error=="Not Found") {
+				  document.getElementById("modaltext").innerHTML="Incorrect User Data";
+				  document.getElementById("modal").style.display="block";
+			      } else {
+				  eval(atob(content));
+				  console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
+				  decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
+				      console.log({respo, prefix_rsa, prefix_ivRsa});
+				      if(respo.indexOf("var")<0) {
+					  document.getElementById("modaltext").innerHTML="Incorrect User Data";
+					  document.getElementById("modal").style.display="block";
+				      } else {
+					  eval(respo);
+					  if(rsaKey) {
+					      const privateKey=await openpgp.readPrivateKey({ armoredKey: rsaKey });
+					      RSA_decrypt(msg, privateKey, null).then(async (responseDecrypted)=>{
+						  rsaKey=responseDecrypted;
+						  console.log("DECRYPTED", {responseDecrypted});
+						  esperando=0;
+						  var contador=1;
+						  var name=await digestMessage(address+""+contador);
+						  name=name+".js";
+						  console.log({address, name, contador});
+						  console.log("*.*.*.*.*.*.*.*.*.*.*.*.*.*.*..*.*.*.*.*.*.*..*.*.*.*.*.*.*.*..*", {name, rsaKey, privateKey});
+						  error=".";
+						  while(error!="Not Found") {
+						      error=".";
+						      while (error==".") {
+							  scro=document.getElementById("scro");
+							  scro.parentNode.removeChild(scro);
+							  scro=document.createElement("script");
+							  scro.id="scro";
+							  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&date=' + (new Date()).getTime();
+							  console.log("^^^^^^^^^^^^^^^^^^^^^^.", encodeURI(name), '<#><#><#><#><#><#><#><#><#><#><#>##', scro.src, esperando);
+							  document.body.appendChild(scro);
+							  esperando+=1;
+							  await sleep (3000);
+						      }
+						      if(error!="Not Found") {
+							  console.log({name, content}, atob(content));
+							  document.getElementById("addressIndex").innerHTML+="<p>" + atob(content) + "</p>";
+						      }
+						      esperando=0;
+						      contador=contador+1;
+						      name=await digestMessage(address+""+contador);
+						      name=name+".js";
+						      console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", {name, address, contador, esperando, error, name});
+						  }
+						  document.getElementById("modaltext").innerHTML="User Loaded Successfully";
+						  document.getElementById("modal").style.display="block";
+						  show=1;
+						  if(show) pon('tab1');
+					      });
+					  }				  
+				      }
+				  });
+			      }
+			  });
+		      }
+		  }
+	      });
+	  }
       }
       
       async function crearBuzonRegistro() {
@@ -926,103 +969,93 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  filed=remotepath+"/"+buzonEnc;
 			  console.log({filed, filed});
 			  console.log({iv_OTP, OTP, OTP_resource});
-			  encripta(codeforRegister, rsaPublicKey).then(async (respo)=>{
-			      codeforRegister=btoa(codeforRegister);
-			      var codeforRegister2=btoa('var rsaPublicKey=`' + publick + '`;');
-			      buzonEnc=buzonEnc+".js";
-			      codeforRegister=insertacode("", "; char nameofindex[" + buzonEnc.length + "]=\""+buzonEnc+"\"; char command["+("REGISTER").length + "]=\"REGISTER\"; char content[" + codeforRegister.length + "]=\""+codeforRegister+"\"; char contentExtra[" + codeforRegister2.length + "]=\"" + codeforRegister2 + "\";");
-			      console.log({codeforRegister});
-			      encripta(codeforRegister).then((resp)=>{
-				  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-				  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-				  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-				  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-				  iframeforRegister.contentDocument.getElementById("submit").submit();
-				  console.log({respo, iv_OTP, OTP_resource, OTP});
-				  console.log(iframeforRegister.url);
-			      });
-			      await sleep (2000);
-			      error="Not Found";
-			      while (error=="Not Found") {
-				  scro=document.getElementById("scro");
-				  scro.parentNode.removeChild(scro);
-				  scro=document.createElement("script");
-				  scro.id="scro";
-				  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'&date=' + (new Date()).getTime();
-				  console.log("----------", encodeURI(buzonEnc), '++++++++++++++', scro.src);
-				  document.body.appendChild(scro);
-				  esperando+=1;
-				  console.log({esperando, error});
-				  await sleep (3000);
-			      }
-			      eval(atob(content));
-			      console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
-			      decr(prefix_rsa, prefix_ivRsa).then((respo)=>{
-				  console.log({respo, prefix_rsa, prefix_ivRsa});
-				  eval(respo);
-				  if(rsaKey) {
-				      userPassword().then(async (response)=>{
-					  buzon=response[1];
-					  digestMessage(response[1]).then((buzonE)=>{
-					      digestMessage(buzonE+".jspublic"+"\n").then(async (buzon)=>{
-						  console.log({buzon, buzonE}, "A" + response[1]);
-						  error="Not Found";
-						  while (error=="Not Found") {
-						      scro=document.getElementById("scro");
-						      scro.parentNode.removeChild(scro);
-						      scro=document.createElement("script");
-						      scro.id="scro";
-						      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
-						      console.log("=:=:=:=:=:==:=:=:=:=:=", encodeURI(buzon), '*:*:*:*:*:*:*:*:*:*:', scro.src);
-						      document.body.appendChild(scro);
-						      esperando+=1;
-						      console.log({esperando, error});
-						      await sleep (3000);
-						  }
-						  eval(atob(content));
-						  const rsaPublicKeyread = await openpgp.readKey({ armoredKey: rsaPublicKey });
-						  encripta(buzonEnc, rsaPublicKeyread).then((resp)=>{
-						      var content=btoa("name="+buzoname+",address="+buzonEnc);
-						      codeforRegister=insertacode("", "; char nameofindex[" + buzonE.length + "]=\""+buzonE+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + content.length + "]=\""+content+"\";");
-						      console.log({rsaPublicKey, buzon, buzonE, codeforRegister}, btoa(buzonEnc));
-						      encripta(codeforRegister).then(async (resp)=>{
-							  iframeforRegister=document.getElementById("ifraRegister");
-							  if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
-							  iframeforRegister=document.createElement("iframe");
-							  iframeforRegister.id="ifraRegister";
-							  document.body.appendChild(iframeforRegister);
-							  iframeforRegister.src="about:blank";
-							  iframeforRegister.style.backgroundColor="blue";
-							  iframeforRegister.style.width=800;
-							  iframeforRegister.style.height=800;
-							  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
-							  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-							  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-							  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-							  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-							  iframeforRegister.contentDocument.getElementById("submit").submit();
-							  await sleep (5000);
-							  document.getElementById("modaltext").innerHTML="Box Registered Successfully";
-							  document.getElementById("modal").style.display="block";
-							  cargaBuzon();
-						      });
+			  userPassword().then(async (response)=>{
+			      buzon=response[1];
+			      digestMessage(response[1]).then((buzonE)=>{
+				  digestMessage(buzonE+".jspublic"+"\n").then(async (buzonPublic)=>{
+				      console.log({buzonPublic, buzonE}, "A" + response[1]);
+				      error="Not Found";
+				      while (error=="Not Found") {
+					  scro=document.getElementById("scro");
+					  scro.parentNode.removeChild(scro);
+					  scro=document.createElement("script");
+					  scro.id="scro";
+					  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
+					  console.log("loading public =:=:=:=:=:==:=:=:=:=:=", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
+					  document.body.appendChild(scro);
+					  esperando+=1;
+					  console.log({esperando, error});
+					  await sleep (3000);
+				      }
+				      eval(atob(content));
+				      console.log({content}, atob(content));
+				      const rsaPublicKeyread = await openpgp.readKey({ armoredKey: rsaPublicKey });
+				      encripta(codeforRegister, rsaPublicKey).then(async (respo)=>{
+					  codeforRegister=btoa(respo);
+					  var codeforRegister2=btoa('var rsaPublicKey=`' + publick + '`;');
+					  buzonEnc=buzonEnc+".js";
+					  codeforRegister=insertacode("", "; char nameofindex[" + buzonEnc.length + "]=\""+buzonEnc+"\"; char command["+("REGISTER").length + "]=\"REGISTER\"; char content[" + codeforRegister.length + "]=\""+codeforRegister+"\"; char contentExtra[" + codeforRegister2.length + "]=\"" + codeforRegister2 + "\";");
+					  console.log({codeforRegister, buzonEnc});
+					  encripta(codeforRegister).then(async (resp)=>{
+					      iframeforRegister.contentDocument.getElementById("texto2").value=resp;
+					      iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
+					      iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
+					      iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
+					      iframeforRegister.contentDocument.getElementById("submit").submit();
+					      console.log({respo, iv_OTP, OTP_resource, OTP});
+					      console.log(iframeforRegister.url);
+					      await sleep (2000);
+					      error="Not Found";
+					      while (error=="Not Found") {
+						  scro=document.getElementById("scro");
+						  scro.parentNode.removeChild(scro);
+						  scro=document.createElement("script");
+						  scro.id="scro";
+						  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'&date=' + (new Date()).getTime();
+						  console.log("_ . _ . _ . _ . ", encodeURI(buzonEnc), '+ + + + + + + + + + +  ++ + ', scro.src);
+						  document.body.appendChild(scro);
+						  esperando+=1;
+						  console.log({esperando, error});
+						  await sleep (3000);
+					      }
+					      console.log({content}, atob(content));
+					      encripta(buzonEnc, rsaPublicKey).then((resp)=>{
+						  var content=btoa("name="+buzoname+",address="+buzonEnc);
+						  codeforRegister=insertacode("", "; char nameofindex[" + buzonE.length + "]=\""+buzonE+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + content.length + "]=\""+content+"\";");
+						  console.log({rsaPublicKey, buzon, buzonE, codeforRegister}, btoa(buzonEnc));
+						  encripta(codeforRegister).then(async (resp)=>{
+						      iframeforRegister=document.getElementById("ifraRegister");
+						      if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
+						      iframeforRegister=document.createElement("iframe");
+						      iframeforRegister.id="ifraRegister";
+						      document.body.appendChild(iframeforRegister);
+						      iframeforRegister.src="about:blank";
+						      iframeforRegister.style.backgroundColor="blue";
+						      iframeforRegister.style.width=800;
+						      iframeforRegister.style.height=800;
+						      iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+						      iframeforRegister.contentDocument.getElementById("texto2").value=resp;
+						      iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
+						      iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
+						      iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
+						      iframeforRegister.contentDocument.getElementById("submit").submit();
+						      await sleep (5000);
+						      document.getElementById("modaltext").innerHTML="Box Registered Successfully";
+						      document.getElementById("modal").style.display="block";
+						      cargaBuzon();
 						  });
 					      });
 					  });
 				      });
-				  }
+				  });
 			      });
-			      if(error) {
-				  console.log(error);
-				  return false;
-			      }
-			      console.log({resource_index});
 			  });
 		      });
 		  }
 	      });
 	  }
       }
+					      
       async function enviarABuzon() {
       }
       async function setscrgrados() {
