@@ -918,12 +918,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      scro.parentNode.removeChild(scro);
 		      scro=document.createElement("script");
 		      scro.id="scro";
-		      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'&date=' + (new Date()).getTime();
+		      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'.js&date=' + (new Date()).getTime();
 		      console.log("----------", encodeURI(buzon), '++++++++++++++', scro.src);
 		      document.body.appendChild(scro);
 		      esperando+=1;
 		      console.log({esperando, error});
-		      await sleep (3000);
+		      await sleep (2000);
 		  }
 		  if(error!="Not Found"){
 		      document.getElementById("modaltext").innerHTML="Box Name Unavailable";
@@ -1039,7 +1039,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
 						      iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
 						      iframeforRegister.contentDocument.getElementById("submit").submit();
-						      await sleep (5000);
+						      await sleep (3000);
 						      document.getElementById("modaltext").innerHTML="Box Registered Successfully";
 						      document.getElementById("modal").style.display="block";
 						      cargaBuzon();
