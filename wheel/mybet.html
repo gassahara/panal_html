@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Roulette Bets</title>
+    <style>
+		
+:root {
+  --navbar-bg-color: RGB(140, 20, 50 ,0.5);
+  --navbar-text-color: hsl(10, 60%, 15%);
+  --navbar-text-color-focus: white;
+  --navbar-bg-contrast: hsl(50, 0%, 25%);}
+
+* {box-sizing: border-box; margin: 0;padding: 0;}
+
+.container { max-width: 1000px;
+  padding-left: 1.4rem;padding-right: 1.4rem;
+  margin-left: auto;  margin-right: auto;
+}
+#navbar { --navbar-height: 64px; position: fixed;
+  height: var(--navbar-height);left: 0;right: 0;
+  background-color: var(--navbar-bg-color);
+  box-shadow: 0 2px 4px rgba(3, 4, 20, 0.25);
+}
+.navbar-container { display: flex;
+  justify-content: space-between;
+  height: 100%; align-items: center;
+}
+.navbar-item {margin: 0.4em; width: 100%;}
+
+.home-link,
+.navbar-link { color: var(--navbar-text-color);
+  text-decoration: none; display: flex;
+  font-weight: 500; align-items: center;}
+
+.home-link:is(:focus, :hover) { color: var(--navbar-text-color-focus);}
+
+.navbar-link {justify-content: center;
+  width: 100%; padding: 0.4em 0.8em; border-radius: 5px;}
+
+.navbar-link:is(:focus, :hover) { color: var(--navbar-text-color-focus);
+  background-color: var(--navbar-bg-contrast);}
+
+.navbar-logo {background-color: var(--navbar-text-color-focus);
+  border-radius: 50%; width: 30px; height: 30px; margin-right: 0.5em;}
+
+#navbar-toggle {cursor: pointer;
+  border: none; background-color: transparent;
+  width: 40px; height: 40px; display: flex;align-items: center;
+  justify-content: center;flex-direction: column;}
+
+.icon-bar {display: block; width: 25px;height: 4px;margin: 2px;
+  background-color: var(--navbar-text-color);}
+
+#navbar-toggle:is(:focus, :hover) .icon-bar { background-color: var(--navbar-text-color-focus);}
+
+#navbar-toggle[aria-expanded="true"] .icon-bar:is(:first-child, :last-child) {
+  position: absolute; margin: 0;width: 30px;}
+  
+#navbar-toggle[aria-expanded="true"] .icon-bar:first-child {transform: rotate(45deg);}
+  
+#navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(2) {opacity: 0;}
+  
+#navbar-toggle[aria-expanded="true"] .icon-bar:last-child { transform: rotate(-45deg);}
+  
+#navbar-menu {position: fixed;top: var(--navbar-height);
+  bottom: 0;opacity: 0; visibility: hidden;left: 0;right: 0;}
+  
+#navbar-toggle[aria-expanded="true"] + #navbar-menu {
+  background-color: rgba(5, 2, 30, 0.5); opacity: 1; visibility: visible;}
+
+.navbar-links {list-style: none;position: absolute;
+  background-color: var(--navbar-bg-color);
+  display: flex; flex-direction: column;
+  align-items: center;left: 0;right: 0;margin: 1.4rem;
+  border-radius: 5px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);}
+
+#navbar-toggle[aria-expanded="true"] + #navbar-menu .navbar-links {padding: 1em;}
+
+@media screen and (min-width: 700px) { #navbar-toggle,
+  #navbar-toggle[aria-expanded="true"] {display: none;}
+
+  #navbar-menu,
+  #navbar-toggle[aria-expanded="true"] #navbar-menu {
+    visibility: visible;opacity: 1;
+    position: static; display: block;height: 100%;}
+
+  .navbar-links,
+  #navbar-toggle[aria-expanded="true"] #navbar-menu .navbar-links {
+    margin: 0; padding: 0; box-shadow: none;  position: static;
+    flex-direction: row; width: 100%; height: 100%;
+  }
+}
+
+			
+		
+		
+		
+
+
+.carousel {position: absolute;left:3%; bottom:5%;display: flex;
+  width: 540px;height: 300px; z-index:-2;background-color:rgba(50, 20, 10, 0.8);
+  border: 2px solid black; box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.8);
+  align-items: center;font-family: Arial;}
+
+.carousel__list {display: flex;left:15%; 
+  list-style: none; position: relative;
+  width: 75%; height: 300px;
+  justify-content: center; perspective: 300px;}
+
+.carousel__item {display: flex; align-items: center;
+  justify-content: center;color: #fff;font-size: 30px;
+  width: 200px; height: 300px; border-radius: 12px;
+  box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.5);
+  position: absolute;transition: all 0.3s ease-in;}
+
+.carousel__item:nth-child(1) { background: linear-gradient(45deg, #2D35EB 0%, #904ED4 100%);}
+.carousel__item:nth-child(2) {background: linear-gradient(45deg, #2D35EB 0%, #fdbb2d 100%);}
+.carousel__item:nth-child(3) {background: linear-gradient(45deg, #2D35EB 0%, #22c1c3 100%);}
+.carousel__item:nth-child(4) {background: linear-gradient(45deg, #fdbb2d 0%, #904ED4 100%);}
+.carousel__item:nth-child(5) {background: linear-gradient(45deg, #22c1c3 0%, #904ED4 100%);}
+.carousel__item[data-pos="0"] {z-index: 5;}
+.carousel__item[data-pos="-1"], .carousel__item[data-pos="1"] {opacity: 0.7;filter: blur(1px) grayscale(10%);}
+.carousel__item[data-pos="-1"] {transform: translateX(-50%) scale(0.9);z-index: 4;}
+.carousel__item[data-pos="1"] {transform: translateX(50%) scale(0.9);z-index: 4;}
+.carousel__item[data-pos="-2"], .carousel__item[data-pos="2"] {opacity: 0.4;filter: blur(3px) grayscale(20%);}
+.carousel__item[data-pos="-2"] {transform: translateX(-90%) scale(0.8);z-index: 3;}
+.carousel__item[data-pos="2"] { transform: translateX(90%) scale(0.8);z-index: 3;}
+
+
+
+		
+    canvas {width: 900px;height: 500px; position: absolute; top: 16%;left: 33%;
+      border: 2px solid black; box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.8);}
+ 
+	.bottom{ display: block;position:absolute; z-index:-1;top:16%;left:33%; width:600px;height:600px; transform: translate(25%, -20%); 
+					background-image:url("tapa.png");background-repeat: no-repeat; background-size: cover; ;} 
+					
+	.top{ position:absolute; z-index:1; top:16%; left: 33%; width:75px; height:120px; transform: translate(550%, -24%); 
+					background-image:url("top2.png");background-repeat: no-repeat; background-size: cover;} 				
+           
+      body {font-family: Arial, sans-serif; background-color: #f2f2f2; 
+		  background-image:url("/wheel/proxy6.jpg");background-repeat: no-repeat;background-size: cover;}
+        
+      form {background-color:transparent; top: 30%; border-radius: 5px; padding: 20px;position: absolute;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.7); width: 250px; height:450px; margin: 0 auto;}
+        
+      label { display: block;margin-bottom: 10px; }
+     
+      input[type="text"],input[type="number"],input[type="date"],input[type="time"] { width: 100%; padding: 10px;background: rgba(0, 10, 0, 0.3);;
+																					border-radius: 5px; border: none; margin-bottom: 20px;}
+      
+      input[type="submit"] {background-color: #4caf50;color: #fff;
+        border: none;padding: 10px 20px; border-radius: 5px;cursor: pointer;}
+      
+      input[type="submit"]:hover { background-color: #3e8e81;}
+      
+      
+
+.logon-box {position: absolute; background-image:url("/wheel/proxy7c.jpg"); background-repeat: no-repeat;background-size: cover;
+  top: 5%;left: 2%;width: 540px;height:460px;padding: 30px;
+  transform: translate(2%, 5%);   
+  box-sizing: border-box;box-shadow: 0 15px 25px rgba(0,0,0,.5);
+  border-radius: 10px;}
+        
+.login-box {position: absolute; background-image:url("/wheel/proxy7a.jpg"); background-repeat: no-repeat;background-size: cover;
+  top: 30%;left: 85%;width: 350px;height:700px;padding: 30px;
+  transform: translate(-25%, -25%);   
+  box-sizing: border-box;box-shadow: 0 15px 25px rgba(0,0,0,.5);
+  border-radius: 10px;}
+
+.login-box h2 {margin: 0 0 30px;  padding: 0; color: white ;text-align: center;}
+
+.login-box .user-box {position: relative;}
+
+.login-box .user-box input { width: 100%;padding: 10px 0;
+  font-size: 16px;color: #fff;margin-bottom: 30px;
+  border: none;border-bottom: 1px solid #fff;
+  outline: none;background: transparent;}
+  
+.login-box .user-box label {position: absolute;top:0;left: 0;padding: 10px 0;
+  font-size: 16px;color: #fff;
+  pointer-events: none;transition: .5s;}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {top: -20px;left: 0;color: #03e9f4;font-size: 12px;}
+
+
+.login-box form a {
+  position: relative;display: inline-block;padding: 10px 20px;
+  color: #03e9f4;font-size: 16px;
+  text-decoration: none;text-transform: uppercase;
+  overflow: hidden;transition: .5s; margin-top: 40px;letter-spacing: 4px}
+
+.login-box a:hover {background: #03e9f4;color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+}
+
+.login-box a span { position: absolute; display: block;}
+
+.login-box a span:nth-child(1) {top: 0;left: -100%;width: 100%;height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: btn-anim1 1s linear infinite;}
+
+@keyframes btn-anim1 {
+  0% {left: -100%;}
+  50%,100% {left: 100%;}
+}
+
+.login-box a span:nth-child(2) {top: -100%;right: 0;width: 2px;height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: btn-anim2 1s linear infinite;animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {top: -100%;}
+  50%,100% {top: 100%;}
+}
+
+.login-box a span:nth-child(3) {bottom: 0;right: -100%;width: 100%;height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: btn-anim3 1s linear infinite;animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {right: -100%;}
+  50%,100% {right: 100%;}
+}
+
+.login-box a span:nth-child(4) {bottom: -100%;left: 0;width: 2px;height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: btn-anim4 1s linear infinite;animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {bottom: -100%;}
+  50%,100% {bottom: 100%;}
+}
+ 
+      
+        
+    </style>
+  </head>
+  <body>
+	<header id="navbar">
+  <nav class="navbar-container container">
+    <a href="/" class="home-link">
+      <div class="navbar-logo"></div>
+      APUESTA Y RUEDA
+    </a>
+    <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu" aria-expanded="false">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>     
+      <span class="icon-bar"></span>
+    </button>
+    <div id="navbar-menu" aria-labelledby="navbar-toggle">
+      <ul class="navbar-links">
+        <li class="navbar-item"><a class="navbar-link" href="/about">About</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/blog">Blog</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/careers">Careers</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<br><br>
+
+
+
+<div class="carousel">
+  <ul class="carousel__list">
+    <li class="carousel__item" data-pos="-2"><div>1</div></li>
+    <li class="carousel__item" data-pos="-1"><div>2</div></li>
+    <li class="carousel__item" data-pos="0"><div>3</div></li>
+    <li class="carousel__item" data-pos="1"><div>4</div></li> 
+    <li class="carousel__item" data-pos="2"><div>5</div></li>
+    
+  </ul>
+</div>
+
+	<div class="logon-box" >
+	<h2>tickets</h2> 
+	<table>
+		th
+	</table>	 
+	</div>
+ 	  
+	<canvas id="canvas">  </canvas>  
+	 
+    <div class="bottom"></div><div class="top"></div>
+     
+	<div class="login-box" >
+	<h2>Apuestas</h2>  
+    <form >
+    
+      <label for="number" class="user-box">Number:</label>
+      <input type="number"  class="user-box" id="number" name="number" min="1" max="36" required>
+      <label for="amount">Amount:</label>
+      <input type="number" class="user-box" id="amount" name="amount" min="1" required>
+      <label for="date">Date:</label>
+      <input type="date" class="user-box" id="date" name="date" required>
+      <label for="time">Time:</label>
+      <input type="time" class="user-box" id="time" name="time" required>
+      <a href="#">
+		<span></span> <span></span> <span></span> <span></span>
+		Submit
+	  </a>
+      <input type="submit" value="Place Bet">
+    
+    </form>
+      
+   
+      
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    
+	//var backgroundImage = new Image();backgroundImage.src = "proxy4.jpg";
+	//backgroundImage.onload = function() {ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);  };
+    
+    
+    
+    const numSlices = 37;
+    const sliceAngle = 2 * Math.PI / numSlices;                                                                                                                                                                                                                                                   
+    const sliceColors = [{color:'#0fa501',num:'1'}, {color:'#0cfcf0',num:'2'}, {color:'#6200ad',num:'3'}, {color:'#ffffff',num:'4'}, {color:'#6200ad',num:'5'}, {color:'#021bdd',num:'6'}, {color:'#0cfcf0',num:'7'}, {color:'#ff00dc',num:'8'}, {color:'#6200ad',num:'9'}, {color:'#ffffff',num:'10'}, {color:'#021bdd',num:'11'}, {color:'#fc0505',num:'12'}, 
+						 {color:'#6200ad',num:'13'},{color:'#0cfcf0',num:'14'},{color:'#ff00dc',num:'15'},{color:'#021bdd',num:'16'},{color:'#6200ad',num:'17'},{color:'#ffffff',num:'18'},{color:'#fcd705',num:'19'},{color:'#0cfcf0',num:'20'},{color:'#021bdd',num:'21'},{color:'#ff00dc',num:'22'}, {color:'#fc0505',num:'23'}, {color:'#ffffff',num:'24'},
+					 	 {color:'#6200ad',num:'25'},{color:'#021bdd ',num:'26'},{color:'#0cfcf0',num:'27'},{color:'#ffffff',num:'28'},{color:'#ff00dc',num:'29'},{color:'#0cfcf0',num:'30'},{color:'#021bdd',num:'31'}, {color:' #ffffff',num:'32'}, {color:'#6200ad',num:'33'}, {color:'#fc0505',num:'34'}, {color:'#0cfcf0',num:'35'}, {color:'#ff00dc',num:'36'}, {color:'#fcd705',num:37}];
+        
+
+	const ballRadius = 75;
+    const ballColor = '#727272'; 
+    const spinDuration = 5000; // 5 seconds
+    let spinStartTime = null;let spinStartAngle = null;let spinEndAngle = null;
+    
+    let ballAngle = null; let ballX = canvas.width / 2;let ballY = canvas.height / 2;let isSpinning = false;
+    function drawRoulette() { //const audio = new Audio('casino-ambiance-19130.mp3');audio.play(); 
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const centerX = canvas.width / 2;const centerY = canvas.height / 2;
+      const radius = Math.min(centerX, centerY) - 2;
+      
+      
+      ctx.restore();
+      ctx.beginPath();
+      ctx.arc(ballX, ballY, ballRadius, 0, 2 * Math.PI);
+      ctx.fillStyle = ballColor; ctx.fill();  ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.rotate(ballAngle);
+                 
+      for(let i=0; i < numSlices; i++) { const startAngle = i * sliceAngle; const endAngle = (i + 1) * sliceAngle;const sliceCenterAngle = (startAngle + endAngle) / 2;
+        ctx.beginPath(); 
+        ctx.moveTo(0, 0);ctx.arc(0, 0, radius, startAngle, endAngle);
+        ctx.fillStyle =sliceColors[i].color;ctx.fill();  ctx.save();
+		ctx.rotate(sliceCenterAngle);
+		ctx.translate(radius / 2, 0);
+		ctx.rotate(Math.PI / 2);console.log (i+" "+sliceCenterAngle+" "+sliceColors[i].color);
+		ctx.fillStyle = sliceColors[i].color;
+		ctx.fillRect(-3, -23, 6, 6);
+		ctx.fillStyle = 'black'; ctx.font = '7px Arial';
+		ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+		ctx.fillText(sliceColors[i].num, 0, -10);
+		ctx.restore();      
+        
+      }
+
+    }
+
+ 
+    
+    function startSpin() { const audio = new Audio('roulette_casino_evianaif-14446.mp3');audio.play();  
+      if(!isSpinning) {isSpinning = true;
+        spinStartTime = Date.now(); spinStartAngle = ballAngle;
+        spinEndAngle = spinStartAngle + 1.25 * /* Math.random() */  2 * Math.PI;
+        ballX = canvas.width / 2;;ballY = canvas.height / 2;
+        requestAnimationFrame(animateSpin); }
+    }
+
+    drawRoulette();
+    canvas.addEventListener('click', startSpin); 
+  
+  
+function animateSpin() {
+  const elapsedTime = Date.now() - spinStartTime;
+  const progress = elapsedTime / spinDuration;
+  const easing = easeOutQuart(progress); // easing function modifies progress
+  if (progress < 1) {const angle = spinStartAngle + (spinEndAngle - spinStartAngle) * easing;
+    ballAngle = angle; //drawRoulette();
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(centerX, centerY) - 20;
+    ballX = (centerX-0) + 2 + Math.cos(angle);
+    ballY = (centerY-0) + 2 + Math.sin(angle);drawRoulette();
+    requestAnimationFrame(animateSpin);} 
+  else {isSpinning = false;
+    ballAngle = spinEndAngle;   drawRoulette();
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(centerX, centerY) - 20;
+    ballX = centerX * radius * Math.cos(ballAngle);
+    ballY = centerY * radius * Math.sin(ballAngle);}
+}
+
+function easeOutQuart(t) { return 1 - (--t) * t * t * t; }  
+  
+  
+  
+    const form = document.querySelector('form');const bets = [];
+	form.addEventListener('submit', (event) => { event.preventDefault();
+		const number = parseInt(document.querySelector('#number').value);
+		const amount = parseInt(document.querySelector('#amount').value);
+		const date = document.querySelector('#date').value;
+		const time = document.querySelector('#time').value;
+        bets.push({ amount, date, time }); console.log(bets);
+		console.log(`Placed a bet of $${amount} on number ${number} for ${date} at ${time}`); });
+		
+
+
+
+const state = {}; 
+const carouselList = document.querySelector('.carousel__list');
+const carouselItems = document.querySelectorAll('.carousel__item');
+const elems = Array.from(carouselItems);
+
+carouselList.addEventListener('click', function (event) { var newActive = event.target;
+  var isItem = newActive.closest('.carousel__item');
+  if (!isItem || newActive.classList.contains('carousel__item_active')) {return;};
+    update(newActive); });
+
+const update = function(newActive) { 
+  const newActivePos = newActive.dataset.pos;
+  const current = elems.find((elem) => elem.dataset.pos == 0);
+  const prev = elems.find((elem) => elem.dataset.pos == -1);
+  const next = elems.find((elem) => elem.dataset.pos == 1);
+  const first = elems.find((elem) => elem.dataset.pos == -2);
+  const last = elems.find((elem) => elem.dataset.pos == 2);
+  
+  current.classList.remove('carousel__item_active');  
+  [current, prev, next, first, last].forEach(item => {var itemPos = item.dataset.pos;
+													  item.dataset.pos = getPos(itemPos, newActivePos) });
+
+};
+
+const getPos = function (current, active) {const diff = current - active;
+  if (Math.abs(current - active) > 2) {return -current}
+  return diff;} 
+  		 
+  </script>
+    
+    
+    
+    
+  
+  </body>
+</html>

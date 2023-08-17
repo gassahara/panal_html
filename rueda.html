@@ -1,0 +1,23 @@
+<HTML>
+<HEAD>
+  <SCRIPT>
+    var remotepath = "https://curare2019.ddns.net/"
+    function carga() {
+	scro=document.getElementById("scro");
+	scro.parentNode.removeChild(scro);
+	scro=document.createElement("script");
+	scro.id="scro";
+	scro.src="grados.js";
+	alert(scro.src);
+	alert(grados);
+    }
+  </SCRIPT>
+</HEAD>
+<BODY>
+  <img src="rueda.png"> </img>
+  <input type="button" onclick="carga()">
+  <div>
+    <script id="scro" src="grados.js" ></script>
+    </div>
+</BODY>
+</HTML>

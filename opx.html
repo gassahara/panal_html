@@ -1,0 +1,820 @@
+<! DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>TICKETS</title>
+    <STYLE>
+      iframe {
+	  width: 250px;
+	  height: 50px;
+	  border-width: 0;
+      }
+      a {
+	  text-decoration: none;
+	  color: blue;
+	  font-weight: bolder;
+      }
+      p, span {
+	  color: #d2a059;
+	  font-family: Sans-Serif;
+	  font-size: 18pt;
+      }
+      input {
+	  font-family: Sans-Serif;
+	  font-size: 18pt;
+	  
+      }
+    </STYLE>
+    <!--
+    <script src="openpgpjs/dist/openpgp.js" type="text/javascript" charset="utf-8"></script>
+    -->
+    <script src="openpgp/openpgp.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="precio/precio.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      var pubkey=`-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+9DCUcsARoYnJdsvLTXnm6qqVv85b
+=e4I6
+-----END PGP PUBLIC KEY BLOCK-----`;//document.getElementById("pubkey").value;
+
+      var encrypted=new Uint8Array();
+      var passw="";
+      var user="";
+      var filed="";
+      var t=null;
+      var scro=null;
+      var iv=new Uint8Array();
+      var remotepath="https://curare2019.ddns.net/";
+      var longitud=0;
+      var latitud=0;
+      var c=0;
+      var errores=null;
+      var ci=0;
+      var pk_global_full=null;
+      var previo=null;
+
+      function importSecretKey(rawKeyz) {
+	  return window.crypto.subtle.importKey(
+	      "raw",
+	      rawKeyz,
+	      "AES-CTR",
+	      false,
+	      ["encrypt", "decrypt"]
+	  );
+      }
+
+      var rawKey="";
+      var kkey=0;
+
+      function modalwarning() {
+	  
+      }
+      function aleatoria() {
+	  var longitudcadenaaleatoria=Math.random() * (60 - 35) + 35;
+	  var cadenaaleatoria="";
+	  var letra=47;
+	  while(longitudcadenaaleatoria>=0) {
+ 	      while(letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='/'||String.fromCharCode(letra)=='*'||String.fromCharCode(letra)=='+'||String.fromCharCode(letra)==';'||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+	      cadenaaleatoria=cadenaaleatoria+String.fromCharCode(letra);
+	      longitudcadenaaleatoria--;
+	      letra=47;
+	  }
+	  return cadenaaleatoria;
+      }
+
+      async function setp() {
+	  passw=document.getElementById('usuario').value; //document.getElementById('passphrase').value+document.getElementById('usuario').value;
+	  user=document.getElementById('usuario').value;
+	  contrasena=await digestMessage(passw);
+	  var bytes = new Uint8Array(16);
+	  for (var ci=0; ci < 16; ci++) bytes[ci] = parseInt(contrasena.substr( (ci * 2) + 32, 2), 16);
+	  return bytes;
+      }
+      
+      function pon(obj) {
+	  divs=0;
+	  while(divs<document.getElementsByTagName("div").length ) {
+	      document.getElementsByTagName("div")[divs].style.display="none";
+	      divs++;
+	  }
+	  document.getElementById(obj).style.display='';
+      }
+
+      async function decr() {
+	  rawKey=setp();
+	  kkey= await importSecretKey(rawKey);
+	  ciphertext = await window.crypto.subtle.decrypt(
+	      {
+		  name: "AES-CTR",
+		  counter:iv,
+		  length: 128
+	      },
+	      kkey,
+	      encrypted
+	  );
+	  const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+	  c=0;
+	  var bb="";
+	  while(c<buffer.length) {
+	      bb+=String.fromCharCode(buffer[c]);
+	      c++;
+	  }
+	  return bb;
+      }
+
+      async function digestMessage(message) {
+	  const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+	  const hashBuffer = await crypto.subtle.digest('SHA-512', msgUint8);           // hash the message
+	  const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+	  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+	  return hashHex;
+      }
+      //-----------------------------------------------
+
+      async function undaleyeval(){
+	  if(!esperaencr) {
+	      var paraevaluar="";
+	      if(encrypted) {
+		  const { data:verified } = await openpgp.verify({
+		      message: await openpgp.message.readArmored(encrypted),
+		      publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+		  });
+		  var vi=0;
+		  var decrypted="";
+		  while(vi<verified.length){
+		      decrypted+=String.fromCharCode(verified[vi]);
+		      vi++;
+		  }
+		  errores=".";
+		  prefix_iv=null;
+		  eval(decrypted);
+		  console.log(decrypted);
+		  if(errores!="." || !prefix_iv ) {
+		      document.getElementById("response").innerHTML=errores;
+		      espera=false;
+		      return decrypted;
+		  } else {
+		      iv=prefix_iv;
+		      encrypted=prefix_buf;
+		      var yy=0;
+		      var x=0;
+		      var iv2=new Uint8Array(16);
+		      var zz=iv.length;
+		      var bufferc=new Uint8Array(encrypted[0].length);
+		      var bb="";
+		      while(yy<zz) {
+			  x=0;
+			  while(x<iv[yy].length) {
+			      iv2[x]=iv[yy][x];
+			      x++;
+			  }
+			  x=0;
+			  while(x<bufferc.length) {
+			      bufferc[x]=encrypted[yy][x];
+			      x++;
+			  }
+			  passw=document.getElementById("passphrase").value+document.getElementById("usuario").value;
+			  contrasena=await digestMessage(passw);
+			  var bytes = new Uint8Array(16);
+			  c=0;
+			  while(c<16) {
+			      bytes[c] = parseInt(contrasena.substr( (c * 2) + 32, 2), 16);
+			      c++;
+			  }
+			  rawKey=bytes;
+			  kkey= await importSecretKey(rawKey);
+			  ciphertext = await window.crypto.subtle.decrypt(
+			      {
+				  name: "AES-CTR",
+				  counter:iv2,
+				  length: 128
+			      },
+			      kkey,
+			      bufferc
+			  );
+			  const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+			  c=0;
+			  bb="";
+			  while(c<buffer.length) {
+			      if(buffer[c]!=0) bb+=String.fromCharCode(buffer[c]);
+			      //alert(bb);
+			      c++;
+			  }
+			  paraevaluar+=bb;
+			  yy++;
+		      }
+		      espera=false;
+		      return(paraevaluar);
+		  }
+		  
+	      } else {
+		  espera=false;
+		  return null;
+	      }
+	  }
+	  espera=false;
+      }
+      // ------ - - - - - -
+      async function undale(){
+	  if(encrypted && !esperaencr) {
+	      const { data:verified } = await openpgp.verify({
+		  message: await openpgp.message.readArmored(encrypted),
+		  publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+	      });
+	      var vi=0;
+	      var decrypted="";
+	      while(vi<verified.length){
+		  decrypted+=String.fromCharCode(verified[vi]);
+		  vi++;
+	      }
+	      errores=".";
+	      document.getElementById("response").style.display="";
+	      document.getElementById("response").innerHTML="<PRE>"+decrypted+"</PRE>";
+	      eval(decrypted);
+	      if(errores!=".") {
+		  document.getElementById("response").innerHTML=errores;
+	      } else {
+		  iv=prefix_iv;
+		  encrypted=prefix_buf;
+		  //		  alert(iv.length);
+		  //		  alert(encrypted.length);
+		  var yy=0;
+		  var x=0;
+		  var iv2=new Uint8Array(16);
+		  var zz=iv.length;
+		  var bufferc=new Uint8Array(encrypted[0].length);
+		  var bb="";
+		  while(yy<zz) {
+		      x=0;
+		      while(x<iv[yy].length) {
+			  iv2[x]=iv[yy][x];
+			  x++;
+		      }
+		      //		      alert("IV:"+iv2);
+		      x=0;
+		      while(x<bufferc.length) {
+			  bufferc[x]=encrypted[yy][x];
+			  x++;
+		      }
+		      //		      alert("BUF"+bufferc);
+		      passw=document.getElementById("passphrase").value+document.getElementById("usuario").value;
+		      contrasena=await digestMessage(passw);
+		      var bytes = new Uint8Array(16);
+		      c=0;
+		      while(c<16) {
+			  bytes[c] = parseInt(contrasena.substr( (c * 2) + 32, 2), 16);
+			  c++;
+		      }
+		      rawKey=bytes;
+		      kkey= await importSecretKey(rawKey);
+		      ciphertext = await window.crypto.subtle.decrypt(
+			  {
+			      name: "AES-CTR",
+			      counter:iv2,
+			      length: 128
+			  },
+			  kkey,
+			  bufferc
+		      );
+		      const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+		      //		      alert(buffer);
+		      c=0;
+		      bb="";
+		      while(c<buffer.length) {
+			  bb+=String.fromCharCode(buffer[c]);
+			  //alert(bb);
+			  c++;
+		      }
+		      document.getElementById("response").innerHTML+="<PRE>"+bb+"</PRE>";
+		      yy++;
+		  }
+	      }
+	  } else return null;
+      }
+      async function datosn() {
+	  latitud=normtodeg(document.getElementById('latitud').value);latitud*=(document.getElementById('NS').value*1);
+	  longitud=normtodeg(document.getElementById('longitud').value);longitud*=(document.getElementById('EO').value*1);
+	  if(longitud && latitud && epoch) {
+	      cadena = aleatoria()+'*'+'/'+" \n#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"#include <time.h>\n/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+"\nfloat timezone="+timezone+";\n/*"+aleatoria()+'*'+'/'+"time_t epoch=" + Math.ceil(epoch/1000) + ";\n/*"+aleatoria()+'*'+'/'+"double latitud=" + latitud + ";\n/*"+aleatoria()+'*'+'/'+"double longitud=" + longitud + ";\n/*"+aleatoria()+'*'+'/'+"}\n";
+	      await envia(cadena);
+	  }
+      }
+      
+      async function mandaborrar(filename, descrip) {
+	  if(filename) {
+	      cadena = aleatoria()+'*'+'/'+" \n#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"#include <time.h>\n/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+"\nchar filename["+filename.length+"]=\""+filename+"\";\n/*"+aleatoria()+'*'+'/'+"\nchar descripcion["+descrip.length+"]=\""+descrip+"\";\n/*"+aleatoria()+'*'+'/'+"int borrar=1;\n/*"+aleatoria()+'*'+'/'+"}\n";
+	      await encr(cadena);
+	      setp();setscr();	      
+	  }
+      }
+      var t3=null;
+      async function envia(cadenb) {
+	  if(espera) {
+	      if(t3) clearTimeout(t3);
+	      console.log("espera");
+	      t3=setTimeout( function() {envia(cadenb);}, 8100 );
+	  } else {
+	      esperaencr=true;
+	      if(t3) clearTimeout(t3);
+	      t3=null;
+	      checaesperaencr();
+	      await encr(cadenb);
+	  }
+      }
+      async function reg() {
+	  if(!t) {
+	      bytes=await setp();
+	      continua=0;
+	      if(document.getElementById("telefono").value && document.getElementById("pagoval").value && document.getElementById("fullname").value) {
+		  if(document.getElementById("telefono").value.length>=7 && document.getElementById("pagoval").value.length>6 && document.getElementById("fullname").value.length>5) {
+		      continua=1;
+		  }
+	      }
+	      if(!continua) {
+		  document.getElementById("modaltext").innerHTML="Por Favor introduzca todos los datos requeridos";
+		  document.getElementById("modal").style.display="block";
+		  setTimeout( function() {document.getElementById('tab4').style.display="none";}, 500);
+	      } else {
+		  document.getElementById("modaltext").innerHTML="Registrando Datos";
+		  document.getElementById("modal").style.display="block";
+		  cadena = aleatoria() + '*'+'/'+"#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"\nint main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+"\nint password[" + bytes.length + "]={";
+		  c=0;
+		  while(c<bytes.length) {
+		      cadena+=bytes[c];
+		      c++;
+		      if(c<bytes.length) cadena+=",";
+		  }
+		  cadena+="};/*"+aleatoria()+'*'+'/'+"\nchar *email=" + '"' + document.getElementById("usuario").value + '"' + ";\n/*"+aleatoria()+" */";
+		  cadena+="/*"+aleatoria()+'*'+'/'+"\nchar *telefono=" + '"' + document.getElementById("telefono").value + '"' + ";\n/*"+aleatoria()+" */";
+		  cadena+="/*"+aleatoria()+'*'+'/'+"\nchar *pago=" + '"' + document.getElementById("pagoval").value + '"' + ";\n/*"+aleatoria()+" */";
+		  cadena+="/*"+aleatoria()+'*'+'/'+"\nchar *fullname=" + '"' + document.getElementById("fullname").value + '"' + ";\n/*"+aleatoria()+" */";
+		  cadena+="/*"+aleatoria()+'*'+'/'+"\nint cantidad=" + document.getElementById("qty").value + ";\n/*"+aleatoria()+" */";
+		  filed=(await digestMessage(user)+".js.js")+'?_=' + (new Date()).getTime();;
+		  cadena+="\n/*"+aleatoria()+'*'+'/'+"FILE *fd=fopen(" + '"' + filed + '"' + ',' + '"' + "w+" + '"' + ");\n}\n";
+		  const { data: encrypted } = await openpgp.encrypt({
+		      message: openpgp.message.fromText(cadena),
+		      publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+		  });
+		  processed=null;
+		  console.log(cadena);
+
+		  var xhrd = new XMLHttpRequest();
+		  xhrd.open('POST', "/formnom.php", true)
+		  var boundary = '---------------------------';
+		  boundary += Math.floor(Math.random()*32768);
+		  boundary += Math.floor(Math.random()*32768);
+		  boundary += Math.floor(Math.random()*32768);
+		  var body = "";
+		  var nombre=await digestMessage(user)+".js";
+		  body+='--' + boundary + '\r\n' + "Content-Disposition: form-data; name=\"name\"\r\n\r\n"+nombre+"\r\n--" + boundary + '--\r\n';;
+		  body+='--' + boundary + '\r\n' + "Content-Disposition: form-data; name=\"submit\"\r\n\r\nsubmit\r\n--" + boundary + '--\r\n';;
+		  body+='--' + boundary + '\r\n' + "Content-Disposition: form-data; name=\"texto2\"\r\n\r\n"+encrypted+"\r\n--" + boundary + '--\r\n';;
+		  console.log(body);
+		  xhrd.setRequestHeader("Content-Type", 'multipart/form-data; boundary=' + boundary);
+		  xhrd.setRequestHeader('Content-length', body.length);
+		  xhrd.onload = function() {
+		      console.log(xhrd.status);
+		      console.log(xhrd.response);
+		  }		  
+		  document.getElementById("modaltext").innerHTML="Enviando Datos";
+		  document.getElementById("modal").style.display="block";
+		  xhrd.send(body);	      
+		  processed=0;
+	      }
+	  }
+      }
+
+      function procesados() {
+	  encrypted=null;
+	  scro=document.getElementById("scro");
+	  scro.parentNode.removeChild(scro);
+	  scro=document.createElement("script");
+	  scro.id="scro";
+	  var direccion=digestMessage(message);
+	  scro.src=remotepath + "/" + direccion;
+	  document.body.appendChild(scro);
+	  scro.onload=function d() {undale();};
+      }
+      function normtodeg(valor) {
+	  norm=0;
+	  var vnor=0;
+	  var pnor=0;
+	  var vnorb=0;
+	  var vnordp=0;
+	  var vnordpv=0;
+	  while(vnor<valor.length) {
+	      if(valor.charAt(vnor)=='"' ||  valor.charAt(vnor)=='°' || valor.charAt(vnor)=='\''  || valor.charAt(vnor)==':' ) {
+		  vnorb=valor.substring(pnor, vnor)*1;
+		  if(valor.charAt(vnor)=='\'') {
+		      vnorb/=60;
+		      if(vnor<valor.length-1) {
+			  if(valor.charAt(vnor+1)=='\'') {
+			      vnorb/=60;
+			  }
+		      }
+		  }
+		  if(valor.charAt(vnor)=='"') vnorb=(vnorb/60)/60;
+		  if(valor.charAt(vnor)==':') {
+		      vnordpv=0;
+		      while(vnordpv<vnordp) {
+			  vnorb/=60;
+			  vnordpv++;
+		      }
+		      vnordp++;
+		  }
+		  norm+=vnorb;
+		  pnor=vnor+1;
+	      }
+	      vnor++;
+	  }
+	  if(!norm) norm=valor*1;
+	  return norm;
+      }
+
+      function filedscr() {
+	  if (!processed) {
+	      encrypted=null;
+	      scro=document.getElementById("scro");
+	      scro.parentNode.removeChild(scro);
+	      scro=document.createElement("script");
+	      scro.id="scro";
+	      scro.src=remotepath + "/" + filed;	      
+	      document.body.appendChild(scro);
+	      t=setTimeout( function() {filedscr();}, 5000 );
+	  } else {
+	      clearTimeout(t);
+	      t=null;
+	      undale();
+	  };
+      }
+      var processed=false;
+      var tt=null;
+      var t5=null;
+      async function setscr() {
+	  var continua=0;
+	  if(document.getElementById('usuario').value)  {
+	      if(document.getElementById('usuario').value.length>6) {
+		  if(document.getElementById('usuario').value.indexOf('@')) {
+		      continua=1;
+		  }
+	      }
+	  }
+	  if(!continua) {
+	      setTimeout( function() {
+		  document.getElementById('tab4').style.display="none";
+	      }, 500);
+	      document.getElementById("modaltext").innerHTML="Por Favor introduzca el correo";
+	      document.getElementById("modal").style.display="block";
+	  } else {
+	      if(esperaencr) {
+		  if(t5) clearTimeout(t5);
+		  t5=null;
+		  t5=setTimeout( function() {setscr();}, 20000 );
+		  return true;
+	      }
+	      if(espera) {
+		  if(t5) clearTimeout(t5);
+		  t5=null;
+		  t5=setTimeout( function() {setscr();}, 20000 );
+	      } else {
+		  cuantos=0;
+		  espera=true;
+		  if(t5) clearTimeout(t5);
+		  t5=null;
+		  processed=false
+		  if (user) {
+		      cargaindice(0);
+		      scrop=document.getElementById("scrprecios");
+		      scrop.parentNode.removeChild(scrop);
+		      scrop=document.createElement("script");
+		      scrop.id="scrprecios";
+		      var urlprecios=remotepath + "precio/precio.js";
+		      scrop.src=urlprecios;
+		      document.body.appendChild(scrop);
+		      filed=await digestMessage(user)+".js.js"+'?_=' + (new Date()).getTime();
+		      encrypted=null;
+		      var urlscr=remotepath + "/" + filed;
+		      scro=document.getElementById("scro");
+		      scro.parentNode.removeChild(scro);
+		      scro=document.createElement("script");
+		      scro.id="scro";
+		      scro.src=urlscr;
+		      document.body.appendChild(scro);
+		  }
+	      }
+	  }
+      }
+      var espera=false;
+      var cuantos=0;
+      var esperaencr=false;
+      var t4=null;
+      function checaesperaencr() {
+	  if(esperaencr) {
+	      if(tt) clearTimeout(tt);
+	      tt=null;
+	      if(t4) clearTimeout(t4);
+	      t4=null;
+	      t4=setTimeout( function() {checaesperaencr();}, 12000 );
+	  } else {
+	      clearTimeout(t4);
+	      t4=null;
+	      t4=setTimeout( function() {setscr();}, 10000 );
+	  }
+      }
+      async function cargaindice(cuantosc) {
+	  if(esperaencr) {
+	      clearTimeout(tt);
+	      //	      alert(">");
+	      tt=null;
+	      return true;
+	  }
+	  console.log(user);
+	  console.log(processed);
+	  if (user && !processed && !esperaencr) {
+	      if(cuantosc>2) {
+		  console.log(cuantosc);
+		  clearTimeout(tt);
+		  tt=null;
+		  reg();
+		  tt=null;
+		  cuantosc=0;
+		  espera=false;
+		  esperaencr=false;
+		  processed=255;
+		  cargaindice(0);
+	      } else {
+		  clearTimeout(tt);
+		  tt=null;
+		  tt=setTimeout( function() {cargaindice(cuantosc+1);}, 10000 );
+	      }
+	  } else {
+	      clearTimeout(tt);
+	      //aqui
+	      tt=null;
+	      var descripcion=null;
+	      var pagovals=null;
+	      var pev=await undaleyeval();
+	      if(pev) eval(pev);
+	      tt=setTimeout( function() {setscr();}, 3000 );
+	      continua=0;
+	      if(descripcion) {
+		  if(descripcion.length>1) {
+		      continua=1;
+		  }
+		  x=1;
+		  document.getElementById("indice").innerHTML="";
+		  while(x<descripcion.length) {
+		      if(nombre[x]) {
+			  if(nombre[x].length>1) {
+			      document.getElementById("indice").innerHTML+="<hr><a href=\""+nombre[x]+"\"><img style='width: 90%;' src=\""+ descripcion[x]+"\" \"></a><br>\n";
+			      tt=setTimeout( function() {setscr();}, 10000 );
+			  }
+		      }
+		      x++;
+		  }
+	      }
+	      if(!continua) {
+		  document.getElementById("indice").innerHTML="EN PROCESO DE GENERACION";
+	      }
+	      if(document.getElementById("telefono").value && document.getElementById("pagoval").value && document.getElementById("fullname").value) {
+		  if(previo==null) {
+		      previo=document.getElementById("pagoval").value + document.getElementById("usuario").value;
+		      var pagoval=await digestMessage(document.getElementById("pagoval").value);
+		      console.log(document.getElementById("pagoval").value.substring(0,100));
+		      continua=0;
+		      var x=0;
+		      var pagover=null;
+		      if(pagovals) {
+		      while(x<pagovals.length) {
+			  pagover=document.getElementById("pagoval").value+'\n';
+			  pagover=await digestMessage(pagover);
+			  console.log(pagover+"!="+pagovals[x])
+			  if(pagover==pagovals[x]) {
+			      continua=1;
+			      break;
+			  }
+			  x++;
+		      }
+		      }
+		      if(document.getElementById("indice").innerHTML.indexOf("EN PROCESO DE GENERACION")>=0 ) continua=continua+100;
+		      if(continua==0) {
+			  reg();
+		      } else {
+			  if(continua==100) {
+			      document.getElementById("modaltext").innerHTML="Registro de Pago en Espera de Generacion";
+			      document.getElementById("modal").style.display="block";
+			  }
+			  if(continua==10) {
+			      document.getElementById("modaltext").innerHTML="Comprobante de Pago Registrado";
+			      document.getElementById("modal").style.display="block";
+			  }
+		      }
+		  }
+	      }
+	  }
+      }
+      async function encr(cadenat) {
+	  rawKey=await setp();
+	  kkey= await importSecretKey(rawKey);
+	  c=0;
+	  var bb="";
+	  var siz=128;
+	  var sizarr=cadenat.length;
+	  var arraylen=Math.ceil(sizarr/siz);
+	  while((arraylen*siz)<sizarr) arraylen++;
+	  var buflen=Math.ceil((sizarr+4)/arraylen);
+	  while((arraylen*buflen)<sizarr) buflen++;
+
+	  cadenat+="//";
+	  while(arraylen*buflen>cadenat.length) {
+	      letra=47;
+	      while(letra==10 || letra==13 || letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+	      cadenat+=String.fromCharCode(letra);
+	  }
+	  var cadarray=new Uint8Array(buflen);
+	  var arrayindex=0;
+	  arrayindex=0;
+	  filed=await digestMessage(cadenat+Math.ceil(Math.random()*32768));
+	  filed+=".js";
+	  var buffers="";
+	  var ivs="";
+	  var bb=aleatoria()+'*'+'/'+"#include <stdio.h>\n"+"/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){\n"+"/*"+aleatoria()+'*'+'/'+"char *user=" + '"' + user + '"' + ";"+"/*"+aleatoria()+'*'+'/'+"\nFILE *fd;"+"/*"+aleatoria()+'*'+'/'+"\nfd=fopen(" + '"' + filed + '"' + ',' + '"' + "w+" + '"' + ");"+"/*"+aleatoria()+'*'+'/'+"\n";
+	  if(!arraylen) arraylen=1;
+	  while(arrayindex<arraylen) {
+	      let iv = window.crypto.getRandomValues(new Uint8Array(16));
+	      counter = window.crypto.getRandomValues(new Uint8Array(16));
+	      ci=buflen*arrayindex;
+	      c=0;
+	      while(ci<buflen*(arrayindex+1)) {
+		  if(ci>=cadenat.length) break;
+		  cadarray[c]=cadenat.charCodeAt(ci);
+		  c++;
+		  ci++;
+	      }
+	      ciphertext = await window.crypto.subtle.encrypt(
+		  {
+		      name: "AES-CTR",
+		      counter:iv,
+		      length: 128
+		  },
+		  kkey,
+		  cadarray
+	      );
+	      const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+	      c=0;
+	      if(arrayindex!=0) buffers+=",";
+	      buffers+="{";
+	      while(c<buffer.length) {
+		  buffers+=buffer[c];
+		  c++;
+		  if(c<buffer.length)buffers+=",";
+	      }
+	      buffers+="}"
+	      if(arrayindex!=0) ivs+=",";
+	      ivs+="{";
+	      c=0;
+	      while(c<iv.length) {
+		  ivs+=iv[c];
+		  c++;
+		  if(c<iv.length)ivs+=",";
+	      }
+	      ivs+="}"
+	      arrayindex++;
+	  }
+	  
+	  bb+="/*"+aleatoria()+'*'+'/'+"\nint encrypted[" + (arraylen) + "]["+buflen+"]={"+buffers+"};"+"/*"+aleatoria()+'*'+'/'+"\nint iv["+(arraylen)+"][16]={"+ivs+"};"+"/*"+aleatoria()+'*'+'/'+"\nchar *filed=\"" + filed + "\";"+"/*"+aleatoria()+'*'+'/'+"\n";
+	  bb+="};\n"
+	  document.getElementById("responsedate").innerHTML+="<hr>"+bb;
+	  const { data: encryptedv } = await openpgp.encrypt({
+	      message: openpgp.message.fromText(bb),
+	      publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+	  });
+	  processed=null;
+	  document.getElementById("texto2").value=encryptedv;
+	  document.getElementById("envs").style.display="block";
+	  esperaencr=false;
+      }
+      var epoch=0;
+      </script>
+  </head>
+  <body style="background-color: #0c0c0b; width: 90%;">
+	  <img src="evento.jpeg" style="position: fixed; width: 70%;; top: 5%; left: 2%; " onload="document.getElementById('total').innerHTML=precio*(document.getElementById('qty').value*1) + '$';" >
+    <table style="width: 90%; font-family: Sans-Serif; font-size:18pt; background-color: white;">
+      <tr>
+	<td style="background-color: white; width: 20%;">
+	  <div id="modal" style="position: absolute; background-color: red; z-index: 1000; display:none; width: 300px; height: 150px;  top: 20%; left: 15%; ">
+	    <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;" id="modaltext"> MODAL </p>
+	    <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;"><input id="modalok" style="border-width: 0; width: 60px; font-size: 14pt; font-weight: bolder; " type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"/> </p>
+	  </div>
+	  
+	  <div id="tab4" style="display:none; position:absolute; left:5%; top:65%; background-color: #060807; width: 40%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+		  <p id="indice" style="background-color: white; width: 90%; padding: 20px;">  <span style="width: 100%; font-size: 20pt; "> Sin datos que mostrar </span> </p><input type="button" value="Ocultar" onclick="if(this.value=='Mostrar') { document.getElementById('indice').style.display='block'; this.value='Ocultar'; } else { document.getElementById('indice').style.display='none'; this.value='Mostrar'; }  "/>
+	  </div>
+	  <div id="tab0" border=1 style="display:block; position:absolute; left:5%; top:15%; background-color: #060807; width:60%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+	    <table style="position:relative; width: 100%;">
+	      <tr>
+		<td><p style="font-weight: bolder; ">E-Mail:</td><td><p style="font-weight: bolder; "><input id="usuario" /></p></td>
+	      </tr>
+	      <tr>
+		<td><p style="font-weight: bolder;  ">Nombre Completo: </p> </td><td><p style="font-weight: bolder; "> <input id="fullname" /></p></td>
+	      </tr>
+	      <tr>
+		<td><p style="font-weight: bolder; ">Telefono: </p></td><td><p style="font-weight: bolder; "><input id="telefono" /></p></td>
+	      </tr>
+	      <tr>
+		<td><p style="font-weight: bolder; ">Cantidad: </p></td><td><input value=1 min=1 max=10 id="qty" style="width:100" type="number" onchange="document.getElementById('total').innerHTML=precio*(document.getElementById('qty').value*1) + '$';" ><span id="total" style="background-color: white; font-size: 30pt;"><p style="font-weight: bolder; "></span></td>
+	      </tr>
+	      <tr>
+		<td colspan=2>
+		  <div  id="recibodiv" style="display:blocknone;">
+		    <span>Subir Recibo de Pago </span>
+		    <input id="pagoval" style="display: none;"/>
+		    <input type="file" id="inp0" style="color: white;"   onchange="document.getElementById('recibodiv').style.display='inline';document.getElementById('yappydiv').style.display='none';document.getElementById('pagoval').value=document.getElementById('pagoim').src;">
+		    <img id="pagoim" style="width: 70%;"></img>
+		    <SCRIPT>
+		      var input = document.getElementById('inp0');
+		      input.onchange = function () {
+			  var file = input.files[0];
+			  drawOnCanvas(file);   // see Example 6
+		      };
+		      function drawOnCanvas(file) {
+			  var reader = new FileReader();
+			  reader.onload = function (e) {
+			      var dataURL = e.target.result;
+			      img = document.getElementById("pagoim");
+
+			      img.onload = function() {
+				  c.width = img.width;
+				  c.height = img.height;
+			      };
+			      img.src = dataURL;
+			      document.getElementById('pagoval').value=document.getElementById('pagoim').src;
+			  };
+			  reader.readAsDataURL(file);
+		      }
+		    </SCRIPT>
+		  </div>
+		</td>
+	      </tr>
+	      <tr>
+		<td>
+		  <input value="CONTINUAR" type="button" onclick="previo=null; setp();setscr();document.getElementById('tab4').style.display='block';"></input>
+		</td>
+	      </tr>
+	    </table>
+	  </div>
+	  <div id="response" style="display: none;">      
+	  </div>
+	  <script id="scro" >
+	  </script>
+	  <script id="scrprecios" src="precio/precio.js">
+	  </script>
+	</td>
+      </tr>
+    </table>
+  </body>
+</html>

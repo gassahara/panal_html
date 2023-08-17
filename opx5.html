@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>A S T R O</title>
+    <STYLE>
+      iframe {
+	  width: 250px;
+	  height: 50px;
+	  border-width: 0;
+      }
+      a {
+	  text-decoration: none;
+	  color: blue;
+	  font-weight: bolder;
+      }
+      input {
+	  font-family: Sans-Serif;
+	  font-size: 18pt;
+	  
+      }
+    </STYLE>
+    <!--
+    <script src="openpgpjs/dist/openpgp.js" type="text/javascript" charset="utf-8"></script>
+    -->
+    <script src="https://curare2019.000webhostapp.com/openpgpjs/dist/openpgp.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      var pubkey=`-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGFo+O0BEADHqLjY8hryq/QtBlx+chAa2PjWZj3rwgFshd2N02qpKmJjqYi+
+OWbXsmVy/xDpVSaFH4oGWKTyBANnPKn0GeYBtdzFtIxPNnPMzhyBOlwjbL7qe03l
+/fAvuN1/CN0tK8ruYu+/h9UaoPDr/Y8LGDjjlENKUYi4tZ1ubtmluylJYMxOvMT9
+MK85qXp4II4y8aa6B+yFnf/oIo+H4xHmUQfwL0NKJJ1950tM5So/eGHUYeb0EBUq
+vpTRdj3n+5xH5zHW7cYsRwMKag7tLwNqvDDaLr4VfRzMEbVkowJ2Lg9/hPJC9jUT
+5GhCEu+245C1JaYHhtSMGbTYa7+6V1KpAVhT+LbpaUAcS3+Pdewka2J4ujxjNQKu
+DZ7WDHqm7WQSnjDs2FC4tkRPhtxF1AFXI3Mc3slS92EffgPv+M9YOxXjTBHXRHZp
+AssMP/J47sqW/At1lcCkWtY3o7EfzjcC0UqiXIDplXSI1HPj5jMohJmDf4uDJw36
+fSQs6pt0vp7qcgDXR0exKcn84RnCS4HcU/hGsCPVhK/n+Uc1i3o9zrl9bw3oZuz9
+7Rk5FDEqdztmY8VQUwYAjLOWPEaWWCIj2rpY+z2kl1+7/tHEanHQV0e3monnyhNN
+vB+WPx1W7ZBDDIlrCAkg0RU9gZAp0aBmezjLtMAOJ1VNuBmlLU9xKzSpSwARAQAB
+tAlnYXNzYWhhcmGJAk4EEwEIADgWIQQT+Mfez7R8omd/Mq7dAqzduIMUiAUCYWj4
+7QIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRDdAqzduIMUiJDVD/0bzAkp
+p4oagS5HvtNL0+pohN+Ied949KPs5HbD8M/Esm2jSEhpwDrez7M6jx89lwpgXyui
+ngW+FfRyw8EsidbHIacsK+ppB1pSimkzxw1cF2530epd5ykWwW+bJrz1E59wXinJ
+2mFOM9eGSvXLh4dTOge7txGJUvEv4hECgkwqhzGfKsOsjj5QQMiW8NOEHHboUJcW
+s/i4aGwO7vAZpB/UOy79lJGpXkNxvsnMBkGdxaBuHuRVmNpMAbNXm0q/kXi3iC9i
+/xOR19gnUc4XuQI2prBNe9fcSfVkKLtqMvMaEyqdBbPGANxzKS5HBiAtwLe2cZDa
+l3/M8MIJCD5KqjAS7nzSPkgyra7VN0T4s+0IdyhbZlZeERbbpM85sRiGS0fx3nYC
+jS8wHwC2jgboT7gbXq2GqR48SaArdkXegHKbsjD+u7HHOa98MUfxC0l+zDOM6yXe
+A4bu9D2wUuzOgu5zwxHdUd3nR/zq3ua/s74XGOlGHCr66OARmbavrXh8w3qJGDIE
+fWMihfTnYBSv73E9jtKVk4Ftw6gQLoyHiqI2Jnb13NHTPno5y6dxehvEFh7NzMj1
+wOyIK9ac6cnsuWAE80T1NVBSD5u2nsrYP8XyFphnqFryuWZVDLYQ4+noxx2WjiFx
+ZDYQJy5Z1CJ9uXyXY6jgmtz7XnvZJaBe5/umRrkCDQRhaPjtARAAw3kCHzx4o6Hf
+pey8Bwiatj1kPqCSDO2XgY3ArXCyCYS0oo5iA7nmGPnu2N0T8NmokIMvJ/ovKE65
+UyoOhmUR4hhSOdGMM3lgkXV6EWV58nzswJphpLBPc+BilxGQiARcHMAHaIWEdViq
+xuomRFZDD7KCoRzFLe+lAwxwO9E6POFJn9FJsBcNbA9Lja5LU67ljI4tOPKwbuja
+rzPvXrj5qOlgGdJRiM3R/HRBN8xRaNQ3ZNF9O3a0NMFxGhi3uOpm5G/RO44p9zCk
+njlLFWdccNCIWdQ7wJdxw2wesnL/bdXaecSyD3GY1Mc9zbHepYkVop/zybWbSBHl
+V5EY5Yqg0HkVHsSyGfsYnEBxNIQrhuwY9qp9hJRcoBe93Sjzef/s/tqy/RD9nHGu
+9EEGl3tcP6aET2zNjBUc/lLgn1nnTAS21nmOtgeOS29vNmgSgglmZrNHake7qmbu
+xUngBZoAcSliUGDq8lUEWHwdyrsupRLOlOmy6nmvk5XQZWvC+AHeVaRDk++sK9zq
+FWrtJ3kejK2gfXwf0Fa+zszcNKQR+cBEMVy9x+iIdguhR2ujV+/lrFT4+bcUjEGi
+EbiGvEGQ8+Fz8rKiqfPxOuvrXR1uNfsHQqIdCLarkQ2d1/2u2oTjYR5aeW8IFBgE
+VeN7PpGodqAtFQqsDUe2Ro2rso7ro6MAEQEAAYkCNgQYAQgAIBYhBBP4x97PtHyi
+Z38yrt0CrN24gxSIBQJhaPjtAhsMAAoJEN0CrN24gxSIte8QAJIDR2mXQoHGAbxt
+t40Rj0m0PgyHP8BT/0UrbV9nm8/wVr9A1pYXmITLTcH6ET01kQrlesbEPlEvlDSZ
+3L+uc6Mwp5hL5fEBHCQ/d7/o36ZTP8tCHvk/vkbZtPIsbA551VMw24/mI0OrT8xl
+tsH7bzc/qAIV85GeZ7yh4V22KsTEJSBj+/BPZc4U+/wP0AihzTt6qthHwYswgaWQ
+zQQ2ET8+OUoPDSAVAMttbzK+jEfxA0QLDffCpnx66FuFNrvK3J+8yODt3A/KfadI
+W+Tw4MQsvzIqGcdSo3gT94TiF9HFHtdey9YjYN7UdKautvcauxJc9zqR+GMdIV82
+XMfBBHENXPnO5tJ+3rdG4wY7gNzWbDTEP2R5gjN3IOAj444aDKfxmaamk983ZXQC
+9CJRnFU3BAiKf+LH8Tj9yQtidXWf6sU8ffU5WBYr23tLIeDU629MBK82kZKl+6fY
+jZw4tT5sev17m1peJAgsDxhyhnBagI1AlodayJTz150q03xgVwVBqxzIraxctzGQ
+xTimkQUDxSl3/7LXDbT9b2Oa61NZ6lFlC4KM5/phbpFg+9VRHW5DnGJHXXVDWW0X
+NU4oxw1G/b4qgYhbWnotKl8187Fp4VWvyI9OSa/29YDuTIUhvk62LMAEKbtELoEm
+9DCUcsARoYnJdsvLTXnm6qqVv85b
+=e4I6
+-----END PGP PUBLIC KEY BLOCK-----`;//document.getElementById("pubkey").value;
+
+      var encrypted=new Uint8Array();
+      var passw="";
+      var user="";
+      var filed="";
+      var t=null;
+      var scro=null;
+      var iv=new Uint8Array();
+      var remotepath="curare2019.000webhostapp.com/panal/";
+      var remotepati="curare0x2019.byethost14.com/panal/";
+      var longitud=0;
+      var latitud=0;
+      var c=0;
+      var errores=NULL;
+      var ci=0;
+      var pk_global_full=null;
+
+      function importSecretKey(rawKeyz) {
+	  return window.crypto.subtle.importKey(
+	      "raw",
+	      rawKeyz,
+	      "AES-CTR",
+	      false,
+	      ["encrypt", "decrypt"]
+	  );
+      }
+
+      var rawKey="";
+      var kkey=0;
+
+      function modalwarning() {
+	  
+      }
+      function aleatoria() {
+	  var longitudcadenaaleatoria=Math.random() * (60 - 35) + 35;
+	  var cadenaaleatoria="";
+	  var letra=47;
+	  while(longitudcadenaaleatoria>=0) {
+ 	      while(letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='/'||String.fromCharCode(letra)=='*'||String.fromCharCode(letra)=='+'||String.fromCharCode(letra)==';'||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+	      cadenaaleatoria=cadenaaleatoria+String.fromCharCode(letra);
+	      longitudcadenaaleatoria--;
+	      letra=47;
+	  }
+	  return cadenaaleatoria;
+      }
+
+      async function setp() {
+	  passw=document.getElementById('passphrase').value+document.getElementById('usuario').value;
+	  user=document.getElementById('usuario').value;
+	  contrasena=await digestMessage(passw);
+	  var bytes = new Uint8Array(16);
+	  for (var ci=0; ci < 16; ci++) bytes[ci] = parseInt(contrasena.substr( (ci * 2) + 32, 2), 16);
+	  return bytes;
+      }
+      
+      function pon(obj) {
+	  divs=0;
+	  while(divs<document.getElementsByTagName("div").length ) {
+	      document.getElementsByTagName("div")[divs].style.display="none";
+	      divs++;
+	  }
+	  document.getElementById(obj).style.display='';
+      }
+
+      async function decr() {
+	  rawKey=setp();
+	  kkey= await importSecretKey(rawKey);
+	  ciphertext = await window.crypto.subtle.decrypt(
+	      {
+		  name: "AES-CTR",
+		  counter:iv,
+		  length: 128
+	      },
+	      kkey,
+	      encrypted
+	  );
+	  const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+	  c=0;
+	  var bb="";
+	  while(c<buffer.length) {
+	      bb+=String.fromCharCode(buffer[c]);
+	      c++;
+	  }
+	  return bb;
+      }
+
+      async function digestMessage(message) {
+	  const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+	  const hashBuffer = await crypto.subtle.digest('SHA-512', msgUint8);           // hash the message
+	  const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+	  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+	  return hashHex;
+      }
+      //-----------------------------------------------
+
+      async function undaleyeval(){
+	  if(!esperaencr) {
+	      var paraevaluar="";
+	      if(encrypted) {
+		  const { data:verified } = await openpgp.verify({
+		      message: await openpgp.message.readArmored(encrypted),
+		      publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+		  });
+		  var vi=0;
+		  var decrypted="";
+		  while(vi<verified.length){
+		      decrypted+=String.fromCharCode(verified[vi]);
+		      vi++;
+		  }
+		  errores=".";
+		  eval(decrypted);
+		  if(errores!=".") {
+		      document.getElementById("response").innerHTML=errores;
+		  } else {
+		      iv=prefix_iv;
+		      encrypted=prefix_buf;
+		      var yy=0;
+		      var x=0;
+		      var iv2=new Uint8Array(16);
+		      var zz=iv.length;
+		      var bufferc=new Uint8Array(encrypted[0].length);
+		      var bb="";
+		      while(yy<zz) {
+			  x=0;
+			  while(x<iv[yy].length) {
+			      iv2[x]=iv[yy][x];
+			      x++;
+			  }
+			  x=0;
+			  while(x<bufferc.length) {
+			      bufferc[x]=encrypted[yy][x];
+			      x++;
+			  }
+			  passw=document.getElementById("passphrase").value+document.getElementById("usuario").value;
+			  contrasena=await digestMessage(passw);
+			  var bytes = new Uint8Array(16);
+			  c=0;
+			  while(c<16) {
+			      bytes[c] = parseInt(contrasena.substr( (c * 2) + 32, 2), 16);
+			      c++;
+			  }
+			  rawKey=bytes;
+			  kkey= await importSecretKey(rawKey);
+			  ciphertext = await window.crypto.subtle.decrypt(
+			      {
+				  name: "AES-CTR",
+				  counter:iv2,
+				  length: 128
+			      },
+			      kkey,
+			      bufferc
+			  );
+			  const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+			  c=0;
+			  bb="";
+			  while(c<buffer.length) {
+			      if(buffer[c]!=0) bb+=String.fromCharCode(buffer[c]);
+			      //alert(bb);
+			      c++;
+			  }
+			  paraevaluar+=bb;
+			  yy++;
+		      }
+		      espera=false;
+		      return(paraevaluar);
+		  }
+		  
+	      } else {
+		  espera=false;
+		  return null;
+	      }
+	  }
+	  espera=false;
+      }
+      // ------ - - - - - -
+      async function undale(){
+	  if(encrypted && !esperaencr) {
+	      const { data:verified } = await openpgp.verify({
+		  message: await openpgp.message.readArmored(encrypted),
+		  publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+	      });
+	      var vi=0;
+	      var decrypted="";
+	      while(vi<verified.length){
+		  decrypted+=String.fromCharCode(verified[vi]);
+		  vi++;
+	      }
+	      errores=".";
+	      document.getElementById("response").style.display="";
+	      document.getElementById("response").innerHTML="<PRE>"+decrypted+"</PRE>";
+	      eval(decrypted);
+	      if(errores!=".") {
+		  document.getElementById("response").innerHTML=errores;
+	      } else {
+		  iv=prefix_iv;
+		  encrypted=prefix_buf;
+		  //		  alert(iv.length);
+		  //		  alert(encrypted.length);
+		  var yy=0;
+		  var x=0;
+		  var iv2=new Uint8Array(16);
+		  var zz=iv.length;
+		  var bufferc=new Uint8Array(encrypted[0].length);
+		  var bb="";
+		  while(yy<zz) {
+		      x=0;
+		      while(x<iv[yy].length) {
+			  iv2[x]=iv[yy][x];
+			  x++;
+		      }
+		      //		      alert("IV:"+iv2);
+		      x=0;
+		      while(x<bufferc.length) {
+			  bufferc[x]=encrypted[yy][x];
+			  x++;
+		      }
+		      //		      alert("BUF"+bufferc);
+		      passw=document.getElementById("passphrase").value+document.getElementById("usuario").value;
+		      contrasena=await digestMessage(passw);
+		      var bytes = new Uint8Array(16);
+		      c=0;
+		      while(c<16) {
+			  bytes[c] = parseInt(contrasena.substr( (c * 2) + 32, 2), 16);
+			  c++;
+		      }
+		      rawKey=bytes;
+		      kkey= await importSecretKey(rawKey);
+		      ciphertext = await window.crypto.subtle.decrypt(
+			  {
+			      name: "AES-CTR",
+			      counter:iv2,
+			      length: 128
+			  },
+			  kkey,
+			  bufferc
+		      );
+		      const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+		      //		      alert(buffer);
+		      c=0;
+		      bb="";
+		      while(c<buffer.length) {
+			  bb+=String.fromCharCode(buffer[c]);
+			  //alert(bb);
+			  c++;
+		      }
+		      document.getElementById("response").innerHTML+="<PRE>"+bb+"</PRE>";
+		      yy++;
+		  }
+	      }
+	  } else return null;
+      }
+      async function datosn() {
+	  if(longitud && latitud && epoch) {
+	      cadena = aleatoria()+'*'+'/'+" \n#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"#include <time.h>\n/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+"\nfloat timezone="+timezone+";\n/*"+aleatoria()+'*'+'/'+"time_t epoch=" + Math.ceil(epoch/1000) + ";\n/*"+aleatoria()+'*'+'/'+"double latitud=" + latitud + ";\n/*"+aleatoria()+'*'+'/'+"double longitud=" + longitud + ";\n/*"+aleatoria()+'*'+'/'+"}\n";
+	      await envia(cadena);
+	  }
+      }
+      
+      async function mandaborrar(filename, descrip) {
+	  if(filename) {
+	      cadena = aleatoria()+'*'+'/'+" \n#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"#include <time.h>\n/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+"\nchar filename["+filename.length+"]=\""+filename+"\";\n/*"+aleatoria()+'*'+'/'+"\nchar descripcion["+descrip.length+"]=\""+descrip+"\";\n/*"+aleatoria()+'*'+'/'+"int borrar=1;\n/*"+aleatoria()+'*'+'/'+"}\n";
+	      await encr(cadena);
+	      setp();setscr();	      
+	  }
+      }
+      var t3=null;
+      async function envia(cadenb) {
+	  if(espera) {
+	      if(t3) clearTimeout(t3);
+	      console.log("espera");
+	      t3=setTimeout( function() {envia(cadenb);}, 8100 );
+	  } else {
+	      esperaencr=true;
+	      if(t3) clearTimeout(t3);
+	      t3=null;
+	      checaesperaencr();
+	      await encr(cadenb);
+	  }
+      }
+      async function reg() {
+	  if(!t) {
+	      bytes=await setp();
+	      cadena = "#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"\nint main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+"\nint password[" + bytes.length + "]={";
+	      c=0;
+	      while(c<bytes.length) {
+		  cadena+=bytes[c];
+		  c++;
+		  if(c<bytes.length) cadena+=",";
+	      }
+	      cadena+="};/*"+aleatoria()+'*'+'/'+"\nchar *user=" + '"' + document.getElementById("usuario").value + '"' + ";\n/*"+aleatoria()+" */";
+	      filed=(await digestMessage(cadena+Math.ceil(Math.random()*32768)));
+	      filed+=".js";
+	      cadena+="\n/*"+aleatoria()+'*'+'/'+"FILE *fd=fopen(" + '"' + filed + '"' + ',' + '"' + "w+" + '"' + ");\n}\n";
+	      const { data: encrypted } = await openpgp.encrypt({
+		  message: openpgp.message.fromText(cadena),
+		  publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+	      });
+	      processed=null;
+	      ifradat=document.getElementById("ifradat");
+	      ifradat.parentNode.removeChild(ifradat);
+	      ifradat=document.createElement("iframe");
+	      ifradat.id="ifradat";
+	      document.body.appendChild(ifradat);
+	      ifradat.src="about:blank";
+	      ifradat.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\"http://"+remotepati+"/formesc.php\" method=\"POST\"><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+	      ifradat.contentDocument.getElementById("texto2").value=encrypted;
+	      console.log(cadena);
+	      ifradat.contentDocument.getElementById("submit").submit();
+	      processed=0;
+	      filedscr();
+	  }
+      }
+
+      function procesados() {
+	  encrypted=null;
+	  scro=document.getElementById("scro");
+	  scro.parentNode.removeChild(scro);
+	  scro=document.createElement("script");
+	  scro.id="scro";
+	  var direccion=digestMessage(message);
+	  scro.src="https://" + remotepath + "msgs/" + direccion;
+	  document.body.appendChild(scro);
+	  scro.onload=function d() {undale();};
+      }
+      function normtodeg(valor) {
+	  norm=0;
+	  var vnor=0;
+	  var pnor=0;
+	  var vnorb=0;
+	  var vnordp=0;
+	  var vnordpv=0;
+	  while(vnor<valor.length) {
+	      if(valor.charAt(vnor)=='"' ||  valor.charAt(vnor)=='°' || valor.charAt(vnor)=='\''  || valor.charAt(vnor)==':' ) {
+		  vnorb=valor.substring(pnor, vnor)*1;
+		  if(valor.charAt(vnor)=='\'') {
+		      vnorb/=60;
+		      if(vnor<valor.length-1) {
+			  if(valor.charAt(vnor+1)=='\'') {
+			      vnorb/=60;
+			  }
+		      }
+		  }
+		  if(valor.charAt(vnor)=='"') vnorb=(vnorb/60)/60;
+		  if(valor.charAt(vnor)==':') {
+		      vnordpv=0;
+		      while(vnordpv<vnordp) {
+			  vnorb/=60;
+			  vnordpv++;
+		      }
+		      vnordp++;
+		  }
+		  norm+=vnorb;
+		  pnor=vnor+1;
+	      }
+	      vnor++;
+	  }
+	  if(!norm) norm=valor*1;
+	  return norm;
+      }
+
+      function filedscr() {
+	  if (!processed) {
+	      encrypted=null;
+	      scro=document.getElementById("scro");
+	      scro.parentNode.removeChild(scro);
+	      scro=document.createElement("script");
+	      scro.id="scro";
+	      scro.src="https://" + remotepath + "msgs/" + filed;	      
+	      document.body.appendChid(scro);
+	      t=setTimeout( function() {filedscr();}, 5000 );
+	  } else {
+	      clearTimeout(t);
+	      t=null;
+	      undale();
+	  };
+      }
+      var processed=false;
+      var tt=null;
+      var t5=null;
+      async function setscr() {
+	  if(esperaencr) {
+	      if(t5) clearTimeout(t5);
+	      t5=null;
+	      t5=setTimeout( function() {setscr();}, 20000 );
+	      return true;
+	  }
+	  if(espera) {
+	      if(t5) clearTimeout(t5);
+	      t5=null;
+	      t5=setTimeout( function() {setscr();}, 20000 );
+	  } else {
+	      cuantos=0;
+	      espera=true;
+	      if(t5) clearTimeout(t5);
+	      t5=null;
+	      processed=false
+	      if (user) {
+		  cargaindice(0);
+		  filed=await digestMessage(user)+".js.js"+'?_=' + (new Date()).getTime();
+		  encrypted=null;
+		  var urlscr="https://" + remotepath + "msgs/" + filed;
+		  scro=document.getElementById("scro");
+		  scro.parentNode.removeChild(scro);
+		  scro=document.createElement("script");
+		  scro.id="scro";
+		  scro.src=urlscr;
+		  document.body.appendChild(scro);
+	      }
+	  }
+      }
+      var espera=false;
+      var cuantos=0;
+      var esperaencr=false;
+      var t4=null;
+      function checaesperaencr() {
+	  if(esperaencr) {
+	      if(tt) clearTimeout(tt);
+	      tt=null;
+	      if(t4) clearTimeout(t4);
+	      t4=null;
+//	      alert("!");
+	      t4=setTimeout( function() {checaesperaencr();}, 12000 );
+	  } else {
+	      clearTimeout(t4);
+	      t4=null;
+//	      alert("@");
+	      t4=setTimeout( function() {setscr();}, 10000 );
+	  }
+      }
+      async function cargaindice(cuantosc) {
+	  if(esperaencr) {
+	      clearTimeout(tt);
+//	      alert(">");
+	      tt=null;
+	      return true;
+	  }
+	  if (user && !processed && !esperaencr) {
+	      if(cuantosc>3) {
+		  clearTimeout(tt);
+		  tt=null;
+		  pon("tab0");
+		  document.getElementById("usuario").value="";
+		  document.getElementById("passphrase").value="";
+		  document.getElementById("modaltext").innerHTML="Problema de autenticacion (o de Red)";
+		  document.getElementById("modal").style.display="block";
+		  passw=null;
+		  user=null;
+		  espera=false;
+	      } else {
+		  clearTimeout(tt);
+		  tt=null;
+		  tt=setTimeout( function() {cargaindice(cuantosc+1);}, 20000 );
+	      }
+	  } else {
+	      clearTimeout(tt);
+	      tt=null;
+	      var descripcion=null;
+	      tt=setTimeout( function() {setscr();}, 10000 );
+	      var pev=await undaleyeval();
+	      eval(pev);
+	      if(descripcion) {
+		  x=1;
+		  document.getElementById("indice").innerHTML="";
+		  while(x<descripcion.length) {
+		      if(nombre[x]) {
+			  document.getElementById("indice").innerHTML+="<hr><a style=\"font-family=Sans-Serif; font-size: 14pt \" href=\"javascript: set_f_scr('"+ nombre[x] + "'); \">" + descripcion[x] + "</a><a href=\"javascript:encrypted=null; processed=false;mandaborrar('"+nombre[x]+"','"+descripcion[x]+"');\"> &nbsp; &nbsp; BORRAR</a><br>\n";
+		      }
+		      x++;
+		  }
+	      } else {
+		  document.getElementById("indice").innerHTML="NO TIENE DATOS CARGADOS";
+	      }
+	  }
+      }
+      function gradosigno(grado) {
+	  var zodiacogradosigno=new Array("Aries", "Tauro", "Geminis", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagitario", "Capricornio", "Acuario", "Piscis");
+	  gradosignocad="";
+	  gradosignotmp="";
+	  while(grado>360) grado-=360;
+	  zgs_i=0;
+	  while((zgs_i*30)<360) {
+	      if(grado>(zgs_i*30) && grado<(zgs_i*30)+30) {
+		  gradosignotmp=(grado-zgs_i*30)+" ";
+		  gradosignotmp=gradosignotmp.substring(0, gradosignotmp.indexOf("."));
+		  gradosignocad=zodiacogradosigno[zgs_i]+" "+gradosignotmp+"° ";
+		  gradosignotmp=((grado-zgs_i*30)-(gradosignotmp*1))+" ";
+		  gradosignotmp2=(gradosignotmp*1)*100;
+		  gradosignotmp2=(((gradosignotmp2)*60)/100) + " ";
+		  gradosignotmp=gradosignotmp2.substring(0, gradosignotmp2.indexOf("."));
+		  gradosignocad+=gradosignotmp+"' ";
+		  gradosignotmp=(gradosignotmp2*1)-(gradosignotmp*1);
+		  gradosignotmp2=(gradosignotmp*1)*100;
+		  gradosignotmp2=(((gradosignotmp2)*60)/100) + " ";
+		  gradosignotmp=gradosignotmp2.substring(0, gradosignotmp2.indexOf("."));
+		  gradosignocad+=gradosignotmp+"'' ";
+		  return gradosignocad;
+	      }
+	      zgs_i++;
+	  }
+      }
+      async function set_f_scr(fileg) {
+	  if(espera) {
+	      t=setTimeout( function() {set_f_scr(fileg);}, 2000 );
+	  } else {
+	      espera=true;;
+	      processed=null;
+	      if(t) clearTimeout(t);
+	      t=null;
+	      if (user) {
+		  cargafile();
+		  filed=fileg;
+		  encrypted=null;
+		  scro=document.getElementById("scro");
+		  scro.parentNode.removeChild(scro);
+		  scro=document.createElement("script");
+		  scro.id="scro";
+		  scro.src="https://" + remotepath + "msgs/" + fileg;
+		  document.body.appendChild(scro);
+	      }
+	  }
+      }
+
+      function tieneaspecto(pos1, pos2) {
+	  var tieneas="";
+	  if(pos1>pos2) {
+	      test=pos1-pos2;
+	  } else {
+	      test=pos2-pos1;
+	  }
+	  console.log(pos1+"-"+pos2+"="+test);
+	  if(test>200)test=test-180;	  
+	  tieneas= "Nada";
+	  if(test >=0 && test < 7 ) tieneas= "conjuncion";
+	  if(test >= 57 && test <=63 ) tieneas= "sextil";
+	  if(test >= 83 && test <=97 ) tieneas= "cuadratura";
+	  if(test >= 113 && test <=127 ) tieneas= "trigono";
+	  if(test >= 173 && test <=187 ) tieneas= "oposicion";
+	  return tieneas;
+      }
+      function posdeplaneta(planeta, planetas, posiciones) {
+	  var h_posdeplaneta=0;
+	  while(h_posdeplaneta<planetas.length) {
+	      if(planetas[h_posdeplaneta]==planeta) return posiciones[h_posdeplaneta];
+	      h_posdeplaneta++;
+	  }
+      }
+      // function pos_regente(regentes, posicion, posiciones, planetas, casash) {
+      // 	  var k_casa_regente=0;
+      // 	  while(k_casa_regente<12) {
+      // 	      if(posicion>=k_casa_regente*30 && posicion<(k_casa_regente+1)*30) {
+      // 		  h_casa_regente=0;
+      // 		  while(h_casa_regente<planetas.length) {
+      // 		      if(regentes[k_casa_regente]==planetas[h_casa_regente]) {
+      // 			  console.log(posicion + "" + planetas[h_casa_regente] + "" + posiciones[h_casa_regente])
+      // 			  return posiciones[h_casa_regente];
+      // 			  break;
+      // 		      }
+      // 		      h_casa_regente++;
+      // 		  }
+      // 	      }
+      // 	      k_casa_regente++;
+      // 	  }
+      // 	  return 0;
+      // }
+
+      function pos_regente(planeta, casas) {
+	  var zodiaco=new Array("Aries", "Tauro", "Geminis", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagitario", "Capricornio", "Acuario", "Piscis");
+	  var regentes=new Array("MARTE", "VENUS", "MERCURIO", "LUNA", "SOL", "MERCURIO", "VENUS", "PLUTON", "JUPITER", "SATURNO", "URANO", "NEPTUNO")
+       	  var k_casa_regente=0;
+       	  while(k_casa_regente<regentes.length) {
+	      if(regentes[k_casa_regente] == planeta) return casade(k_casa_regente*30, casas);
+	      k_casa_regente++;
+	  }
+	  return 0;
+      }
+      function casade(pos, casas) {
+	  var k_casade=0;
+	  console.log("F:" + pos +">>>"+ casas);
+	  while(k_casade<casas.length) {
+	      test=pos;
+	      if((casas[k_casade]+30)>=360) {
+		  if(test<(casas[k_casade]+30)-360) {
+		      console.log(test+"<"+((casas[k_casade]+30)-360));
+		      break;
+		  }
+		  if(test>=casas[k_casade]) {
+		      break;
+		  }
+	      }
+	      
+	      if(test>=casas[k_casade]) {
+		  if(k_casade+1==casas.length) {
+		      if(test<casas[0]) {
+			  break;
+		      }
+		  } else {
+		      if(test<casas[k_casade+1]) {
+			  console.log(test+"<C>"+k_casade+"(C)"+casas[k_casade]+1);
+			  break;
+		      }
+		  }
+	      }
+	      k_casade++;
+	  }
+	  return k_casade+1;
+      }
+
+      function tablaaspecto(colour, planeta1, planeta2, regentes, casas, planetas, posiciones) {
+	  arraydeaspectos=new Array(new Array("conjuncion", 1), new Array("sextil", 1), new Array("cuadratura", 0), new Array("trigono", 1), new Array("oposicion", 0));
+	  var cadena="";
+	  if(tieneaspecto(posdeplaneta(planeta1,planetas, posiciones), posdeplaneta(planeta2,planetas, posiciones)) !="Nada") {
+	      console.log("< - - >");
+	      console.log(planeta1+" "+pos_regente(planeta1, casas));
+	      console.log(posdeplaneta(planeta1,planetas, posiciones));
+	      console.log(planeta2+" "+pos_regente(planeta2, casas));
+	      console.log(posdeplaneta(planeta2,planetas, posiciones));
+	      console.log(".");
+	      cadena="<table style='background-color: "+colour+";'><tr><td>"+pos_regente(planeta1, casas) + "<td></td><td>" +  pos_regente(planeta2, casas)  + "</td></tr><tr><td></td><td>"+ planeta1 + " en " + tieneaspecto(posdeplaneta(planeta1,planetas, posiciones), posdeplaneta(planeta2,planetas, posiciones)) + " con "+planeta2+"</td><td></td></tr><tr><td>"+casade(posdeplaneta(planeta1, planetas, posiciones), casas) +"</td><td></td><td>"+casade( posdeplaneta(planeta2, planetas, posiciones), casas) +"</td></tr><tr><td colspan=4><div><input type='button' value='Ver Descripcion' onclick=\"objeto=this; if(this.value=='Ver Descripcion') {objeto.parentNode.getElementsByTagName('p')[0].style.display='block';objeto.value='Ocultar Descripcion';} else {objeto.parentNode.getElementsByTagName('p')[0].style.display='none';objeto.value='Ver Descripcion';} \" /><p style='display: none; '>";
+	      var asp_i=0;
+	      var positivospetos=new Array("", "EFECTOS DEL CUERPO o EFECTOS HACIA LA PERSONA", "EFECTOS CAUSADOS POR EL DINERO o PAGO DE DINERO o EVENTOS CONCERNIENTES AL AMOR o EFECTOS CONCERNIENTES AL AMOR EN LA PERSONA", "EFECTOS PROVENIENTES DE HERMANOS, TIOS, PRIMOS, SOBRINOS o EVENTOS RELACIONADOS CON EL USO DE LA TECNOLOGIA O LA  COMUNICACION", "EFECTOS PROVENIENTES DE PADRES, DESCENDIENTES o EVENTOS RELACIONADOS CON CASAS", "EFECTOS PROVENIENTES DE HIJOS o EVENTOS RELACIONADOS CON AMIGOS o EFECTOS PROVENIENTES DE AMIGOS o EVENTOS RELACIONADOS CON PLACER o EFECTOS RELACIONADOS CON PLACER o EVENTOS RELACIONADOS CON PAREJAS SENTIMENTALES o EFECTOS PROVENIENTES DE PAREJAS SENTIMENTALES", "EFECTOS RELACIONADOS CON EL CUERPO FISICO o EVENTOS RELACIONADOS CON EL CUIDADO DEL CUERPO", "EVENTOS RELACIONADOS CON PAREJAS FORMALES SENTIMENTALES O EN NEGOCIOS o EFECTOS PROVENIENTES DE PAREJAS FORMALES DENTIMENTALES O DE NEGOCIOS o EVENTOS CONCERNIENTES A ESTUDIOS ACADEMICOS o EFECTOS PROVENIENTES DE ESTUDIOS ACADEMICOS", "EVENTOS RELATIVOS A PRACTICAS MAGICAS O MISTICAS o EFECTOS PROVENIENTES DE LAS ARTES MAGICAS O MISTICAS", "EVENTOS RELATIVOS A PRACTICAS RELIGIOSAS o EFECTOS PROVENIENTES PRACTICAS RELIGIOSAS", "EFECTOS PROVENIENTES DE FIGURAS DE AUTORIDAD O LEGITIMIDAD o EVENTOS RELACIONADOS CON FIGURAS DE AUTORIDAD o EFECTOS DE PERSONAS DE AUTORIDAD EN LA PERSONA", "EFECTOS PROVENIENTES DE AYUDA o EVENTOS CONERNIENTES A AYUDA", "EVENTOS CONERNIENTES A ANGELES o EFECTOS PROVENIENTES DE ANGELES o EVENTOS POR KARMA o EFECTOS DEL KARMA ");
+	      var positivosfugos=new Array("", "EL CUERPO DE LA PERSONA o ASPECTOS DE LA PERSONA", "POSESION DE DINERO o GASTO DE DINERO o AMOR DE LA PERSONA", "EVENTOS RELATICOS A HERMANOS, TIOS, PRIMOS O SOBRINOS DE LA PERSONA o EFECTOS DE LA PERSONA EN HERMANOS, TIOS, SOBRINOS O PRIMOS", "EFECTOS DE LA PERSONA EN PADRES O DESCENDIENTES o EVENTOS CONCERNIENTES A LA CASA DE LA PERSONA", "EFECTOS DE LA PERSONA EN AMIGOS o EVENTOS RELACIONADOS CON EL PLACER DE LA PERSONA o EVENTOS EN LOS QUE PARTICIPAN LA PERSONA Y SUS AMIGOS o EFECTOS DE LA PERSONA EN SU PAREJA SENTIMENTAL", "EFECTOS DE LA PERSONA EN SU SALUD", "EFECTOS DE LA PERSONA EN SU TRABAJO o EFECTOS DE LA PERSONA EN SU PAREJA FORMAL SENTIMENTAL O DE NEGOCIOS o EFECTOS DE LA PERSONA EN SU ACTIVIDAD ACADEMICA", "EFECTOS SOBRE LAS PRACTICAS DE LA PERSONA o EFECTOS QUE LA PERSONA PUEDE TENER PRACTICANDO LA MAGIA", "EFECTOS QUE LA PERSONA PUEDE TENER PRACTICANDO ACTIVIDADES RELIGIOSAS", "EFECTOS EN LA AUTORIDAD Y LEGITIMIDAD DE LA PERSONA", "EFECTOS DE LA PERSONA AL AYUDAR A LOS DEMAS", "EFECTOS DE LA PERSONA POR SU KARMA o EFECTOS DE LA PERSONA CON LA AYUDA DE LOS ANGELES");
+	      var negativospetos=new Array("", "EFECTOS DEL CUERPO o EFECTOS HACIA LA PERSONA", "EFECTOS CAUSADOS POR EL DINERO o PAGO DE DINERO o EVENTOS CONCERNIENTES AL AMOR o EFECTOS CONCERNIENTES AL AMOR EN LA PERSONA", "EFECTOS PROVENIENTES DE HERMANOS, TIOS, PRIMOS, SOBRINOS o PROBEMAS CON EL USO DE LA TECNOLOGIA O PROBLEMAS CON LA COMUNICACION", "EFECTOS PROVENIENTES DE PADRES, DESCENDIENTES o EVENTOS RELACIONADOS CON CASAS", "EFECTOS PROVENIENTES DE HIJOS o EVENTOS RELACIONADOS CON AMIGOS o EFECTOS PROVENIENTES DE AMIGOS o EVENTOS RELACIONADOS CON PLACER o EFECTOS RELACIONADOS CON PLACER o EVENTOS RELACIONADOS CON PAREJAS SENTIMENTALES o EFECTOS PROVENIENTES DE PAREJAS SENTIMENTALES", "ENFERMEDADES", "EVENTOS RELACIONADOS CON PAREJAS FORMALES SENTIMENTALES O EN NEGOCIOS o EFECTOS PROVENIENTES DE PAREJAS FORMALES DENTIMENTALES O DE NEGOCIOS o EVENTOS CONCERNIENTES A ESTUDIOS ACADEMICOS o PROBLEMAS RELACIONADOS CON ESTUDIOS ACADEMICOS", "EFECTOS DE MIEDOS QUE AFECTAN A LA PERSONA o VICTIMA DE ACTIVIDADES PROVENIENTES DE LAS ARTES MISTICAS o EVENTOS RELATIVOS A PRACTICAS MAGICAS O MISTICAS o EFECTOS PROVENIENTES DE LAS ARTES MAGICAS O MISTICAS", "EVENTOS RELATIVOS A PRACTICAS RELIGIOSAS o EFECTOS PROVENIENTES PRACTICAS RELIGIOSAS", "EVENTOS RELACIONADOS CON HOSPITALES o EFECTOS PROVENIENTES DE FIGURAS DE AUTORIDAD O LEGITIMIDAD o EVENTOS RELACIONADOS CON FIGURAS DE AUTORIDAD o EFECTOS DE PERSONAS DE AUTORIDAD EN LA PERSONA", "EFECTOS PROVENIENTES DE AYUDA o EVENTOS CONERNIENTES A AYUDA", "EVENTOS CONERNIENTES A LUGARES DE RECLUSION o EVENTOS POR KARMA o EFECTOS DEL KARMA ");
+	      var negativosfugos=new Array("", "EL CUERPO DE LA PERSONA o ASPECTOS DE LA PERSONA", "PROBLEMAS CON LA POSESION DE DINERO o GASTO DE DINERO o AMOR DE LA PERSONA", "EVENTOS RELATICOS A HERMANOS, TIOS, PRIMOS O SOBRINOS DE LA PERSONA o EFECTOS DE LA PERSONA EN HERMANOS, TIOS, SOBRINOS O PRIMOS", "EFECTOS DE LA PERSONA EN PADRES O DESCENDIENTES o EVENTOS CONCERNIENTES A LA CASA DE LA PERSONA", "EFECTOS DE LA PERSONA EN AMIGOS o EVENTOS RELACIONADOS CON EL PLACER DE LA PERSONA o EVENTOS EN LOS QUE PARTICIPAN LA PERSONA Y SUS AMIGOS o EFECTOS DE LA PERSONA EN SU PAREJA SENTIMENTAL", "PROBLEMAS DE SALUD EN LA PERSONA", "EFECTOS DE LA PERSONA EN SU TRABAJO o EFECTOS DE LA PERSONA EN SU PAREJA FORMAL SENTIMENTAL O DE NEGOCIOS o EFECTOS DE LA PERSONA EN SU ACTIVIDAD ACADEMICA", "MIEDOS DE LA PERSONA o EFECTOS NEGATIVOS SOBRE LA PERSONA AL REALIZAR MAGICAS o EFECTOS NEGATIVOS QUE LA PERSONA PUEDE TENER PRACTICANDO LA MAGIA", "EFECTOS QUE LA PERSONA PUEDE TENER PRACTICANDO ACTIVIDADES RELIGIOSAS", "EFECTOS EN LA AUTORIDAD Y LEGITIMIDAD DE LA PERSONA", "EFECTOS DE LA PERSONA AL AYUDAR A LOS DEMAS", "EFECTOS DE LA PERSONA POR SU KARMA o EFECTOS DE LA PERSONA CON LA AYUDA DE LOS ANGELES");
+	      aspectotabula=tieneaspecto(posdeplaneta(planeta1,planetas, posiciones), posdeplaneta(planeta2,planetas, posiciones));
+	      while(asp_i<arraydeaspectos.length) {
+		  if(arraydeaspectos[asp_i][0]==aspectotabula) {
+		      if(arraydeaspectos[asp_i][1]==0) {
+			  cadena+="Aspecto NEGATIVO relativo a ";
+			  cadena+=negativospetos[pos_regente(planeta1, casas)];
+			  if(pos_regente(planeta1,casas) != pos_regente(planeta2,casas)) {
+			      cadena+=" y " + negativospetos[pos_regente(planeta2, casas)];
+			  }
+			  cadena+= + " y " + negativosfugos[casade(posdeplaneta(planeta1, planetas, posiciones), casas)];
+			  if(casade(posdeplaneta(planeta1, planetas, posiciones), casas) != casade(posdeplaneta(planeta2, planetas, posiciones), casas)) {
+			      cadena+= " y " + negativosfugos[casade(posdeplaneta(planeta2, planetas, posiciones), casas)] ;
+			  }
+		      }
+		      if(arraydeaspectos[asp_i][1]==1) {
+			  cadena+="Aspecto POSITIVO  relativo a ";
+			  cadena+=positivospetos[pos_regente(planeta1, casas)];
+			  if(pos_regente(regentes, casas) != pos_regente(planeta2, casas)) {
+			      " y " + positivospetos[pos_regente(planeta2, casas)];
+			  }
+			  cadena+=" y " + positivosfugos[casade(posdeplaneta(planeta1, planetas, posiciones), casas)];
+			  if(casade(posdeplaneta(planeta1, planetas, posiciones), casas)!=casade(posdeplaneta(planeta2, planetas, posiciones), casas)) {
+			      cadena+=" y " + positivosfugos[casade(posdeplaneta(planeta2, planetas, posiciones), casas)] ;
+			  }
+		      }
+		  }
+		  asp_i++;
+	      }
+	  } else {
+	      cadena= "<table style='background-color: "+colour+";'><tr><td>  </td></tr></table>";
+	  }
+	  cadena+="</p></div>";
+	  cadena+="</td></tr></table>";
+	  return cadena;
+      }
+      async function cargafile() {
+	  if (user && !processed) {
+	      t=setTimeout( function() {cargafile();}, 3000 );
+	  } else {
+	      clearTimeout(t);
+	      t=null;
+	      document.getElementById("carta").innerHTML="Por Favor espere mientras se carga la Informacion ... ";
+	      fecha_inicio=null;
+	      fecha_fin=null;
+	      prefix_ascendente_ascencional=null;
+	      prefix_dispositor_dispositores_aspects=null;
+	      prefix_dispositor_dispositores_planets=null;
+	      ascendente=null;
+	      var pfv=await undaleyeval();
+//	      alert(pfv);
+	      eval(pfv);
+	      espera=false;
+	      cadena="";
+	      if(ascendente && latitud && longitud) {
+		  cadena="<table><tr><td>ASC</td><td>LATIDUD</td><td>LONGITUD</td></tr><tr><td>" + ascendente + "</td><td>" + latitud + "</td><td>" + longitud + "</td></tr></table>";
+		  var casas=new Array();
+		  var zodiaco=new Array("Aries", "Tauro", "Geminis", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagitario", "Capricornio", "Acuario", "Piscis");
+		  var regentes=new Array("MARTE", "VENUS", "MERCURIO", "LUNA", "SOL", "MERCURIO", "VENUS", "PLUTON", "JUPITER", "SATURNO", "URANO", "NEPTUNO")
+		  casas[0]=ascendente;
+		  console.log("CASA 0" + ":" + casas[0]);
+		  g=1;
+		  while(g<12) {
+		      casas[g]=casas[g-1]+30;
+		      if(casas[g]>360) casas[g]=casas[g]-360;
+		      console.log("CASA " + g + ":" + casas[g]);
+		      g++;
+		  }
+		  if(fecha_inicio && fecha_fin) {
+		      if(fecha_inicio[1]) {
+			  i=1;
+			  var pos1=0;
+			  var pos2=0;
+			  var planetsv=new Array();
+			  var positionsv=new Array();
+			  while(i<planeta_transito.length){
+			      g=0;
+			      pos1=-1;
+			      pos2=-1;
+			      pla1="";
+			      pla2="";
+			      cadena+="<table style='border-width:2px; border-collapse: collapse; width: 70%;'><tr><td colspan=4 style='text-align: center; font-size: 16pt;'> ASPECTOS </td></tr>";
+			      if(planeta_transito[i]==planeta[i]) {
+			      while(g<prefix_prefix_planets.length) {
+				  h=0;
+				  while(h<prefix_prefix_planets[g].length) {
+				      if(planeta_transito[i]==prefix_prefix_planets[g][h]) {
+					  console.log(planeta_transito[i]+"=="+prefix_prefix_planets[g][h])
+					  pla1=prefix_prefix_planets[g][h];
+					  if(h==1) pla2=prefix_prefix_planets[g][0];
+					  else pla2=prefix_prefix_planets[g][1];;
+					  planetsv=prefix_prefix_planets[g];
+					  positionsv=prefix_prefix_positions[g];
+					  cadena+="<tr><td>"+tablaaspecto("white", pla1, pla2, regentes, casas, planetsv, positionsv)+"</td></tr>";
+					  g=100;
+					  break;
+				      }
+				      h++;
+				  }
+				  g++;
+			      } 
+			      } else {
+				  planetsv=new Array(planeta_transito[i], planeta[i]);
+				  console.log("ASP: "+planeta_transito[i] + "-" + planeta[i]);
+				  positionsv=new Array();
+				  varos=" ";
+				  g=0;
+				  while(g<prefix_prefix_planets.length) {
+				      if(planetsv[1]==prefix_prefix_planets[g][0]) {
+					  positionsv[1]=prefix_prefix_positions[g][0];
+					  varos+="X";
+				      }
+				      if(planetsv[1]==prefix_prefix_planets[g][1]) {
+					  positionsv[1]=prefix_prefix_positions[g][1];
+					  varos+="X";
+				      }
+
+				      if(planetsv[0]==prefix_prefix_planets[g][0]) {
+					  positionsv[0]=prefix_prefix_positions[g][0];
+					  varos+="Y";
+				      }
+				      if(planetsv[0]==prefix_prefix_planets[g][1]) {
+					  positionsv[0]=prefix_prefix_positions[g][1];
+					  varos+="Y";
+				      }
+				      if(varos.indexOf("X")>=0 && varos.indexOf("Y")>=0) break;
+				      g++;
+				  }
+				  cadena+="<tr><td>"+tablaaspecto("white", planeta_transito[i], planeta[i], regentes, casas, planetsv, positionsv)+"</td></tr>";
+			      }
+			      cadena+="</table>";
+			      cadena+="<table border=1 style='border-width:2px; border-collapse: collapse; width: 70%;'><tr><td colspan=4 style='text-align: center; font-size: 16pt;'> FECHAS </td></tr><tr><td>PLANETAS EN EL ASPECTO</td><td>PLANETA NATAL</td><td>PLANETA EN TRANSITO</td><td>INICIO</td><td>FIN</td></tr>\n";
+			      cadena+="<tr><td>"+planetas_aspectos[i]+"</td><td>"+planeta[i]+"</td><td>"+planeta_transito[i]+"</td><td>"+fecha_inicio[i]+"</td>";
+			      if(fecha_fin[i]) cadena+="<td>"+fecha_fin[i]+"</td>";
+			      cadena+="</tr>";
+			      i++;
+			  }
+			  cadena+="</table>";
+			  document.getElementById("carta").innerHTML=cadena;
+		      }
+		  }
+	      }
+	      var g=1;
+	      var casas=new Array();
+	      if(prefix_ascendente_ascencional) {
+		  casas[0]=prefix_ascendente;
+		  console.log("CASA 0" + ":" + casas[0]);
+		  while(g<12) {
+		      casas[g]=casas[g-1]+30;
+		      if(casas[g]>360) casas[g]=casas[g]-360;
+		      console.log("CASA " + g + ":" + casas[g]);
+		      g++;
+		  }
+		  var aspectos_ascencional=new Array();
+		  var aspectos_ascencional_planetas=new Array();
+		  var planetas=new Array();
+		  var planetacasa=new Array();
+		  var casaregente=new Array();
+		  var posiciones=new Array();
+		  var posiciones_ecliptico=new Array();
+		  var zodiaco=new Array("Aries", "Tauro", "Geminis", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagitario", "Capricornio", "Acuario", "Piscis");
+		  var regentes=new Array("MARTE", "VENUS", "MERCURIO", "LUNA", "SOL", "MERCURIO", "VENUS", "PLUTON", "JUPITER", "SATURNO", "URANO", "NEPTUNO")
+		  g=0;
+		  while(g<prefix_ascencional_aspects.length) {
+		      aspectos_ascencional_planetas[g]=new Array();
+		      if(prefix_ascencional_planets[g][0][0]=='S' && prefix_ascencional_planets[g][0][1]=='O') aspectos_ascencional_planetas[g][0]="SOL";
+		      if(prefix_ascencional_planets[g][0][0]=='L') aspectos_ascencional_planetas[g][0]="LUNA";
+		      if(prefix_ascencional_planets[g][0][0]=='M' && prefix_ascencional_planets[g][0][1]=='E') aspectos_ascencional_planetas[g][0]="MERCURIO";
+		      if(prefix_ascencional_planets[g][0][0]=='M' && prefix_ascencional_planets[g][0][1]=='A') aspectos_ascencional_planetas[g][0]="MARTE";
+		      if(prefix_ascencional_planets[g][0][0]=='V') aspectos_ascencional_planetas[g][0]="VENUS";
+		      if(prefix_ascencional_planets[g][0][0]=='J') aspectos_ascencional_planetas[g][0]="JUPITER";
+		      if(prefix_ascencional_planets[g][0][0]=='S' && prefix_ascencional_planets[g][0][1]=='A') aspectos_ascencional_planetas[g][0]="SATURNO";
+		      if(prefix_ascencional_planets[g][0][0]=='U') aspectos_ascencional_planetas[g][0]="URANO";
+		      if(prefix_ascencional_planets[g][0][0]=='N') aspectos_ascencional_planetas[g][0]="NEPTUNO";
+		      if(prefix_ascencional_planets[g][0][0]=='P') aspectos_ascencional_planetas[g][0]="PLUTON";
+
+		      if(prefix_ascencional_planets[g][1][0]=='S' && prefix_ascencional_planets[g][1][1]=='O') aspectos_ascencional_planetas[g][1]="SOL";
+		      if(prefix_ascencional_planets[g][1][0]=='L') aspectos_ascencional_planetas[g][1]="LUNA";
+		      if(prefix_ascencional_planets[g][1][0]=='M' && prefix_ascencional_planets[g][1][1]=='E') aspectos_ascencional_planetas[g][1]="MERCURIO";
+		      if(prefix_ascencional_planets[g][1][0]=='M' && prefix_ascencional_planets[g][1][1]=='A') aspectos_ascencional_planetas[g][1]="MARTE";
+		      if(prefix_ascencional_planets[g][1][0]=='V') aspectos_ascencional_planetas[g][1]="VENUS";
+		      if(prefix_ascencional_planets[g][1][0]=='J') aspectos_ascencional_planetas[g][1]="JUPITER";
+		      if(prefix_ascencional_planets[g][1][0]=='S' && prefix_ascencional_planets[g][1][1]=='A') aspectos_ascencional_planetas[g][1]="SATURNO";
+		      if(prefix_ascencional_planets[g][1][0]=='U') aspectos_ascencional_planetas[g][1]="URANO";
+		      if(prefix_ascencional_planets[g][1][0]=='N') aspectos_ascencional_planetas[g][1]="NEPTUNO";
+		      if(prefix_ascencional_planets[g][1][0]=='P') aspectos_ascencional_planetas[g][1]="PLUTON";
+		      //- - - - - - - -
+		      if(prefix_ascencional_aspects[g]==0) aspectos_ascencional[g]="conjuncion";
+		      if(prefix_ascencional_aspects[g]==60) aspectos_ascencional[g]="sextil";
+		      if(prefix_ascencional_aspects[g]==90) aspectos_ascencional[g]="cuadratura";
+		      if(prefix_ascencional_aspects[g]==120) aspectos_ascencional[g]="trigono";
+		      if(prefix_ascencional_aspects[g]==180) aspectos_ascencional[g]="oposicion";
+		      g++;
+		  }
+		  h=0;
+		  while(h<prefix_planetas_ascencional.length) {
+		      if(prefix_ascencional_planet_names[h][0]=='S' && prefix_ascencional_planet_names[h][1]=='O') planetas[h]="SOL";
+		      if(prefix_ascencional_planet_names[h][0]=='L') planetas[h]="LUNA";
+		      if(prefix_ascencional_planet_names[h][0]=='M' && prefix_ascencional_planet_names[h][1]=='E') planetas[h]="MERCURIO";
+		      if(prefix_ascencional_planet_names[h][0]=='M' && prefix_ascencional_planet_names[h][1]=='A') planetas[h]="MARTE";
+		      if(prefix_ascencional_planet_names[h][0]=='V') planetas[h]="VENUS";
+		      if(prefix_ascencional_planet_names[h][0]=='J') planetas[h]="JUPITER";
+		      if(prefix_ascencional_planet_names[h][0]=='S' && prefix_ascencional_planet_names[h][1]=='A') planetas[h]="SATURNO";
+		      if(prefix_ascencional_planet_names[h][0]=='U') planetas[h]="URANO";
+		      if(prefix_ascencional_planet_names[h][0]=='N') planetas[h]="NEPTUNO";
+		      if(prefix_ascencional_planet_names[h][0]=='P') planetas[h]="PLUTON";
+		      h++;
+		  }
+		  fortuna=0;
+		  i=0;
+		  while(i<planetas.length) {
+		      if(planetas[i]=="LUNA") {
+			  fortuna+=prefix_planetas_ecliptico[i];
+		      }
+		      if(planetas[i]=="SOL") {
+			  fortuna=Math.abs(fortuna-prefix_planetas_ecliptico[i]);
+		      }
+		      i++;
+		  }
+		  while(fortuna>180) fortuna-=180;
+		  fortuna+=prefix_ascendente;
+		  prefix_planetas_ecliptico[prefix_planetas_ecliptico.length]=fortuna;
+		  fortuna=0;
+		  i=0;
+		  while(i<planetas.length) {
+		      if(planetas[i]=="LUNA") {
+			  fortuna+=prefix_planetas_ascencional[i];
+		      }
+		      if(planetas[i]=="SOL") {
+			  fortuna=Math.abs(fortuna-prefix_planetas_ascencional[i]);
+		      }
+		      i++;
+		  }
+		  while(fortuna>180) fortuna-=180;
+		  fortuna+=prefix_ascendente;
+		  planetas[planetas.length]="FORTUNA";
+		  prefix_planetas_ascencional[prefix_planetas_ascencional.length]=fortuna;
+		  i=0;
+		  aspectosgrados=new Array(0, 45, 60, 90, 180);
+		  aspectosgradosnombres=new Array("conjuncion", "trigono", "sextil", "cuadratura", "oposicion");
+		  while(i<planetas.length) {
+		      if(prefix_planetas_ascencional[i]>fortuna) {
+			  j=0;
+			  while(j<aspectosgrados.length) {
+			      if(prefix_planetas_ascencional[i]-fortuna == aspectosgrados[j]) {
+				  aspectos_ascencional_planetas[aspectos_ascencional_planetas.length][0]="FORTUNA";
+				  aspectos_ascencional_planetas[aspectos_ascencional_planetas.length][1]=planetas[i];
+				  aspectos_ascencional[aspectos_ascencional.length]=aspectosgradosnombres[j];
+			      }
+			      j++;
+			  }
+		      }
+		      if(prefix_planetas_ascencional[i]<fortuna) {
+			  j=0;
+			  while(j<aspectosgrados.length) {
+			      if(fortuna-prefix_planetas_ascencional[i] == aspectosgrados[j]) {
+				  aspectos_ascencional_planetas[aspectos_ascencional_planetas.length][0]="FORTUNA";
+				  aspectos_ascencional_planetas[aspectos_ascencional_planetas.length][1]=planetas[i];
+				  aspectos_ascencional[aspectos_ascencional.length]=aspectosgradosnombres[j];
+			      }
+			      j++;
+			  }
+		      }
+		      i++;
+		  }
+		  j=0;
+		  while(j<aspectos_ascencional_planetas.length) {
+		      i=0;
+		      posiciones[j]=new Array();
+		      posiciones_ecliptico[j]=new Array();
+		      planetacasa[j]=new Array();
+		      casaregente[j]=new Array();
+		      while(i<planetas.length) {
+			  test=aspectos_ascencional_planetas[j][0];
+			  if(test.substring(0, 3)==planetas[i].substring(0, 3) || test.substring(test.length-3, test.length)==planetas[i].substring(planetas[i].length-3, planetas[i].length)) {
+			      posiciones[j][0]=prefix_planetas_ascencional[i];
+			      posiciones_ecliptico[j][0]=prefix_planetas_ecliptico[i];
+			      k=0;
+			      while(k<12) {
+				  if(posiciones[j][0]>=k*30 && posiciones[j][0]<(k+1)*30) {
+				      h=0;
+				      while(h<planetas.length) {
+					  if(regentes[k]==planetas[h]) {
+					      casaregente[j][0]=casade(prefix_planetas_ascencional[h], casas);
+					  }
+					  h++;
+				      }
+				  }
+				  k++;
+			      }
+			      k=0;
+			      g=0;
+			      planetacasa[j][0]=casade(posiciones[j][0], casas);
+			      break;
+			  }
+			  i++;
+		      }
+		      i=0;
+		      while(i<planetas.length) {
+			  test=aspectos_ascencional_planetas[j][1];
+			  if(test.substring(0, 3)==planetas[i].substring(0, 3) || test.substring(test.length-3, test.length)==planetas[i].substring(planetas[i]-3, planetas[i])) {
+			      posiciones[j][1]=prefix_planetas_ascencional[i];
+			      posiciones_ecliptico[j][1]=prefix_planetas_ecliptico[i];
+			      k=0;
+			      while(k<12) {
+				  if(posiciones[j][1]>=k*30 && posiciones[j][1]<(k+1)*30) {
+				      h=0;
+				      while(h<planetas.length) {
+					  if(regentes[k]==planetas[h]) {
+					      console.log(prefix_planetas_ascencional[h]);
+					      casaregente[j][1]=casade(prefix_planetas_ascencional[h], casas);
+					      break;
+					  }
+					  h++;
+				      }
+				  }
+				  k++;
+			      }
+			      k=0;
+			      g=0;
+			      planetacasa[j][1]=casade(posiciones[j][1], casas);
+			      break;
+			  }
+			  i++;
+		      }
+		      j++;
+		  }
+		  g=0;
+		  aspectos_dispositor=new Array();
+		  aspectos_dispositor_origen=new Array();
+		  posiciones_dispositor=new Array();
+		  planetacasa_dispositor=new Array();
+		  casaregente_dispositor=new Array();
+		  if(prefix_dispositor_dispositores_aspects) {
+		  while(g<prefix_dispositor_dispositores_aspects.length) {
+		      if(prefix_dispositor_dispositores_aspects[g]==0) aspectos_dispositor[g]="conjuncion";
+		      if(prefix_dispositor_dispositores_aspects[g]==60) aspectos_dispositor[g]="sextil";
+		      if(prefix_dispositor_dispositores_aspects[g]==90) aspectos_dispositor[g]="cuadratura";
+		      if(prefix_dispositor_dispositores_aspects[g]==120) aspectos_dispositor[g]="trigono";
+		      if(prefix_dispositor_dispositores_aspects[g]==180) aspectos_dispositor[g]="oposicion";		  
+		      g++;
+		  }
+		  }
+		  i=0;
+		  if(prefix_dispositor_dispositores_planets) {
+		      while(i<prefix_dispositor_dispositores_planets.length) {
+			  if(prefix_dispositor_dispositores_planets[i][0]) {
+			      j=0;
+			      posiciones_dispositor[i]=new Array();
+			      planetacasa_dispositor[i]=new Array();
+			      while(j<planetas.length) {
+				  test=prefix_dispositor_dispositores_planets[i][0];
+				  if(test.substring(0, 3)==planetas[j].substring(0, 3) || test.substring(test.length-3, test.length)==planetas[j].substring(planetas[j].length-3, planetas[j].length) ) {
+				      posiciones_dispositor[i][0]=prefix_planetas_ascencional[j];
+				      planetacasa_dispositor[i][0]=casade(posiciones_dispositor[i][0], casas);
+				      break;
+				  }
+				  j++;
+			      }
+
+			      // - - - - - -
+			      k=0;
+			      casaregente_dispositor[i]=new Array();
+			      while(k<12) {
+				  if(posiciones_dispositor[i][0]>=k*30 && posiciones_dispositor[i][0]<(k+1)*30) {
+				      h=0;
+				      while(h<planetas.length) {
+					  if(regentes[k]==planetas[h]) {
+					      casaregente_dispositor[i][0]=casade(prefix_planetas_ascencional[h], casas);
+					      break;
+					  }
+					  h++;
+				      }
+				  }
+				  k++;
+			      }
+			      // -..-.-.-.-.-.-.
+			      j=0;
+			      while(j<planetas.length) {
+				  test=prefix_dispositor_dispositores_planets[i][1];
+				  if(test.substring(0, 3)==planetas[j].substring(0, 3) || test.substring(test.length-3, test.length)==planetas[j].substring(planetas[j].length-3, planetas[j].length) ) {
+				      posiciones_dispositor[i][1]=prefix_planetas_ascencional[j];
+				      planetacasa_dispositor[i][1]=casade(posiciones_dispositor[i][1], casas);
+				      break;
+				  }
+				  j++;
+			      }
+			      // - - - - - -
+			      k=0;
+			      while(k<12) {
+				  if(posiciones_dispositor[i][1]>=k*30 && posiciones_dispositor[i][1]<(k+1)*30) {
+				      h=0;
+				      while(h<planetas.length) {
+					  if(regentes[k]==planetas[h]) {
+					      casaregente_dispositor[i][1]=casade(prefix_planetas_ascencional[h], casas);
+					      break;
+					  }
+					  h++;
+				      }
+				  }
+				  k++;
+			      }
+			      // -..-.-.-.-.-.-.
+			  }
+			  i++;
+		      }
+		  }
+		  cadena="";
+		  var longitudcadena="";
+		  var latitudcadena="";
+		  if(prefix_longitud<0) {
+		      longitudcadena=Math.abs(prefix_longitud)+" O";
+		  } else {
+		      longitudcadena=Math.abs(prefix_longitud)+" E";
+		  }
+		  if(prefix_latitud<0) {
+		      latitudcadena=Math.abs(prefix_latitud)+" S";
+		  } else {
+		      latitudcadena=Math.abs(prefix_latitud)+" N";
+		  }
+		  document.getElementById("datos").innerHTML="var posiciones=new Array(); var planetas=new Array();ascendentedatos="+prefix_ascendente+"; var longituddatos=" + longitud + ";" + "var latituddatos=" + latitud + ";descripcion=\""+ new Date(prefix_fecha*1000).toUTCString()+ " en LONGITUD: "+ longitudcadena + " LATITUD:" + latitudcadena +"\";";
+		  cadena+="<br> <table> <tr><td>Dias </td><td> Longitud</td><td> Latitud</td></tr><tr><td><input id='dias'/></td><td><input id='londatos'/></td><td><input id='latdatos'/></td><td><input type='button' value='Transitos' onclick=\"if(document.getElementById('dias').value && document.getElementById('londatos').value && document.getElementById('latdatos').value) transitos();\"/> </td></tr></table>";
+		  cadena+="<table style='vertical-align: top; padding: 30px; width: 30%;  overflow: scroll; width: 100% '>";
+		  cadena+="\n<tr><td >ASC "+prefix_ascendente+" " + gradosigno(prefix_ascendente)+"</td></tr>\n";
+		  cadena+="\n<tr><td>FORTUNA "+fortuna+" " + gradosigno(fortuna)+"</td></tr>\n";
+		  cadena+="\n<tr><td style='background-color: lightgray; font-weight: bolder;'>ASCENCIONAL</td></tr>";
+		  i=0;
+		  while(i<planetas.length) {
+		      cadena+="\n<tr><td> "+planetas[i]+" " + gradosigno(prefix_planetas_ascencional[i])+" "+prefix_planetas_ascencional[i]+"</td></tr>\n";
+		      i++;
+		  }
+		  cadena+="\n<tr><td style='background-color: lightgray; font-weight: bolder;'>ECLIPTICO</td></tr>";
+		  i=0;
+		  while(i<planetas.length) {
+		      cadena+="\n<tr><td> "+planetas[i]+" " + gradosigno(prefix_planetas_ecliptico[i])+" "+prefix_planetas_ecliptico[i]+"</td></tr>\n";
+		      i++;
+		  }
+		  cadena+="</td></tr></table>";
+		  i=0;
+		  posiciones_total=new Array();
+		  planetas_total=new Array();
+		  while(i<casaregente_dispositor.length) {
+		      j=0;
+		      while(j<i) {
+			  if( (prefix_dispositor_ecliptico_origen[j][0]==prefix_dispositor_ecliptico_origen[i][0] && prefix_dispositor_ecliptico_origen[j][1]==prefix_dispositor_ecliptico_origen[i][1]) || (prefix_dispositor_ecliptico_origen[j][1]==prefix_dispositor_ecliptico_origen[i][0] && prefix_dispositor_ecliptico_origen[j][0]==prefix_dispositor_ecliptico_origen[i][1]) ) {
+			      j=i;
+			  }
+			  j++;
+		      }
+		      if(j!=i+1 && casaregente_dispositor[i] && planetacasa_dispositor[i]) {
+			  document.getElementById("datos").innerHTML+="posiciones[posiciones.length]=new Array("+ posdeplaneta(prefix_dispositor_dispositores_planets[i][0], planetas, prefix_planetas_ascencional) +", "+ posdeplaneta(prefix_dispositor_dispositores_planets[i][1], planetas, prefix_planetas_ascencional) +");"
+			  document.getElementById("datos").innerHTML+="planetas[planetas.length]=new Array(\""+ prefix_dispositor_dispositores_planets[i][0] +"\", \""+ prefix_dispositor_dispositores_planets[i][1] +"\");"
+
+			  aspecto="<table><tr><td>"+tablaaspecto("white", prefix_dispositor_ecliptico_origen[i][0], prefix_dispositor_ecliptico_origen[i][1], regentes, casas, planetas, prefix_planetas_ecliptico) +"</td><td><b>D</b></td><td>"+tablaaspecto("white", prefix_dispositor_dispositores_planets[i][0], prefix_dispositor_dispositores_planets[i][1], regentes, casas, planetas, prefix_planetas_ascencional)+"</td></tr></table>";
+			  if(cadena.indexOf(aspecto)<0) cadena+="\n<tr><td>"+aspecto+"</td></tr>\n</table>";
+		      }
+		      i++;
+		  }
+		  j=0;
+		  while(j<aspectos_ascencional.length) {
+		      planetas_total[planetas_total.length]=new Array();
+		      posiciones_total[posiciones_total.length]=new Array();
+		      k=0;
+		      while(k<j) {
+			  if( (aspectos_ascencional_planetas[j][0]==aspectos_ascencional_planetas[k][0] && aspectos_ascencional_planetas[j][1]==aspectos_ascencional_planetas[k][1]) || (aspectos_ascencional_planetas[j][0]==aspectos_ascencional_planetas[k][1] && aspectos_ascencional_planetas[j][1]==aspectos_ascencional_planetas[k][0]) ) {
+			      k=100;
+			  }
+			  k++;
+		      }
+		      if(k<100) {
+			  document.getElementById("datos").innerHTML+="planetas[planetas.length]=new Array(\""+aspectos_ascencional_planetas[j][0]+"\", \""+aspectos_ascencional_planetas[j][1]+"\");";
+			  document.getElementById("datos").innerHTML+="posiciones[posiciones.length]=new Array("+posdeplaneta(aspectos_ascencional_planetas[j][0], planetas, posiciones)+", "+posdeplaneta(aspectos_ascencional_planetas[j][1], planetas, posiciones)+");";
+			  cadena+="\n<tr><td>";
+			  aspecto="\n"+tablaaspecto("white", aspectos_ascencional_planetas[j][0], aspectos_ascencional_planetas[j][1], regentes, casas, planetas, prefix_planetas_ascencional);
+			  //aspecto="\n<table><tr><td>"+ casaregente[j][0] + "</td><td></td><td>" + casaregente[j][1] + "</td></tr><tr><td></td><td>" + aspectos_ascencional_planetas[j][0] + " en " + aspectos_ascencional[j]+" con "+ aspectos_ascencional_planetas[j][1] + "</td><td></td></tr><tr><td>" + planetacasa[j][0] + "</td><td></td><td>" + planetacasa[j][1] + "</td></tr></table>\n";
+			  //			  aspecto=j+":"+aspectos_ascencional[j]+" "+aspectos_ascencional_planetas[j][0] + "(" + planetacasa[j][0] + "/" + casaregente[j][0]+ ") -" + aspectos_ascencional_planetas[j][1] + "(" + planetacasa[j][1] + "/" + casaregente[j][1] + ")";
+			  cadena+=aspecto + "</td></tr>\n";
+		      }
+		      j++;
+		  }
+		  cadena+="</td></tr></table>";
+		  document.getElementById("carta").innerHTML=cadena;
+	      }
+	  }
+      }
+
+      function ponendatos(arreglo) {
+	  var poi=0;
+	  var pcadena="";
+	  while(poi<arreglo.length) {
+	      pcadena+="planetas[planetas.length]=new Array(\""+arreglo[poi][0][0]+"\", \""+arreglo[poi][0][1]+"\");";
+	      pcadena+="posiciones[posiciones.length]=new Array("+arreglo[poi][1][0] +","+arreglo[poi][1][1] +");";
+	      poi++;
+	  }
+	  return pcadena;
+      }
+      function tienenaspectos(planetas1, posiciones1, planetas2, posiciones2) {
+	  var ci=0;
+	  var cj=0;
+	  var ck=0;
+	  var pos1;
+	  var pos2;
+	  var test;
+	  var asp;
+	  var retornoaspecto=new Array();
+	  while(ci<posiciones1.length) {
+	      cj=0;
+	      while(cj<posiciones2.length) {
+		  ck=0;
+		  while(ck<retornoaspecto.length) {
+		      if( (planetas1[ci]==retornoaspecto[ck][0][0] && planetas2[cj]==retornoaspecto[ck][0][1]) || (planetas1[ci]==retornoaspecto[ck][0][1] && planetas2[cj]==retornoaspecto[ck][0][0]) ) break;
+		      ck++;
+		  }
+		  if(ck==retornoaspecto.length) {
+		      pos1=posiciones1[ci];
+		      pos2=posiciones2[cj];
+		      if(pos1>pos2) {
+			  test=pos1-pos2;
+		      } else {
+			  test=pos2-pos1;
+		      }
+		      asp=null;
+		      if(test>200)test=test-180;	  
+		      if(test >=0 && test < 7 ) asp="conjuncion";
+		      if(test >= (60-1.5) && test <=(60+1.5) ) asp="sextil";
+		      if(test >= (90-3.5) && test <=(90+3.5) ) asp="cuadratura";
+		      if(test >= (120-3.5) && test <=(120+3.5) ) asp="trigono";
+		      if(test >= (180-3.5) && test <=(180+3.5) ) asp="oposicion";
+		      if(asp && (planetas1[ci]!=planetas2[cj]) ) {
+			  retornoaspecto[retornoaspecto.length]=new Array( new Array(planetas1[ci].trim(), planetas2[cj].trim()), new Array(posiciones1[ci], posiciones2[cj]), asp);
+		      }
+		  }
+		  cj++;
+	      }
+	      ci++;
+	  }
+	  return retornoaspecto;
+      }
+      async function transitos() {
+	  if(document.getElementById("datos").innerHTML.indexOf("var")>=0) {
+	      if(document.getElementById("datos").innerHTML.indexOf("var planetas")>=0 && document.getElementById("datos").innerHTML.indexOf("var posiciones")>=0) {
+//		  alert(document.getElementById("datos").innerHTML);
+		  eval(document.getElementById("datos").innerHTML);
+		  console.log(document.getElementById("datos").innerHTML);
+//		  alert("P"+posiciones);
+		  fechb=new Date();
+		  epoci=fechb.getTime();
+		  cadena = aleatoria()+'*'+'/'+" \n#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+";\n/*"+aleatoria()+'*'+'/'+"int dias=" + document.getElementById('dias').value + ";\n/*"+aleatoria()+'*'+'/'+"\n"+"double ascendente=" + ascendentedatos + ";\n/*"+aleatoria()+'*'+'/'    +"char descripcion["+descripcion.length+"]=\"" + descripcion + "\";/*"+aleatoria()+'*'+'/'     +"long epoch=" + Math.ceil(epoci/1000) + ";\n/*"+aleatoria()+'*'+'/'+"double latituddatos=" + document.getElementById('latdatos').value + ";\n/*"+aleatoria()+'*'+'/'+"double longituddatos=" + document.getElementById('londatos').value + ";\n/*"+aleatoria()+'*'+'/'+"\n";
+		  console.log(cadena);
+		  cadena+="/*"+aleatoria()+'*'+'/'+"char planets[" + planetas.length + "][2][10]={";
+		  if(planetas[0]) cadena+="{\""+planetas[0][0]+"\", \""+planetas[0][1] +"\"}";
+		  i=1;
+		  while(i<planetas.length) {
+		      cadena+=","+"{\""+planetas[i][0]+"\", \""+planetas[i][1]+ "\"}";
+		      i++;
+		  }
+		  cadena+="};\n"
+		  cadena+="/*"+aleatoria()+'*'+'/'+"double positions[" + posiciones.length + "][2]={";
+		  if(posiciones[0]) cadena+="{"+posiciones[0][0]+","+posiciones[0][1]+"}";
+		  i=1;
+		  while(i<posiciones.length) {
+		      cadena+=",{"+posiciones[i][0]+","+posiciones[i][1]+"}";
+		      i++;
+		  }
+		  cadena+="};}\n";
+		  esperaencr=true;
+		  checaesperaencr();
+		  await encr(cadena);
+		  setp();setscr();
+	      }
+	  }
+      }	  
+      async function encr(cadenat) {
+	  rawKey=await setp();
+	  kkey= await importSecretKey(rawKey);
+	  c=0;
+	  var bb="";
+	  var siz=128;
+	  var sizarr=cadenat.length;
+	  var arraylen=Math.ceil(sizarr/siz);
+	  while((arraylen*siz)<sizarr) arraylen++;
+	  var buflen=Math.ceil((sizarr+4)/arraylen);
+	  while((arraylen*buflen)<sizarr) buflen++;
+
+	  cadenat+="//";
+	  while(arraylen*buflen>cadenat.length) {
+	      letra=47;
+	      while(letra==10 || letra==13 || letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+	      cadenat+=String.fromCharCode(letra);
+	  }
+	  var cadarray=new Uint8Array(buflen);
+	  var arrayindex=0;
+	  arrayindex=0;
+	  filed=await digestMessage(cadenat+Math.ceil(Math.random()*32768));
+	  filed+=".js";
+	  var buffers="";
+	  var ivs="";
+	  var bb=aleatoria()+'*'+'/'+"#include <stdio.h>\n"+"/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){\n"+"/*"+aleatoria()+'*'+'/'+"char *user=" + '"' + user + '"' + ";"+"/*"+aleatoria()+'*'+'/'+"\nFILE *fd;"+"/*"+aleatoria()+'*'+'/'+"\nfd=fopen(" + '"' + filed + '"' + ',' + '"' + "w+" + '"' + ");"+"/*"+aleatoria()+'*'+'/'+"\n";
+	  if(!arraylen) arraylen=1;
+	  while(arrayindex<arraylen) {
+	      let iv = window.crypto.getRandomValues(new Uint8Array(16));
+	      counter = window.crypto.getRandomValues(new Uint8Array(16));
+	      ci=buflen*arrayindex;
+	      c=0;
+	      while(ci<buflen*(arrayindex+1)) {
+		  if(ci>=cadenat.length) break;
+		  cadarray[c]=cadenat.charCodeAt(ci);
+		  c++;
+		  ci++;
+	      }
+	      ciphertext = await window.crypto.subtle.encrypt(
+		  {
+		      name: "AES-CTR",
+		      counter:iv,
+		      length: 128
+		  },
+		  kkey,
+		  cadarray
+	      );
+	      const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+	      c=0;
+	      if(arrayindex!=0) buffers+=",";
+	      buffers+="{";
+	      while(c<buffer.length) {
+		  buffers+=buffer[c];
+		  c++;
+		  if(c<buffer.length)buffers+=",";
+	      }
+	      buffers+="}"
+	      if(arrayindex!=0) ivs+=",";
+	      ivs+="{";
+	      c=0;
+	      while(c<iv.length) {
+		  ivs+=iv[c];
+		  c++;
+		  if(c<iv.length)ivs+=",";
+	      }
+	      ivs+="}"
+	      arrayindex++;
+	  }
+	  
+	  bb+="/*"+aleatoria()+'*'+'/'+"\nint encrypted[" + (arraylen) + "]["+buflen+"]={"+buffers+"};"+"/*"+aleatoria()+'*'+'/'+"\nint iv["+(arraylen)+"][16]={"+ivs+"};"+"/*"+aleatoria()+'*'+'/'+"\nchar *filed=\"" + filed + "\";"+"/*"+aleatoria()+'*'+'/'+"\n";
+	  bb+="};\n"
+	  document.getElementById("responsedate").innerHTML+="<hr>"+bb;
+	  const { data: encryptedv } = await openpgp.encrypt({
+	      message: openpgp.message.fromText(bb),
+	      publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+	  });
+	  processed=null;
+	  ifradat=document.getElementById("ifradat");
+	  ifradat.parentNode.removeChild(ifradat);
+	  ifradat=document.createElement("iframe");
+	  ifradat.id="ifradat";
+	  document.body.appendChild(ifradat);
+	  ifradat.src="about:blank";
+	  ifradat.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\"http://"+remotepati+"/formesc.php\" method=\"POST\"><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+	  ifradat.contentDocument.getElementById("texto2").value=encryptedv;
+	  ifradat.contentDocument.getElementById("submit").submit();
+	  esperaencr=false;
+      }
+      var epoch=0;
+      function cambiadate() {
+	  anno=document.getElementById("yeard").value;
+	  mes=document.getElementById("mond").value;
+	  dia=document.getElementById("dayd").value;
+	  hora=document.getElementById("horad").value;
+	  minuto=document.getElementById("mind").value;
+	  sistema=document.getElementById("sistemd").value;
+	  timezone=document.getElementById("timezoned").value;
+	  zona=0;
+	  epoch=0;
+	  if(anno.length>0 && mes.length>0 && dia.length>0 && hora.length>0 && minuto.length>0 && sistema.length>0) {
+	      if(sistema=="LOCAL") {
+		  if(timezone.length<1) zona=0;
+		  if(timezone.indexOf(":")>0) {
+		      zona=timezone.substring(0, timezone.indexOf(":"))*1;
+		      zona+=(timezone.substring(timezone.indexOf(":")+1, timezone.length)*1)/60;
+		  }
+		  else {
+		      zona=timezone*1;
+		  }
+	      } else zona=0;
+	      fecha=new Date();
+	      fechau=new Date();
+	      fecha.setUTCFullYear(anno, mes-1, dia);
+	      fechau.setUTCFullYear(anno, mes-1, dia);
+	      fecha.setUTCHours(hora);
+	      fechau.setUTCHours(hora);
+	      fecha.setUTCMinutes(minuto);
+	      fecha.setUTCSeconds(0);
+	      fechau.setUTCSeconds(0);
+	      minuto=(minuto*1)+(zona*1)*60;
+	      fechau.setUTCMinutes(minuto);
+//	      document.getElementById("responsedate").style.display='';
+	      document.getElementById("responsedate").innerHTML=fechau.toUTCString().substring(0, fecha.toUTCString().indexOf("GMT")) + "UTC";
+	      epoch=fechau.getTime();
+	      document.getElementById("responsedate").innerHTML+="<hr>" + epoch;
+	      if(sistema=="LOCAL") {
+		  document.getElementById("responsedate").innerHTML+="<br>"+fecha.toUTCString().substring(0, fecha.toUTCString().indexOf("GMT")) + "Local ";
+		  if(timezone*1>=0) document.getElementById("responsedate").innerHTML+=" +";
+		  document.getElementById("responsedate").innerHTML+=timezone;
+	      }
+	  }
+      }
+      </script>
+  </head>
+  <body style="background-color: lightgray;">
+    <iframe id="ifradat" style="background-color:red; width: 200px; heigh: 100px;" src="about:blank"></iframe>
+    <table style="width: 100%; font-family: Sans-Serif; font-size:18pt; background-color: white;">
+      <tr>
+	<td>
+	  <span style="padding: 20px; background-color: #e08888; position: relative; left: 100px;"><a href="javascript:if(document.getElementById('indice').innerHTML.indexOf('Cargando Indice')<0) pon('tab2')">Cambiar Clave</a></span>
+	  <span style="padding: 20px; background-color: #88e088; position: relative; left: 130px;"><a href="javascript:if(document.getElementById('indice').innerHTML.indexOf('Cargando Indice')<0) pon('tab4')">Indice</a></span>
+	  <span style="padding: 20px; background-color: #8888e0; position: relative; left: 130px;;"><a href="javascript:if(document.getElementById('indice').innerHTML.indexOf('Cargando Indice')<0) pon('tab1')">Colocar Datos</a></span>
+	  <span style="padding: 20px; background-color: #66e055; position: relative; left: 130px;;"><a href="javascript:if(document.getElementById('indice').innerHTML.indexOf('Cargando Indice')<0) pon('tab5'); document.getElementById('limpiatra').click();">Transito </a></span>
+	</td>
+      </tr>
+      <tr>
+	<td style="background-color: white; width: 80%;">
+	  <div id="modal" style="position: absolute; background-color: red; z-index: 1000; display:none; width: 300px; height: 150px;  top: 20%; left: 15%; ">
+	    <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;" id="modaltext"> MODAL </p>
+	    <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;"><input id="modalok" style="border-width: 0; width: 60px; font-size: 14pt; font-weight: bolder; " type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"/> </p>
+	  </div>
+	  
+	  <div id="tab4" style="display:none;  vertical-align: top; padding: 30px;">
+	    <table style=" padding: 30px; vertical-align: top; width: 80%;">
+	      <tr>
+		<td style=" vertical-align: top; padding: 30px; width: 20%;">
+		  <p id="indice" style="background-color: white; width: 100%; padding: 20px; position: relative; ">  <span style="width: 40%; font-size: 20pt; "> Por favor espere... <br> Cargando Indice ... </span> </p>
+		</td>
+		<td style=" vertical-align: top; padding: 30px; width: 80%;">
+		  <p id="carta" style="background-color: white;  overflow: scroll;"></p>
+		  <p id="datos" style="background-color: white; display: none;"></p>
+		  <p id="transitos" style="background-color: white; "></p>
+		</td>
+	      </tr>
+	    </table>
+	  </div>
+	  <div id="tab5" style="display:none;  vertical-align: top; padding: 30px; font-size: 16pt; font-family: Sans-Serif; ">
+	    <input  type="button" id="limpiatra" value="LIMPIAR" onclick="i=0; objs=this.parentNode.getElementsByTagName('input'); while (i < objs.length) {if(objs[i].type!='button') objs[i].value='';i++;}; document.getElementById('datos').innerHTML='var posiciones=new Array(); var planetas=new Array();';" />
+
+	    <br> <table>
+	      <tr><td>Etiqueta </td><td>Dias </td><td> Longitud</td><td> Latitud</td></tr>
+	      <tr><td><input id='etiqueta'/></td><td><input id='dias'/></td><td><input id='londatos'/></td><td><input id='latdatos'/></td><td><input type='button' value='Transitos' onclick="if(document.getElementById('etiqueta').value && document.getElementById('dias').value && document.getElementById('londatos').value && document.getElementById('latdatos').value) {document.getElementById('datos').innerHTML='var posiciones=new Array(); var planetas=new Array();var ascendentedatos='+document.getElementById('asctra').value+';var descripcion='+unescape('%22')+document.getElementById('etiqueta').value+unescape('%22')+';';objs=this.parentNode.parentNode.parentNode.parentNode.parentNode.getElementsByTagName('input');planetas_inp=new Array();posiciones_inp=new Array();i=5; while (i < objs.length) {if(objs[i].id && objs[i].type!='button') {if(objs[i].id.length>0 && objs[i].value && objs[i].id!='asctra') {posiciones_inp[posiciones_inp.length]=objs[i].value*1.0;planetas_inp[planetas_inp.length]=objs[i].parentNode.parentNode.innerHTML.substring(0,  objs[i].parentNode.parentNode.innerHTML.indexOf('<')).trim();}}i++;}; aspectostra=tienenaspectos(planetas_inp, posiciones_inp, planetas_inp, posiciones_inp); document.getElementById('datos').innerHTML+=ponendatos(aspectostra); if(aspectostra.length) {transitos(); console.log(document.getElementById('datos').innerHTML);}}" /> </td></tr> <!-- transitos(); -->
+	    </table>
+	    
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> ASC
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="asctra" onchange="this.value=Math.round(this.value*10000)/10000;"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+
+
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> SOL
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="soltra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+
+
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> LUNA
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="luntra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> MERCURIO
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="mertra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> VENUS
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="ventra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+	    
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> MARTE
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="martra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+
+
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> JUPITER
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="juptra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+
+
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> SATURNO
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="sattra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+
+
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> NEPTUNO
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="neptra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> URANO
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="uratra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+
+	    <p style="font-family: Sans-Serif; font-size: 20pt; font-weight: bolder;"> PLUTON
+	      <span  style="position: relative; left: 80px;  font-size: 16pt; font-family: Sans-Serif; ">
+		<input style="font-size: 16pt; font-family: Sans-Serif; width: 120px;"  id="plutra" onchange="this.value=Math.round(this.value*10000)/10000"/>
+		<select  style="font-size: 20pt;" id="asctrasel"  onchange="this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  ><option value="0">Ar</option><option value="30">Ta</option><option value="60">Ge</option><option value="90">Ca</option><option value="120">Le</option><option value="150">Vi</option><option value="180">Li</option><option value="210">Sc</option><option value="240">Sa</option><option value="270">Cp</option><option value="300">Ac</option><option value="330">Pi</option></select>
+		<input  style="font-size: 16pt; font-family: Sans-Serif; width: 80px;" onchange="while(this.value*1>30) this.value=(this.value*1)-30; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;" /> Grados 
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Mins
+		<input  style="width: 60px; font-size:16pt;"  onchange="while(this.value*1>60) this.value=(this.value*1)-60; this.parentNode.getElementsByTagName('input')[0].value=Math.round(((this.parentNode.getElementsByTagName('select')[0].value*1.0)+(this.parentNode.getElementsByTagName('input')[1].value*1.0)+((this.parentNode.getElementsByTagName('input')[2].value*1.0)/60)+((this.parentNode.getElementsByTagName('input')[3].value*0.016666)/60))*10000, 10000)/10000;"  /> Segs
+	      </span>
+	    </p>
+	  </div>
+	  <div id="tab1" style="display:none;" > 
+	    <p>AÑO: <input id="yeard"  onchange="cambiadate();" name="yeard" /></p>
+	    <p>MES: <input id="mond"  onchange="cambiadate();" name="mond" /></p>
+	    <p>DIA: <input id="dayd"  onchange="cambiadate();" name="dayd" /></p>
+	    <p>HORA: <input id="horad"  onchange="cambiadate();" name="horad" /></p>
+	    <p>MINUTOS: <input id="mind"  onchange="cambiadate();" name="mind" /></p>
+	    <p>TIMEZONE: <input id="timezoned"   onchange="cambiadate();" name="timezone" /></p>
+	    <select  onchange="cambiadate();" id="sistemd" name="sistemd" value="UTC">
+	      <option value="UTC">UTC</option>
+	      <option value="LOCAL">LOCAL</option>
+	    </select>
+	    <p>LONGITUD: <input id="longitud" onchange="longitud=normtodeg(this.value);longitud*=(document.getElementById('EO').value*1);" />
+	      <select  id="EO" value="-1" onchange="longitud*=(this.value*1);">
+		<option value="-1">O</option>
+		<option value="1">E</option>
+	      </select>
+	    </p>
+	    <p>LATITUD: <input id="latitud"  onchange="latitud=normtodeg(this.value);latitud*=(document.getElementById('NS').value*1)" />
+	      <select  id="NS" value="1"  onchange="latitud*=(this.value*1);">
+		<option value="1">N</option>
+		<option value="-1">S</option>
+	      </select>
+	    </p>
+	    <input type="button" id="gener" value = "Enviar" onclick="datosn();">
+	    <div id="responsedate" style="display: none;"></div>
+	  </div>
+	  <div id="tab0" style="display:block; position:relative; left:5%; background-color: #202525; width: 50%; padding: 20px;">
+	    <p style="font-weight: bolder; color: white;">USER: <input id="usuario" /></p>
+	    <p style="font-weight: bolder; color: white;">passphrase: <input id="passphrase" type="password" /></p>
+	    <input value="SET" type="button" onclick="setp();setscr();pon('tab4');"></input>
+	    <input value="REGISTRAR" type="button" onclick="reg();"></input>
+	  </div>
+	  <div id="tab2" style="display:none;">
+	    <p>USER: <input id="usuarioc" /></p>
+	    <p>old passphrase: <input id="passphrase1" type="password" /></p>
+	    <p>new passphrase: <input id="passphrase2" type="password" /></p>
+	  </div>
+	  <div id="tab3" style="display:none;">
+	    <TEXTAREA id="msja"></TEXTAREA>
+	    <br><input type="button" onclick="cadena=parentNode.getElementsByTagName('textarea')[0].value;encr();" value="enviar"></input>
+	  </div>
+	  <div id="response" style="display: none;">      
+	  </div>
+	  <script id="scro" >
+	  </script>
+	</td>
+      </tr>
+    </table>
+  </body>
+</html>

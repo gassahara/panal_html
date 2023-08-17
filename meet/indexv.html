@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+<script src="vendor/jquery/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/strophe.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/strophejs-plugin-disco/lib/strophe.disco.js?v=1"></script>
+<script src="lib/lib-jitsi-meet.min.js"></script>
+<script>
+
+function onConnectionSuccess(){
+    const confOptions = {
+        openBridgeChannel: true
+    }
+    room = connection.initJitsiConference("abcdef", confOptions);
+    room.join();
+    room.myUserId();
+    console.log('CONNECTION_ESTABLISHED');
+}
+
+JitsiMeetJS.init();
+
+JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
+
+  const options = {
+    hosts: {
+        anonymousdomain: "meet.jitsi", // Internal domain. meet.jitsi by default (docker). may be used to infer others. 
+        muc: "muc.meet.jitsi", // Session coordinator. If this is wrong, the connection fails with Strophe: BOSH-Connection failed: improper-addressing
+        focus: "focus.meet.jitsi", // Video stream coordinator. If this is wrong, you won't see any video and get "Focus error"s on the console. 
+    },
+      sericeUrl: 'https://curare2019.ddns.net:8444/xmpp-websocket',
+      useStunTurn: true,
+      externalConnectUrl: 'https://curare2019.ddns.net:8444/http-pre-bind',
+      bosh: 'https://curare2019.ddns.net:8444/http-bind',
+      clientNode: 'https://curare2019.ddns.net:8444/http-bind',
+      websocket: 'wss://curare2019.ddns.net:8444/xmpp-websocket',
+};
+
+var connection = new JitsiMeetJS.JitsiConnection(null, null, options);
+
+connection.addEventListener(JitsiMeetJS.events.connection.CONNECTION_ESTABLISHED, onConnectionSuccess);
+
+connection.connect();
+
+</script>
+
+	  <body>
+    <a href="#" onclick="unload()">Unload</a>
+    <a href="#" onclick="switchVideo()">switchVideo</a>
+    <div id="audioOutputSelectWrapper" style="display: none;">
+        Change audio output device
+        <select id="audioOutputSelect" onchange="changeAudioOutput(this)"></select>
+    </div>
+    <!-- <video id="localVideo" autoplay="true"></video> -->
+    <!--<audio id="localAudio" autoplay="true" muted="true"></audio>-->
+</body>
+</html>

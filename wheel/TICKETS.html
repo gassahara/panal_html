@@ -1,0 +1,2150 @@
+<!-- DOCTYPE html-->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>TICKETS</title>
+    
+    <style>
+    <!--  iframe {width: 250px; height: 50px;border-width: 0;}
+      a {text-decoration: none;color: blue;font-weight: bolder;}
+      p, span {color: #d2a059;font-family: Sans-Serif;font-size: 18pt;}
+      input {font-family: Sans-Serif;font-size: 18pt;} -->
+    
+    
+    
+        <style type="text/css">
+							
+:root {
+  --navbar-bg-color: hsl(80, 50%, 55%);
+  --navbar-text-color: hsl(10, 60%, 15%);
+  --navbar-text-color-focus: white;
+  --navbar-bg-contrast: hsl(50, 0%, 25%);
+}
+* {box-sizing: border-box;
+  margin: 0;padding: 0;}
+
+.container {
+  max-width: 1000px;
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+#navbar {
+  --navbar-height: 64px;
+  position: fixed;
+  height: var(--navbar-height);
+  background-color: var(--navbar-bg-color);
+  left: 0;right: 0;
+  box-shadow: 0 2px 4px rgba(3, 4, 20, 0.25);
+}
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+}
+.navbar-item {
+  margin: 0.4em;
+  width: 100%;
+}
+
+.home-link,
+.navbar-link {
+  color: var(--navbar-text-color);
+  text-decoration: none;
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+}
+
+.home-link:is(:focus, :hover) {
+  color: var(--navbar-text-color-focus);
+}
+
+.navbar-link {
+  justify-content: center;
+  width: 100%;
+  padding: 0.4em 0.8em;
+  border-radius: 5px;
+}
+
+.navbar-link:is(:focus, :hover) {
+  color: var(--navbar-text-color-focus);
+  background-color: var(--navbar-bg-contrast);
+}
+.navbar-logo {
+  background-color: var(--navbar-text-color-focus);
+  border-radius: 50%;
+  width: 30px;height: 30px;
+  margin-right: 0.5em;
+}
+#navbar-toggle {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.icon-bar {display: block;
+  width: 25px;height: 4px;margin: 2px;
+  background-color: var(--navbar-text-color);
+}
+#navbar-toggle:is(:focus, :hover) .icon-bar {
+  background-color: var(--navbar-text-color-focus);
+}
+#navbar-toggle[aria-expanded="true"] .icon-bar:is(:first-child, :last-child) {
+  position: absolute;
+  margin: 0;width: 30px;
+}
+#navbar-toggle[aria-expanded="true"] .icon-bar:first-child {
+  transform: rotate(45deg);
+}
+#navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(2) {
+  opacity: 0;
+}
+#navbar-toggle[aria-expanded="true"] .icon-bar:last-child {
+  transform: rotate(-45deg);
+}
+#navbar-menu {position: fixed;
+  top: var(--navbar-height);
+  bottom: 0;opacity: 0;
+  visibility: hidden;left: 0;right: 0;
+}
+#navbar-toggle[aria-expanded="true"] + #navbar-menu {
+  background-color: rgba(5, 2, 30, 0.5);
+  opacity: 1;
+  visibility: visible;
+}
+.navbar-links {
+  list-style: none;position: absolute;
+  background-color: var(--navbar-bg-color);
+  display: flex; flex-direction: column;
+  align-items: center;left: 0;right: 0;margin: 1.4rem;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+#navbar-toggle[aria-expanded="true"] + #navbar-menu .navbar-links {
+  padding: 1em;
+}
+@media screen and (min-width: 700px) {
+  #navbar-toggle,
+  #navbar-toggle[aria-expanded="true"] {display: none;}
+
+  #navbar-menu,
+  #navbar-toggle[aria-expanded="true"] #navbar-menu {
+    visibility: visible;opacity: 1;
+    position: static;
+    display: block;height: 100%;}
+
+  .navbar-links,
+  #navbar-toggle[aria-expanded="true"] #navbar-menu .navbar-links {
+    margin: 0; padding: 0;
+    box-shadow: none;  position: static;
+    flex-direction: row; width: 100%; height: 100%;
+  }
+}
+			
+			
+            #info_wrapper{ width:100%;text-align:center;}
+
+            #triangle{
+                width:20px;height:20px;
+                border-left:10px solid transparent;
+                border-right:10px solid transparent;
+                border-top: 20px solid #ffffff;
+                margin-left:auto;margin-right:auto;margin-top:50px;
+            }
+            .bottom{ position:absolute; z-index:0;left: 800px;top:73px;width:680px;height:680px;
+					background-image:url("bottom.png");background-size: cover;} 
+
+            #wheel_wrapper{ width:500px;height:500px;
+                position:absolute;margin-left:880px; margin-top:100px;
+                }
+
+            .semicircle_wrapper{ width:250px;height:500px;
+                overflow:hidden; position:relative;}
+
+            .wheel1{ float:right;}
+
+            .wheel2{float:left;}
+
+            .semicircle1{ margin-left:-250px;}
+
+            .semicircle2{ margin-left:0px;}
+
+            .segment_wrapper{ width:500px;height:500px;
+                border-radius:50%; overflow:hidden; position:relative;}
+
+            .segment{
+                width:250px; height:250px; position:absolute;
+                margin-left:250px; margin-top:0px;transform-origin:0% 100%;
+                -webkit-transform-origin:0% 100%;} 
+
+            .segment0{background-color:#0fa501;z-index:1;transform: rotate(0deg); 
+												 -webkit-transform: rotate(0deg);}
+
+            .segment1{background-color:#0cfcf0 ;z-index:2;transform: rotate(9.729deg);
+												  -webkit-transform: rotate(9.729deg);}
+
+            .segment2{background-color:#6200ad;z-index:3;transform: rotate(19.458deg);
+												 -webkit-transform: rotate(19.458deg);}
+
+            .segment3{background-color:#ffffff;z-index:4;transform: rotate(29.187deg);
+												 -webkit-transform: rotate(29.187deg); }
+
+            .segment4{background-color:#6200ad; z-index:5;transform: rotate(38.916deg);
+												  -webkit-transform: rotate(38.916deg);}
+
+            .segment5{background-color:#021bdd;z-index:6;transform: rotate(48.645deg);
+												 -webkit-transform: rotate(48.645deg);}
+
+            .segment6{background-color:#0cfcf0;z-index:7;transform: rotate(58.374deg);
+												 -webkit-transform: rotate(58.374deg);}
+
+            .segment7{background-color:#ff00dc; z-index:8;transform: rotate(68.103deg);
+												  -webkit-transform: rotate(68.103deg);}
+
+            .segment8{background-color:#6200ad;z-index:9;transform: rotate(77.832deg);
+												 -webkit-transform: rotate(77.832deg);}
+
+            .segment9{background-color:#ffffff;z-index:10;transform: rotate(87.561deg);
+												   -webkit-transform: rotate(87.561deg);}
+
+            .segment10{background-color:#021bdd;z-index:11;transform: rotate(97.290deg);
+												   -webkit-transform: rotate(97.290deg);}
+
+            .segment11{background-color:#fc0505; z-index:12;transform: rotate(107.019deg);
+												    -webkit-transform: rotate(107.019deg);}
+            
+            .segment12{background-color:#6200ad;z-index:13;transform: rotate(116.748deg);
+												   -webkit-transform: rotate(116.748deg);}
+            
+            .segment13{background-color:#0cfcf0;z-index:14;transform: rotate(126.477deg);
+												   -webkit-transform: rotate(126.477deg);}
+                
+            .segment14{background-color:#ff00dc;z-index:15;transform: rotate(136.206deg);
+												   -webkit-transform: rotate(136.206deg);}
+                
+            .segment15{background-color:#021bdd; z-index:16;transform: rotate(145.935deg);
+												    -webkit-transform: rotate(145.935deg);}
+                
+            .segment16{background-color:#6200ad;z-index:17;transform: rotate(155.664deg);
+												   -webkit-transform: rotate(155.664deg);}
+                            
+            .segment17{background-color:#ffffff;z-index:18;transform: rotate(165.393deg);
+												   -webkit-transform: rotate(165.393deg);}
+												   
+			.segment18-5{background-color:#fcd705;z-index:19;transform: rotate(170.103deg);
+												   -webkit-transform: rotate(170.103deg);}									   
+												
+            .segment18{background-color:#fcd705;z-index:20;transform: rotate(175.122deg);
+												   -webkit-transform: rotate(175.122deg);}
+												
+			.segment19{background-color:#0cfcf0;z-index:21;transform: rotate(184.851deg);
+												   -webkit-transform: rotate(184.851deg);}	
+												
+			.segment20{background-color:#021bdd;z-index:22;transform: rotate(194.580deg);
+												   -webkit-transform: rotate(194.580deg);}	
+												
+			.segment21{background-color:#ff00dc;z-index:23;transform: rotate(204.309deg);
+												   -webkit-transform: rotate(204.309eg);}	
+												
+			.segment22{background-color:#fc0505;z-index:24;transform: rotate(214.038deg);
+												   -webkit-transform: rotate(214.038deg);}	
+												
+			.segment23{background-color:#ffffff;z-index:25;transform: rotate(223.767deg);
+												   -webkit-transform: rotate(223.767deg);}	
+												
+			.segment24{background-color:#6200ad;z-index:26;transform: rotate(233.496deg);
+												   -webkit-transform: rotate(233.496deg);}	
+												
+			.segment25{background-color:#021bdd;z-index:27;transform: rotate(243.225deg);
+												   -webkit-transform: rotate(243.225deg);}	
+												
+			.segment26{background-color:#0cfcf0;z-index:28;transform: rotate(252.954deg);
+												   -webkit-transform: rotate(252.954deg);}	
+												
+			.segment27{background-color:#ffffff;z-index:29;transform: rotate(262.683deg);
+												   -webkit-transform: rotate(262.683deg);}	
+												
+			.segment28{background-color:#ff00dc;z-index:30;transform: rotate(272.412deg);
+												   -webkit-transform: rotate(272.412deg);}	
+												
+			.segment29{background-color:#0cfcf0;z-index:31;transform: rotate(282.141deg);
+												   -webkit-transform: rotate(282.141deg);}	
+												
+			.segment30{background-color:#021bdd;z-index:32;transform: rotate(291.870deg);
+												   -webkit-transform: rotate(291.870deg);}	
+												
+			.segment31{background-color:#ffffff;z-index:33;transform: rotate(301.599deg);
+												   -webkit-transform: rotate(301.599deg);}	
+												
+			.segment32{background-color:#6200ad;z-index:34;transform: rotate(311.328deg);
+												   -webkit-transform: rotate(311.328deg);}	
+												
+			.segment33{background-color:#fc0505;z-index:35;transform: rotate(321.057deg);
+												   -webkit-transform: rotate(321.057deg);}	
+												
+			.segment34{background-color:#0cfcf0;z-index:36;transform: rotate(330.786deg);
+												   -webkit-transform: rotate(330.786deg);}	
+												
+			.segment35{background-color:#ff00dc;z-index:37;transform: rotate(340.515deg);
+												   -webkit-transform: rotate(340.515deg);}	
+												
+			.segment36{background-color:#fcd705;z-index:38;transform: rotate(350.244deg);
+												   -webkit-transform: rotate(350.244deg);}													
+
+													
+	.box {display:block;width:600px;;height;500px;margin-top:50px;}
+	
+	.button {height: 40px;width: 130px;margin-bottom: 3%;
+				background-color: #7C8082;font-size: 100%;color: white;
+				font-family: 'Muli', sans-serif;
+				border-radius: 5px;border-color: #ffffff;}
+
+    .button:hover {background-color: #474240;
+				font-family: 'Muli', sans-serif;}   
+    
+    .grid{display:grid;width:500px;height:450px;
+			margin: 0 auto;grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));}
+    
+    .button3 {height: 40px;width: 50px;background-color: #7C8082;
+			font-size: 100%;color: white;display: block;
+			font-family: 'Muli', sans-serif; border-radius: 10px;margin-top:5px; }
+    
+    .button3:hover {background-color: #474240;}																														
+
+
+
+.carousel {display: block;position: absolute;
+  width: 30%;height: 30%; top:480px;left:250px;
+  align-items: center;font-family: Arial;}
+
+.carousel__list {display: flex;
+  list-style: none; position: relative;
+  width: 100%; height: 300px;
+  justify-content: center;
+  perspective: 400px;}
+
+.carousel__item {display: flex; align-items: center;
+  justify-content: center;color: #fff;font-size: 30px;
+  width: 150px; height: 250px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.5);
+  position: absolute;transition: all 0.3s ease-in;}
+
+.carousel__item:nth-child(1) { background: linear-gradient(45deg, #2D35EB 0%, #904ED4 100%);}
+
+.carousel__item:nth-child(2) {background: linear-gradient(45deg, #2D35EB 0%, #fdbb2d 100%);}
+
+.carousel__item:nth-child(3) {background: linear-gradient(45deg, #2D35EB 0%, #22c1c3 100%);}
+  
+.carousel__item:nth-child(4) {background: linear-gradient(45deg, #fdbb2d 0%, #904ED4 100%);}
+  
+.carousel__item:nth-child(5) {background: linear-gradient(45deg, #22c1c3 0%, #904ED4 100%);}
+  
+.carousel__item[data-pos="0"] {z-index: 5;}
+  
+.carousel__item[data-pos="-1"], .carousel__item[data-pos="1"] {opacity: 0.7;filter: blur(1px) grayscale(10%);}
+  
+.carousel__item[data-pos="-1"] {transform: translateX(-50%) scale(0.9);z-index: 4;}
+  
+.carousel__item[data-pos="1"] {transform: translateX(50%) scale(0.9);z-index: 4;}
+  
+.carousel__item[data-pos="-2"], .carousel__item[data-pos="2"] {opacity: 0.4;filter: blur(3px) grayscale(20%);}
+  
+.carousel__item[data-pos="-2"] {transform: translateX(-90%) scale(0.8);z-index: 3;}
+  
+.carousel__item[data-pos="2"] { transform: translateX(90%) scale(0.8);z-index: 3;}
+
+
+body {margin:0;padding:0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  background: white;
+}
+
+.login-box {position: absolute;
+  top: 30%;left: 50%;width: 300px;height:400px;padding: 40px;
+  transform: translate(-50%, -50%); background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {position: relative;}
+
+.login-box .user-box input {
+  width: 100%;padding: 10px 0;
+  font-size: 16px;color: #fff;
+  margin-bottom: 30px;
+  border: none;border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;top:0;left: 0;padding: 10px 0;
+  font-size: 16px;color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.login-box form a {
+  position: relative;display: inline-block;padding: 10px 20px;
+  color: #03e9f4;font-size: 16px;
+  text-decoration: none;text-transform: uppercase;
+  overflow: hidden;transition: .5s;
+  margin-top: 40px;letter-spacing: 4px
+}
+
+.login-box a:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+}
+
+.login-box a span {
+  position: absolute;
+  display: block;
+}
+
+.login-box a span:nth-child(1) {
+  top: 0;left: -100%;width: 100%;height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {left: -100%;}
+  50%,100% {left: 100%;}
+}
+
+.login-box a span:nth-child(2) {top: -100%;right: 0;width: 2px;height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: btn-anim2 1s linear infinite;animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {top: -100%;}
+  50%,100% {top: 100%;}
+}
+
+.login-box a span:nth-child(3) {bottom: 0;right: -100%;width: 100%;height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: btn-anim3 1s linear infinite;animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {right: -100%;}
+  50%,100% {right: 100%;}
+}
+
+.login-box a span:nth-child(4) {bottom: -100%;left: 0;width: 2px;height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: btn-anim4 1s linear infinite;animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {bottom: -100%;}
+  50%,100% {bottom: 100%;}
+}
+ 
+
+ 
+#logowrap{ 
+    display:inline-block;margin-top:150px;}
+    
+#logowrap>div{display:inline-block; position:absolute;margin-left:-100px;}
+    
+#logowrap>div div{ position:absolute;}
+
+#logowrap .yellow{left:80px;top:90px;width:20px;height:20px;}
+
+#logowrap .green{width:200px;height:200px; z-index:40;
+	background-color:white; background-image:url("top.png");
+	background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;}
+    
+#logowrap .yellow{border-radius: 50%;
+    background-color:yellow;z-index:39;
+    -webkit-animation: yellow 5s;
+    -webkit-animation-iteration-count: infinite;}
+
+@-webkit-keyframes yellow{
+	from {transform: rotate(0deg)
+		           translate(280px)
+		           rotate(0deg);}
+	to {transform: rotate(720deg)
+		           translate(220px) 
+		           rotate(-720deg);}
+}
+      
+        </style>    
+    
+    
+    
+    </style>
+    <!--
+    <script src="openpgpjs/dist/openpgp.js" type="text/javascript" charset="utf-8"></script>
+    -->
+    <script src="TICKETS_files/openpgp.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="TICKETS_files/precio.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+      
+  </head>
+  <body style="background-color: #d0d0d0; width: 90%;">
+<header id="navbar">
+  <nav class="navbar-container container">
+    <a href="/" class="home-link">
+      <div class="navbar-logo"></div>
+      APUESTA Y RUEDA
+    </a>
+    <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu" aria-expanded="false">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>     
+      <span class="icon-bar"></span>
+    </button>
+    <div id="navbar-menu" aria-labelledby="navbar-toggle">
+      <ul class="navbar-links">
+        <li class="navbar-item"><a class="navbar-link" href="/about">About</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/blog">Blog</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/careers">Careers</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<br><br>	  
+	  
+    <table style="width: 50%;height:1%; font-family: Sans-Serif; font-size:18pt; background-color: white;">
+      <tbody><tr>
+	<td style="background-color: white; width: 20%;">
+	  <div id="modal" style="position: absolute; background-color: red; z-index: 1000; display:none; width: 300px; height: 150px;  top: 20%; left: 15%; ">
+	    <p style="text-align: center;font-family: Sans-Serif; font-size: 14pt;" id="modaltext"> MODAL </p>
+	    <p style="text-align: center;font-family: Sans-Serif; font-size: 14pt;"><input id="modalok" style="border-width: 0; width: 60px; font-size: 14pt; font-weight: bolder; " type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"> </p>
+	  </div>	  
+	  <div id="tab4" style="display:none; position:absolute; left:5%; top:65%; background-color: #060807; width: 40%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+		  <p id="indice" style="background-color: white; width: 90%; padding: 20px;">  <span style="width: 100%; font-size: 20pt; "> Sin datos que mostrar </span> </p><input type="button" value="Ocultar" onclick="if(this.value=='Mostrar') { document.getElementById('indice').style.display='block'; this.value='Ocultar'; } else { document.getElementById('indice').style.display='none'; this.value='Mostrar'; }  ">
+	  </div>
+	  <div id="tab0" border="1" style="display:block; position:absolute; left:5%; top:15%; background-color: #d0d0d0; width:60%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+	    <table style="position:relative; width: 100%;">
+	    <tbody>
+		<tr>
+		<td><p style="font-weight: bolder; ">E-Mail:</p> <input id="usuario" type="text" style="background-color: #fffff0;"></td>
+		<!--<td>
+			 <p style="font-weight: bolder; ">
+				<input id="usuario" type="text" style="background-color: #fffff0;">
+			</p> 
+		</td>-->
+	    </tr>
+	    <tr>
+		<td>
+		  <table id="numbers" style="color: white;" onclick="agarradatos(event)">
+			  <tbody> 
+				<tr>
+					<td style=width:50><button type="button3" class="button3"><a href="">0</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">1</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">2</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">3</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">4</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">5</a></button></td>
+				</tr>
+				<tr>
+					<td style=width:50><button type="button3" class="button3"><a href="">6</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">7</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">8</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">9</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">10</a></button></td>
+					<td style=width:50><button type="button3" class="button3"><a href="">11</a></button></td>
+				</tr>
+				<tr>
+					<td style=width:30><button type="button3" class="button3"><a href="">12</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">13</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">14</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">15</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">16</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">17</a></button></td>
+				</tr>
+				<tr>
+					<td style=width:30><button type="button3" class="button3"><a href="">18</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">19</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">20</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">21</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">22</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">23</a></button></td>
+				</tr>
+				<tr>
+					<td style=width:30><button type="button3" class="button3"><a href="">24</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">25</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">26</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">27</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">28</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">29</a></button></td>
+				</tr>
+				<tr>
+					<td style=width:30><button type="button3" class="button3"><a href="">30</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">31</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">32</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">33</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">34</a></button></td>
+					<td style=width:30><button type="button3" class="button3"><a href="">35</a></button></td>
+				</tr>
+			  </tbody> 
+		  </table>
+		</td>
+	    </tr>
+	    <tr>
+		<td> 
+		  <select id="date_select" onchange="checatabla();">
+		  <option value="1669684620" selected="selected">Mon Nov 28 2022 21:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669684740">Mon Nov 28 2022 21:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669684860">Mon Nov 28 2022 21:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669684980">Mon Nov 28 2022 21:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669685100">Mon Nov 28 2022 21:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669685220">Mon Nov 28 2022 21:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669685340">Mon Nov 28 2022 21:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669685460">Mon Nov 28 2022 21:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669685580">Mon Nov 28 2022 21:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669685700">Mon Nov 28 2022 21:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669685820">Mon Nov 28 2022 21:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669685940">Mon Nov 28 2022 21:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669686060">Mon Nov 28 2022 21:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669686180">Mon Nov 28 2022 21:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669686300">Mon Nov 28 2022 21:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669686420">Mon Nov 28 2022 21:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669686540">Mon Nov 28 2022 21:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669686660">Mon Nov 28 2022 21:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669686780">Mon Nov 28 2022 21:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669686900">Mon Nov 28 2022 21:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669687020">Mon Nov 28 2022 21:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669687140">Mon Nov 28 2022 21:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669687260">Mon Nov 28 2022 22:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669687380">Mon Nov 28 2022 22:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669687500">Mon Nov 28 2022 22:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669687620">Mon Nov 28 2022 22:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669687740">Mon Nov 28 2022 22:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669687860">Mon Nov 28 2022 22:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669687980">Mon Nov 28 2022 22:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669688100">Mon Nov 28 2022 22:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669688220">Mon Nov 28 2022 22:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669688340">Mon Nov 28 2022 22:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669688460">Mon Nov 28 2022 22:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669688580">Mon Nov 28 2022 22:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669688700">Mon Nov 28 2022 22:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669688820">Mon Nov 28 2022 22:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669688940">Mon Nov 28 2022 22:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669689060">Mon Nov 28 2022 22:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669689180">Mon Nov 28 2022 22:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669689300">Mon Nov 28 2022 22:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669689420">Mon Nov 28 2022 22:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669689540">Mon Nov 28 2022 22:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669689660">Mon Nov 28 2022 22:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669689780">Mon Nov 28 2022 22:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669689900">Mon Nov 28 2022 22:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669690020">Mon Nov 28 2022 22:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669690140">Mon Nov 28 2022 22:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669690260">Mon Nov 28 2022 22:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669690380">Mon Nov 28 2022 22:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669690500">Mon Nov 28 2022 22:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669690620">Mon Nov 28 2022 22:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669690740">Mon Nov 28 2022 22:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669690860">Mon Nov 28 2022 23:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669690980">Mon Nov 28 2022 23:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669691100">Mon Nov 28 2022 23:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669691220">Mon Nov 28 2022 23:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669691340">Mon Nov 28 2022 23:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669691460">Mon Nov 28 2022 23:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669691580">Mon Nov 28 2022 23:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669691700">Mon Nov 28 2022 23:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669691820">Mon Nov 28 2022 23:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669691940">Mon Nov 28 2022 23:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669692060">Mon Nov 28 2022 23:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669692180">Mon Nov 28 2022 23:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669692300">Mon Nov 28 2022 23:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669692420">Mon Nov 28 2022 23:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669692540">Mon Nov 28 2022 23:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669692660">Mon Nov 28 2022 23:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669692780">Mon Nov 28 2022 23:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669692900">Mon Nov 28 2022 23:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669693020">Mon Nov 28 2022 23:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669693140">Mon Nov 28 2022 23:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669693260">Mon Nov 28 2022 23:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669693380">Mon Nov 28 2022 23:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669693500">Mon Nov 28 2022 23:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669693620">Mon Nov 28 2022 23:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669693740">Mon Nov 28 2022 23:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669693860">Mon Nov 28 2022 23:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669693980">Mon Nov 28 2022 23:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669694100">Mon Nov 28 2022 23:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669694220">Mon Nov 28 2022 23:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669694340">Mon Nov 28 2022 23:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669694460">Tue Nov 29 2022 00:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669694580">Tue Nov 29 2022 00:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669694700">Tue Nov 29 2022 00:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669694820">Tue Nov 29 2022 00:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669694940">Tue Nov 29 2022 00:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669695060">Tue Nov 29 2022 00:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669695180">Tue Nov 29 2022 00:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669695300">Tue Nov 29 2022 00:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669695420">Tue Nov 29 2022 00:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669695540">Tue Nov 29 2022 00:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669695660">Tue Nov 29 2022 00:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669695780">Tue Nov 29 2022 00:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669695900">Tue Nov 29 2022 00:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669696020">Tue Nov 29 2022 00:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669696140">Tue Nov 29 2022 00:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669696260">Tue Nov 29 2022 00:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669696380">Tue Nov 29 2022 00:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669696500">Tue Nov 29 2022 00:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669696620">Tue Nov 29 2022 00:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669696740">Tue Nov 29 2022 00:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669696860">Tue Nov 29 2022 00:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669696980">Tue Nov 29 2022 00:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669697100">Tue Nov 29 2022 00:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669697220">Tue Nov 29 2022 00:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669697340">Tue Nov 29 2022 00:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669697460">Tue Nov 29 2022 00:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669697580">Tue Nov 29 2022 00:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669697700">Tue Nov 29 2022 00:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669697820">Tue Nov 29 2022 00:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669697940">Tue Nov 29 2022 00:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669698060">Tue Nov 29 2022 01:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669698180">Tue Nov 29 2022 01:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669698300">Tue Nov 29 2022 01:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669698420">Tue Nov 29 2022 01:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669698540">Tue Nov 29 2022 01:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669698660">Tue Nov 29 2022 01:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669698780">Tue Nov 29 2022 01:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669698900">Tue Nov 29 2022 01:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669699020">Tue Nov 29 2022 01:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669699140">Tue Nov 29 2022 01:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669699260">Tue Nov 29 2022 01:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669699380">Tue Nov 29 2022 01:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669699500">Tue Nov 29 2022 01:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669699620">Tue Nov 29 2022 01:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669699740">Tue Nov 29 2022 01:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669699860">Tue Nov 29 2022 01:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669699980">Tue Nov 29 2022 01:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669700100">Tue Nov 29 2022 01:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669700220">Tue Nov 29 2022 01:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669700340">Tue Nov 29 2022 01:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669700460">Tue Nov 29 2022 01:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669700580">Tue Nov 29 2022 01:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669700700">Tue Nov 29 2022 01:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669700820">Tue Nov 29 2022 01:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669700940">Tue Nov 29 2022 01:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669701060">Tue Nov 29 2022 01:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669701180">Tue Nov 29 2022 01:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669701300">Tue Nov 29 2022 01:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669701420">Tue Nov 29 2022 01:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669701540">Tue Nov 29 2022 01:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669701660">Tue Nov 29 2022 02:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669701780">Tue Nov 29 2022 02:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669701900">Tue Nov 29 2022 02:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669702020">Tue Nov 29 2022 02:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669702140">Tue Nov 29 2022 02:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669702260">Tue Nov 29 2022 02:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669702380">Tue Nov 29 2022 02:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669702500">Tue Nov 29 2022 02:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669702620">Tue Nov 29 2022 02:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669702740">Tue Nov 29 2022 02:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669702860">Tue Nov 29 2022 02:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669702980">Tue Nov 29 2022 02:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669703100">Tue Nov 29 2022 02:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669703220">Tue Nov 29 2022 02:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669703340">Tue Nov 29 2022 02:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669703460">Tue Nov 29 2022 02:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669703580">Tue Nov 29 2022 02:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669703700">Tue Nov 29 2022 02:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669703820">Tue Nov 29 2022 02:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669703940">Tue Nov 29 2022 02:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669704060">Tue Nov 29 2022 02:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669704180">Tue Nov 29 2022 02:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669704300">Tue Nov 29 2022 02:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669704420">Tue Nov 29 2022 02:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669704540">Tue Nov 29 2022 02:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669704660">Tue Nov 29 2022 02:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669704780">Tue Nov 29 2022 02:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669704900">Tue Nov 29 2022 02:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669705020">Tue Nov 29 2022 02:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669705140">Tue Nov 29 2022 02:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669705260">Tue Nov 29 2022 03:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669705380">Tue Nov 29 2022 03:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669705500">Tue Nov 29 2022 03:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669705620">Tue Nov 29 2022 03:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669705740">Tue Nov 29 2022 03:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669705860">Tue Nov 29 2022 03:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669705980">Tue Nov 29 2022 03:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669706100">Tue Nov 29 2022 03:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669706220">Tue Nov 29 2022 03:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669706340">Tue Nov 29 2022 03:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669706460">Tue Nov 29 2022 03:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669706580">Tue Nov 29 2022 03:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669706700">Tue Nov 29 2022 03:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669706820">Tue Nov 29 2022 03:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669706940">Tue Nov 29 2022 03:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669707060">Tue Nov 29 2022 03:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669707180">Tue Nov 29 2022 03:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669707300">Tue Nov 29 2022 03:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669707420">Tue Nov 29 2022 03:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669707540">Tue Nov 29 2022 03:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669707660">Tue Nov 29 2022 03:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669707780">Tue Nov 29 2022 03:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669707900">Tue Nov 29 2022 03:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669708020">Tue Nov 29 2022 03:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669708140">Tue Nov 29 2022 03:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669708260">Tue Nov 29 2022 03:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669708380">Tue Nov 29 2022 03:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669708500">Tue Nov 29 2022 03:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669708620">Tue Nov 29 2022 03:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669708740">Tue Nov 29 2022 03:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669708860">Tue Nov 29 2022 04:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669708980">Tue Nov 29 2022 04:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669709100">Tue Nov 29 2022 04:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669709220">Tue Nov 29 2022 04:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669709340">Tue Nov 29 2022 04:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669709460">Tue Nov 29 2022 04:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669709580">Tue Nov 29 2022 04:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669709700">Tue Nov 29 2022 04:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669709820">Tue Nov 29 2022 04:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669709940">Tue Nov 29 2022 04:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669710060">Tue Nov 29 2022 04:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669710180">Tue Nov 29 2022 04:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669710300">Tue Nov 29 2022 04:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669710420">Tue Nov 29 2022 04:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669710540">Tue Nov 29 2022 04:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669710660">Tue Nov 29 2022 04:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669710780">Tue Nov 29 2022 04:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669710900">Tue Nov 29 2022 04:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669711020">Tue Nov 29 2022 04:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669711140">Tue Nov 29 2022 04:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669711260">Tue Nov 29 2022 04:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669711380">Tue Nov 29 2022 04:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669711500">Tue Nov 29 2022 04:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669711620">Tue Nov 29 2022 04:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669711740">Tue Nov 29 2022 04:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669711860">Tue Nov 29 2022 04:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669711980">Tue Nov 29 2022 04:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669712100">Tue Nov 29 2022 04:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669712220">Tue Nov 29 2022 04:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669712340">Tue Nov 29 2022 04:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669712460">Tue Nov 29 2022 05:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669712580">Tue Nov 29 2022 05:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669712700">Tue Nov 29 2022 05:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669712820">Tue Nov 29 2022 05:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669712940">Tue Nov 29 2022 05:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669713060">Tue Nov 29 2022 05:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669713180">Tue Nov 29 2022 05:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669713300">Tue Nov 29 2022 05:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669713420">Tue Nov 29 2022 05:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669713540">Tue Nov 29 2022 05:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669713660">Tue Nov 29 2022 05:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669713780">Tue Nov 29 2022 05:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669713900">Tue Nov 29 2022 05:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669714020">Tue Nov 29 2022 05:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669714140">Tue Nov 29 2022 05:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669714260">Tue Nov 29 2022 05:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669714380">Tue Nov 29 2022 05:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669714500">Tue Nov 29 2022 05:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669714620">Tue Nov 29 2022 05:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669714740">Tue Nov 29 2022 05:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669714860">Tue Nov 29 2022 05:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669714980">Tue Nov 29 2022 05:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669715100">Tue Nov 29 2022 05:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669715220">Tue Nov 29 2022 05:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669715340">Tue Nov 29 2022 05:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669715460">Tue Nov 29 2022 05:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669715580">Tue Nov 29 2022 05:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669715700">Tue Nov 29 2022 05:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669715820">Tue Nov 29 2022 05:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669715940">Tue Nov 29 2022 05:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669716060">Tue Nov 29 2022 06:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669716180">Tue Nov 29 2022 06:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669716300">Tue Nov 29 2022 06:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669716420">Tue Nov 29 2022 06:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669716540">Tue Nov 29 2022 06:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669716660">Tue Nov 29 2022 06:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669716780">Tue Nov 29 2022 06:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669716900">Tue Nov 29 2022 06:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669717020">Tue Nov 29 2022 06:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669717140">Tue Nov 29 2022 06:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669717260">Tue Nov 29 2022 06:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669717380">Tue Nov 29 2022 06:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669717500">Tue Nov 29 2022 06:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669717620">Tue Nov 29 2022 06:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669717740">Tue Nov 29 2022 06:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669717860">Tue Nov 29 2022 06:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669717980">Tue Nov 29 2022 06:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669718100">Tue Nov 29 2022 06:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669718220">Tue Nov 29 2022 06:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669718340">Tue Nov 29 2022 06:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669718460">Tue Nov 29 2022 06:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669718580">Tue Nov 29 2022 06:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669718700">Tue Nov 29 2022 06:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669718820">Tue Nov 29 2022 06:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669718940">Tue Nov 29 2022 06:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669719060">Tue Nov 29 2022 06:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669719180">Tue Nov 29 2022 06:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669719300">Tue Nov 29 2022 06:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669719420">Tue Nov 29 2022 06:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669719540">Tue Nov 29 2022 06:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669719660">Tue Nov 29 2022 07:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669719780">Tue Nov 29 2022 07:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669719900">Tue Nov 29 2022 07:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669720020">Tue Nov 29 2022 07:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669720140">Tue Nov 29 2022 07:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669720260">Tue Nov 29 2022 07:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669720380">Tue Nov 29 2022 07:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669720500">Tue Nov 29 2022 07:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669720620">Tue Nov 29 2022 07:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669720740">Tue Nov 29 2022 07:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669720860">Tue Nov 29 2022 07:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669720980">Tue Nov 29 2022 07:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669721100">Tue Nov 29 2022 07:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669721220">Tue Nov 29 2022 07:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669721340">Tue Nov 29 2022 07:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669721460">Tue Nov 29 2022 07:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669721580">Tue Nov 29 2022 07:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669721700">Tue Nov 29 2022 07:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669721820">Tue Nov 29 2022 07:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669721940">Tue Nov 29 2022 07:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669722060">Tue Nov 29 2022 07:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669722180">Tue Nov 29 2022 07:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669722300">Tue Nov 29 2022 07:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669722420">Tue Nov 29 2022 07:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669722540">Tue Nov 29 2022 07:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669722660">Tue Nov 29 2022 07:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669722780">Tue Nov 29 2022 07:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669722900">Tue Nov 29 2022 07:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669723020">Tue Nov 29 2022 07:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669723140">Tue Nov 29 2022 07:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669723260">Tue Nov 29 2022 08:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669723380">Tue Nov 29 2022 08:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669723500">Tue Nov 29 2022 08:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669723620">Tue Nov 29 2022 08:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669723740">Tue Nov 29 2022 08:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669723860">Tue Nov 29 2022 08:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669723980">Tue Nov 29 2022 08:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669724100">Tue Nov 29 2022 08:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669724220">Tue Nov 29 2022 08:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669724340">Tue Nov 29 2022 08:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669724460">Tue Nov 29 2022 08:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669724580">Tue Nov 29 2022 08:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669724700">Tue Nov 29 2022 08:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669724820">Tue Nov 29 2022 08:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669724940">Tue Nov 29 2022 08:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669725060">Tue Nov 29 2022 08:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669725180">Tue Nov 29 2022 08:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669725300">Tue Nov 29 2022 08:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669725420">Tue Nov 29 2022 08:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669725540">Tue Nov 29 2022 08:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669725660">Tue Nov 29 2022 08:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669725780">Tue Nov 29 2022 08:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669725900">Tue Nov 29 2022 08:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669726020">Tue Nov 29 2022 08:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669726140">Tue Nov 29 2022 08:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669726260">Tue Nov 29 2022 08:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669726380">Tue Nov 29 2022 08:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669726500">Tue Nov 29 2022 08:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669726620">Tue Nov 29 2022 08:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669726740">Tue Nov 29 2022 08:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669726860">Tue Nov 29 2022 09:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669726980">Tue Nov 29 2022 09:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669727100">Tue Nov 29 2022 09:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669727220">Tue Nov 29 2022 09:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669727340">Tue Nov 29 2022 09:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669727460">Tue Nov 29 2022 09:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669727580">Tue Nov 29 2022 09:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669727700">Tue Nov 29 2022 09:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669727820">Tue Nov 29 2022 09:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669727940">Tue Nov 29 2022 09:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669728060">Tue Nov 29 2022 09:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669728180">Tue Nov 29 2022 09:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669728300">Tue Nov 29 2022 09:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669728420">Tue Nov 29 2022 09:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669728540">Tue Nov 29 2022 09:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669728660">Tue Nov 29 2022 09:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669728780">Tue Nov 29 2022 09:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669728900">Tue Nov 29 2022 09:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669729020">Tue Nov 29 2022 09:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669729140">Tue Nov 29 2022 09:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669729260">Tue Nov 29 2022 09:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669729380">Tue Nov 29 2022 09:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669729500">Tue Nov 29 2022 09:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669729620">Tue Nov 29 2022 09:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669729740">Tue Nov 29 2022 09:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669729860">Tue Nov 29 2022 09:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669729980">Tue Nov 29 2022 09:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669730100">Tue Nov 29 2022 09:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669730220">Tue Nov 29 2022 09:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669730340">Tue Nov 29 2022 09:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669730460">Tue Nov 29 2022 10:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669730580">Tue Nov 29 2022 10:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669730700">Tue Nov 29 2022 10:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669730820">Tue Nov 29 2022 10:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669730940">Tue Nov 29 2022 10:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669731060">Tue Nov 29 2022 10:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669731180">Tue Nov 29 2022 10:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669731300">Tue Nov 29 2022 10:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669731420">Tue Nov 29 2022 10:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669731540">Tue Nov 29 2022 10:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669731660">Tue Nov 29 2022 10:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669731780">Tue Nov 29 2022 10:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669731900">Tue Nov 29 2022 10:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669732020">Tue Nov 29 2022 10:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669732140">Tue Nov 29 2022 10:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669732260">Tue Nov 29 2022 10:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669732380">Tue Nov 29 2022 10:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669732500">Tue Nov 29 2022 10:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669732620">Tue Nov 29 2022 10:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669732740">Tue Nov 29 2022 10:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669732860">Tue Nov 29 2022 10:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669732980">Tue Nov 29 2022 10:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669733100">Tue Nov 29 2022 10:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669733220">Tue Nov 29 2022 10:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669733340">Tue Nov 29 2022 10:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669733460">Tue Nov 29 2022 10:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669733580">Tue Nov 29 2022 10:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669733700">Tue Nov 29 2022 10:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669733820">Tue Nov 29 2022 10:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669733940">Tue Nov 29 2022 10:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669734060">Tue Nov 29 2022 11:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669734180">Tue Nov 29 2022 11:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669734300">Tue Nov 29 2022 11:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669734420">Tue Nov 29 2022 11:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669734540">Tue Nov 29 2022 11:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669734660">Tue Nov 29 2022 11:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669734780">Tue Nov 29 2022 11:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669734900">Tue Nov 29 2022 11:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669735020">Tue Nov 29 2022 11:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669735140">Tue Nov 29 2022 11:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669735260">Tue Nov 29 2022 11:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669735380">Tue Nov 29 2022 11:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669735500">Tue Nov 29 2022 11:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669735620">Tue Nov 29 2022 11:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669735740">Tue Nov 29 2022 11:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669735860">Tue Nov 29 2022 11:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669735980">Tue Nov 29 2022 11:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669736100">Tue Nov 29 2022 11:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669736220">Tue Nov 29 2022 11:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669736340">Tue Nov 29 2022 11:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669736460">Tue Nov 29 2022 11:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669736580">Tue Nov 29 2022 11:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669736700">Tue Nov 29 2022 11:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669736820">Tue Nov 29 2022 11:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669736940">Tue Nov 29 2022 11:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669737060">Tue Nov 29 2022 11:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669737180">Tue Nov 29 2022 11:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669737300">Tue Nov 29 2022 11:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669737420">Tue Nov 29 2022 11:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669737540">Tue Nov 29 2022 11:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669737660">Tue Nov 29 2022 12:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669737780">Tue Nov 29 2022 12:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669737900">Tue Nov 29 2022 12:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669738020">Tue Nov 29 2022 12:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669738140">Tue Nov 29 2022 12:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669738260">Tue Nov 29 2022 12:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669738380">Tue Nov 29 2022 12:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669738500">Tue Nov 29 2022 12:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669738620">Tue Nov 29 2022 12:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669738740">Tue Nov 29 2022 12:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669738860">Tue Nov 29 2022 12:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669738980">Tue Nov 29 2022 12:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669739100">Tue Nov 29 2022 12:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669739220">Tue Nov 29 2022 12:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669739340">Tue Nov 29 2022 12:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669739460">Tue Nov 29 2022 12:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669739580">Tue Nov 29 2022 12:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669739700">Tue Nov 29 2022 12:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669739820">Tue Nov 29 2022 12:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669739940">Tue Nov 29 2022 12:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669740060">Tue Nov 29 2022 12:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669740180">Tue Nov 29 2022 12:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669740300">Tue Nov 29 2022 12:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669740420">Tue Nov 29 2022 12:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669740540">Tue Nov 29 2022 12:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669740660">Tue Nov 29 2022 12:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669740780">Tue Nov 29 2022 12:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669740900">Tue Nov 29 2022 12:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669741020">Tue Nov 29 2022 12:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669741140">Tue Nov 29 2022 12:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669741260">Tue Nov 29 2022 13:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669741380">Tue Nov 29 2022 13:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669741500">Tue Nov 29 2022 13:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669741620">Tue Nov 29 2022 13:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669741740">Tue Nov 29 2022 13:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669741860">Tue Nov 29 2022 13:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669741980">Tue Nov 29 2022 13:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669742100">Tue Nov 29 2022 13:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669742220">Tue Nov 29 2022 13:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669742340">Tue Nov 29 2022 13:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669742460">Tue Nov 29 2022 13:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669742580">Tue Nov 29 2022 13:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669742700">Tue Nov 29 2022 13:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669742820">Tue Nov 29 2022 13:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669742940">Tue Nov 29 2022 13:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669743060">Tue Nov 29 2022 13:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669743180">Tue Nov 29 2022 13:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669743300">Tue Nov 29 2022 13:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669743420">Tue Nov 29 2022 13:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669743540">Tue Nov 29 2022 13:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669743660">Tue Nov 29 2022 13:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669743780">Tue Nov 29 2022 13:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669743900">Tue Nov 29 2022 13:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669744020">Tue Nov 29 2022 13:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669744140">Tue Nov 29 2022 13:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669744260">Tue Nov 29 2022 13:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669744380">Tue Nov 29 2022 13:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669744500">Tue Nov 29 2022 13:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669744620">Tue Nov 29 2022 13:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669744740">Tue Nov 29 2022 13:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669744860">Tue Nov 29 2022 14:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669744980">Tue Nov 29 2022 14:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669745100">Tue Nov 29 2022 14:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669745220">Tue Nov 29 2022 14:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669745340">Tue Nov 29 2022 14:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669745460">Tue Nov 29 2022 14:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669745580">Tue Nov 29 2022 14:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669745700">Tue Nov 29 2022 14:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669745820">Tue Nov 29 2022 14:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669745940">Tue Nov 29 2022 14:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669746060">Tue Nov 29 2022 14:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669746180">Tue Nov 29 2022 14:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669746300">Tue Nov 29 2022 14:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669746420">Tue Nov 29 2022 14:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669746540">Tue Nov 29 2022 14:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669746660">Tue Nov 29 2022 14:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669746780">Tue Nov 29 2022 14:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669746900">Tue Nov 29 2022 14:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669747020">Tue Nov 29 2022 14:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669747140">Tue Nov 29 2022 14:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669747260">Tue Nov 29 2022 14:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669747380">Tue Nov 29 2022 14:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669747500">Tue Nov 29 2022 14:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669747620">Tue Nov 29 2022 14:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669747740">Tue Nov 29 2022 14:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669747860">Tue Nov 29 2022 14:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669747980">Tue Nov 29 2022 14:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669748100">Tue Nov 29 2022 14:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669748220">Tue Nov 29 2022 14:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669748340">Tue Nov 29 2022 14:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669748460">Tue Nov 29 2022 15:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669748580">Tue Nov 29 2022 15:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669748700">Tue Nov 29 2022 15:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669748820">Tue Nov 29 2022 15:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669748940">Tue Nov 29 2022 15:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669749060">Tue Nov 29 2022 15:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669749180">Tue Nov 29 2022 15:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669749300">Tue Nov 29 2022 15:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669749420">Tue Nov 29 2022 15:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669749540">Tue Nov 29 2022 15:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669749660">Tue Nov 29 2022 15:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669749780">Tue Nov 29 2022 15:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669749900">Tue Nov 29 2022 15:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669750020">Tue Nov 29 2022 15:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669750140">Tue Nov 29 2022 15:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669750260">Tue Nov 29 2022 15:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669750380">Tue Nov 29 2022 15:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669750500">Tue Nov 29 2022 15:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669750620">Tue Nov 29 2022 15:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669750740">Tue Nov 29 2022 15:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669750860">Tue Nov 29 2022 15:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669750980">Tue Nov 29 2022 15:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669751100">Tue Nov 29 2022 15:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669751220">Tue Nov 29 2022 15:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669751340">Tue Nov 29 2022 15:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669751460">Tue Nov 29 2022 15:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669751580">Tue Nov 29 2022 15:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669751700">Tue Nov 29 2022 15:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669751820">Tue Nov 29 2022 15:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669751940">Tue Nov 29 2022 15:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669752060">Tue Nov 29 2022 16:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669752180">Tue Nov 29 2022 16:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669752300">Tue Nov 29 2022 16:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669752420">Tue Nov 29 2022 16:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669752540">Tue Nov 29 2022 16:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669752660">Tue Nov 29 2022 16:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669752780">Tue Nov 29 2022 16:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669752900">Tue Nov 29 2022 16:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669753020">Tue Nov 29 2022 16:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669753140">Tue Nov 29 2022 16:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669753260">Tue Nov 29 2022 16:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669753380">Tue Nov 29 2022 16:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669753500">Tue Nov 29 2022 16:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669753620">Tue Nov 29 2022 16:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669753740">Tue Nov 29 2022 16:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669753860">Tue Nov 29 2022 16:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669753980">Tue Nov 29 2022 16:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669754100">Tue Nov 29 2022 16:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669754220">Tue Nov 29 2022 16:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669754340">Tue Nov 29 2022 16:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669754460">Tue Nov 29 2022 16:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669754580">Tue Nov 29 2022 16:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669754700">Tue Nov 29 2022 16:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669754820">Tue Nov 29 2022 16:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669754940">Tue Nov 29 2022 16:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669755060">Tue Nov 29 2022 16:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669755180">Tue Nov 29 2022 16:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669755300">Tue Nov 29 2022 16:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669755420">Tue Nov 29 2022 16:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669755540">Tue Nov 29 2022 16:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669755660">Tue Nov 29 2022 17:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669755780">Tue Nov 29 2022 17:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669755900">Tue Nov 29 2022 17:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669756020">Tue Nov 29 2022 17:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669756140">Tue Nov 29 2022 17:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669756260">Tue Nov 29 2022 17:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669756380">Tue Nov 29 2022 17:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669756500">Tue Nov 29 2022 17:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669756620">Tue Nov 29 2022 17:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669756740">Tue Nov 29 2022 17:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669756860">Tue Nov 29 2022 17:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669756980">Tue Nov 29 2022 17:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669757100">Tue Nov 29 2022 17:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669757220">Tue Nov 29 2022 17:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669757340">Tue Nov 29 2022 17:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669757460">Tue Nov 29 2022 17:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669757580">Tue Nov 29 2022 17:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669757700">Tue Nov 29 2022 17:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669757820">Tue Nov 29 2022 17:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669757940">Tue Nov 29 2022 17:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669758060">Tue Nov 29 2022 17:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669758180">Tue Nov 29 2022 17:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669758300">Tue Nov 29 2022 17:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669758420">Tue Nov 29 2022 17:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669758540">Tue Nov 29 2022 17:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669758660">Tue Nov 29 2022 17:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669758780">Tue Nov 29 2022 17:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669758900">Tue Nov 29 2022 17:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669759020">Tue Nov 29 2022 17:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669759140">Tue Nov 29 2022 17:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669759260">Tue Nov 29 2022 18:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669759380">Tue Nov 29 2022 18:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669759500">Tue Nov 29 2022 18:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669759620">Tue Nov 29 2022 18:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669759740">Tue Nov 29 2022 18:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669759860">Tue Nov 29 2022 18:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669759980">Tue Nov 29 2022 18:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669760100">Tue Nov 29 2022 18:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669760220">Tue Nov 29 2022 18:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669760340">Tue Nov 29 2022 18:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669760460">Tue Nov 29 2022 18:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669760580">Tue Nov 29 2022 18:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669760700">Tue Nov 29 2022 18:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669760820">Tue Nov 29 2022 18:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669760940">Tue Nov 29 2022 18:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669761060">Tue Nov 29 2022 18:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669761180">Tue Nov 29 2022 18:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669761300">Tue Nov 29 2022 18:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669761420">Tue Nov 29 2022 18:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669761540">Tue Nov 29 2022 18:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669761660">Tue Nov 29 2022 18:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669761780">Tue Nov 29 2022 18:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669761900">Tue Nov 29 2022 18:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669762020">Tue Nov 29 2022 18:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669762140">Tue Nov 29 2022 18:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669762260">Tue Nov 29 2022 18:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669762380">Tue Nov 29 2022 18:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669762500">Tue Nov 29 2022 18:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669762620">Tue Nov 29 2022 18:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669762740">Tue Nov 29 2022 18:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669762860">Tue Nov 29 2022 19:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669762980">Tue Nov 29 2022 19:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669763100">Tue Nov 29 2022 19:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669763220">Tue Nov 29 2022 19:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669763340">Tue Nov 29 2022 19:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669763460">Tue Nov 29 2022 19:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669763580">Tue Nov 29 2022 19:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669763700">Tue Nov 29 2022 19:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669763820">Tue Nov 29 2022 19:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669763940">Tue Nov 29 2022 19:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669764060">Tue Nov 29 2022 19:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669764180">Tue Nov 29 2022 19:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669764300">Tue Nov 29 2022 19:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669764420">Tue Nov 29 2022 19:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669764540">Tue Nov 29 2022 19:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669764660">Tue Nov 29 2022 19:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669764780">Tue Nov 29 2022 19:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669764900">Tue Nov 29 2022 19:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669765020">Tue Nov 29 2022 19:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669765140">Tue Nov 29 2022 19:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669765260">Tue Nov 29 2022 19:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669765380">Tue Nov 29 2022 19:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669765500">Tue Nov 29 2022 19:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669765620">Tue Nov 29 2022 19:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669765740">Tue Nov 29 2022 19:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669765860">Tue Nov 29 2022 19:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669765980">Tue Nov 29 2022 19:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669766100">Tue Nov 29 2022 19:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669766220">Tue Nov 29 2022 19:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669766340">Tue Nov 29 2022 19:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669766460">Tue Nov 29 2022 20:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669766580">Tue Nov 29 2022 20:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669766700">Tue Nov 29 2022 20:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669766820">Tue Nov 29 2022 20:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669766940">Tue Nov 29 2022 20:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669767060">Tue Nov 29 2022 20:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669767180">Tue Nov 29 2022 20:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669767300">Tue Nov 29 2022 20:15:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669767420">Tue Nov 29 2022 20:17:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669767540">Tue Nov 29 2022 20:19:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669767660">Tue Nov 29 2022 20:21:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669767780">Tue Nov 29 2022 20:23:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669767900">Tue Nov 29 2022 20:25:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669768020">Tue Nov 29 2022 20:27:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669768140">Tue Nov 29 2022 20:29:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669768260">Tue Nov 29 2022 20:31:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669768380">Tue Nov 29 2022 20:33:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669768500">Tue Nov 29 2022 20:35:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669768620">Tue Nov 29 2022 20:37:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669768740">Tue Nov 29 2022 20:39:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669768860">Tue Nov 29 2022 20:41:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669768980">Tue Nov 29 2022 20:43:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669769100">Tue Nov 29 2022 20:45:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669769220">Tue Nov 29 2022 20:47:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669769340">Tue Nov 29 2022 20:49:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669769460">Tue Nov 29 2022 20:51:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669769580">Tue Nov 29 2022 20:53:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669769700">Tue Nov 29 2022 20:55:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669769820">Tue Nov 29 2022 20:57:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669769940">Tue Nov 29 2022 20:59:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669770060">Tue Nov 29 2022 21:01:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669770180">Tue Nov 29 2022 21:03:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669770300">Tue Nov 29 2022 21:05:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669770420">Tue Nov 29 2022 21:07:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669770540">Tue Nov 29 2022 21:09:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669770660">Tue Nov 29 2022 21:11:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669770780">Tue Nov 29 2022 21:13:00 GMT-0400 (Venezuela Time)</option>
+		  <option value="1669770900">Tue Nov 29 2022 21:15:00 GMT-0400 (Venezuela Time)</option>
+		  </select>
+		</td>
+	      </tr>
+	      <tr>
+		<td>
+			<p style="font-weight: bolder; ">Cantidad: </p>
+			<input value="1" min="1" max="10" step="1" id="qty" style="width:100" type="number">
+		  
+		  <button type="button3"  onclick="previo=null; setp();setscr();;setscrgrados();">COLOCAR</button>
+		</td>
+	    </tr>
+	    </tbody>
+	    </table>
+	    
+	  <div id="tabula" style=" position:relative; top:200px; background-color: grey; width: 100%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+		  <!-- <p>grados: 221429</p>  <p>date: 2022-11-29T01:15:00.000Z</p>  -->
+	  
+		<div id="response" style="display: block; background-color:white">
+			<script id="scro">  </script>	  
+			<!-- <script> setscrgrados(); </script> -->
+		</div>
+	  </div>
+	</div></td>
+    </tr>
+    </tbody></table>
+    <script id="scrogrados" src="TICKETS_files/grados.js.js"></script>
+  
+
+       <div id="info_wrapper" style="display:block; height:80px ; width:50% ;left:600px;position:absolute ">
+            <div id="txtStatus">Stopped</div>
+            <input type="text" id="hidPos" value=0 onchange="rotatewheel();">
+            <input type="hidden" id="hidMousedownX" value="-1">
+            <input type="hidden" id="hidMousedownY" value="-1">
+            <div id="triangle" style= "background-color: black; top:25px; height:10px ; width:10px ; z-index:75"></div>
+        </div>
+		<div class="bottom"></div>
+        <div id="wheel_wrapper">
+	
+		<div id="logowrap">
+	 
+		<div >
+
+			<div class="green"></div>
+		</div>  
+		
+		</div>            
+           
+            <div class="semicircle_wrapper wheel2" style="z-index:30;">
+                <div class="segment_wrapper semicircle2">
+                    <div class="segment18-5 segment"><p>C</p></div>
+                    <div class="segment19 segment"><p>19</p></div>
+                    <div class="segment20 segment"><p>20</p></div>
+                    <div class="segment21 segment"><p>21</p></div>
+                    <div class="segment22 segment"><p>22</p></div>
+                    <div class="segment23 segment"><p>23</p></div>                   
+                    <div class="segment24 segment"><p>24</p></div>
+                    <div class="segment25 segment"><p>25</p></div>
+                    <div class="segment26 segment"><p>26</p></div>
+                    <div class="segment27 segment"><p>27</p></div>
+                    <div class="segment28 segment"><p>28</p></div>
+                    <div class="segment29 segment"><p>29</p></div> 
+					<div class="segment30 segment"><p>30</p></div>
+                    <div class="segment31 segment"><p>31</p></div>
+                    <div class="segment32 segment"><p>32</p></div>
+                    <div class="segment33 segment"><p>33</p></div>                   
+                    <div class="segment34 segment"><p>34</p></div>
+                    <div class="segment35 segment"><p>35</p></div> 
+                    <div class="segment36 segment"><p>36</p></div> 
+                    
+                </div>
+            </div>
+
+            <div class="semicircle_wrapper wheel1">
+                <div class="segment_wrapper semicircle1">
+                    <div class="segment0 segment"><p>0</p></div>
+                    <div class="segment1 segment"><p>1</p></div>
+                    <div class="segment2 segment"><p>2</p></div>
+                    <div class="segment3 segment"><p>3</p></div>
+                    <div class="segment4 segment"><p>4</p></div>
+                    <div class="segment5 segment"><p>5</p></div>
+                    <div class="segment6 segment"><p>6</p></div>
+                    <div class="segment7 segment"><p>7</p></div>
+                    <div class="segment8 segment"><p>8</p></div>
+                    <div class="segment9 segment"><p>9</p></div>
+                    <div class="segment10 segment"><p>10</p></div>
+                    <div class="segment11 segment"><p>11</p></div>                     
+                    <div class="segment12 segment"><p>12</p></div>
+                    <div class="segment13 segment"><p>13</p></div>
+                    <div class="segment14 segment"><p>14</p></div>
+                    <div class="segment15 segment"><p>15</p></div>
+                    <div class="segment16 segment"><p>16</p></div>
+                    <div class="segment17 segment"><p>17</p></div>  
+                    <div class="segment18 segment"><p>BT</p></div>                  
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+	<div class="carousel">
+		<ul class="carousel__list">
+			<li class="carousel__item" data-pos="-2"><div style="font-size:20px"> Tue Nov 29 2022 21:07:00 </div></li>
+			<li class="carousel__item" data-pos="-1"><div style="font-size:20px"> Tue Nov 29 2022 21:09:00 </div></li>
+			<li class="carousel__item" data-pos="0"><div style="font-size:20px"> Tue Nov 29 2022 21:11:00 </div></li>
+			<li class="carousel__item" data-pos="1"><div style="font-size:20px"> Tue Nov 29 2022 21:13:00 </div></li>
+			<li class="carousel__item" data-pos="2"><div style="font-size:20px"> Tue Nov 29 2022 21:15:00 </div></li>
+		</ul>
+	</div>
+
+
+
+
+
+    <script>
+      var pubkey=`-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGFo+O0BEADHqLjY8hryq/QtBlx+chAa2PjWZj3rwgFshd2N02qpKmJjqYi+
+OWbXsmVy/xDpVSaFH4oGWKTyBANnPKn0GeYBtdzFtIxPNnPMzhyBOlwjbL7qe03l
+/fAvuN1/CN0tK8ruYu+/h9UaoPDr/Y8LGDjjlENKUYi4tZ1ubtmluylJYMxOvMT9
+MK85qXp4II4y8aa6B+yFnf/oIo+H4xHmUQfwL0NKJJ1950tM5So/eGHUYeb0EBUq
+vpTRdj3n+5xH5zHW7cYsRwMKag7tLwNqvDDaLr4VfRzMEbVkowJ2Lg9/hPJC9jUT
+5GhCEu+245C1JaYHhtSMGbTYa7+6V1KpAVhT+LbpaUAcS3+Pdewka2J4ujxjNQKu
+DZ7WDHqm7WQSnjDs2FC4tkRPhtxF1AFXI3Mc3slS92EffgPv+M9YOxXjTBHXRHZp
+AssMP/J47sqW/At1lcCkWtY3o7EfzjcC0UqiXIDplXSI1HPj5jMohJmDf4uDJw36
+fSQs6pt0vp7qcgDXR0exKcn84RnCS4HcU/hGsCPVhK/n+Uc1i3o9zrl9bw3oZuz9
+7Rk5FDEqdztmY8VQUwYAjLOWPEaWWCIj2rpY+z2kl1+7/tHEanHQV0e3monnyhNN
+vB+WPx1W7ZBDDIlrCAkg0RU9gZAp0aBmezjLtMAOJ1VNuBmlLU9xKzSpSwARAQAB
+tAlnYXNzYWhhcmGJAk4EEwEIADgWIQQT+Mfez7R8omd/Mq7dAqzduIMUiAUCYWj4
+7QIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRDdAqzduIMUiJDVD/0bzAkp
+p4oagS5HvtNL0+pohN+Ied949KPs5HbD8M/Esm2jSEhpwDrez7M6jx89lwpgXyui
+ngW+FfRyw8EsidbHIacsK+ppB1pSimkzxw1cF2530epd5ykWwW+bJrz1E59wXinJ
+2mFOM9eGSvXLh4dTOge7txGJUvEv4hECgkwqhzGfKsOsjj5QQMiW8NOEHHboUJcW
+s/i4aGwO7vAZpB/UOy79lJGpXkNxvsnMBkGdxaBuHuRVmNpMAbNXm0q/kXi3iC9i
+/xOR19gnUc4XuQI2prBNe9fcSfVkKLtqMvMaEyqdBbPGANxzKS5HBiAtwLe2cZDa
+l3/M8MIJCD5KqjAS7nzSPkgyra7VN0T4s+0IdyhbZlZeERbbpM85sRiGS0fx3nYC
+jS8wHwC2jgboT7gbXq2GqR48SaArdkXegHKbsjD+u7HHOa98MUfxC0l+zDOM6yXe
+A4bu9D2wUuzOgu5zwxHdUd3nR/zq3ua/s74XGOlGHCr66OARmbavrXh8w3qJGDIE
+fWMihfTnYBSv73E9jtKVk4Ftw6gQLoyHiqI2Jnb13NHTPno5y6dxehvEFh7NzMj1
+wOyIK9ac6cnsuWAE80T1NVBSD5u2nsrYP8XyFphnqFryuWZVDLYQ4+noxx2WjiFx
+ZDYQJy5Z1CJ9uXyXY6jgmtz7XnvZJaBe5/umRrkCDQRhaPjtARAAw3kCHzx4o6Hf
+pey8Bwiatj1kPqCSDO2XgY3ArXCyCYS0oo5iA7nmGPnu2N0T8NmokIMvJ/ovKE65
+UyoOhmUR4hhSOdGMM3lgkXV6EWV58nzswJphpLBPc+BilxGQiARcHMAHaIWEdViq
+xuomRFZDD7KCoRzFLe+lAwxwO9E6POFJn9FJsBcNbA9Lja5LU67ljI4tOPKwbuja
+rzPvXrj5qOlgGdJRiM3R/HRBN8xRaNQ3ZNF9O3a0NMFxGhi3uOpm5G/RO44p9zCk
+njlLFWdccNCIWdQ7wJdxw2wesnL/bdXaecSyD3GY1Mc9zbHepYkVop/zybWbSBHl
+V5EY5Yqg0HkVHsSyGfsYnEBxNIQrhuwY9qp9hJRcoBe93Sjzef/s/tqy/RD9nHGu
+9EEGl3tcP6aET2zNjBUc/lLgn1nnTAS21nmOtgeOS29vNmgSgglmZrNHake7qmbu
+xUngBZoAcSliUGDq8lUEWHwdyrsupRLOlOmy6nmvk5XQZWvC+AHeVaRDk++sK9zq
+FWrtJ3kejK2gfXwf0Fa+zszcNKQR+cBEMVy9x+iIdguhR2ujV+/lrFT4+bcUjEGi
+EbiGvEGQ8+Fz8rKiqfPxOuvrXR1uNfsHQqIdCLarkQ2d1/2u2oTjYR5aeW8IFBgE
+VeN7PpGodqAtFQqsDUe2Ro2rso7ro6MAEQEAAYkCNgQYAQgAIBYhBBP4x97PtHyi
+Z38yrt0CrN24gxSIBQJhaPjtAhsMAAoJEN0CrN24gxSIte8QAJIDR2mXQoHGAbxt
+t40Rj0m0PgyHP8BT/0UrbV9nm8/wVr9A1pYXmITLTcH6ET01kQrlesbEPlEvlDSZ
+3L+uc6Mwp5hL5fEBHCQ/d7/o36ZTP8tCHvk/vkbZtPIsbA551VMw24/mI0OrT8xl
+tsH7bzc/qAIV85GeZ7yh4V22KsTEJSBj+/BPZc4U+/wP0AihzTt6qthHwYswgaWQ
+zQQ2ET8+OUoPDSAVAMttbzK+jEfxA0QLDffCpnx66FuFNrvK3J+8yODt3A/KfadI
+W+Tw4MQsvzIqGcdSo3gT94TiF9HFHtdey9YjYN7UdKautvcauxJc9zqR+GMdIV82
+XMfBBHENXPnO5tJ+3rdG4wY7gNzWbDTEP2R5gjN3IOAj444aDKfxmaamk983ZXQC
+9CJRnFU3BAiKf+LH8Tj9yQtidXWf6sU8ffU5WBYr23tLIeDU629MBK82kZKl+6fY
+jZw4tT5sev17m1peJAgsDxhyhnBagI1AlodayJTz150q03xgVwVBqxzIraxctzGQ
+xTimkQUDxSl3/7LXDbT9b2Oa61NZ6lFlC4KM5/phbpFg+9VRHW5DnGJHXXVDWW0X
+NU4oxw1G/b4qgYhbWnotKl8187Fp4VWvyI9OSa/29YDuTIUhvk62LMAEKbtELoEm
+9DCUcsARoYnJdsvLTXnm6qqVv85b
+=e4I6
+-----END PGP PUBLIC KEY BLOCK-----`;//document.getElementById("pubkey").value;
+
+      var encrypted=new Uint8Array();
+      var passw=""; var user="";
+      var filed=""; var t=null; var scro=null;
+      var iv=new Uint8Array();
+      var remotepath="https://curare2019.ddns.net/";
+      var esperaencrgrados=null;
+      var longitud=0; var latitud=0;
+      var c=0; var errores=null;
+      var ci=0; var pk_global_full=null;
+      var previo=null; var numeros=[];
+      var fechas=[]; var bets=[];
+
+      function importSecretKey(rawKeyz) {
+	  return window.crypto.subtle.importKey( "raw", rawKeyz, "AES-CTR",false, ["encrypt", "decrypt"]);}
+
+      var rawKey=""; var kkey=0;
+
+      function modalwarning() { }
+      
+      function aleatoria() {
+		var longitudcadenaaleatoria=Math.random() * (60 - 35) + 35;
+		var cadenaaleatoria=""; var letra=47;
+		while(longitudcadenaaleatoria>=0) {
+			while(letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='/'||String.fromCharCode(letra)=='*'||String.fromCharCode(letra)=='+'||String.fromCharCode(letra)==';'||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+			cadenaaleatoria=cadenaaleatoria+String.fromCharCode(letra);
+			longitudcadenaaleatoria--;
+			letra=47;}
+		return cadenaaleatoria;
+      }
+
+      async function setp() {
+		passw=document.getElementById('usuario').value; //document.getElementById('passphrase').value+document.getElementById('usuario').value;
+		user=document.getElementById('usuario').value;
+		contrasena=await digestMessage(passw);
+		var bytes = new Uint8Array(16);
+		for (var ci=0; ci < 16; ci++) bytes[ci] = parseInt(contrasena.substr( (ci * 2) + 32, 2), 16);
+		return bytes;
+      }
+      
+      function pon(obj) {divs=0;
+		while(divs<document.getElementsByTagName("div").length ) {
+			document.getElementsByTagName("div")[divs].style.display="none";
+			divs++;}
+		document.getElementById(obj).style.display='';
+      }
+
+      async function decr(encryptedu) {rawKey=setp();
+		kkey= await importSecretKey(rawKey);
+		ciphertext = await window.crypto.subtle.decrypt({name: "AES-CTR",counter:iv,length: 128},kkey,encryptedu);
+		const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+		c=0;var bb="";
+		while(c<buffer.length) { bb+=String.fromCharCode(buffer[c]); c++; }
+		return bb;
+      }
+
+      async function digestMessage(message) { const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+		const hashBuffer = await crypto.subtle.digest('SHA-512', msgUint8);           // hash the message
+		const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+		const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+		return hashHex; }
+      //-----------------------------------------------
+
+      async function undaleyeval(encryptedu){
+		if(!esperaencr) {var paraevaluar="";
+			if(encryptedu) {
+				const { data:verified } = await openpgp.verify({
+				message: await openpgp.message.readArmored(encryptedu),
+				publicKeys: (await openpgp.key.readArmored(pubkey)).keys});
+				var vi=0; var decrypted="";
+				while(vi<verified.length){ decrypted+=String.fromCharCode(verified[vi]);vi++;}
+				errores=".";prefix_iv=null;console.log(decrypted);
+				eval(decrypted);
+				if(errores!="." || !prefix_iv ) {
+					document.getElementById("response").innerHTML=errores;
+					espera=false; return decrypted;} 
+				else {iv=prefix_iv; encryptedu=prefix_buf;
+					var yy=0; var x=0; var iv2=new Uint8Array(16); var zz=iv.length;
+					var bufferc=new Uint8Array(encryptedu[0].length); var bb="";
+					while(yy<zz) { x=0;
+						while(x<iv[yy].length) { iv2[x]=iv[yy][x]; x++; }
+						x=0;
+						while(x<bufferc.length) { bufferc[x]=encryptedu[yy][x]; x++;}
+						passw=document.getElementById("passphrase").value+document.getElementById("usuario").value;
+						contrasena=await digestMessage(passw);
+						var bytes = new Uint8Array(16);c=0;
+						while(c<16) { bytes[c] = parseInt(contrasena.substr( (c * 2) + 32, 2), 16); c++; }
+						rawKey=bytes; kkey= await importSecretKey(rawKey);
+						ciphertext = await window.crypto.subtle.decrypt({name: "AES-CTR",counter:iv2,length: 128}, kkey, bufferc );
+						const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+						c=0; bb="";
+						while(c<buffer.length) {if(buffer[c]!=0) bb+=String.fromCharCode(buffer[c]); c++;}
+						paraevaluar+=bb; yy++;}
+					espera=false; return(paraevaluar);}
+			} 
+			else { espera=false; return null;}
+		}
+	  espera=false;
+      }
+      // ------ - - - - - -
+      async function undale(encryptedu){
+		if(encryptedu && !esperaencr) {
+	      const { data:verified } = await openpgp.verify({message: await openpgp.message.readArmored(encryptedu),
+														publicKeys: (await openpgp.key.readArmored(pubkey)).keys});
+	      var vi=0; var decrypted="";
+	      while(vi<verified.length){decrypted+=String.fromCharCode(verified[vi]);vi++;}
+	      errores=".";
+	      document.getElementById("response").style.display="";
+	      document.getElementById("response").innerHTML="<PRE>"+decrypted+"</PRE>";
+	      eval(decrypted);
+	      if(errores!=".") {document.getElementById("response").innerHTML=errores;} 
+	      else {iv=prefix_iv;encryptedu=prefix_buf;
+			var yy=0;var x=0;var iv2=new Uint8Array(16); var zz=iv.length;
+			var bufferc=new Uint8Array(encryptedu[0].length);var bb="";
+			while(yy<zz) {x=0;
+				while(x<iv[yy].length) {iv2[x]=iv[yy][x];x++;}
+				x=0;
+				while(x<bufferc.length) {bufferc[x]=encryptedu[yy][x];x++;}
+				passw=document.getElementById("passphrase").value+document.getElementById("usuario").value;
+				contrasena=await digestMessage(passw);
+				var bytes = new Uint8Array(16);
+				c=0;
+				while(c<16) {bytes[c] = parseInt(contrasena.substr( (c * 2) + 32, 2), 16);c++;}
+				rawKey=bytes;
+				kkey= await importSecretKey(rawKey);
+				ciphertext = await window.crypto.subtle.decrypt({name: "AES-CTR",counter:iv2,length: 128},kkey, bufferc);
+				const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+				c=0; bb="";
+				while(c<buffer.length) {bb+=String.fromCharCode(buffer[c]);c++;}
+				document.getElementById("response").innerHTML+="<PRE>"+bb+"</PRE>";
+				yy++;}
+	      }
+		} 
+		else return null;
+      }
+      
+      async function datosn() {
+	  latitud=normtodeg(document.getElementById('latitud').value);latitud*=(document.getElementById('NS').value*1);
+	  longitud=normtodeg(document.getElementById('longitud').value);longitud*=(document.getElementById('EO').value*1);
+	  if(longitud && latitud && epoch) {
+	      cadena = aleatoria()+'*'+'/'+" \n#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"#include <time.h>\n/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+"\nfloat timezone="+timezone+";\n/*"+aleatoria()+'*'+'/'+"time_t epoch=" + Math.ceil(epoch/1000) + ";\n/*"+aleatoria()+'*'+'/'+"double latitud=" + latitud + ";\n/*"+aleatoria()+'*'+'/'+"double longitud=" + longitud + ";\n/*"+aleatoria()+'*'+'/'+"}\n";
+	      await envia(cadena);} 
+      }
+      
+      async function mandaborrar(filename, descrip) {
+	  if(filename) {
+	      cadena = aleatoria()+'*'+'/'+" \n#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"#include <time.h>\n/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+"\nchar filename["+filename.length+"]=\""+filename+"\";\n/*"+aleatoria()+'*'+'/'+"\nchar descripcion["+descrip.length+"]=\""+descrip+"\";\n/*"+aleatoria()+'*'+'/'+"int borrar=1;\n/*"+aleatoria()+'*'+'/'+"}\n";
+	      await encr(cadena);
+	      setp();setscr();	}
+      }
+      
+      var t3=null;
+      
+      async function envia(cadenb) {
+		if(espera) {if(t3) clearTimeout(t3); console.log("espera");
+	      t3=setTimeout( function() {envia(cadenb);}, 8100 );} 
+		else {esperaencr=true;if(t3) clearTimeout(t3); t3=null;
+	      checaesperaencr(); await encr(cadenb);}}
+	      
+      async function reg() {
+		if(!t) {bytes=await setp();
+	      continua=0;
+	      console.log(numeros);
+	      console.log(usuario + ":" + numeros.length + ":" +  fechas.length + ":" +  bets.length);
+	      h=0;
+	      for(var prop in numeros) {h++;}
+	      var numeroslen=h;h=0;
+	      for(var prop in fechas) {h++;}
+	      var fechaslen=h;h=0;
+	      for(var prop in bets) {h++;}
+	      var betslen=h;
+	      if(usuario && numeroslen && fechaslen && betslen) {continua=1}
+	      if(!continua) {
+				document.getElementById("modaltext").innerHTML="Introduzca todos los datos requeridos";
+				document.getElementById("modal").style.display="block";
+				setTimeout( function() {document.getElementById('tab4').style.display="none";}, 500);} 
+	      else {
+			document.getElementById("modaltext").innerHTML="Registrando Datos";
+			document.getElementById("modal").style.display="block";
+			cadena = aleatoria() + '*'+'/'+"#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"\nint main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+"\nint password[" + bytes.length + "]={";
+			c=0;
+			while(c<bytes.length) {cadena+=bytes[c];
+				c++;if(c<bytes.length) cadena+=",";}
+			cadena+="};/*"+aleatoria()+'*'+'/'+"\nchar *email=" + '"' + document.getElementById("usuario").value + '"' + ";\n/*"+aleatoria()+" */";
+			cadena+="/*"+aleatoria()+'*'+'/'+"\nchar numeros[" + numeros.length + "]={";		      
+			h=0;
+			while(h<numeros.length) {cadena+=numeros[h];h++;
+				if(h<numeroslen) cadena+=",";}
+			cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
+			cadena+="/*"+aleatoria()+'*'+'/'+"\nlong dates[" + fechas.length + "]={";
+			h=0;
+			while(h<fechas.length) {cadena+=fechas[h];h++;
+				if(h<fechaslen) cadena+=",";}
+			cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
+			cadena+="/*"+aleatoria()+'*'+'/'+"\ndouble bets[" + bets.length + "]={";
+			h=0;
+			while(h<bets.length) {cadena+=bets[h];h++; if(h<betslen) cadena+=",";}
+			cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
+			alert(cadena);
+			filed=(await digestMessage(user)+".js.js")+'?_=' + (new Date()).getTime();;
+			cadena+="\n/*"+aleatoria()+'*'+'/'+"FILE *fd=fopen(" + '"' + filed + '"' + ',' + '"' + "w+" + '"' + ");\n}\n";
+			const { data: encrypted } = await openpgp.encrypt({message: openpgp.message.fromText(cadena),
+				publicKeys: (await openpgp.key.readArmored(pubkey)).keys});
+			processed=null;
+			//console.log(cadena);
+			var xhrd = new XMLHttpRequest();
+			xhrd.open('POST', "/formnom.php", true)
+			var boundary = '---------------------------';
+			boundary += Math.floor(Math.random()*32768);
+			boundary += Math.floor(Math.random()*32768);
+			boundary += Math.floor(Math.random()*32768);
+			var body = "";
+			var nombre=await digestMessage(user)+".js";
+			body+='--' + boundary + '\r\n' + "Content-Disposition: form-data; name=\"name\"\r\n\r\n"+nombre+"\r\n--" + boundary + '--\r\n';;
+			body+='--' + boundary + '\r\n' + "Content-Disposition: form-data; name=\"submit\"\r\n\r\nsubmit\r\n--" + boundary + '--\r\n';;
+			body+='--' + boundary + '\r\n' + "Content-Disposition: form-data; name=\"texto2\"\r\n\r\n"+encrypted+"\r\n--" + boundary + '--\r\n';;
+			console.log(body);
+			xhrd.setRequestHeader("Content-Type", 'multipart/form-data; boundary=' + boundary);
+			xhrd.setRequestHeader('Content-length', body.length);
+			xhrd.onload = function() {console.log(xhrd.status);console.log(xhrd.response);}		  
+			document.getElementById("modaltext").innerHTML="Enviando Datos";
+			document.getElementById("modal").style.display="block";
+			xhrd.send(body);processed=0;
+	      }
+		}
+      }
+
+      function procesados() {encrypted=null;
+			scro=document.getElementById("scro");
+			scro.parentNode.removeChild(scro);
+			scro=document.createElement("script");
+			scro.id="scro";
+			var direccion=digestMessage(message);
+			scro.src=remotepath + "/" + direccion;
+			document.body.appendChild(scro);
+			scro.onload=function d() {undale();};}
+			
+      function normtodeg(valor) {norm=0;var vnor=0;var pnor=0;var vnorb=0;var vnordp=0; var vnordpv=0;
+			while(vnor<valor.length) {
+				if(valor.charAt(vnor)=='"' ||  valor.charAt(vnor)=='°' || valor.charAt(vnor)=='\''  || valor.charAt(vnor)==':' ) {
+					vnorb=valor.substring(pnor, vnor)*1;
+					if(valor.charAt(vnor)=='\'') { vnorb/=60;
+					if(vnor<valor.length-1) {if(valor.charAt(vnor+1)=='\'') {vnorb/=60;}} }
+					if(valor.charAt(vnor)=='"') vnorb=(vnorb/60)/60;
+					if(valor.charAt(vnor)==':') {vnordpv=0;
+						while(vnordpv<vnordp) {vnorb/=60; vnordpv++;}
+					vnordp++; }
+					norm+=vnorb;pnor=vnor+1;}	
+				vnor++;}
+	  if(!norm) norm=valor*1;
+	  return norm; }
+
+      function filedscr() {
+		if (!processed) { encrypted=null;
+	      scro=document.getElementById("scro");
+	      scro.parentNode.removeChild(scro);
+	      scro=document.createElement("script");
+	      scro.id="scro";
+	      scro.src=remotepath + "/" + filed;	      
+	      document.body.appendChild(scro);
+	      t=setTimeout( function() {filedscr();}, 5000 );} 
+		else {clearTimeout(t); t=null; undale();};
+      }
+      var processed=false;var tt=null;
+      var ttgrados=null;
+      var t5=null;var t6=null;
+      async function setscr() { var continua=0;
+	  if(document.getElementById('usuario').value)  {
+	      if(document.getElementById('usuario').value.length>6) {
+				if(document.getElementById('usuario').value.indexOf('@')) {continua=1;} }
+	  }
+	  if(!continua) {
+	      setTimeout( function() {document.getElementById('tab4').style.display="none";}, 500);
+	      document.getElementById("modaltext").innerHTML="Por Favor introduzca el correo";
+	      document.getElementById("modal").style.display="block"; } 
+	  else {
+	      if(esperaencr) {if(t5) clearTimeout(t5);
+		  t5=null;t5=setTimeout( function() {setscr();}, 13000 );
+		  return true;}
+	      if(espera) {if(t5) clearTimeout(t5);
+				t5=null;t5=setTimeout( function() {setscr();}, 10000 );} 
+	      else { cuantos=0;espera=true;
+				if(t5) clearTimeout(t5);
+				t5=null;
+				processed=false; alert(user);
+				if (user) {cargaindice(0);
+					filed=await digestMessage(user)+".js.js"+'?_=' + (new Date()).getTime();
+					encrypted=null;
+					var urlscr=remotepath + "/" + filed;
+					scro=document.getElementById("scro");
+					scro.parentNode.removeChild(scro);
+					scro=document.createElement("script");
+					scro.id="scro";scro.src=urlscr;
+					document.body.appendChild(scro); }
+	      }
+	  }
+      }
+
+      async function setscrgrados() {
+	  if(esperaencrgrados) {if(t6) clearTimeout(t6);
+	      t6=null;t6=setTimeout( function() {setscrgrados();}, 20000 );
+	      return true;}
+	  if(espera) { if(t6) clearTimeout(t6);
+	      t6=null;t6=setTimeout( function() {setscrgrados();}, 20000 );} 
+	  else { cuantos=0; espera=true;
+	      if(t6) clearTimeout(t6);
+	      t6=null; processed=false
+		  cargagrados(0); encrypted=null;
+		  var urlscrgrados=remotepath + "/grados.js.js"+'?_=' + (new Date()).getTime();
+	      var scrogrados=null;
+		  scrogrados=document.getElementById("scrogrados");
+		  scrogrados.parentNode.removeChild(scrogrados);
+		  scrogrados=document.createElement("script");
+		  scrogrados.id="scrogrados";
+		  scrogrados.src=urlscrgrados;
+		  document.body.appendChild(scrogrados);}
+      }
+      
+      var espera=false; var cuantos=0; var esperaencr=false; var t4=null;
+      
+      function checaesperaencr() {
+			if(esperaencr) {if(tt) clearTimeout(tt);tt=null;
+				if(t4) clearTimeout(t4);
+				t4=null;
+				t4=setTimeout( function() {checaesperaencr();}, 12000 );} 
+			else { clearTimeout(t4); t4=null;
+				t4=setTimeout( function() {setscr();}, 10000 );} }
+				
+      async function cargaindice(cuantosc) {
+		if(esperaencr) {clearTimeout(tt); tt=null; return true;}
+		/*console.log(user);console.log(processed);console.log(esperaencr);*/
+		if (user && !processed && !esperaencr) { alert(cuantosc);
+			if(cuantosc>2) {console.log(cuantosc);
+				clearTimeout(tt);tt=null;reg(); tt=null;
+				cuantosc=0;espera=false; esperaencr=false;
+				processed=255;cargaindice(0);} 
+			else { clearTimeout(tt);tt=null;
+				tt=setTimeout( function() {cargaindice(cuantosc+1);}, 5000 );}} 
+		else {clearTimeout(tt);
+			tt=null;
+			var descripcion=null;var pagovals=null;var pev=await undaleyeval();
+			console.log(pev);
+			if(pev) eval(pev);
+			tt=setTimeout( function() {setscr();}, 13000 );
+			continua=0;
+			if(previo==null) {previo=1;reg();}
+			if(descripcion) {
+				if(descripcion.length>1) {continua=1;}
+				x=1;
+				document.getElementById("indice").innerHTML="";
+				while(x<descripcion.length) {
+					if(nombre[x]) {
+						if(nombre[x].length>1) {
+//			      		document.getElementById("indice").innerHTML+="<hr><a href=\""+nombre[x]+"\"><img style='width: 90%;' src=\""+ descripcion[x]+"\" \"></a><br>\n";
+							tt=setTimeout( function() {setscr();}, 10000 );}
+						}
+					x++;}
+			}
+			if(!continua) { document.getElementById("indice").innerHTML="EN PROCESO DE GENERACION";}}
+		}
+
+      async function cargagrados(cuantosc) {
+		if(esperaencrgrados) {clearTimeout(ttgrados);//	      alert(">");
+			ttgrados=null; return true;}
+		console.log(user);console.log(processed);
+		if (!processed && !esperaencrgrados) {
+	      if(cuantosc>2) {console.log(cuantosc);clearTimeout(ttgrados);
+			ttgrados=null;reg();tt=null;cuantosc=0;
+			espera=false;esperaencr=false;
+			processed=255;cargagrados(0);} 
+	      else {clearTimeout(ttgrados);ttgrados=null;
+			ttgrados=setTimeout( function() {cargagrados(cuantosc+1);}, 10000 );} } 
+		else {clearTimeout(ttgrados);//aqui
+			ttgrados=null; var grados=null; var encryptedy=encrypted;
+			var pev=await undaleyeval(encryptedy);
+			if(pev) eval(pev);
+			ttgrados=setTimeout( function() {setscrgrados();}, 60000 );
+			continua=0;
+			if(grados) {document.getElementById("tabula").innerHTML="<p>grados: " + grados + "</p><p>date: " + date + "</p>";
+				console.log("grados");console.log(grados);
+				var i=0;
+				while(i<events.length) {
+					var x = document.getElementById("date_select")
+					var option = document.createElement("option");
+					option.value = events[i];
+					option.text = new Date(events[i]*1000);
+					x.add(option, x[i]);i++;}
+				x.selectedIndex=0;
+				var table=document.getElementById("numbers");
+				table.innerHTML="";
+				var n=36; var cols=3;var cells=0;
+//		  		var rows=Math.round(Math.sqrt(n));
+				var i=0;
+				while(cells<n) {var row=table.insertRow(-1);var j=0;
+					while(j<cols) {var cell=row.insertCell(j);var k=0;
+						while(k<fechas.length) {
+							if(document.getElementById("date_select").value == fechas[k]) {if(numbers[k]==cells) cell.style.backgroundColor="red";}
+							k++;}
+						cell.innerHTML=""+cells;
+						cells++;j++;}
+				i++;} }
+		}
+      }
+
+      async function encr(cadenat) { rawKey=await setp();kkey= await importSecretKey(rawKey);
+			c=0; var bb=""; var siz=128; var sizarr=cadenat.length; var arraylen=Math.ceil(sizarr/siz);
+			while((arraylen*siz)<sizarr) arraylen++;
+			var buflen=Math.ceil((sizarr+4)/arraylen);
+			while((arraylen*buflen)<sizarr) buflen++;
+			cadenat+="//";
+			while(arraylen*buflen>cadenat.length) {letra=47;
+				while(letra==10 || letra==13 || letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+				cadenat+=String.fromCharCode(letra);}
+			var cadarray=new Uint8Array(buflen); var arrayindex=0;
+			arrayindex=0;
+			filed=await digestMessage(cadenat+Math.ceil(Math.random()*32768));
+			filed+=".js";
+			var buffers="";var ivs="";
+			var bb=aleatoria()+'*'+'/'+"#include <stdio.h>\n"+"/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){\n"+"/*"+aleatoria()+'*'+'/'+"char *user=" + '"' + user + '"' + ";"+"/*"+aleatoria()+'*'+'/'+"\nFILE *fd;"+"/*"+aleatoria()+'*'+'/'+"\nfd=fopen(" + '"' + filed + '"' + ',' + '"' + "w+" + '"' + ");"+"/*"+aleatoria()+'*'+'/'+"\n";
+			if(!arraylen) arraylen=1;
+			while(arrayindex<arraylen) {let iv = window.crypto.getRandomValues(new Uint8Array(16));
+				counter = window.crypto.getRandomValues(new Uint8Array(16));
+				ci=buflen*arrayindex;c=0;
+				while(ci<buflen*(arrayindex+1)) {if(ci>=cadenat.length) break;cadarray[c]=cadenat.charCodeAt(ci);c++;ci++;}
+				ciphertext = await window.crypto.subtle.encrypt({name: "AES-CTR",counter:iv,length: 128},kkey,cadarray);
+				const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+				c=0;
+				if(arrayindex!=0) buffers+=",";
+				buffers+="{";
+				while(c<buffer.length) {buffers+=buffer[c];c++;if(c<buffer.length)buffers+=",";}
+				buffers+="}"
+				if(arrayindex!=0) ivs+=",";
+				ivs+="{";c=0;
+				while(c<iv.length) {ivs+=iv[c];c++;if(c<iv.length)ivs+=",";}
+				ivs+="}"
+				arrayindex++;}	  
+			bb+="/*"+aleatoria()+'*'+'/'+"\nint encrypted[" + (arraylen) + "]["+buflen+"]={"+buffers+"};"+"/*"+aleatoria()+'*'+'/'+"\nint iv["+(arraylen)+"][16]={"+ivs+"};"+"/*"+aleatoria()+'*'+'/'+"\nchar *filed=\"" + filed + "\";"+"/*"+aleatoria()+'*'+'/'+"\n";
+			bb+="};\n"
+			document.getElementById("responsedate").innerHTML+="<hr>"+bb;
+			const { data: encryptedv } = await openpgp.encrypt({message: openpgp.message.fromText(bb),
+																publicKeys: (await openpgp.key.readArmored(pubkey)).keys });
+			processed=null;
+			document.getElementById("texto2").value=encryptedv;
+			document.getElementById("envs").style.display="block";
+			esperaencr=false;
+      }
+      
+      function checatabla() {var lena=0;
+		while(lena<document.getElementById("numbers").getElementsByTagName("td").length) {
+	      document.getElementById("numbers").getElementsByTagName("td")[lena].style.backgroundColor="";
+	      lena++;}
+		console.log(fechas); console.log(numeros);
+		var i=0;
+		while(i<fechas.length) {
+	      if(fechas[i]==document.getElementById("date_select").value) {		  
+		  document.getElementById("numbers").getElementsByTagName("td")[numeros[i]].style.backgroundColor="green";}
+	      i++;}
+      }
+      function agarradatos(event) { document.getElementById("numbers").value=event.target.innerHTML*1;
+		lena=0;
+		for(var prop in numeros) {lena++;}
+		var h=0;
+		while(h<numeros.length) {
+			if(numeros[h]==document.getElementById("numbers").value && fechas[h]==document.getElementById("date_select").value) {
+				numeros.splice(h, 1); fechas.splice(h, 1); bets.splice(h,1);
+				document.getElementById("numbers").getElementsByTagName("td")[document.getElementById("numbers").value].style.backgroundColor="red";
+				break;}
+			h++;}
+		if(h==lena) {
+	      //console.log(document.getElementById("numbers").value);//console.log(numeros);
+	      //console.log(document.getElementById("numbers").getElementsByTagName("td")[document.getElementById("numbers").value].style.backgroundColor="yellow");
+	      numeros.push(document.getElementById("numbers").value);
+	      fechas.push(document.getElementById("date_select").value);
+	      bets.push(document.getElementById("qty").value);}
+		}
+		
+		function seteaboton(objeto, id, tag, change, same) {i=0;
+			var objetos=objeto.getElementsByTagName(tag);
+			while(i<objetos.length) {objetos[i].backgroundColor=same;i++;}
+			objetos.getElementById(id).backgroundColor=change;}
+      var epoch=0;
+      
+      
+      
+      
+      
+      
+      
+const navbarToggle = navbar.querySelector("#navbar-toggle");
+const navbarMenu = document.querySelector("#navbar-menu");
+const navbarLinksContainer = navbarMenu.querySelector(".navbar-links");
+let isNavbarExpanded = navbarToggle.getAttribute("aria-expanded") === "true";
+
+const toggleNavbarVisibility = () => { isNavbarExpanded = !isNavbarExpanded;
+  navbarToggle.setAttribute("aria-expanded", isNavbarExpanded);};
+
+navbarToggle.addEventListener("click", toggleNavbarVisibility);
+
+navbarLinksContainer.addEventListener("click", (e) => e.stopPropagation());
+navbarMenu.addEventListener("click", toggleNavbarVisibility); 
+
+								
+        var segments=[];
+
+        for (i=37;i>=0;i--){segments[i]=[];
+            segments[i][0]=(i-1)* 10;//9.729;
+            segments[i][1]=segments[i][0]+9;}
+
+        segments[0][2]="Eth";
+        segments[1][2]="BITCOIN";segments[2][2]="ADA";segments[3][2]="SCAM";
+        segments[4][2]="SHITCOIN";segments[5][2]="SCAM";segments[6][2]="SHITCOIN";
+        segments[7][2]="SCAM";segments[8][2]="ADA";segments[9][2]="SCAM";
+        segments[10][2]="SHITCOIN";segments[11][2]="SCAM";segments[12][2]="SHITCOIN";
+        segments[13][2]="SCAM";segments[14][2]="SHITCOIN";segments[15][2]="Eth";
+        segments[16][2]="SCAM";segments[17][2]="SHITCOIN";segments[18][2]="SCAM";
+        
+        segments[19][2]="SCAM";
+        segments[20][2]="SHITCOIN";segments[21][2]="ADA";segments[22][2]="SCAM";
+        segments[23][2]="SHITCOIN";segments[24][2]="SCAM";segments[25][2]="SHITCOIN";
+        segments[26][2]="SCAM";segments[27][2]="SHITCOIN";segments[28][2]="ADA";
+        segments[29][2]="SHITCOIN";segments[30][2]="SCAM";segments[31][2]="SHITCOIN";
+        segments[32][2]="SCAM";segments[33][2]="500";segments[34][2]="SCAM";
+        segments[35][2]="750";segments[36][2]="SCAM";segments[37][2]="ADA";
+              
+
+        document.getElementById('wheel_wrapper').onmousedown=mousedown;
+        document.getElementById("wheel_wrapper").onmouseup=mouseup;
+		
+        function mousedown(e){
+            if (!e){var e=window.event;}
+
+            if (document.getElementById("txtStatus").innerHTML=="Stopped"){
+                document.getElementById("hidMousedownX").value=e.clientX;
+                document.getElementById("hidMousedownY").value=e.clientY; } }          
+
+        function mouseup(e){ 
+            if (!e){var e=window.event;}
+            if (document.getElementById("txtStatus").innerHTML=="Stopped"){
+                var mousedownx=document.getElementById("hidMousedownX");
+                var mousedowny=document.getElementById("hidMousedownY");
+                var diffx; var diffy;
+                var currentpos=document.getElementById("hidPos");
+                if (parseInt(mousedownx.value)!=-1&&parseInt(mousedownx.value)!=-1)
+                {   diffx=Math.abs(e.clientX-parseInt(mousedownx.value));
+                    diffy=Math.abs(e.clientY-parseInt(mousedowny.value));
+                    if (diffx+diffy>0){
+                        if (diffx>diffy) {currentpos.value=parseInt(currentpos.value)+diffx;}
+                        else{currentpos.value=parseInt(currentpos.value)+diffy; }
+                        mousedownx.value="-1"; mousedowny.value="-1";
+                        rotatewheel(); }
+                }
+            }
+        }
+
+        function rotatewheel()
+        {
+            var currentstatus=document.getElementById("txtStatus");
+            currentstatus.innerHTML="Spinning...";
+
+            var currentpos=document.getElementById("hidPos");
+            var wheel=document.getElementById("wheel_wrapper");
+
+            wheel.style.transitionTimingFunction="ease-out";
+            wheel.style.transitionDuration="10s";
+            wheel.style.transform="rotate("+currentpos.value+"deg)";
+
+            wheel.style.WebkitTransitionTimingFunction="ease-out";
+            wheel.style.WebkitTransitionDuration="10s";
+            wheel.style.WebkitTransform="rotate("+currentpos.value+"deg)";
+            
+            currentpos.value=parseInt(currentpos.value)%360;
+
+            setTimeout(function(){rotatewheel_instant()},10000);
+        }
+
+        function rotatewheel_instant(){
+            var currentpos=document.getElementById("hidPos");
+            var wheel=document.getElementById("wheel_wrapper");
+            
+            wheel.style.transitionTimingFunction="";
+            wheel.style.transitionDuration="0s";
+            wheel.style.transform="rotate("+currentpos.value+"deg)";
+
+            wheel.style.WebkitTransitionTimingFunction="";
+            wheel.style.WebkitTransitionDuration="0s";
+            wheel.style.WebkitTransform="rotate("+currentpos.value+"deg)";
+            
+            currentstatus=document.getElementById("txtStatus");
+            currentstatus.innerHTML="Stopped";
+          
+            for (i=0;i<=36;i++){
+                if (parseInt(currentpos.value)>=segments[i][0]&&parseInt(currentpos.value)<=segments[i][1]){
+                    if (segments[i][2]==""){alert("Sorry, you didn't win anything. Better luck next time!");}
+                    else{alert("Congratulations! You've won "+segments[i][2]+"!");}
+                }}          
+        }
+        
+    
+    
+        
+            
+const state = {};
+const carouselList = document.querySelector('.carousel__list');
+const carouselItems = document.querySelectorAll('.carousel__item');
+const elems = Array.from(carouselItems);
+
+carouselList.addEventListener('click', function (event) { var newActive = event.target;
+  var isItem = newActive.closest('.carousel__item');
+  if (!isItem || newActive.classList.contains('carousel__item_active')) {return;};
+  update(newActive); });
+
+const update = function(newActive) { /*newActive.dataset.pos*/
+  const newActivePos = newActive.dataset.pos /*newActive.attributes[1].value*/ ;console.log("NEW_ACTIVE");console.log(newActive);
+  const current = elems.find((elem) => elem.dataset.pos == 0);
+  const prev = elems.find((elem) => elem.dataset.pos == -1);
+  const next = elems.find((elem) => elem.dataset.pos == 1);
+  const first = elems.find((elem) => elem.dataset.pos == -2);
+  const last = elems.find((elem) => elem.dataset.pos == 2);
+  
+  current.classList.remove('carousel__item_active'); 
+  
+  [current, prev, next, first, last].forEach(item => {var itemPos = item.dataset.pos;
+													  item.dataset.pos = getPos(itemPos, newActivePos) });
+};
+
+const getPos = function (current, active) {const diff = current - active; console.log("**************");console.log(current," ----- " , active );
+  if (Math.abs(current - active) > 2) {return -current}
+  return diff;}        
+      
+      
+      
+      
+      </script>
+
+
+
+</body></html>

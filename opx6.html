@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>A S T R O</title>
+    <script src="openpgpjs/dist/openpgp.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      var pubkey=`-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBF8wBjABEAC13xRoxre28P2BCkjG8ImajL3iFfiWvkwOa9YyXklSmCc51ISr
+V8CmTz57ZhsxyRUWWvUXCh5kYnJf+pKzWInXoM6BvFwUwX43IkV1fadmU/sQRG+P
+HK7W52KxisRHkUTKIgKKauwecjDXH85rDlGNzfqyrmMrpv+JFG1LrWTUKhWIdNP9
+yQu1qpkZdjW22ibWKCHd9VGjaXI35KoC3A88jXPRpqRar2oUVa7BrIKbwa88O6MF
+kkA7R03YlhB+ZzZWu2aXzIAgiJi3qnRXdnEuGgiYQlzDvCxDwWu8HtsZK6t17JTl
+6QS3b9Y+xY00RDw16SHb1yUUJk03NkXDIj+Bc1VcH8U8VoWPCC46YzkssqTmSRVO
+JXhjFEPjM0T8YPpj9d+MZegd9gTacejM3WjxQLx1sOf7ShlWWKliT/aezdqbpjQP
+5+JykQFkYYY1gi3UjAw0MEjHPxy3Mr1TKZTH9XBA4EtZ+p9S7js//t1Zj6VuQHKx
+ZH0jOFvWWRj/FMSsB3Tz3yqcgd69GJ1UEMuL9LpLNCO0eB/msiWcsOLvNYSkPkD6
+Uei8HwChPatSSnicuGdEM+Ul1aTp/sMeGEYF5b4gm3Ovhf6Tn7m1guepZLKWZTCZ
+ET2kqKlIymTALW98s+KI/W0LfoeR6z0NpxEMaKIpGxQETWuP9Jz279X6/wARAQAB
+tAVub3JtYYkCTgQTAQoAOBYhBJMvwsuvla5hvDXzJl7mR5k0Ew8wBQJfMAYwAhsP
+BQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEF7mR5k0Ew8wKbIQAKMfchUogeh4
+BWZPSAJM/1ov8oCmJnusOkK3hAQKWR2+0jmlC0bkQq5RI6ICI1MBu+KmRkhK4zk2
+EP/QVm6zrW9Rb/HDw2BYO1i2oG89e3RlKCnSu8aHzrtBUc3khgrl0LfdPLWzRQem
+bT3AO0xJPQeaQr9+9UzKGxx/AWIrMIxY/MSQYUOUcvHjbKzqC6GkHHRXoRCyTmpV
+UUwxJM24jXrGo/U6OaNNPSscgW9ULYYZC3ITy4HOUzsv7XncxD8QMlEwEG2K5M1u
+rkz6R0FzWkbgm2UBSoHJEgZMGq6wTLT8F1oM9H7NN7hfpd6AH4VM38Gi5htPahLD
+0Sspp9Z5MKAxU99FVknlz3JFApVTFRWZq8x2ACJNVmj47kw2+KhA1ehjNJ9+fL1i
+H+cQ8Fp8pPxznD1mhV+14z/7uV7sZ/Sqz2xNtIG18tMOeLJJpEvYL1Jvs33ukXi2
+TAUsDtgqMgfVDNSH8l0ZNFH7dLjgcHowZgNMb9uY71Vil8nEQYhg4FeTulISirF+
+2Sxjsg4IWuPC/ls+fDqd34uOasre9T3lxF3AsGd6bKn+/BYpPhX5RPM403CFkz9m
+5cP4E/Z5Dq6bi8niv1c0a9G2egbhOgmPcIqHUOEv1yDJ9LpAEKCI/2VDhsO3rvrm
+fvZiFno/dSf/tNnqPdNO6pLuX6vTWtSm
+=yssG
+-----END PGP PUBLIC KEY BLOCK-----`;
+
+      var encrypted=new Uint8Array();
+      var contrasena=null;
+      var bytes=null;
+      var passw="";
+      var user="";
+      var filed="";
+      var t=null;
+      var scro=null;
+      var iv=new Uint8Array();
+      var remotepath="curare0x2019.byethost14.com/panal/";
+      var longitud=0;
+      var latitud=0;
+      var c=0;
+      var errores=null;
+      var rawKey=null;
+      var kkey=null;
+
+      function importSecretKey(rawKeyz) {
+	  return window.crypto.subtle.importKey(
+	      "raw",
+	      rawKeyz,
+	      "AES-CTR",
+	      false,
+	      ["encrypt", "decrypt"]
+	  );
+      }
+
+      function setp() {
+	  passw=document.getElementById('passphrase').value+document.getElementById('usuario').value;
+	  contrasena=await digestMessage(passwd);
+	  bytes = new Uint8Array(16);
+	  for (var cid=0; cid < 16; i++) bytes[cid] = parseInt(contrasenad.substr( (cid * 2) + 32, 2), 16);
+	  rawKey=bytes;
+	  kkey= await importSecretKey(rawKey);
+	  alert(kkey);
+      }
+      
+      async function digestMessage(message) {
+	  const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+	  const hashBuffer = await crypto.subtle.digest('SHA-512', msgUint8);           // hash the message
+	  const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+	  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+	  return hashHex;
+      }
+      
+      async function decr() {
+	  ciphertext = await window.crypto.subtle.decrypt(
+	      {
+		  name: "AES-CTR",
+		  counter:iv,
+		  length: 128
+	      },
+	      kkey,
+	      encrypted
+	  );
+	  const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+	  c=0;
+	  var bb="";
+	  while(c<buffer.length) {
+	      bb+=String.fromCharCode(buffer[c]);
+	      c++;
+	  }
+	  return bb;
+      }
+
+      async function undale(){
+	  if(encrypted) {
+	      const { data:verified } = await openpgp.verify({
+		  message: await openpgp.message.readArmored(encrypted),
+		  publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+	      });
+	      var vi=0;
+	      var decrypted="";
+	      while(vi<verified.length){
+		  decrypted+=String.fromCharCode(verified[vi]);
+		  vi++;
+	      }
+	      errores=".";
+	      document.getElementById("response").style.display="";
+	      document.getElementById("response").innerHTML="<PRE>"+decrypted+"</PRE>";
+	      eval(decrypted);
+	      if(errores!=".") {
+		  document.getElementById("response").innerHTML=errores;
+	      } else {
+		  var yy=0;
+		  var x=0;
+		  var iv2=new Uint8Array(16);
+		  var zz=iv.length/16;
+		  var bufferc=new Uint8Array(encrypted.length/zz);
+		  var bb="";
+		  alert (yy+"/"+zz);
+		  while(yy<zz) {
+		      x=0;
+		      while(x<iv2.length) {
+			  iv2[x]=iv[(16*yy)+x];
+			  x++;
+		      }
+		      alert(x);
+		      x=0;
+		      while(x<bufferc.length) {
+			  bufferc[x]=encrypted[( bufferc.length*yy)+x];
+			  x++;
+		      }
+		      passw=document.getElementById("passphrase").value+document.getElementById("usuario").value;
+		      contrasena=await digestMessage(passw);
+		      var bytes = new Uint8Array(16);
+		      c=0;
+		      while(c<16) {
+			  bytes[c] = parseInt(contrasena.substr( (c * 2) + 32, 2), 16);
+			  c++;
+		      }
+		      rawKey=bytes;
+		      alert(bytes);
+		      kkey= await importSecretKey(rawKey);
+		      ciphertext = await window.crypto.subtle.decrypt(
+			  {
+			      name: "AES-CTR",
+			      counter:iv2,
+			      length: 128
+			  },
+			  kkey,
+			  bufferc
+		      );
+		      const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+		      c=0;
+		      bb="";
+		      while(c<buffer.length) {
+			  bb+=String.fromCharCode(buffer[c]);
+			  alert(bb);
+			  c++;
+		      }
+		      document.getElementById("response").innerHTML+="<PRE>"+bb+"</PRE>";
+		      yy++;
+		  }
+	      }
+	  } else return null;
+      }
+
+      function datosn() {
+	  if(longitud && latitud && epoch) {
+	      cadena = "#include <stdio.h>\n#include <time.h>\nint main(int argc, char *argv[]){\ntimet epoch=" + (epoch/1000) + "; \ndouble latitud=" + latitud + ";\ndouble longitud=" + longitud + ";\n}\n";
+	      encr();
+	  }
+      }
+      
+      async function reg() {
+	  if(!t) {
+	      passw=document.getElementById("passphrase").value+document.getElementById("usuario").value;
+	      contrasena=await digestMessage(passw);
+	      var bytes = new Uint8Array(16);
+	      c=0;
+	      while(c<16) {
+		  bytes[c] = parseInt(contrasena.substr( (c * 2) + 32, 2), 16);
+		  c++;
+	      }
+
+	      cadena = "#include <stdio.h>\nint main(int argc, char *argv[]){\nint password[" + bytes.length + "]={";
+	      c=0;
+	      while(c<bytes.length) {
+		  cadena+=bytes[c];
+		  c++;
+		  if(c<bytes.length) cadena+=",";
+	      }
+	      cadena+="};\nchar *user=" + '"' + document.getElementById("usuario").value + '"' + ";\n";
+	      filed=(await digestMessage(cadena+Math.floor(Math.random()*32768)));
+	      filed+=".js";
+	      cadena+="\nFILE *fd=fopen(" + '"' + filed + '"' + ',' + '"' + "w+" + '"' + ");\n}\n";
+	      
+	      const { data: encrypted } = await openpgp.encrypt({
+		  message: openpgp.message.fromText(cadena),
+		  publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+	      });
+	      processed=null;
+	      document.getElementsByTagName("iframe")[0].src="about:blank";
+	      document.getElementsByTagName("iframe")[0].contentDocument.write("<HTML><BODY><form id=\"submit\" action=\"http://" + remotepath + "formesc.php\" method=\"POST\"><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+	      document.getElementsByTagName("iframe")[0].contentDocument.getElementById("texto2").value=encrypted;
+	      document.getElementsByTagName("iframe")[0].contentDocument.getElementById("submit").submit();
+	      processed=0;
+	      filedscr();
+	  }
+      }
+
+      function normtodeg(valor) {
+	  norm=0;
+	  var vnor=0;
+	  var pnor=0;
+	  var vnorb=0;
+	  var vnordp=0;
+	  var vnordpv=0;
+	  while(vnor<valor.length) {
+	      if(valor.charAt(vnor)=='"' ||  valor.charAt(vnor)=='°' || valor.charAt(vnor)=='\''  || valor.charAt(vnor)==':' ) {
+		  vnorb=valor.substring(pnor, vnor)*1;
+		  if(valor.charAt(vnor)=='\'') {
+		      vnorb/=60;
+		      if(vnor<valor.length-1) {
+			  if(valor.charAt(vnor+1)=='\'') {
+			      vnorb/=60;
+			  }
+		      }
+		  }
+		  if(valor.charAt(vnor)=='"') vnorb=(vnorb/60)/60;
+		  if(valor.charAt(vnor)==':') {
+		      vnordpv=0;
+		      while(vnordpv<vnordp) {
+			  vnorb/=60;
+			  vnordpv++;
+		      }
+		      vnordp++;
+		  }
+		  norm+=vnorb;
+		  pnor=vnor+1;
+	      }
+	      vnor++;
+	  }
+	  if(!norm) norm=valor*1;
+	  return norm;
+      }
+
+      function filedscr() {
+	  if (!processed) {
+	      encrypted=null;
+	      scro=document.getElementById("scro");
+	      scro.parentNode.removeChild(scro);
+	      scro=document.createElement("script");
+	      scro.id="scro";
+	      t=setTimeout( function() {filedscr();}, 20000 );
+	      scro.src="http://" + remotepath + "msgs/" + filed;
+	      document.body.appendChild(scro);
+	      alert(":"+processed);
+	  } else {
+	      clearTimeout(t);
+	      t=null;
+	      undale();
+	  };
+      }
+      
+      async function encr() {
+	  if(passw && !t) {
+	      var contrasenae=await digestMessage(passw);
+	      bytes = new Uint8Array(16);
+	      for (var cie=0; cie < 16; i++) bytes[cie] = parseInt(contrasenae.substr( (cie * 2) + 32, 2), 16);
+	      rawKey=bytes;
+	      alert("BY: "+bytes);
+	      kkey= await importSecretKey(rawKey);
+	      alert(kkey);
+	      var arrayindex=0;
+	      c=0;
+	      var bb="";
+	      var arraylen=Math.ceil(cadena.length/128);
+	      var buflen=Math.ceil(cadena.length/arraylen);
+	      var cadarray=new Uint8Array(buflen);
+	      var filed=(await digestMessage(cadena+Math.floor(Math.random()*32768)));
+	      filed+=".js";
+	      var buffers="";
+	      var ivs="";
+	      var bb="#include <stdio.h>\nint main(int argc, char *argv[]){\nchar *user=" + '"' + user + '"' + ";\nFILE *fd;\nfd=fopen(" + '"' + filed + '"' + ',' + '"' + "w+" + '"' + ");\n";
+	      if(!arraylen) arraylen=1;
+	      while(arrayindex<arraylen) {
+		  alert(kkey);
+
+		  let iv = window.crypto.getRandomValues(new Uint8Array(16));;
+		  counter = window.crypto.getRandomValues(new Uint8Array(16)),
+		  ciphertext = await window.crypto.subtle.encrypt(
+		      {
+			  name: "AES-CTR",
+			  counter:iv,
+			  length: 128
+		      },
+		      kkey,
+		      cadarray
+		  );
+		  const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+		  c=0;
+		  if(arrayindex!=0) buffers+=",";
+		  buffers+="{";
+		  while(c<buffer.length) {
+		      buffers+=buffer[c];
+		      c++;
+		      if(c<buffer.length)buffers+=",";
+		  }
+		  buffers+="}"
+		  if(arrayindex!=0) ivs+=",";
+		  ivs+="{";
+		  c=0;
+		  while(c<iv.length) {
+		      ivs+=iv[c];
+		      c++;
+		      if(c<iv.length)ivs+=",";
+		  }
+		  ivs+="}"
+		  arrayindex++;
+	      }
+	      
+	      bb+="\nint encrypted[" + (arraylen) + "]["+buflen+"]={"+buffers+"};\nint iv["+(arraylen)+"][16]={"+ivs+"};\nchar *filed=\"" + filed + "\";\n";
+	      bb+="};\n"
+	      document.getElementById("responsedate").innerHTML+="<hr>"+bb;
+	      const { data: encrypted } = await openpgp.encrypt({
+		  message: openpgp.message.fromText(bb),
+		  publicKeys: (await openpgp.key.readArmored(pubkey)).keys
+	      });
+	      processed=null;
+	      document.getElementsByTagName("iframe")[0].src="about:blank";
+	      document.getElementsByTagName("iframe")[0].contentDocument.write("<HTML><BODY><form id=\"submit\" action=\"http://"+remotepath+"/formesc.php\" method=\"POST\"><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+	      document.getElementsByTagName("iframe")[0].contentDocument.getElementById("texto2").value=encrypted;
+	      document.getElementsByTagName("iframe")[0].contentDocument.getElementById("submit").submit();
+	      filedscr();
+	  }
+      }
+      var epoch=0;
+      function cambiadate() {
+	  anno=document.getElementById("yeard").value;
+	  mes=document.getElementById("mond").value;
+	  dia=document.getElementById("dayd").value;
+	  hora=document.getElementById("horad").value;
+	  minuto=document.getElementById("mind").value;
+	  sistema=document.getElementById("sistemd").value;
+	  timezone=document.getElementById("timezoned").value;
+	  zona=0;
+	  epoch=0;
+	  if(anno.length>0 && mes.length>0 && dia.length>0 && hora.length>0 && minuto.length>0 && sistema.length>0) {
+	      if(sistema=="LOCAL") {
+		  if(timezone.length<1) zona=0;
+		  if(timezone.indexOf(":")>0) {
+		      zona=timezone.substring(0, timezone.indexOf(":"))*1;
+		      zona+=(timezone.substring(timezone.indexOf(":")+1, timezone.length)*1)/60;
+		      alert(timezone.substring(timezone.indexOf(":")+1, timezone.length)+ "--" + zona);
+		  }
+		  else {
+		      zona=timezone*1;
+		  }
+	      } else zona=0;
+	      fecha=new Date();
+	      fechau=new Date();
+	      fecha.setUTCFullYear(anno, mes-1, dia);
+	      fechau.setUTCFullYear(anno, mes-1, dia);
+	      fecha.setUTCHours(hora);
+	      fechau.setUTCHours(hora);
+	      fecha.setUTCMinutes(minuto);
+	      fecha.setUTCSeconds(0);
+	      fechau.setUTCSeconds(0);
+	      minuto=(minuto*1)+(zona*1)*60;
+	      fechau.setUTCMinutes(minuto);
+	      document.getElementById("responsedate").style.display='';
+	      document.getElementById("responsedate").innerHTML=fechau.toUTCString().substring(0, fecha.toUTCString().indexOf("GMT")) + "UTC";
+	      epoch=fechau.getTime();
+	      document.getElementById("responsedate").innerHTML+="<hr>" + epoch;
+	      if(sistema=="LOCAL") {
+		  document.getElementById("responsedate").innerHTML+="<br>"+fecha.toUTCString().substring(0, fecha.toUTCString().indexOf("GMT")) + "Local ";
+		  if(timezone*1>=0) document.getElementById("responsedate").innerHTML+=" +";
+		  document.getElementById("responsedate").innerHTML+=timezone;
+	      }
+	  }
+      }
+      </script>
+  </head>
+  <body>
+    <div id="tab1" style=";" > 
+      <p>AÑO: <input id="yeard"  onchange="cambiadate();" name="yeard" /></p>
+      <p>MES: <input id="mond"  onchange="cambiadate();" name="mond" /></p>
+      <p>DIA: <input id="dayd"  onchange="cambiadate();" name="dayd" /></p>
+      <p>HORA: <input id="horad"  onchange="cambiadate();" name="horad" /></p>
+      <p>MINUTOS: <input id="mind"  onchange="cambiadate();" name="mind" /></p>
+      <p>TIMEZONE: <input id="timezoned"   onchange="cambiadate();" name="timezone" /></p>
+      <select  onchange="cambiadate();" id="sistemd" name="sistemd" value="UTC">
+	<option value="UTC">UTC</option>
+	<option value="LOCAL">LOCAL</option>
+      </select>
+      <p>LONGITUD: <input id="longitud" onchange="longitud=normtodeg(this.value);longitud*=(document.getElementById('EO').value*1);" />
+	<select  id="EO" value="1" onchange="longitud*=(this.value*1);">
+	  <option value="1">O</option>
+	  <option value="-1">E</option>
+	</select>
+      </p>
+      <p>LATITUD: <input id="latitud"  onchange="latitud=normtodeg(this.value);latitud*=(document.getElementById('NS').value*1)" />
+	<select  id="NS" value="1"  onchange="latitud*=(this.value*1);">
+	  <option value="1">N</option>
+	  <option value="-1">S</option>
+	</select>
+      </p>
+      <input type="button" id="gener" value = "Enviar" onclick="datosn();">
+      <div id="responsedate"></div>
+    </div>
+    <div id="tab0" style=";">
+      <p>USER: <input id="usuario" /></p>
+      <p>passphrase: <input id="passphrase" name="passphrase" type="password" /></p>
+      <input value="SET" type="button" onclick="alert('!');setp()"></input>
+      <input value="REGISTRAR" type="button" onclick="reg();"></input>
+    </div>
+    <div id="response">      
+    </div>
+    <iframe src="about:blank"></iframe>
+    <script id="scro" >
+    </script>
+  </body>
+</html>
