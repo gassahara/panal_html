@@ -5,7 +5,7 @@ function minus($mins) {
     $formatted_time = gmdate("Y-m-d H:i", $new_time); // Format the new timestamp    
     return $formatted_time; // Print the new time
 }
-if (! $_POST["iv_OTP"] || ! $_POST["OTP_resource"] || ! $_POST["OTP"]) {
+if (! isset($_POST["iv_OTP"]) || ! isset($_POST["OTP_resource"]) || ! isset($_POST["OTP"])) {
     $OTP_resource="";
     while(strlen($OTP_resource)<128){
         $cadn=rand(0, 255);
@@ -56,7 +56,7 @@ if (! $_POST["iv_OTP"] || ! $_POST["OTP_resource"] || ! $_POST["OTP"]) {
     */
     echo "var iv_OTP=\"$iv_OTP\"; var OTP_resource=\"$OTP_resource\"; var OTP=\"$OTP\"; var init_OTProcessed=255;\n";
 }
-if ( $_POST["iv_OTP"] &&  $_POST["OTP_resource"] &&  $_POST["OTP"] &&  $_POST["texto2"]) {
+if ( isset($_POST["iv_OTP"]) &&  isset($_POST["OTP_resource"]) &&  isset($_POST["OTP"]) &&  isset($_POST["texto2"])) {
     $filename = "msgs/" . $_POST["OTP_resource"] . ".js";
     $ciphertext=file_get_contents($filename);
     $fecha2=gmdate("Y-m-d H:i");
@@ -82,7 +82,7 @@ if ( $_POST["iv_OTP"] &&  $_POST["OTP_resource"] &&  $_POST["OTP"] &&  $_POST["t
         $fp = fopen("msgs/" . $filename . ".js", 'w');
         fwrite($fp, $_POST["texto2"]);
         fclose($fp);
-        echo "var error=\"Success\";";
+        echo "var error=\"Success\";var filename=\"$filename\"";
     } else {
         echo "var error=\"Could not decrypt $mins $fecha1 $fecha2\";";
     }
