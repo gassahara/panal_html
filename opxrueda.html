@@ -193,12 +193,16 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      if(document.getElementById('usuario').value.length<8) {
 		  document.getElementById("modaltext").innerHTML="Username Must Be At Least 8 Characters Long";
 		  document.getElementById("modal").style.display="block";
+		  document.getElementById("ingrbutton").disabled=0;
+		  document.getElementById("regbutton").disabled=0;
 		  resolve({error: "Username Must Be At Least 8 Characters Long"});
 		  return false;
 	      }
 	      if(document.getElementById('passphrase').value.length<10) {
 		  document.getElementById("modaltext").innerHTML="Password Must Be At Least 10 Characters Long";
 		  document.getElementById("modal").style.display="block";
+		  document.getElementById("ingrbutton").disabled=0;
+		  document.getElementById("regbutton").disabled=0;
 		  resolve({error: "Password Must Be At Least 10 Characters Long"});
 		  return false;
 	      }
@@ -275,7 +279,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 
 			      if(header.indexOf("From:")>=0 && !rsaPublicKey ) {
 				  var buzonFromField=header.substring(header.indexOf("From:")+("From:").length, header.length).substring(0, header.substring(header.indexOf("From:")+("From:").length, header.length).indexOf("\n")).trim();
-				  console.log("Decryoting", {header, buzonFromField});
+				  console.log("Decrypting", {header, buzonFromField});
 				  buzonFromField=await digestMessage(buzonFromField);
 				  console.log({buzonFromField});
 				  buzonFromFieldPublic=await digestMessage(buzonFromField+".jspublic"+"\n");
@@ -289,18 +293,17 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  document.body.appendChild(scro);
 				  while(error==".") {
 				      console.log({error});
-				      await sleep (1000);
+				      await sleep (500);
 				  }
 				  if(error=="Not Found") {
 				      errorFromDecMessages="Signatary Not Found";
 				      resolve({error: errorFromDecMessages, data});
 				      return false;
 				  }
-				  console.log({errorFromDecMessages});
 				  errorFromDecMessagesName=errorFromDecMessages;
 				  eval(atob(content));
 				  publicK=rsaPublicKey;
-				  console.log("Loaded Public ('From:' Field)", {content}, publicK);
+				  console.log("Loaded Public ('From:' Field)");
 			      }
 			      
 			      var boundary=header.substring(header.indexOf("boundary=")+("boundary=").length, header.length);
@@ -332,17 +335,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      }
 			      if(errorFromDecMessages!="Missing Fields") {
 				  var messageV=contentMessage[fields["signature"]];
-				  console.log({contentMessage, fields, messageV});
 				  const signedMessage = await openpgp.readCleartextMessage({
 				      cleartextMessage: messageV
 				  });
-				  console.log({signedMessage});
 				  const public_Key = await openpgp.readKey({ armoredKey: publicK });
 				  openpgp.verify({
 				      message: signedMessage,
 				      verificationKeys: public_Key,
 				  }).then(async (verificationResult)=> {
-				      console.log(verificationResult);
 				      try {
 					  await verificationResult.signatures[0].verified; // throws on invalid signature
 				      } catch (e) {
@@ -351,13 +351,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      }
 				      errorFromDecMessages = "Message Mismatch";
 				      messageV=signedMessage.text;
-				      console.log({messageV, rsaPrivateKey});
 				      RSA_decrypt(messageV, rsaPrivateKey).then((response)=>{
 					  var messageD=response;
-					  console.log({messageD});
 					  var headerM=messageD.substring(0, messageD.indexOf("\n\n")+2);
 					  var datefieldM=headerM.substring(headerM.indexOf("Date:")+("Date:").length, headerM.length).substring(0, headerM.substring(headerM.indexOf("Date:")+("Date:").length, headerM.length).indexOf("\n")).trim();
-					  console.log({datefieldM, datefield});
 					  var subject=headerM.substring(headerM.indexOf("Subject:")+("Subject:").length, headerM.length).substring(0, headerM.substring(headerM.indexOf("Subject:")+("Subject:").length, headerM.length).indexOf("\n"));
 					  messageD=messageD.substring(headerM.length, messageD.length);
 					  if(datefield==datefieldM) {
@@ -374,7 +371,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  }
 						  headerRest=headerRest.substring(headerRest.indexOf("\n")+1, headerRest.length);
 					      }
-					      console.log({data});
 					      resolve({error: errorFromDecMessages, data});
 					  } else {
 					      resolve({error: errorFromDecMessages, data});
@@ -747,7 +743,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      init_OTProcessed=false;
 	      var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
 	      error="Not Found";
-	      await sleep (1000);
+	      await sleep (500);
 	      var esperando=null;
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
@@ -760,7 +756,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  document.body.appendChild(scro);
 		  esperando+=1;
 		  console.log({esperando, error});
-		  await sleep (1000);
+		  await sleep (500);
 	      }
 	      console.log({init_OTProcessed});
 	      regprocessed=false;
@@ -773,14 +769,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      return(false);
 		  } else {
 		      if(response.length===4) {
-			  await sleep (1000);
+			  await sleep (500);
 			  console.log({response});
 			  encrypted=null;
 			  resource_index=null;
 			  var iframeforRegister=null;
 			  buzon=response[1];
 			  digestMessage(response[1]).then(async (buzon)=>{
-			      await sleep (1000);
+			      await sleep (500);
 			      error=".";
 			      var esperando=0;
 			      while (error==".") {
@@ -794,7 +790,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  document.body.appendChild(scro);
 				  console.log({error});
 				  while(error==".") {
-				      await sleep (1000);
+				      await sleep (500);
 				  }
 			      }
 			      if(error=="Not Found") {
@@ -803,9 +799,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  return(false);
 			      } else {
 				  eval(atob(content));
-				  console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
 				  decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
-				      console.log({respo, prefix_rsa, prefix_ivRsa});
 				      if(respo.indexOf("var")<0) {
 					  document.getElementById("modaltext").innerHTML="Incorrect User Data";
 					  document.getElementById("modal").style.display="block";
@@ -821,7 +815,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					      var name=await digestMessage(buzon+""+contador);
 					      name=name+".js";
 					      console.log({buzon, name, contador});
-					      console.log("********************************************************", {name, rsaKey, privateKey});
+//					      console.log("********************************************************", {name, rsaKey, privateKey});
 					      var errorName=".";
 					      var boxes=[];
 					      while(errorName!="Not Found") {
@@ -836,7 +830,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      console.log(".......................", encodeURI(name), '#############', scro.src, esperando);
 						      document.body.appendChild(scro);
 						      while(error==".") {
-							  await sleep (1000);
+							  await sleep (500);
 						      }
 						  }
 						  errorName=error;					      
@@ -856,13 +850,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  console.log("loading public =:=:=:=:=:==:=:=:=:=:=", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
 							  document.body.appendChild(scro);
 							  while(error==".") {
-							      await sleep (1000);
+							      await sleep (500);
 							  }
 							  console.log({error});
 						      }
 						      errorName=error;
 						      eval(atob(content));
-						      console.log("Loaded Public", {content}, atob(content));
+//						      console.log("Loaded Public", {content}, atob(content));
 						      if(rsaPublicKey) {
 							  cadena=await RSA_verify_and_decrypt(message, rsaKey, rsaPublicKey);
 							  boxes[name]["error"]=error;
@@ -899,7 +893,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  boxes[name]["name"]=nameBox;
 								  console.log({nameBox, addressBox});
 							      }
-							      console.log({name, content, cadena, boxes}, atob(content));
 							  } else {
 							      console.log({cadena});
 							  }
@@ -916,6 +909,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					      document.getElementById("modaltext").innerHTML="User Loaded Successfully";
 					      document.getElementById("modal").style.display="block";
 					      resolve(boxes);
+					      return true;
 					  }
 				      }
 				  });
@@ -984,18 +978,30 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      console.log("Setting address for Ignore Box", encodeURI(address), '#############');
 			      document.body.appendChild(scro);
 			      while(error==".") {
-				  await sleep (1000);
+				  await sleep (500);
 			      }
 			  }
 			  console.log({address, error});
 			  if(error=="Not Found") continua=false;
 			  contador++;
 		      }
-		      alert(await RSA_crearBuzon(buzon, "#ignore"));
+		      await RSA_crearBuzon(buzon, "#ignore");
 		      return true;
 		  } else {
+		      document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: ignore)";
+		      document.getElementById("modal").style.display="block";
 		      console.log({boxesofIgnored});
-		      RSA_cargaBuzon(boxesofIgnored[0]["address"].trim(), boxesofIgnored[0]["name"].trim(), boxesofIgnored[0]["subject"]);
+		      RSA_cargaBuzon(boxesofIgnored[0]["address"].trim(), boxesofIgnored[0]["name"].trim(), boxesofIgnored[0]["subject"]).then(async (resp)=>{
+			  document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: coins)";
+			  document.getElementById("modal").style.display="block";
+			  console.log({resp});
+			  var c=0;
+			  console.log({subjectisCoin});
+			  while(c<subjectisCoin.length) {
+			      await RSA_cargaBuzon(boxes[subjectisCoin[c]]["address"].trim(), boxes[subjectisCoin[c]]["name"].trim(), boxes[subjectisCoin[c]]["subject"]);
+			      c++;
+			  }
+		      });
 		  }
 		  if(!subjectisCoin.length) {
 		      show=1;
@@ -1020,7 +1026,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      console.log("Setting address for Coin Box", encodeURI(address), '#############');
 			      document.body.appendChild(scro);
 			      while(error==".") {
-				  await sleep (1000);
+				  await sleep (500);
 			      }
 			  }
 			  console.log({address, error});
@@ -1048,8 +1054,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  var tokens=new Array();
 	  var c=0;
 	  var ammounts=0;
-	  console.log(text.indexOf("char fname[20]=")+ "\n"  +  text.indexOf("long date=")+ "\n"  + text.indexOf("long ammount=")+ "\n"  + text.indexOf("long uid1=")+ "\n"  + text.indexOf("long uid2=")+ "\n"  + text.indexOf("long uid3=")+ "\n"  + text.indexOf("long uid4=")+ "\n" );
-	  while(text.indexOf("char fname[20]=")>1 &&  text.indexOf("long date=")>1 && text.indexOf("long ammount=")>1 && text.indexOf("long uid1=")>1 && text.indexOf("long uid2=")>1 && text.indexOf("long uid3=")>1 && text.indexOf("long uid4=")>1) {
+	  console.log(text.indexOf("char fname[21]=")+ "\n"  +  text.indexOf("long date=")+ "\n"  + text.indexOf("long ammount=")+ "\n"  + text.indexOf("long uid1=")+ "\n"  + text.indexOf("long uid2=")+ "\n"  + text.indexOf("long uid3=")+ "\n"  + text.indexOf("long uid4=")+ "\n" );
+	  while(text.indexOf("char fname[21]=")>1 &&  text.indexOf("long date=")>1 && text.indexOf("long ammount=")>1 && text.indexOf("long uid1=")>1 && text.indexOf("long uid2=")>1 && text.indexOf("long uid3=")>1 && text.indexOf("long uid4=")>1) {
 	      console.log({c});
 	      tokens[c]=[];
 	      tokens[c]["stamps_dates"]=new Array();
@@ -1059,7 +1065,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      tokens[c]["stamps_uid2"]=new Array();
 	      tokens[c]["stamps_uid3"]=new Array();
 	      tokens[c]["stamps_uid4"]=new Array();
-	      tokens[c]["stamps_fname"]=text.substring(text.indexOf("char fname[20]=")+("char fname[20]=").length, text.length);
+	      tokens[c]["stamps_fname"]=text.substring(text.indexOf("char fname[21]=")+("char fname[21]=").length, text.length);
 	      tokens[c]["stamps_fname"]=tokens[c]["stamps_fname"].substring(0, tokens[c]["stamps_fname"].indexOf(";"));
 	      tokens[c]["stamps_dates"]=text.substring(text.indexOf("long date=")+("long date=").length, text.length);
 	      tokens[c]["stamps_dates"]=tokens[c]["stamps_dates"].substring(0, tokens[c]["stamps_dates"].indexOf(";"));
@@ -1079,49 +1085,41 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  }
 	  return tokens;
       }
-      async function toStampCollector(text, buzon, address, command, ammountBillsArg=null) {
-	  var ammountBills=null;
-	  if(ammountBillsArg) {
-	      ammountBills=document.getElementById("cambioBills").value*1;
-	      alert(ammountBills);
+      // - - - -
+      async function toStampContractBox(buzon, command, ammountinTokens) {
+	  if(coinsValue*1<ammountinTokens*1) {
+	      resolve({error: "Insuficient Funds", data: null});
+	      return false;
 	  }
-	  var tokens=new Array();
+	  var ammountArray=new Array(1000000, 500000, 250000, 200000, 125000, 100000, 50000, 25000, 20000, 12500, 10000, 5000, 2500, 2000, 1250, 1000, 500, 250, 200, 125, 100, 50, 25, 20, 10, 5, 2, 1);
+	  var d=0
 	  var c=0;
-	  if(text==null) {
-	      c=0;
-	      for(var key in coins) {
-		  tokens[c]=[];
-		  for(var keyc in coins[key]) {
-		      console.log({keyc}, tokens[c][keyc]);
-		      tokens[c][keyc]=coins[key][keyc];
-		  }
-		  console.log({key});
-		  c++;
-	      }
-	      console.log({tokens, c});
-	      if(c<1) {
-		  document.getElementById("modaltext").innerHTML="There are not any Coins Loaded";
-		  document.getElementById("modal").style.display="block";
-		  return (false);
-	      }
-	  } else {
-	      console.log("PARSING");
-	      tokens=parseTexttoTokens(text);
-	  }
-	  console.log("TOKENS", {tokens});
+	  var ammountforTokens=ammountinTokens*1;
+	  var tokens=new Array();
 	  c=0;
-	  if(text) {
-	      while(c<tokens.length) {
-		  if (coins.hasOwnProperty(tokens[c]["stamps_fname"])) {
-		      tokens.splice(c, 1);
-		      c--;
-		  } else {
-		      coins[tokens[c]["stamps_fname"]]=tokens[c];
+	  while(d<ammountArray.length) {
+	      for(var key in coins) {
+		  if(ammountArray[d]<=ammountforTokens*1 && coins[key]["verified"] && coins[key]["stamps_ammount"]*1==ammountArray[d]*1) {
+		      ammountforTokens=(ammountforTokens*1)-(coins[key]["stamps_ammount"]*1);
+		      tokens[c]=[];
+		      for(var keyc in coins[key]) {
+			  tokens[c][keyc]=coins[key][keyc];
+			  coins[key]["verified"]=false;
+		      }
+		      console.log({key});
+		      c++;
 		  }
-		  c++;
 	      }
+	      d++;
 	  }
-	  console.log({tokens, coins, text});
+	  if(ammountforTokens*1>0) {
+	      alert(ammountforTokens);
+	      resolve({error: "NO Change for Ammount Please Consolidate", data: null});
+	      return false;
+	  }
+	  console.log({tokens, c, buzon, command});
+	  alert(c);
+	  alert(ammountforTokens);
 	  if(tokens.length) {
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
@@ -1133,23 +1131,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  console.log(">:>:>", scro.src);
 		  document.body.appendChild(scro);
 		  console.log({error});
-		  await sleep (5000);
+		  await sleep (500);
 	      }
 	      console.log({init_OTProcessed});
-	      var iframeforRegister=null;
-	      iframeforRegister=document.getElementById("ifraRegister");
-	      if(iframeforRegister)iframeforRegister.parentNode.removeChild(iframeforRegister);
-	      iframeforRegister=document.createElement("iframe");
-	      iframeforRegister.id="iframeforRegister";
-	      document.body.appendChild(iframeforRegister);
-	      iframeforRegister.src="about:blank";
-	      iframeforRegister.style.backgroundColor="blue";
-	      iframeforRegister.style.width=1;
-	      iframeforRegister.style.height=1;
-	      iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
-	      var codeforRegister=insertacode("", "; char nameofBox[" + buzon.length + "]=\""+buzon+"\"; ");
+	      var codeforRegister=insertacode("", "; char nameofDestinatary[" + buzon.length + "]=\""+buzon+"\"; ");
 	      codeforRegister=insertacode(codeforRegister, "; char stamps_command["+command.length + "]=\""+command+"\"; ");
-	      if(ammountBills) codeforRegister=insertacode(codeforRegister, "; long stamps_bills["+ammountBills.length + "]=\""+ammountBills+"\"; ");
 	      var c=0;
 	      var cadenatoInsert="long stamps_dates["+tokens.length+"]={";
 	      while(tokens.length>c) {
@@ -1215,37 +1201,207 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      cadenatoInsert+="};";
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
 	      console.log(codeforRegister);
-	      alert(codeforRegister);
-	      var contador=1;
-	      var name=await digestMessage(address+""+contador);
-	      name=name+".js";
-	      console.log({address, name, contador});
+	      encripta(codeforRegister).then(async (resp)=>{
+		  console.log({resp});
+		  alert("!");
+		  var iframeforRegister=null;
+		  iframeforRegister=document.getElementById("ifraRegister");
+		  if(iframeforRegister)iframeforRegister.parentNode.removeChild(iframeforRegister);
+		  iframeforRegister=document.createElement("iframe");
+		  iframeforRegister.id="iframeforRegister";
+		  document.body.appendChild(iframeforRegister);
+		  iframeforRegister.src="about:blank";
+		  iframeforRegister.style.backgroundColor="blue";
+		  iframeforRegister.style.width=1;
+		  iframeforRegister.style.height=1;
+		  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+		  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
+		  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
+		  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
+		  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
+		  console.log("sending POST");
+		  iframeforRegister.contentDocument.getElementById("submit").submit();
+		  console.log({resp, iv_OTP, OTP_resource, OTP});
+		  console.log(iframeforRegister.url);
+		  coinsValue-=ammountinTokens*1;
+		  document.getElementById("coins").innerHTML=coinsValue;
+	      });
+	  } else {
+	      document.getElementById("modaltext").innerHTML="All the Tokens have been processed";
+	      document.getElementById("modal").style.display="block";
+	  }
+      }
+
+      // - - - - 
+
+
+
+      async function toStampCollector(text, buzon, address, command, ammountBillsArg=null, subjectBox=null, buzonCoin=null) {
+	  var ammountBills=null;
+	  if(ammountBillsArg) {
+	      ammountBills=document.getElementById("cambioBills").value*1;
+	  }
+	  var tokens=new Array();
+	  var c=0;
+	  var stampcoins=[];
+	  if(!buzonCoin) stampcoins=coins;
+	  else stampcoins=document.getElementById('indice').coins;
+	  if(text==null) {
+	      c=0;
+	      for(var key in stampcoins) {
+		  tokens[c]=[];
+		  for(var keyc in stampcoins[key]) {
+		      console.log({keyc}, tokens[c][keyc]);
+		      tokens[c][keyc]=stampcoins[key][keyc];
+		  }
+		  console.log({key});
+		  c++;
+	      }
+	      console.log({tokens, c});
+	      if(c<1) {
+		  document.getElementById("modaltext").innerHTML="There are not any Coins Loaded";
+		  document.getElementById("modal").style.display="block";
+		  return (false);
+	      }
+	  } else {
+	      console.log("PARSING");
+	      tokens=parseTexttoTokens(text);
+	  }
+	  console.log("TOKENS", {tokens});
+	  c=0;
+	  if(text) {
+	      while(c<tokens.length) {
+		  if (stampcoins.hasOwnProperty(tokens[c]["stamps_fname"])) {
+		      tokens.splice(c, 1);
+		      c--;
+		  } else {
+		      stampcoins[tokens[c]["stamps_fname"]]=tokens[c];
+		  }
+		  c++;
+	      }
+	  }
+	  console.log({tokens, stampcoins, text});
+	  if(!buzonCoin) coins=stampcoins;
+	  else document.getElementById('indice').coins=stampcoins;
+
+	  if(tokens.length) {
+	      init_OTProcessed=0;
+	      while (init_OTProcessed!=255) {
+		  scro=document.getElementById("scro");
+		  scro.parentNode.removeChild(scro);
+		  scro=document.createElement("script");
+		  scro.id="scro";
+		  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+		  console.log(">:>:>", scro.src);
+		  document.body.appendChild(scro);
+		  console.log({error});
+		  await sleep (500);
+	      }
+	      console.log({init_OTProcessed});
+	      var codeforRegister=insertacode("", "; char nameofBox[" + buzon.length + "]=\""+buzon+"\"; ");
+	      codeforRegister=insertacode(codeforRegister, "; char stamps_command["+command.length + "]=\""+command+"\"; ");
+	      if(ammountBills) codeforRegister=insertacode(codeforRegister, "; long stamps_bills="+ammountBills+"; ");
+	      var c=0;
+	      var cadenatoInsert="long stamps_dates["+tokens.length+"]={";
+	      while(tokens.length>c) {
+		  cadenatoInsert+=tokens[c]["stamps_dates"];
+		  c++;
+		  if (c<tokens.length) cadenatoInsert+=",";
+	      }
+	      cadenatoInsert+="};";
+	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
+	      c=0;
+	      cadenatoInsert="char stamps_fname["+tokens.length+"][20]={";
+	      while(tokens.length>c) {
+		  cadenatoInsert+=tokens[c]["stamps_fname"];
+		  c++;
+		  if (c<tokens.length) cadenatoInsert+=",";
+	      }
+	      cadenatoInsert+="};";
+	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
+	      c=0;
+	      cadenatoInsert="long stamps_ammount["+tokens.length+"]={";
+	      while(tokens.length>c) {
+		  cadenatoInsert+=tokens[c]["stamps_ammount"];
+		  c++;
+		  if (c<tokens.length) cadenatoInsert+=",";
+	      }
+	      cadenatoInsert+="};";
+	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
+	      cadenatoInsert="long stamps_uid1["+tokens.length+"]={";
+	      c=0;
+	      while(tokens.length>c) {
+		  cadenatoInsert+=tokens[c]["stamps_uid1"];
+		  c++;
+		  if (c<tokens.length) cadenatoInsert+=",";
+	      }
+	      cadenatoInsert+="};";
+	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
+	      cadenatoInsert="long stamps_uid2["+tokens.length+"]={";
+	      c=0;
+	      while(tokens.length>c) {
+		  cadenatoInsert+=tokens[c]["stamps_uid2"];
+		  c++;
+		  if (c<tokens.length) cadenatoInsert+=",";
+	      }
+	      cadenatoInsert+="};";
+	      console.log({cadenatoInsert});
+	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
+	      cadenatoInsert="long stamps_uid3["+tokens.length+"]={";
+	      c=0;
+	      while(tokens.length>c) {
+		  cadenatoInsert+=tokens[c]["stamps_uid3"];
+		  c++;
+		  if (c<tokens.length) cadenatoInsert+=",";
+	      }
+	      cadenatoInsert+="};";
+	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
+	      cadenatoInsert="long stamps_uid4["+tokens.length+"]={";
+	      c=0;
+	      while(tokens.length>c) {
+		  cadenatoInsert+=tokens[c]["stamps_uid4"];
+		  c++;
+		  if (c<tokens.length) cadenatoInsert+=",";
+	      }
+	      cadenatoInsert+="};";
+	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
+	      console.log(codeforRegister);
+	      var nameforMessage=""
+	      var contador=0;
 	      error=".";
 	      while(error!="Not Found") {
 		  error=".";
 		  while (error==".") {
+		      contador=contador+1;
+		      nameforMessage=await digestMessage(address+""+contador);
+		      nameforMessage=nameforMessage+".js";
+		      console.log("Loading ", {nameforMessage, address, contador, error});
 		      error=".";
 		      scro=document.getElementById("scro");
 		      scro.parentNode.removeChild(scro);
 		      scro=document.createElement("script");
 		      scro.id="scro";
-		      scro.src=remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(name)+'&date=' + (new Date()).getTime();
-		      console.log("Attempt to Load ", encodeURI(name), '<<<<< ##', scro.src);
+		      scro.src=remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime();
+		      console.log("Attempt to Load ", encodeURI(nameforMessage), '<<<<< ##', scro.src);
 		      document.body.appendChild(scro);
 		      while(error==".") {
-			  await sleep (1000);
+			  await sleep (500);
 		      }
 		  }
-		  contador=contador+1;
-		  name=await digestMessage(address+""+contador);
-		  name=name+".js";
-		  console.log("Loading ", {name, address, contador, error});
 	      }
-	      contador--;
-	      name=await digestMessage(address+""+contador);
-	      name=name+".js";
 	      encripta(codeforRegister).then(async (resp)=>{
 		  console.log({resp});
+		  var iframeforRegister=null;
+		  iframeforRegister=document.getElementById("ifraRegister");
+		  if(iframeforRegister)iframeforRegister.parentNode.removeChild(iframeforRegister);
+		  iframeforRegister=document.createElement("iframe");
+		  iframeforRegister.id="iframeforRegister";
+		  document.body.appendChild(iframeforRegister);
+		  iframeforRegister.src="about:blank";
+		  iframeforRegister.style.backgroundColor="blue";
+		  iframeforRegister.style.width=1;
+		  iframeforRegister.style.height=1;
+		  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
 		  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
 		  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
 		  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
@@ -1256,7 +1412,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  console.log(iframeforRegister.url);
 		  console.log ({buzon, address});
 		  error=".";
-		  document.getElementById('indice').innerHTML="RECEIVING (" + command + ")";
+		  document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
+		  document.getElementById("modal").style.display="block";
 		  error="Not Found";
 		  while(error=="Not Found") {
 		      error=".";
@@ -1266,299 +1423,424 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  scro.parentNode.removeChild(scro);
 			  scro=document.createElement("script");
 			  scro.id="scro";
-			  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&date=' + (new Date()).getTime();
-			  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(name), '<<<<<< #####', scro.src);
+			  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime();
+			  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameforMessage), '<<<<<< #####', scro.src);
 			  document.body.appendChild(scro);
 			  while(error==".") {
-			      await sleep (1000);
+			      await sleep (500);
 			  }
 		      }
-		      console.log("waiting for ", {name, address, contador});
+		      console.log("waiting for ", {nameforMessage, address, contador});
 		  }
-		  RSA_cargaBuzon(address, buzon, "#coin", contador);
+		  var subjBox=null;
+		  if(!subjectBox) {
+		      subjBox="#coin";
+		  } else {
+		      subjBox=subjectBox;
+		  }
+		  console.log({address, buzon, subjBox, contador});
+		  RSA_cargaBuzon(address, buzon, subjBox, contador);
 	      });
 	  } else {
 	      document.getElementById("modaltext").innerHTML="All the Tokens have been processed";
 	      document.getElementById("modal").style.display="block";
 	  }
       }
-      async function RSA_cargaBuzon(address, buzon, subject, setContador=null) {
-	  init_OTProcessed=false;
-	  var buzonOriginal=buzon;
-	  error=".";
-	  var boxRSAKey=null;
-	  var consolidate="";
-	  var prevcommand="";
-	  document.getElementById("modaltext").innerHTML="Loading " + buzon + " ("+subject+")";
-	  document.getElementById("modal").style.display="block";
-	  while (error==".") {
+      function RSA_cargaBuzon(address, buzon, subject, setContador=null) {
+	  return new Promise(async (resolve)=>{
+	      init_OTProcessed=false;
+	      var buzonOriginal=buzon;
 	      error=".";
-	      scro=document.getElementById("scro");
-	      scro.parentNode.removeChild(scro);
-	      scro=document.createElement("script");
-	      scro.id="scro";
-	      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime();
-	      console.log(".......................", encodeURI(address), '#############', scro.src);
-	      document.body.appendChild(scro);
-	      while(error==".") {
-		  await sleep (1000);
-	      }
-	  }
-	  if(error!="Success") {
-	      document.getElementById("modaltext").innerHTML="Box Not Found";
+	      var boxRSAKey=null;
+	      var consolidate="";
+	      var verifyString="";
+	      var prevcommand="";
+	      document.getElementById("modaltext").innerHTML="Loading " + buzon + " ("+subject+")";
 	      document.getElementById("modal").style.display="block";
-	  } else {
-	      boxRSAKey=atob(content);	      
-	      var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-	      error="Not Found";
-	      await sleep (1000);
-	      var esperando=null;
-	      init_OTProcessed=0;
-	      while (init_OTProcessed!=255) {
+	      while (error==".") {
+		  error=".";
 		  scro=document.getElementById("scro");
 		  scro.parentNode.removeChild(scro);
 		  scro=document.createElement("script");
 		  scro.id="scro";
-		  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-		  console.log(">:>:>", scro.src);
+		  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime();
+		  console.log(".......................", encodeURI(address), '#############', scro.src);
 		  document.body.appendChild(scro);
-		  esperando+=1;
-		  console.log({esperando, error});
-		  await sleep (1000);
+		  while(error==".") {
+		      await sleep (500);
+		  }
 	      }
-	      console.log({init_OTProcessed});
-	      regprocessed=false;
-	      document.getElementById("indice").innerHTML="LOADING";
-	      userPassword().then(async (response)=>{
-		  if(response.error) {
-		      console.log(response.error);
-		      if(tt) clearTimeout(tt);
-		  } else {
-		      if(response.length===4) {
-			  await sleep (1000);
-			  encrypted=null;
-			  resource_index=null;
-			  var iframeforRegister=null;
-			  buzon=response[1];
-			  digestMessage(response[1]).then(async (buzon)=>{
-			      await sleep (1000);
-			      var esperando=0;
-			      error=".";
-			      while (error==".") {
+	      if(error!="Success") {
+		  document.getElementById("modaltext").innerHTML="Box Not Found";
+		  document.getElementById("modal").style.display="block";
+		  resolve({error: "Box Not Found"});
+		  return false;
+	      } else {
+		  boxRSAKey=atob(content);	      
+		  var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+		  error="Not Found";
+		  await sleep (500);
+		  var esperando=null;
+		  init_OTProcessed=0;
+		  while (init_OTProcessed!=255) {
+		      scro=document.getElementById("scro");
+		      scro.parentNode.removeChild(scro);
+		      scro=document.createElement("script");
+		      scro.id="scro";
+		      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+		      console.log(">:>:>", scro.src);
+		      document.body.appendChild(scro);
+		      esperando+=1;
+		      console.log({esperando, error});
+		      await sleep (500);
+		  }
+		  console.log({init_OTProcessed});
+		  regprocessed=false;
+		  document.getElementById("modaltext").innerHTML="LOADING";
+		  document.getElementById("modal").style.display="block";
+		  userPassword().then(async (response)=>{
+		      if(response.error) {
+			  console.log(response.error);
+			  if(tt) clearTimeout(tt);
+		      } else {
+			  if(response.length===4) {
+			      await sleep (500);
+			      encrypted=null;
+			      resource_index=null;
+			      var iframeforRegister=null;
+			      buzon=response[1];
+			      digestMessage(response[1]).then(async (buzon)=>{
+				  await sleep (500);
+				  var esperando=0;
 				  error=".";
-				  scro=document.getElementById("scro");
-				  scro.parentNode.removeChild(scro);
-				  scro=document.createElement("script");
-				  scro.id="scro";
-				  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
-				  console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
-				  document.body.appendChild(scro);
-				  while(error==".") {
-				      await sleep (1000);
+				  while (error==".") {
+				      error=".";
+				      scro=document.getElementById("scro");
+				      scro.parentNode.removeChild(scro);
+				      scro=document.createElement("script");
+				      scro.id="scro";
+				      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
+				      console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
+				      document.body.appendChild(scro);
+				      while(error==".") {
+					  await sleep (500);
+				      }
 				  }
-			      }
-			      if(error=="Not Found") {
-				  document.getElementById("modaltext").innerHTML="Incorrect User Data";
-				  document.getElementById("modal").style.display="block";
-			      } else {
-				  eval(atob(content));
-				  console.log("Loading User Keys", {content}, atob(content), {prefix_rsa, prefix_ivRsa});
-				  decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
-				      console.log({respo, prefix_rsa, prefix_ivRsa});
-				      if(respo.indexOf("var")<0) {
-					  document.getElementById("modaltext").innerHTML="Incorrect User Data";
-					  document.getElementById("modal").style.display="block";
-				      } else {
-					  eval(respo);
-					  if(rsaKey) {
-					      const privateKey=await openpgp.readPrivateKey({ armoredKey: rsaKey });
-					      const privateKey_RSA=rsaKey;
-					      error=".";
-					      digestMessage(buzon+".jspublic"+"\n").then(async (buzonPublic)=>{
-						  console.log({buzonPublic, buzon}, "A" + response[1]);
-						  error="Not Found";
-						  while (error=="Not Found" || error==".") {
-						      error=".";
-						      scro=document.getElementById("scro");
-						      scro.parentNode.removeChild(scro);
-						      scro=document.createElement("script");
-						      scro.id="scro";
-						      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
-						      console.log("loading Box Public key", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
-						      document.body.appendChild(scro);
-						      console.log({error});
-						      while(error==".") {
-							  await sleep (1000);
+				  if(error=="Not Found") {
+				      document.getElementById("modaltext").innerHTML="Incorrect User Data";
+				      document.getElementById("modal").style.display="block";
+				  } else {
+				      eval(atob(content));
+				      //				  console.log("Loading User Keys", {content}, atob(content), {prefix_rsa, prefix_ivRsa});
+				      decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
+					  //				      console.log({respo, prefix_rsa, prefix_ivRsa});
+					  if(respo.indexOf("var")<0) {
+					      document.getElementById("modaltext").innerHTML="Incorrect User Data";
+					      document.getElementById("modal").style.display="block";
+					  } else {
+					      eval(respo);
+					      if(rsaKey) {
+						  const privateKey=await openpgp.readPrivateKey({ armoredKey: rsaKey });
+						  const privateKey_RSA=rsaKey;
+						  error=".";
+						  digestMessage(buzon+".jspublic"+"\n").then(async (buzonPublic)=>{
+						      //						  console.log({buzonPublic, buzon}, "A" + response[1]);
+						      error="Not Found";
+						      while (error=="Not Found" || error==".") {
+							  error=".";
+							  scro=document.getElementById("scro");
+							  scro.parentNode.removeChild(scro);
+							  scro=document.createElement("script");
+							  scro.id="scro";
+							  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
+							  console.log("loading User Public key", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
+							  document.body.appendChild(scro);
+							  console.log({error});
+							  while(error==".") {
+							      await sleep (500);
+							  }
 						      }
-						  }
-						  if(error=="Success") {
-						      eval(atob(content));
-						      var rsaPublic=rsaPublicKey;
-						      if(rsaPublic) {
-							  console.log("Loaded Public", {content}, atob(content), "Public Key of Box:", {rsaPublicKey});
-							  console.log({boxRSAKey});
-							  var responseDecrypted=await RSA_verify_and_decrypt(boxRSAKey,privateKey_RSA,rsaPublic);
-							  if(responseDecrypted.error=="Success"){
+						      if(error=="Success") {
+							  eval(atob(content));
+							  var rsaPublic=rsaPublicKey;
+							  if(rsaPublic) {
+							      var responseDecrypted=await RSA_verify_and_decrypt(boxRSAKey,privateKey_RSA,rsaPublic);
 							      eval(responseDecrypted.data["msg"]);
 							      console.log("DECRYPTED", {responseDecrypted});
-							      esperando=0;
-							      var contador=1;
-							      if(setContador)contador=setContador; 
-							      var nameofMessage=null;
-							      nameofMessage=null;
-							      console.log({boxesignored});
-							      while(!nameofMessage) {
-								  contador=contador+1;
-								  nameofMessage=await digestMessage(address+""+contador);
-								  nameofMessage=nameofMessage+".js";
-								  var n=0;
-								  while(n<boxesignored.length) {
-								      console.log(">>>>", boxesignored[n], nameofMessage)
-								      if(nameofMessage.trim()==boxesignored[n].trim()) {
-									  nameofMessage=null;
-									  break;
-								      }
-								      n++;
-								  }
-							      }
-							      console.log({address, nameofMessage, contador});
-							      error=".";
-							      while(error!="Not Found" && nameofMessage) {
-								  error=".";
-								  while (error==".") {
+							      if(responseDecrypted.error=="Success"){
+
+								  if(subject=="#ignore") {
+								      buzon=await digestMessage(buzonOriginal);
+								      console.log({buzon});
+								      buzonPublic=await digestMessage(buzon+".jspublic"+"\n");
 								      error=".";
 								      scro=document.getElementById("scro");
 								      scro.parentNode.removeChild(scro);
 								      scro=document.createElement("script");
 								      scro.id="scro";
-								      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime();
-								      console.log("Loading Box Content", encodeURI(nameofMessage), '<#><#><#><#><#><#><#><#><#><#><#>##', scro.src, esperando);
+								      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
+								      console.log("loading Box public key (#ignore) ", encodeURI(buzon), encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
 								      document.body.appendChild(scro);
 								      while(error==".") {
-									  await sleep (1000);
+									  console.log({error});
+									  await sleep (500);
 								      }
+								      if(error=="Not Found") {
+									  errorFromDecMessages="Signatary Not Found";
+									  console.log({errorFromDecMessages});
+									  return false;
+								      }
+								      eval(atob(content));
+								      rsaPublic=rsaPublicKey;
 								  }
-								  if(error!="Not Found") {
-								      console.log("Loading Content from Slot ", {contador, subject, buzon});
-								      //boxesignored
-								      var contentB=null;
-								      if(subject=="#ignore") {
-									  contentB=await RSA_verify_and_decrypt(atob(content),rsaKey);
-								      } else {
-									  contentB=await RSA_verify_and_decrypt(atob(content),rsaKey,pubkey);
-								      }
-								      console.log({contentB});
-								      if(contentB.error!="Success"){
-									  document.getElementById("indice").innerHTML+="<p> Error Decoding: " + contentB.error + "</p>";
-								      } else {
-									  for (var key in contentB.data) {
-									      if(key!=="msg") document.getElementById("indice").innerHTML+="<p>"+key+": "+contentB.data[key]+"</p>";
-									  }
-									  if(contentB.data["subject"]) {
-									      if(subject=="#coin" && contentB.data["subject"].trim()=="consolidate") {
-										  console.log({subject}, contentB.data["subject"]);
-										  if(prevcommand!=contentB.data["date"]) {
-										      consolidate="";
-										  }
-										  prevcommand=contentB.data["date"];
-										  consolidate+="\n"+contentB.data["msg"]+"\n";
-									      }
-									      if(subject=="#coin" && contentB.data["subject"].trim()=="verify") {
-										  console.log({subject}, contentB.data["subject"]);
-										  parseCoin(contentB.data["msg"]);
-										  boxesignoredadd(nameofMessage);
-										  var enviaResult=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", nameofMessage);
-										  console.log(">>>", contentB.data["subject"].trim(), {subject, nameofMessage, enviaResult, boxesofIgnored});
-									      }
-									      if(subject=="#ignore" && contentB.data["subject"].trim()=="#ignore") {
-										  boxesignoredadd(contentB.data["msg"]);
-									      }
-									  }
-									  if(subject!="#ignore" && ! (subject=="#coin" && contentB.data["subject"].trim().substring(0, ("consolidate").length)!="consolidate")) document.getElementById("indice").innerHTML+="<p><pre>" + contentB.data["msg"] + "</pre></p>";
-								      }
-								  }
+
+								  
 								  esperando=0;
+								  var nameofMessage=null;
+								  var contador=0;
 								  nameofMessage=null;
-								  console.log({boxesignored});
-								  while(!nameofMessage) {
-								      contador=contador+1;
+								  if(setContador){
+								      contador=setContador;
 								      nameofMessage=await digestMessage(address+""+contador);
 								      nameofMessage=nameofMessage+".js";
-								      var n=0;
-								      while(n<boxesignored.length) {
-									  console.log(">>>>", boxesignored[n], nameofMessage)
-									  if(nameofMessage.trim()==boxesignored[n].trim()) {
-									      nameofMessage=null;
-									      break;
+								  }
+								  error=".";
+								  if(subject!="#coin" && subject!="#ignore") {
+								  document.getElementById('indice').innerHTML="<p><span id=\"boxBalance\"></span></p><input type=\"button\" value=\"RSA Key\" onclick=\"this.parentNode.innerHTML+='<textarea>"+privateKey_RSA.replace(/(\r\n|\r|\n)/g, "\\n")+"</textarea>'\" />";
+								  var fieldsforPPV="File: <input id=\\'blobtoSend\\' type=\\'file\\'/> <br /> To Box: <input id=\\'buzonToPPV\\' /> <br /> Ammount: <input id=\\'ammountToPPV\\' /> <br />";
+								  var functionSend="RSA_registrarAPPV(document.getElementById('buzonToPPV').value, \'"+buzonOriginal+"\', \'SEND\', document.getElementById('ammountToPPV').value).then((resp)=>{document.getElementById(\'fieldsforPPVspan\').innerHTML=\'\';});;";
+								  document.getElementById('indice').innerHTML+="<input id=\"ammountSend\"/> <input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(\'"+buzonOriginal+"\', \'SEND\', document.getElementById('ammountSend').value)\" /><p><span id=\"fieldsforPPVspan\"></span><input type=\"button\" value=\"Send File to Box PPV\" onclick=\"if(this.send){this.send=0; "+functionSend+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforPPV+"\';}\" /></p>" + document.getElementById('indice').innerHTML;
+								  }
+								  while(error!="Not Found") {
+								      if(!setContador) nameofMessage=null;
+								      if(subject=="#ignore") {
+									  error=".";
+									  while(error!="Not Found") {
+									      contador=contador+1;
+									      nameofMessage=await digestMessage(address+""+contador);
+									      nameofMessage=nameofMessage+".js";
+									      error=".";
+									      scro=document.getElementById("scro");
+									      scro.parentNode.removeChild(scro);
+									      scro=document.createElement("script");
+									      scro.id="scro";
+									      scro.src=remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime();
+									      //console.log("Skipping Box Content", encodeURI(nameofMessage), ' Slot ', contador, scro.src);
+									      document.body.appendChild(scro);
+									      while(error==".") {
+										  await sleep (500);
+									      }
 									  }
-									  n++;
+									  contador=contador-1;
+									  nameofMessage=await digestMessage(address+""+contador);
+									  nameofMessage=nameofMessage+".js";
+									  console.log("Last name ", encodeURI(nameofMessage), ' in Slot ', contador, scro.src);
+								      } else {
+									  while(!nameofMessage && !setContador) {
+									      contador=contador+1;
+									      nameofMessage=await digestMessage(address+""+contador);
+									      nameofMessage=nameofMessage+".js";
+									      var n=0;
+									      while(n<boxesignored.length) {
+										  console.log(">>>>", boxesignored[n], nameofMessage)
+										  if(nameofMessage.trim()==boxesignored[n].trim()) {
+										      nameofMessage=null;
+										      break;
+										  }
+										  n++;
+									      }
+									  }
+								      }
+								      console.log({address, nameofMessage, contador, boxesignored});
+								      setContador=0;
+								      error=".";
+								      while (error==".") {
+									  error=".";
+									  scro=document.getElementById("scro");
+									  scro.parentNode.removeChild(scro);
+									  scro=document.createElement("script");
+									  scro.id="scro";
+									  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime();
+									  console.log("Loading Box Content", encodeURI(nameofMessage), '<#><#><#><#><#><#><#><#><#><#><#>##', scro.src, esperando);
+									  document.body.appendChild(scro);
+									  while(error==".") {
+									      await sleep (500);
+									  }
+								      }
+								      if(error!="Not Found") {
+									  console.log("Loading Content from Slot ", {contador, subject, buzon});
+									  var contentB=null;
+									  if(subject=="#ignore") {
+									      contentB=await RSA_verify_and_decrypt(atob(content),rsaKey, rsaPublic);
+									  } else {
+									      contentB=await RSA_verify_and_decrypt(atob(content),rsaKey,pubkey);
+									  }
+									  console.log({contentB});
+									  if(contentB.error!="Success"){
+									      document.getElementById("indice").innerHTML+="<p> Error Decoding: " + contentB.error + "</p>";
+									  } else {
+									      if(subject.trim()!="#ignore" && subject.trim()!="#coin") {
+										  for (var key in contentB.data) {
+										      if(key!=="msg") document.getElementById("indice").innerHTML+="<p>"+key+": "+contentB.data[key]+"</p>";
+										  }
+									      }
+									      if(contentB.data["subject"]) {
+										  if((subject=="#coin" && contentB.data["subject"].trim()=="consolidate") || (subject!="#coin" && contentB.data["subject"].trim()=="#sendcoin")) {
+										      console.log({subject}, contentB.data["subject"]);
+										      if(prevcommand!=contentB.data["date"]) {
+											  var contadorTemporal=contador-1;
+											  var nameofMessageTemporal="";
+											  while(contadorTemporal>=0) {
+											      nameofMessageTemporal=await digestMessage(address+""+contadorTemporal);
+											      nameofMessageTemporal=nameofMessageTemporal+".js";
+											      var n=0;
+											      while(n<boxesignored.length) {
+												  if(nameofMessageTemporal.trim()==boxesignored[n].trim()) {
+												      nameofMessageTemporal=null;
+												      break;
+												  }
+												  n++;
+											      }
+											      if(nameofMessageTemporal) {
+												  boxesignoredadd(nameofMessageTemporal);
+											      }
+											      contadorTemporal=contadorTemporal-1;
+											  }
+											  var msgTemporal="";
+											  for (let i = 0; i < boxesignored.length; i++) {
+											      msgTemporal += boxesignored[i]+';';
+											  }
+											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
+											  consolidate="";
+										      }
+										      prevcommand=contentB.data["date"];
+										      consolidate+="\n"+contentB.data["msg"]+"\n";
+										  }
+										  if(subject!="#coin" && contentB.data["subject"].trim()=="verify") {
+										      verifyString+=nameofMessage+";"
+										      console.log({subject}, contentB.data["subject"]);
+										      var coinObj=parseCoin(contentB.data["msg"], document.getElementById('indice').coins);
+										      document.getElementById('indice').coinValue=coinObj.coinsValue;
+										      document.getElementById('indice').coins=coinObj.parsedcoins;
+										      document.getElementById("coins").innerHTML=coinsValue;
+										      boxesignoredadd(nameofMessage+";");
+										      document.getElementById("boxBalance").innerHTML=document.getElementById('indice').coinValue;
+										  }
+										  if(subject=="#coin" && contentB.data["subject"].trim()=="verify") {
+										      verifyString+=nameofMessage+";"
+										      console.log({subject}, contentB.data["subject"]);
+										      var coinObj=parseCoin(contentB.data["msg"], coins);
+										      coinsValue=coinObj.parsedcoinsValue
+										      document.getElementById("coins").innerHTML=coinsValue;
+										      coins=coinObj.parsedcoins;
+										      boxesignoredadd(nameofMessage+";");
+										      console.log({coinObj, coins, coinsValue});
+										  }
+										  if(subject=="#ignore" && contentB.data["subject"].trim()=="#ignore") {
+										      boxesignoredadd(contentB.data["msg"]);
+										  }
+									      }
+									      if(subject.trim()!="#ignore" && !(subject!="#coin" && contentB.data["subject"].trim().substring(0, ("#sendcoin").length)=="#sendcoin") && !(subject=="#coin" && contentB.data["subject"].trim().substring(0, ("consolidate").length)=="consolidate") && ! (subject=="#coin" && contentB.data["subject"].trim()=="verify")) document.getElementById("indice").innerHTML+="<p><pre>" + contentB.data["msg"] + "</pre></p>";
+									  }
+								      } else {
+									  console.log("DONE", {contador});
+								      }
+								      esperando=0;
+								      console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", {nameofMessage, address, contador, esperando, error, name});
+								      nameofMessage=null;
+								      if(subject=="#ignore") {
+									  error="Not Found";
 								      }
 								  }
-								  console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", {nameofMessage, address, contador, esperando, error, name});
+								  if(verifyString.length) {
+								      var msgTemporal="";
+								      for (let i = 0; i < boxesignored.length; i++) {
+									  msgTemporal += boxesignored[i]+';';
+								      }
+								      var enviaResult=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
+								  }
+								  if(!consolidate.length) {
+								      document.getElementById("modaltext").innerHTML="Box Loaded Successfully";
+								      document.getElementById("modal").style.display="block";
+								  }
+								  if(consolidate.length) {
+								      var isBoxCoin=false;
+								      if( subject=="#coin") {
+									  coins=[];
+									  coinsValue=0;
+									  document.getElementById("coins").innerHTML=coinsValue;
+									  isBoxCoin=true;
+								      } else {
+									  document.getElementById('indice').coinValue=0;
+									  document.getElementById('indice').coins=[];
+									  document.getElementById("boxBalance").innerHTML=document.getElementById('indice').coinValue;
+								      }
+								      console.log({subjBox: subject});
+								      toStampCollector(consolidate, buzonOriginal, address, 'VERIFY', null, subject, isBoxCoin);
+								  }
+								  document.getElementById(buzonOriginal+"Button").disabled=0
+								  resolve({error:"Success"});
+								  return true;
+							      } else {
+								  console.log(responseDecrypted.error);
+								  resolve({error: responseDecrypted.error});
+								  return false;
 							      }
-							      document.getElementById("modaltext").innerHTML="Box Loaded Successfully";
-							      document.getElementById("modal").style.display="block";
-							      document.getElementById('indice').innerHTML="<input type=\"button\" value=\"RSA Key\" onclick=\"this.parentNode.innerHTML+='<textarea>"+privateKey_RSA.replace(/(\r\n|\r|\n)/g, "\\n")+"</textarea>'\" />" + document.getElementById('indice').innerHTML;
-							      if(consolidate.length) {
-								  console.log(">:>:>:>", parseTexttoTokens(consolidate));
-								  coins=[];
-								  coinsValue=0;
-								  document.getElementById("coins").innerHTML=coinsValue;
-								  toStampCollector(consolidate, buzonOriginal, address, 'VERIFY');
-							      }
-							      document.getElementById(buzonOriginal+"Button").disabled=0
 							  } else {
-							      console.log(responseDecrypted.error);
+							      resolve({error: "No Public Key"});
+							      return false;
 							  }
-						      }				  
-						  }
-					      });
+						      } else {
+							  resolve({error: "No Public Key"});
+							  return false;
+						      }
+						  });
+					      } else {
+						  resolve({error: "No Public Key"});
+						  return false;
+					      }
 					  }
-				      }
-				  });
-			      }
-			  });
+				      });
+				  }
+			      });
+			  }
 		      }
-		  }
-	      });
-	  }
+		  });
+	      }
+	  });
       }
       
       function boxesignoredadd(msg) {
 	  msg=msg.replace(/\n/g, ";");
-	  console.log("Ignored:", {msg});
-	  boxesignored[boxesignored.length]=msg;
+	  boxesignored=boxesignored.concat(msg.split(';'));
+	  console.log("Ignored:", {boxesignored});
+	  return true;
       }
-      function parseCoin(msg) {
+      function parseCoin(msg, parsedcoinSet=null) {
 	  msg=msg.replace(/\n/g, ";");
-	  console.log(msg);
+	  var parsedcoinsValue=0;
+	  var parsedcoins=[];
+	  if(parsedcoinSet) parsedcoins=parsedcoinSet;
 	  while(msg.indexOf(";")>=0) {
 	      line=msg.substring(0, msg.indexOf(";"));
-	      console.log({line});
 	      if(line.indexOf("VERIFIED:")==0) {
-		  console.log(line.substring(line.indexOf("VERIFIED:")+("VERIFIED:").length, line.length));
 		  var fname='"'+(line.substring(line.indexOf("VERIFIED:")+("VERIFIED:").length, line.length))+'"';
 		  if (coins.hasOwnProperty(fname)) {
-		      coins[fname]["verified"]=true;
+		      parsedcoins[fname]["verified"]=true;
+		      parsedcoinsValue+=(parsedcoins[fname]["stamps_ammount"]*1);
 		  }
 	      }
 	      if(line.indexOf("NOT VERIFIED:")==0) {
-		  console.log(line.substring(line.indexOf("NOT VERIFIED:")+("NOT VERIFIED:").length, line.length));
 		  var fname=(line.substring(line.indexOf("NOT VERIFIED:")+("NOT VERIFIED:").length, line.length));
-		  if (coins.hasOwnProperty(fname)) {
-		      coins[fname]["verified"]=false;
+		  if (parsedcoins.hasOwnProperty(fname)) {
+		      parsedcoins[fname]["verified"]=false;
 		  }
 	      }
 	      msg=msg.substring(msg.indexOf(";")+1, msg.length);
 	  }
-	  coinsValue=0;
-	  for(var key in coins) {
-	      if(coins[key]["verified"]) {
-		  coinsValue+=coins[key]["stamps_ammount"]*1;
-	      }
-	  }
-	  console.log({coins});
-	  document.getElementById("coins").innerHTML=coinsValue;
+	  console.log({parsedcoins});
+	  //document.getElementById("coins").innerHTML=coinsValue;
+	  return ({parsedcoinsValue, parsedcoins});
       }
       async function crearBuzonRegistro() {
 	  cuantos=0;
@@ -1619,7 +1901,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      console.log("Finding if ", encodeURI(buzon), 'is Available', scro.src);
 			      document.body.appendChild(scro);
 			      while(error==".") {
-				  await sleep (1000);
+				  await sleep (500);
 			      }
 			  }
 			  if(error!="Not Found"){
@@ -1657,7 +1939,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  console.log({respo, iv_OTP, OTP_resource, OTP});
 					  console.log(iframeforRegister.url);
 				      });
-				      await sleep (1000);
+				      await sleep (500);
 				      error="Not Found";
 				      while (error=="Not Found") {
 					  error=".";
@@ -1669,7 +1951,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  console.log("----------", encodeURI(buzon), '++++++++++++++', scro.src);
 					  document.body.appendChild(scro);
 					  while(error==".") {
-					      await sleep (1000);
+					      await sleep (500);
 					  }
 				      }
 				      eval(atob(content));
@@ -1721,7 +2003,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  console.log("----------", encodeURI(buzon), '++++++++++++++', scro.src);
 			  document.body.appendChild(scro);
 			  while(error==".") {
-			      await sleep (1000);
+			      await sleep (500);
 			  }
 		      }
 		      if(error!="Not Found"){
@@ -1749,7 +2031,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      document.body.appendChild(scro);
 			      esperando+=1;
 			      console.log({esperando, error});
-			      await sleep (1000);
+			      await sleep (500);
 			  }
 			  encrypted=null;
 			  resource_index=null;
@@ -1789,7 +2071,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzonE), '+<+<+<+<+<+++++++++', scro.src);
 					  document.body.appendChild(scro);
 					  while(error==".") {
-					      await sleep (1000);
+					      await sleep (500);
 					  }
 				      }
 				      if(error=="Not Found") {
@@ -1825,7 +2107,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							      console.log("loading public =:=:=:=:=:==:=:=:=:=:=", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
 							      document.body.appendChild(scro);
 							      while(error==".") {
-								  await sleep (1000);
+								  await sleep (500);
 							      }
 							  }
 							  eval(atob(content));
@@ -1845,7 +2127,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  iframeforRegister.contentDocument.getElementById("submit").submit();
 								  console.log({respo, iv_OTP, OTP_resource, OTP});
 								  console.log(iframeforRegister.url);
-								  await sleep (1000);
+								  await sleep (500);
 								  error="Not Found";
 								  while (error=="Not Found") {
 								      error=".";
@@ -1857,7 +2139,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      console.log("_ . _ . _ . _ . ", encodeURI(buzonEnc), '+ + + + + + + + + + +  ++ + ', scro.src);
 								      document.body.appendChild(scro);
 								      while(error==".") {
-									  await sleep (1000);
+									  await sleep (500);
 								      }
 								  }
 
@@ -1877,7 +2159,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      console.log("Attempt to Load ", encodeURI(nameofMessages), '<<<<< ##', scro.src);
 								      document.body.appendChild(scro);
 								      while(error==".") {
-									  await sleep (1000);
+									  await sleep (500);
 								      }
 								      contador=contador+1;
 								      nameofMessages=await digestMessage(buzonE+""+contador);
@@ -1910,7 +2192,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
 									  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
 									  iframeforRegister.contentDocument.getElementById("submit").submit();
-									  document.getElementById('indice').innerHTML="RECEIVING (" + subject + ")";
+									  document.getElementById("modaltext").innerHTML="RECEIVING (" + subject + ")";
+									  document.getElementById("modal").style.display="block";
+									  if(subject!="#ignore" && subject!="#coin") document.getElementById('indice').innerHTML="";
 									  error="Not Found";
 									  while(error=="Not Found") {
 									      error=".";
@@ -1923,8 +2207,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime();
 										  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####', scro.src);
 										  document.body.appendChild(scro);
+										  await sleep (2500);
 										  while(error==".") {
-										      await sleep (1000);
+										      await sleep (2500);
 										  }
 									      }
 									      console.log("waiting for ", {nameofMessages, contador});
@@ -1957,7 +2242,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       
       async function RSA_enviarABuzon(buzonTo=null, fromBuzon=null, subject=null, msg=null) {
 	  return new Promise(async (resolve)=>{
-	      console.log({show, buzonTo, fromBuzon});
+	      console.log({show}, "sending to:", {buzonTo}, " sending from:", {fromBuzon});
 	      var buzoname=buzon;
 	      if(show && buzonTo && fromBuzon && subject && msg) {
 		  init_OTProcessed=false;
@@ -1977,10 +2262,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  scro.src=scrosrc;
 			  console.log(".......................", encodeURI(addressFrom), '#############', scro.src);
 			  document.body.appendChild(scro);
-			  await sleep (1000);
+			  await sleep (500);
 			  while(error=="." || !content || content==undefined) {
 			      console.log({error, content, processed});
-			      await sleep (1000);
+			      await sleep (500);
 			  }
 			  if(error!="Success") {
 			      document.getElementById("modaltext").innerHTML="Box Not Found";
@@ -1994,7 +2279,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      buzonEnc+=".js";
 			      var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
 			      error="Not Found";
-			      await sleep (1000);
+			      await sleep (500);
 			      var esperando=null;
 			      init_OTProcessed=0;
 			      while (init_OTProcessed!=255) {
@@ -2007,7 +2292,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  document.body.appendChild(scro);
 				  esperando+=1;
 				  console.log({esperando, error});
-				  await sleep (1000);
+				  await sleep (500);
 			      }
 			      console.log({init_OTProcessed});
 			      regprocessed=false;
@@ -2018,14 +2303,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  if(tt) clearTimeout(tt);
 			      } else {
 				  if(response.length===4) {
-				      await sleep (1000);
+				      await sleep (500);
 				      console.log({response});
 				      encrypted=null;
 				      resource_index=null;
 				      var iframeforRegister=null;
 				      buzon=response[1];
 				      var buzon=await digestMessage(response[1]);
-				      await sleep (1000);
+				      await sleep (500);
 				      var esperando=0;
 				      error=".";
 				      while (error==".") {
@@ -2038,7 +2323,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
 					  document.body.appendChild(scro);
 					  while(error==".") {
-					      await sleep (1000);
+					      await sleep (500);
 					  }
 				      }
 				      if(error=="Not Found") {
@@ -2071,7 +2356,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  document.body.appendChild(scro);
 						  console.log({error});
 						  while(error==".") {
-						      await sleep (1000);
+						      await sleep (500);
 						  }
 						  if(error!="Success") {
 						      document.getElementById("modaltext").innerHTML=error;
@@ -2083,9 +2368,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      var rsaPublic=rsaPublicKey;
 						      error=".";
 						      var buzonPublicFrom=await digestMessage(addressFrom+"public"+"\n");
-						      console.log({buzonPublicFrom, fromBuzon}, "A" + response[1]);
+						      console.log({buzonPublicFrom, addressFrom});
 						      error="Not Found";
-						      console.log("loading Box Public key", encodeURI(buzonPublicFrom), '.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:', scro.src);
+						      console.log("loading Sender Box Public key", encodeURI(buzonPublicFrom), '.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:', scro.src);
 						      error=".";
 						      scro=document.getElementById("scro");
 						      scro.parentNode.removeChild(scro);
@@ -2093,96 +2378,102 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      scro.id="scro";
 						      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublicFrom)+'.js&date=' + (new Date()).getTime();
 						      document.body.appendChild(scro);
-						      await sleep (1000);
+						      await sleep (500);
 						      while(error=="." || content==undefined || !content) {
 							  console.log({error, content});
-							  await sleep (1000);
+							  await sleep (500);
 						      }
 						      if(error=="Success") {
 							  console.log({content, error});
 							  eval(atob(content));
 							  var rsaPublicFrom=rsaPublicKey;
 							  if(rsaPublicFrom) {
-							      console.log("Loaded Public From ", {content}, atob(content), "Public Key of Box (From):", {rsaPublicKey});
-							      error=".";
+							      console.log("Loaded Sender Public From ");
 							      var buzonPublicTo=await digestMessage(addressTo+"public"+"\n");
-							      console.log({buzonPublicTo, buzon}, "A" + response[1]);
+							      console.log({buzonPublicTo, addressTo});
 							      error="Not Found";
-							      while (error=="Not Found" || error==".") {
-								  error=".";
-								  scro=document.getElementById("scro");
-								  scro.parentNode.removeChild(scro);
-								  scro=document.createElement("script");
-								  scro.id="scro";
-								  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublicTo)+'.js&date=' + (new Date()).getTime();
-								  console.log("loading Box Public key", encodeURI(buzonPublicTo), '*:*:*:*:*:*:*:*:*:*:', scro.src);
-								  document.body.appendChild(scro);
-								  console.log({error});
-								  while(error==".") {
-								      await sleep (1000);
-								  }
-							      }
-							      if(error=="Success") {
-								  console.log("Loaded Public To", {content, error});
-								  eval(atob(content));
-								  var rsaPublicTo=rsaPublicKey;
-								  if(rsaPublicTo) {
-								      console.log("Loaded Public To", {content}, atob(content), "Public Key of Box (To):", {rsaPublicKey});
-								      console.log({boxRSAKey});
-								      var responseDecrypted=await RSA_verify_and_decrypt(boxRSAKey,privateKey_RSA,rsaPublic);
-								      console.log({responseDecrypted});
-								      if(responseDecrypted.error=="Success"){
-									  eval(responseDecrypted.data["msg"]);
-									  boxRSAkey_dec=rsaKey;
-									  var datefield=(new Date().getTime());
-									  if (!subject) subject = "#" + buzonforGameis;
-									  var contentofMessageA="Subject:" + subject + "\nDate: " + datefield + "\n\n" + msg;
-									  var resp=await encripta(contentofMessageA, rsaPublicTo, boxRSAkey_dec, datefield, fromBuzon);
-									  console.log({resp, contentofMessageA, subject});
-									  contentofMessageA=btoa(resp);
-									  codeforRegister=insertacode("", "; char nameofindex[" + buzonEnc.length + "]=\""+buzonEnc+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + contentofMessageA.length + "]=\""+contentofMessageA+"\";");
-									  console.log({rsaPublicKey, buzon, buzonEnc, codeforRegister}, btoa(buzonEnc));
-									  encripta(codeforRegister).then(async (resp)=>{
-									      console.log({resp});
-									      init_OTProcessed=0;
-									      while (init_OTProcessed!=255) {
-										  scro=document.getElementById("scro");
-										  scro.parentNode.removeChild(scro);
-										  scro=document.createElement("script");
-										  scro.id="scro";
-										  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-										  console.log(">:>:>", scro.src);
-										  document.body.appendChild(scro);
-										  console.log({error});
-										  await sleep (5000);
-									      }
-									      console.log({init_OTProcessed, iv_OTP, OTP_resource, OTP});
-									      iframeforRegister=document.getElementById("ifraRegister");
-									      if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
-									      iframeforRegister=document.createElement("iframe");
-									      iframeforRegister.id="ifraRegister";
-									      document.body.appendChild(iframeforRegister);
-									      iframeforRegister.src="about:blank";
-									      iframeforRegister.style.backgroundColor="blue";
-									      iframeforRegister.style.width=1;
-									      iframeforRegister.style.height=1;
-									      iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
-									      iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-									      iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-									      iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-									      iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-									      iframeforRegister.contentDocument.getElementById("submit").submit();
-									      await sleep (1000);
-									      resolve("Message Sent Successfully");
-									      return true;
-									  });
-								      } else {
-									  resolve({error: "Failed to load Key"});
-									  return false;
-								      }
-								  }
+							      console.log("loading Destinatary Box Public key", encodeURI(buzonPublicTo), '.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:', scro.src);
+							      error=".";
+							      scro=document.getElementById("scro");
+							      scro.parentNode.removeChild(scro);
+							      scro=document.createElement("script");
+							      scro.id="scro";
+							      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublicTo)+'.js&date=' + (new Date()).getTime();
+							      document.body.appendChild(scro);
+							      await sleep (500);
+							      while(error=="." || content==undefined || !content) {
+								  console.log({error, content});
+								  await sleep (500);
 							      }
 							  }
+							  if(error=="Success") {
+							      console.log("Loaded Destinatary Public To", {content, error});
+							      eval(atob(content));
+							      var rsaPublicTo=rsaPublicKey;
+							      if(rsaPublicTo) {
+								  console.log("Loaded Public To", {content}, atob(content), "Public Key of Box (To):", {rsaPublicKey});
+								  console.log({boxRSAKey});
+								  var responseDecrypted=await RSA_verify_and_decrypt(boxRSAKey,privateKey_RSA,rsaPublic);
+								  console.log({responseDecrypted});
+								  if(responseDecrypted.error=="Success"){
+								      eval(responseDecrypted.data["msg"]);
+								      boxRSAkey_dec=rsaKey;
+								      var datefield=(new Date().getTime());
+								      if (!subject) subject = "#" + buzonforGameis;
+								      var contentofMessageA="Subject:" + subject + "\nDate: " + datefield + "\n\n" + msg;
+								      var resp=await encripta(contentofMessageA, rsaPublicTo, boxRSAkey_dec, datefield, fromBuzon);
+								      console.log({resp, contentofMessageA, subject});
+								      contentofMessageA=btoa(resp);
+								      codeforRegister=insertacode("", "; char nameofindex[" + buzonEnc.length + "]=\""+buzonEnc+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + contentofMessageA.length + "]=\""+contentofMessageA+"\";");
+								      console.log({rsaPublicKey, buzon, buzonEnc, codeforRegister}, btoa(buzonEnc));
+								      encripta(codeforRegister).then(async (resp)=>{
+									  console.log({resp});
+									  init_OTProcessed=0;
+									  while (init_OTProcessed!=255) {
+									      scro=document.getElementById("scro");
+									      scro.parentNode.removeChild(scro);
+									      scro=document.createElement("script");
+									      scro.id="scro";
+									      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+									      console.log(">:>:>", scro.src);
+									      document.body.appendChild(scro);
+									      console.log({error});
+									      await sleep (500);
+									  }
+									  console.log({init_OTProcessed, iv_OTP, OTP_resource, OTP});
+									  iframeforRegister=document.getElementById("ifraRegister");
+									  if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
+									  iframeforRegister=document.createElement("iframe");
+									  iframeforRegister.id="ifraRegister";
+									  document.body.appendChild(iframeforRegister);
+									  iframeforRegister.src="about:blank";
+									  iframeforRegister.style.backgroundColor="blue";
+									  iframeforRegister.style.width=1;
+									  iframeforRegister.style.height=1;
+									  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+									  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
+									  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
+									  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
+									  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
+									  iframeforRegister.contentDocument.getElementById("submit").submit();
+									  await sleep (500);
+									  resolve("Message Sent Successfully");
+									  return true;
+								      });
+								  } else {
+								      resolve({error: "Failed to load Private Key for Send"});
+								      return false;
+								  }
+							      }
+							  } else {
+							      console.log({error, content});
+							      resolve({error: "Failed to load Box Public Key of Destinatary for Send"});
+							      return false;
+							  }								  
+						      }  else {
+							  console.log({error, content});
+							  resolve({error: "Failed to load Box Public Key of Sender for Send"});
+							  return false;
 						      }
 						  }
 					      }
@@ -2199,257 +2490,321 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	  });
       }
-	  
 
-
-      async function RSA_enviarAPPV(buzonTo=null, fromBuzon=null, subject=null, msg=null) {
+      function readFiletoSend(element) {
+	  return new Promise((resolve)=>{
+	      var fileInput = document.getElementById(element);
+	      if (fileInput.files.length > 0) {
+		  var file = fileInput.files[0];
+		  var reader = new FileReader();
+		  reader.readAsDataURL(file);
+		  reader.onload = function() {
+		      var base64String = reader.result.replace(/^data:.*;base64,/, '');
+		      resolve ({error: "Success", data: base64String});
+		  };
+	      } else {
+		  resolve ({error: "No Files Loaded", data: null});
+	      }
+	  });
+      }
+      async function RSA_registrarAPPV(buzonTo=null, fromBuzon=null, command=null, ammountinTokens=null) {
 	  return new Promise(async (resolve)=>{
-	      console.log({show, buzonTo, fromBuzon});
-	      var buzoname=buzon;
-	      if(show && buzonTo && fromBuzon && subject && msg) {
+	      var msg=await readFiletoSend("blobtoSend");
+	      console.log({msg});
+	      if(msg.error!="Success") {
+		  resolve(msg);
+		  return (false);
+	      } else {
+		  msg=msg.data;
+	      }
+	      console.log({show , ammountinTokens , buzonTo , fromBuzon, msg , command});
+	      if(show && ammountinTokens && buzonTo && msg && command && fromBuzon) {
 		  init_OTProcessed=false;
-		  var buzonOriginal=buzon;
 		  error=".";
-		  var boxRSAKey=null;
-		  digestMessage(buzonTo).then((addressTo)=>{
-		      addressTo=addressTo+".js";
-		      digestMessage(fromBuzon).then(async (addressFrom)=>{
-			  addressFrom=addressFrom+".js";
-			  var scrosrc=remotepath + "/fretfile.php"+'?fname='+addressFrom+'&date=' + (new Date()).getTime();
+		  var response=await userPassword();
+		  console.log("----------------", {response});
+		  if(response.error) {
+		      console.log(response.error);
+		      if(tt) clearTimeout(tt);
+		  } else {
+		      if(response.length===4) {
+			  await sleep (500);
+			  console.log({response});
+			  encrypted=null;
+			  resource_index=null;
+			  var iframeforRegister=null;
+			  buzon=response[1];
+			  var buzon=await digestMessage(response[1]);
+			  await sleep (500);
+			  var esperando=0;
 			  error=".";
-			  scro=document.getElementById("scro");
-			  scro.parentNode.removeChild(scro);
-			  scro=document.createElement("script");
-			  scro.id="scro";
-			  scro.src=scrosrc;
-			  console.log(".......................", encodeURI(addressFrom), '#############', scro.src);
-			  document.body.appendChild(scro);
-			  await sleep (1000);
-			  while(error=="." || !content || content==undefined) {
-			      console.log({error, content, processed});
-			      await sleep (1000);
+			  while (error==".") {
+			      error=".";
+			      scro=document.getElementById("scro");
+			      scro.parentNode.removeChild(scro);
+			      scro=document.createElement("script");
+			      scro.id="scro";
+			      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
+			      console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
+			      document.body.appendChild(scro);
+			      while(error==".") {
+				  await sleep (500);
+			      }
 			  }
-			  if(error!="Success") {
-			      document.getElementById("modaltext").innerHTML="Box Not Found";
+			  if(error=="Not Found") {
+			      document.getElementById("modaltext").innerHTML="Incorrect User Data";
 			      document.getElementById("modal").style.display="block";
-			      resolve({error: "Box Not Found", buzonTo, addressFrom});
+			      resolve({error: "Box Not Found"});
 			      return false;
 			  } else {
-			      boxRSAKey=atob(content);	      
-			      console.log({boxRSAKey, content});
-			      var buzonEnc=await digestMessage(buzonTo);
-			      buzonEnc+=".js";
-			      var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-			      error="Not Found";
-			      await sleep (1000);
-			      var esperando=null;
-			      init_OTProcessed=0;
-			      while (init_OTProcessed!=255) {
-				  scro=document.getElementById("scro");
-				  scro.parentNode.removeChild(scro);
-				  scro=document.createElement("script");
-				  scro.id="scro";
-				  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-				  console.log(">:>:>", scro.src);
-				  document.body.appendChild(scro);
-				  esperando+=1;
-				  console.log({esperando, error});
-				  await sleep (1000);
-			      }
-			      console.log({init_OTProcessed});
-			      regprocessed=false;
-			      var response=await userPassword();
-			      console.log("----------------", {response});
-			      if(response.error) {
-				  console.log(response.error);
-				  if(tt) clearTimeout(tt);
+			      eval(atob(content));
+			      console.log("Loading User Keys", {content}, atob(content), {prefix_rsa, prefix_ivRsa});
+			      var respo=await decr(prefix_rsa, prefix_ivRsa);
+			      console.log({respo, prefix_rsa, prefix_ivRsa});
+			      if(respo.indexOf("var")<0) {
+				  document.getElementById("modaltext").innerHTML="Incorrect User Data";
+				  document.getElementById("modal").style.display="block";
 			      } else {
-				  if(response.length===4) {
-				      await sleep (1000);
-				      console.log({response});
-				      encrypted=null;
-				      resource_index=null;
-				      var iframeforRegister=null;
-				      buzon=response[1];
-				      var buzon=await digestMessage(response[1]);
-				      await sleep (1000);
-				      var esperando=0;
-				      error=".";
-				      while (error==".") {
+				  eval(respo);
+				  if(rsaKey) {
+				      const privateKey_RSA=rsaKey;
+				      var boxRSAKey=null;
+				      digestMessage(fromBuzon).then(async (addressFrom)=>{
+					  addressFrom=addressFrom+".js";
+					  var scrosrc=remotepath + "/fretfile.php"+'?fname='+addressFrom+'&date=' + (new Date()).getTime();
 					  error=".";
 					  scro=document.getElementById("scro");
 					  scro.parentNode.removeChild(scro);
 					  scro=document.createElement("script");
 					  scro.id="scro";
-					  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
-					  console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
+					  scro.src=scrosrc;
+					  console.log(".......................", encodeURI(addressFrom), '#############', scro.src);
 					  document.body.appendChild(scro);
-					  while(error==".") {
-					      await sleep (1000);
+					  await sleep (500);
+					  while(error=="." || !content || content==undefined) {
+					      console.log({error, content, processed});
+					      await sleep (500);
 					  }
-				      }
-				      if(error=="Not Found") {
-					  document.getElementById("modaltext").innerHTML="Incorrect User Data";
-					  document.getElementById("modal").style.display="block";
-					  resolve({error: "Box Not Found"});
-					  return false;
-				      } else {
-					  eval(atob(content));
-					  console.log("Loading User Keys", {content}, atob(content), {prefix_rsa, prefix_ivRsa});
-					  var respo=await decr(prefix_rsa, prefix_ivRsa);
-					  console.log({respo, prefix_rsa, prefix_ivRsa});
-					  if(respo.indexOf("var")<0) {
-					      document.getElementById("modaltext").innerHTML="Incorrect User Data";
+					  if(error!="Success") {
+					      document.getElementById("modaltext").innerHTML="Box Not Found";
 					      document.getElementById("modal").style.display="block";
+					      resolve({error: "Box Not Found", buzonTo, addressFrom});
+					      return false;
 					  } else {
-					      eval(respo);
-					      if(rsaKey) {
-						  const privateKey_RSA=rsaKey;
-
-						  var buzonPublic=await digestMessage(buzon+".jspublic"+"\n");
-						  console.log({buzonPublic, buzon}, "A" + response[1]);
-						  error=".";
-						  scro=document.getElementById("scro");
-						  scro.parentNode.removeChild(scro);
-						  scro=document.createElement("script");
-						  scro.id="scro";
-						  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
-						  console.log("loading Box Public key", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
-						  document.body.appendChild(scro);
-						  console.log({error});
-						  while(error==".") {
-						      await sleep (1000);
-						  }
-						  if(error!="Success") {
-						      document.getElementById("modaltext").innerHTML=error;
-						      document.getElementById("modal").style.display="block";
-						      resolve({error: "Box Not Found"});
-						      return false;
-						  } else {
-						      eval(atob(content));
-						      var rsaPublic=rsaPublicKey;
-						      error=".";
-						      var buzonPublicFrom=await digestMessage(addressFrom+"public"+"\n");
-						      console.log({buzonPublicFrom, fromBuzon}, "A" + response[1]);
-						      error="Not Found";
-						      console.log("loading Box Public key", encodeURI(buzonPublicFrom), '.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:', scro.src);
-						      error=".";
+					      boxRSAKey=atob(content);	      
+					      digestMessage(buzonTo).then(async (addressTo)=>{
+						  addressTo=addressTo+".js";
+						  var buzonEnc=await digestMessage(buzonTo);
+						  buzonEnc+=".js";
+						  var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+						  error="Not Found";
+						  await sleep (500);
+						  var esperando=null;
+						  init_OTProcessed=0;
+						  while (init_OTProcessed!=255) {
 						      scro=document.getElementById("scro");
 						      scro.parentNode.removeChild(scro);
 						      scro=document.createElement("script");
 						      scro.id="scro";
-						      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublicFrom)+'.js&date=' + (new Date()).getTime();
+						      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+						      console.log(">:>:>", scro.src);
 						      document.body.appendChild(scro);
-						      await sleep (1000);
-						      while(error=="." || content==undefined || !content) {
-							  console.log({error, content});
-							  await sleep (1000);
-						      }
-						      if(error=="Success") {
-							  console.log({content, error});
-							  eval(atob(content));
-							  var rsaPublicFrom=rsaPublicKey;
-							  if(rsaPublicFrom) {
-							      console.log("Loaded Public From ", {content}, atob(content), "Public Key of Box (From):", {rsaPublicKey});
+						      esperando+=1;
+						      console.log({esperando, error});
+						      await sleep (500);
+						  }
+						  console.log({init_OTProcessed});
+						  regprocessed=false;
+						  var response=await userPassword();
+						  console.log("----------------", {response});
+						  if(response.error) {
+						      console.log(response.error);
+						      if(tt) clearTimeout(tt);
+						  } else {
+						      if(response.length===4) {
+							  await sleep (500);
+							  console.log({response});
+							  encrypted=null;
+							  resource_index=null;
+							  var iframeforRegister=null;
+							  buzon=response[1];
+							  var buzon=await digestMessage(response[1]);
+							  await sleep (500);
+							  var esperando=0;
+							  error=".";
+							  while (error==".") {
 							      error=".";
-							      var buzonPublicTo=await digestMessage(addressTo+"public"+"\n");
-							      console.log({buzonPublicTo, buzon}, "A" + response[1]);
-							      error="Not Found";
-							      while (error=="Not Found" || error==".") {
-								  error=".";
-								  scro=document.getElementById("scro");
-								  scro.parentNode.removeChild(scro);
-								  scro=document.createElement("script");
-								  scro.id="scro";
-								  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublicTo)+'.js&date=' + (new Date()).getTime();
-								  console.log("loading Box Public key", encodeURI(buzonPublicTo), '*:*:*:*:*:*:*:*:*:*:', scro.src);
-								  document.body.appendChild(scro);
-								  console.log({error});
-								  while(error==".") {
-								      await sleep (1000);
-								  }
+							      scro=document.getElementById("scro");
+							      scro.parentNode.removeChild(scro);
+							      scro=document.createElement("script");
+							      scro.id="scro";
+							      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
+							      console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
+							      document.body.appendChild(scro);
+							      while(error==".") {
+								  await sleep (500);
 							      }
-							      if(error=="Success") {
-								  console.log("Loaded Public To", {content, error});
-								  eval(atob(content));
-								  var rsaPublicTo=rsaPublicKey;
-								  if(rsaPublicTo) {
-								      console.log("Loaded Public To", {content}, atob(content), "Public Key of Box (To):", {rsaPublicKey});
-								      console.log({boxRSAKey});
-								      var responseDecrypted=await RSA_verify_and_decrypt(boxRSAKey,privateKey_RSA,rsaPublic);
-								      console.log({responseDecrypted});
-								      if(responseDecrypted.error=="Success"){
-									  eval(responseDecrypted.data["msg"]);
-									  boxRSAkey_dec=rsaKey;
-									  var datefield=(new Date().getTime());
-									  if (!subject) subject = "#" + buzonforGameis;
-									  var contentofMessageA="Subject:" + subject + "\nDate: " + datefield + "\n\n" + msg;
-									  var resp=await encripta(contentofMessageA, rsaPublicTo, boxRSAkey_dec, datefield, fromBuzon);
-									  console.log({resp, contentofMessageA, subject});
-									  contentofMessageA=btoa(resp);
-									  codeforRegister=insertacode("", "; char nameofindex[" + buzonEnc.length + "]=\""+buzonEnc+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + contentofMessageA.length + "]=\""+contentofMessageA+"\";");
-									  console.log({rsaPublicKey, buzon, buzonEnc, codeforRegister}, btoa(buzonEnc));
-									  encripta(codeforRegister).then(async (resp)=>{
-									      console.log({resp});
-									      init_OTProcessed=0;
-									      contentofMessageA=btoa(resp);
-									      var codeforRegisterPPV=insertacode("", "; char nameofSignatary[" + buzonFrom.length + "]=\""+buzonFrom+"\"; char nameofDestinatary[" + buzonTo.length + "]=\""+buzonTo+"\"; char command["+("REGISTER").length + "]=\"REGISTER\"; long ammount=1000; char content[" + contentofMessageA.length + "]=\""+contentofMessageA+"\";");
-									      while (init_OTProcessed!=255) {
-										  scro=document.getElementById("scro");
-										  scro.parentNode.removeChild(scro);
-										  scro=document.createElement("script");
-										  scro.id="scro";
-										  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-										  console.log(">:>:>", scro.src);
-										  document.body.appendChild(scro);
-										  console.log({error});
-										  await sleep (5000);
-									      }
-									      console.log({init_OTProcessed, iv_OTP, OTP_resource, OTP});
-									      iframeforRegister=document.getElementById("ifraRegister");
-									      if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
-									      iframeforRegister=document.createElement("iframe");
-									      iframeforRegister.id="ifraRegister";
-									      document.body.appendChild(iframeforRegister);
-									      iframeforRegister.src="about:blank";
-									      iframeforRegister.style.backgroundColor="blue";
-									      iframeforRegister.style.width=1;
-									      iframeforRegister.style.height=1;
-									      iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
-									      iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-									      iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-									      iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-									      iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-									      iframeforRegister.contentDocument.getElementById("submit").submit();
-									      await sleep (1000);
-									      resolve("Message Sent Successfully");
-									      return true;
-									  });
-								      } else {
-									  resolve({error: "Failed to load Key"});
+							  }
+							  if(error=="Not Found") {
+							      document.getElementById("modaltext").innerHTML="Incorrect User Data";
+							      document.getElementById("modal").style.display="block";
+							      resolve({error: "Box Not Found"});
+							      return false;
+							  } else {
+							      eval(atob(content));
+							      console.log("Loading User Keys", {content}, atob(content), {prefix_rsa, prefix_ivRsa});
+							      var respo=await decr(prefix_rsa, prefix_ivRsa);
+							      console.log({respo, prefix_rsa, prefix_ivRsa});
+							      if(respo.indexOf("var")<0) {
+								  document.getElementById("modaltext").innerHTML="Incorrect User Data";
+								  document.getElementById("modal").style.display="block";
+							      } else {
+								  eval(respo);
+								  if(rsaKey) {
+								      const privateKey_RSA=rsaKey;
+
+								      var buzonPublic=await digestMessage(buzon+".jspublic"+"\n");
+								      console.log({buzonPublic, buzon}, "A" + response[1]);
+								      error=".";
+								      scro=document.getElementById("scro");
+								      scro.parentNode.removeChild(scro);
+								      scro=document.createElement("script");
+								      scro.id="scro";
+								      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
+								      console.log("loading User Public key", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
+								      document.body.appendChild(scro);
+								      console.log({error});
+								      while(error==".") {
+									  await sleep (500);
+								      }
+								      if(error!="Success") {
+									  document.getElementById("modaltext").innerHTML=error;
+									  document.getElementById("modal").style.display="block";
+									  resolve({error: "Box Not Found"});
 									  return false;
+								      } else {
+									  eval(atob(content));
+									  var rsaPublic=rsaPublicKey;
+									  error=".";
+									  var buzonPublicTo=await digestMessage(addressTo+"public"+"\n");
+									  error=".";
+									  scro=document.getElementById("scro");
+									  scro.parentNode.removeChild(scro);
+									  scro=document.createElement("script");
+									  scro.id="scro";
+									  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublicTo)+'.js&date=' + (new Date()).getTime();
+									  console.log("loading Box Public key (to)", buzonTo, addressTo, encodeURI(buzonPublicTo), '*:*:*:*:*:*:*:*:*:*:', scro.src);
+									  document.body.appendChild(scro);
+									  console.log({error});
+									  await sleep (500);
+									  while(error==".") {
+									      await sleep (500);
+									  }
+									  if(error=="Success") {
+									      console.log("Loaded Public To", {content, error});
+									      eval(atob(content));
+									      var rsaPublicTo=rsaPublicKey;
+									      if(rsaPublicTo) {
+										  console.log("Loaded Public To", {content}, atob(content), "Public Key of Box (To):", {rsaPublicKey});
+										  console.log({boxRSAKey});
+										  var responseDecrypted=await RSA_verify_and_decrypt(boxRSAKey,privateKey_RSA,rsaPublic);
+										  console.log({responseDecrypted});
+										  if(responseDecrypted.error=="Success"){
+										      eval(responseDecrypted.data["msg"]);
+										      boxRSAkey_dec=rsaKey;
+										      var datefield=(new Date().getTime());
+										      var contentofMessageA="Subject: #PPV \nDate: " + datefield + "\n\n" + msg;
+										      var resp=await encripta(contentofMessageA, rsaPublicTo, boxRSAkey_dec, datefield, fromBuzon);
+										      console.log({resp, contentofMessageA});
+										      contentofMessageA=btoa(resp);
+										      codeforRegister=insertacode("", "; char nameofindex[" + buzonEnc.length + "]=\""+buzonEnc+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + contentofMessageA.length + "]=\""+contentofMessageA+"\";");
+										      console.log("Encripting Content");
+										      encripta(codeforRegister).then(async (respon)=>{
+											  init_OTProcessed=0;
+											  contentofMessagePPV=btoa(respon);
+											  var codeforRegisterPPV=insertacode("", "; char nameofSignatary[" + fromBuzon.length + "]=\""+fromBuzon+"\"; ");
+											  codeforRegisterPPV=insertacode(codeforRegisterPPV, "char nameofDestinatary[" + buzonTo.length + "]=\""+buzonTo+"\"; ");
+											  codeforRegisterPPV=insertacode(codeforRegisterPPV, "char command["+("REGISTER").length + "]=\"REGISTER\"; ");
+											  codeforRegisterPPV=insertacode(codeforRegisterPPV, "long ammount="+ammountinTokens+"; ");
+											  codeforRegisterPPV=insertacode(codeforRegisterPPV, "char content[" + (contentofMessagePPV.length) + "]=\""+contentofMessagePPV+"\";");
+											  console.log({codeforRegisterPPV});
+											  encripta(codeforRegisterPPV).then(async (respPPV)=>{
+											      console.log("Encripting Registration");
+											      while (init_OTProcessed!=255) {
+												  scro=document.getElementById("scro");
+												  scro.parentNode.removeChild(scro);
+												  scro=document.createElement("script");
+												  scro.id="scro";
+												  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+												  console.log(">:>:>", scro.src);
+												  document.body.appendChild(scro);
+												  console.log({error});
+												  await sleep (5000);
+											      }
+											      console.log({init_OTProcessed, iv_OTP, OTP_resource, OTP});
+											      iframeforRegister=document.getElementById("ifraRegister");
+											      if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
+											      iframeforRegister=document.createElement("iframe");
+											      iframeforRegister.id="ifraRegister";
+											      document.body.appendChild(iframeforRegister);
+											      iframeforRegister.src="about:blank";
+											      iframeforRegister.style.backgroundColor="blue";
+											      iframeforRegister.style.width=1;
+											      iframeforRegister.style.height=1;
+											      iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
+											      iframeforRegister.contentDocument.getElementById("texto2").value=respPPV;
+											      iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
+											      iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
+											      iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
+											      iframeforRegister.contentDocument.getElementById("submit").submit();
+											      await sleep (500);
+											      resolve("Message Sent Successfully");
+											      return true;
+											  });
+										      });
+										  } else {
+										      resolve({error: "Failed to load Key"});
+										      return false;
+										  }
+									      }
+									  } else {
+									      console.log({error: "Failed to load Public Key of Box"});
+									      resolve({error: "Failed to load Public Key of Box"});
+									      return false;
+									  }
 								      }
 								  }
 							      }
 							  }
 						      }
 						  }
-					      }
+					      });
 					  }
-				      }
+				      });
 				  }
 			      }
 			  }
-		      });
-		  });
+		      }
+		  }
 	      } else {
 		  resolve({error: "Missing Arguments"});
 		  return false;
 	      }
 	  });
       }
-	  
 
+      function loadFromFile() {
+	  const fileInput = document.getElementById("file-input");
+	  const reader = new FileReader();
+
+	  reader.addEventListener("load", () => {
+	      const base64String = reader.result.split(",")[1];
+	      console.log(base64String);
+	  });
+
+	  reader.readAsDataURL(fileInput.files[0]);
+      }
+      
       async function setscrgrados() {
 	  grados=-1;
 	  cuantos=0;
@@ -2745,7 +3100,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      </span>
 	      <span id="buzonIndex" name="buzonIndex"></span>
 	    </p>
-	    <p id="indice" style="background-color: white; width: 90%; padding: 20px;">  <span style="width: 100%; font-size: 20pt; "> Sin datos que mostrar </span> </p><input type="button" value="Ocultar" onclick="if(this.value=='Mostrar') { document.getElementById('indice').style.display='block'; this.value='Ocultar'; } else { document.getElementById('indice').style.display='none'; this.value='Mostrar'; }  "/>
+	    <p id="indice" style="background-color: white; width: 90%; padding: 20px; height: 800px; overflow: auto">  <span style="width: 100%; font-size: 20pt; "> Sin datos que mostrar </span> </p><input type="button" value="Ocultar" onclick="if(this.value=='Mostrar') { document.getElementById('indice').style.display='block'; this.value='Ocultar'; } else { document.getElementById('indice').style.display='none'; this.value='Mostrar'; }  "/>
 	  </div>
 	  <div id="tab2" border=1 style="display:none; position:absolute; left:5%; top:15%; background-color: #060807; width:60%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
 	    <table style="position:relative; width: 100%;">
