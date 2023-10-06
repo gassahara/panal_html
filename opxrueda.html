@@ -93,7 +93,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var t=null;
       var scro=null;
       var iv=new Uint8Array();
-      var remotepath="http://localhost";
+      var remotepath="https://curare2019.ddns.net/";
       var esperaencrgrados=null;
       var longitud=0;
       var latitud=0;
@@ -1205,27 +1205,27 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      encripta(codeforRegister).then(async (resp)=>{
 		  console.log({resp});
 		  alert("!");
-		  var iframeforRegister=null;
-		  iframeforRegister=document.getElementById("ifraRegister");
-		  if(iframeforRegister)iframeforRegister.parentNode.removeChild(iframeforRegister);
-		  iframeforRegister=document.createElement("iframe");
-		  iframeforRegister.id="iframeforRegister";
-		  document.body.appendChild(iframeforRegister);
-		  iframeforRegister.src="about:blank";
-		  iframeforRegister.style.backgroundColor="blue";
-		  iframeforRegister.style.width=1;
-		  iframeforRegister.style.height=1;
-		  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
-		  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-		  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-		  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-		  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-		  console.log("sending POST");
-		  iframeforRegister.contentDocument.getElementById("submit").submit();
-		  console.log({resp, iv_OTP, OTP_resource, OTP});
-		  console.log(iframeforRegister.url);
-		  coinsValue-=ammountinTokens*1;
-		  document.getElementById("coins").innerHTML=coinsValue;
+		  const data = new URLSearchParams();
+		  data.append("texto2", resp);
+		  data.append("iv_OTP", iv_OTP);
+		  data.append("OTP_resource", OTP_resource);
+		  data.append("OTP", OTP);
+
+		  fetch(remotepath + "/formalm.php", {
+		      method: "POST",
+		      headers: {
+			  "Content-Type": "application/x-www-form-urlencoded"
+		      },
+		      body: data
+		  })
+		      .then(response => response.json())
+		      .then(data => {
+			  console.log({resp, iv_OTP, OTP_resource, OTP});
+			  console.log(iframeforRegister.url);
+			  coinsValue-=ammountinTokens*1;
+			  document.getElementById("coins").innerHTML=coinsValue;
+		      })
+		      .catch(error => console.error(error));
 	      });
 	  } else {
 	      document.getElementById("modaltext").innerHTML="All the Tokens have been processed";
@@ -1394,55 +1394,57 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	      encripta(codeforRegister).then(async (resp)=>{
 		  console.log({resp});
-		  var iframeforRegister=null;
-		  iframeforRegister=document.getElementById("ifraRegister");
-		  if(iframeforRegister)iframeforRegister.parentNode.removeChild(iframeforRegister);
-		  iframeforRegister=document.createElement("iframe");
-		  iframeforRegister.id="iframeforRegister";
-		  document.body.appendChild(iframeforRegister);
-		  iframeforRegister.src="about:blank";
-		  iframeforRegister.style.backgroundColor="blue";
-		  iframeforRegister.style.width=1;
-		  iframeforRegister.style.height=1;
-		  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
-		  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-		  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-		  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-		  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-		  console.log("sending POST");
-		  iframeforRegister.contentDocument.getElementById("submit").submit();
-		  console.log({resp, iv_OTP, OTP_resource, OTP});
-		  console.log(iframeforRegister.url);
-		  console.log ({buzon, address});
-		  error=".";
-		  document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
-		  document.getElementById("modal").style.display="block";
-		  error="Not Found";
-		  while(error=="Not Found") {
-		      error=".";
-		      while (error==".") {
+		  const data = new URLSearchParams();
+		  data.append("texto2", resp);
+		  data.append("iv_OTP", iv_OTP);
+		  data.append("OTP_resource", OTP_resource);
+		  data.append("OTP", OTP);
+
+		  fetch(remotepath + "/formalm.php", {
+		      method: "POST",
+		      headers: {
+			  "Content-Type": "application/x-www-form-urlencoded"
+		      },
+		      body: data
+		  })
+		      .then(response => response.text)
+		      .then(async (data) => {
+			  console.log("sending POST");
+			  iframeforRegister.contentDocument.getElementById("submit").submit();
+			  console.log({resp, iv_OTP, OTP_resource, OTP});
+			  console.log(iframeforRegister.url);
+			  console.log ({buzon, address});
 			  error=".";
-			  scro=document.getElementById("scro");
-			  scro.parentNode.removeChild(scro);
-			  scro=document.createElement("script");
-			  scro.id="scro";
-			  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime();
-			  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameforMessage), '<<<<<< #####', scro.src);
-			  document.body.appendChild(scro);
-			  while(error==".") {
-			      await sleep (500);
+			  document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
+			  document.getElementById("modal").style.display="block";
+			  error="Not Found";
+			  while(error=="Not Found") {
+			      error=".";
+			      while (error==".") {
+				  error=".";
+				  scro=document.getElementById("scro");
+				  scro.parentNode.removeChild(scro);
+				  scro=document.createElement("script");
+				  scro.id="scro";
+				  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime();
+				  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameforMessage), '<<<<<< #####', scro.src);
+				  document.body.appendChild(scro);
+				  while(error==".") {
+				      await sleep (500);
+				  }
+			      }
+			      console.log("waiting for ", {nameforMessage, address, contador});
 			  }
-		      }
-		      console.log("waiting for ", {nameforMessage, address, contador});
-		  }
-		  var subjBox=null;
-		  if(!subjectBox) {
-		      subjBox="#coin";
-		  } else {
-		      subjBox=subjectBox;
-		  }
-		  console.log({address, buzon, subjBox, contador});
-		  RSA_cargaBuzon(address, buzon, subjBox, contador);
+			  var subjBox=null;
+			  if(!subjectBox) {
+			      subjBox="#coin";
+			  } else {
+			      subjBox=subjectBox;
+			  }
+			  console.log({address, buzon, subjBox, contador});
+			  RSA_cargaBuzon(address, buzon, subjBox, contador);
+		      })
+		      .catch(error => console.error(error));
 	      });
 	  } else {
 	      document.getElementById("modaltext").innerHTML="All the Tokens have been processed";
@@ -1534,9 +1536,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      document.getElementById("modal").style.display="block";
 				  } else {
 				      eval(atob(content));
-				      //				  console.log("Loading User Keys", {content}, atob(content), {prefix_rsa, prefix_ivRsa});
 				      decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
-					  //				      console.log({respo, prefix_rsa, prefix_ivRsa});
 					  if(respo.indexOf("var")<0) {
 					      document.getElementById("modaltext").innerHTML="Incorrect User Data";
 					      document.getElementById("modal").style.display="block";
@@ -1547,7 +1547,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  const privateKey_RSA=rsaKey;
 						  error=".";
 						  digestMessage(buzon+".jspublic"+"\n").then(async (buzonPublic)=>{
-						      //						  console.log({buzonPublic, buzon}, "A" + response[1]);
 						      error="Not Found";
 						      while (error=="Not Found" || error==".") {
 							  error=".";
@@ -1883,16 +1882,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      console.log({response});
 		      encrypted=null;
 		      resource_index=null;
-		      var iframeforRegister=null;
-		      iframeforRegister=document.getElementById("ifraRegister");
-		      iframeforRegister.parentNode.removeChild(iframeforRegister);
-		      iframeforRegister=document.createElement("iframe");
-		      iframeforRegister.id="iframeforRegister";
-		      document.body.appendChild(iframeforRegister);
-		      iframeforRegister.src="about:blank";
-		      iframeforRegister.style.backgroundColor="blue";
-		      iframeforRegister.style.width=1;
-		      iframeforRegister.style.height=1;
 		      buzon=response[1];
 		      digestMessage(response[1]).then(async (buzon)=>{
 			  filed=remotepath+"/"+buzon;
@@ -1926,7 +1915,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  const publick=keys[0].publicKey;
 				  var codeforRegister='var rsaKey=`' + privatek + '`;';
 				  console.log({codeforRegister});
-				  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
 				  console.log({filed, filed});
 				  console.log({iv_OTP, OTP, OTP_resource, colour});
 				  encr(codeforRegister, false).then(async (respo)=>{
@@ -1938,48 +1926,58 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      console.log({codeforRegister});
 				      encripta(codeforRegister).then((resp)=>{
 					  console.log({resp});
-					  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-					  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-					  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-					  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-					  iframeforRegister.contentDocument.getElementById("submit").submit();
-					  console.log({respo, iv_OTP, OTP_resource, OTP});
-					  console.log(iframeforRegister.url);
-				      });
-				      await sleep (500);
-				      error="Not Found";
-				      while (error=="Not Found") {
-					  error=".";
-					  scro=document.getElementById("scro");
-					  scro.parentNode.removeChild(scro);
-					  scro=document.createElement("script");
-					  scro.id="scro";
-					  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'&date=' + (new Date()).getTime();
-					  console.log("----------", encodeURI(buzon), '++++++++++++++', scro.src);
-					  document.body.appendChild(scro);
-					  while(error==".") {
-					      await sleep (500);
-					  }
-				      }
-				      eval(atob(content));
-				      console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
-				      decr(prefix_rsa, prefix_ivRsa).then((respo)=>{
-					  console.log({respo, prefix_rsa, prefix_ivRsa});
-					  eval(respo);
-					  if(rsaKey) {
-					      show=1;
-					      if(show) pon('tab1');
-					      document.getElementById("modaltext").innerHTML="User Registered Successfully";
-					      document.getElementById("modal").style.display="block";
-					      checkAndDisplayBuzon();
+					  const data = new URLSearchParams();
+					  data.append("texto2", resp);
+					  data.append("iv_OTP", iv_OTP);
+					  data.append("OTP_resource", OTP_resource);
+					  data.append("OTP", OTP);
 
-					  }
+					  fetch(remotepath + "/formalm.php", {
+					      method: "POST",
+					      headers: {
+						  "Content-Type": "application/x-www-form-urlencoded"
+					      },
+					      body: data
+					  })
+					      .then(response => response.text)
+					      .then(async (data) => {
+						  console.log("sending POST");
+						  await sleep (500);
+						  error="Not Found";
+						  while (error=="Not Found") {
+						      error=".";
+						      scro=document.getElementById("scro");
+						      scro.parentNode.removeChild(scro);
+						      scro=document.createElement("script");
+						      scro.id="scro";
+						      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'&date=' + (new Date()).getTime();
+						      console.log("----------", encodeURI(buzon), '++++++++++++++', scro.src);
+						      document.body.appendChild(scro);
+						      while(error==".") {
+							  await sleep (500);
+						      }
+						  }
+						  eval(atob(content));
+						  console.log({content}, atob(content), {prefix_rsa, prefix_ivRsa});
+						  decr(prefix_rsa, prefix_ivRsa).then((respo)=>{
+						      console.log({respo, prefix_rsa, prefix_ivRsa});
+						      eval(respo);
+						      if(rsaKey) {
+							  show=1;
+							  if(show) pon('tab1');
+							  document.getElementById("modaltext").innerHTML="User Registered Successfully";
+							  document.getElementById("modal").style.display="block";
+							  checkAndDisplayBuzon();
+
+						      }
+						  });
+						  if(error) {
+						      console.log(error);
+						      return false;
+						  }
+						  console.log({resource_index});
+					      });
 				      });
-				      if(error) {
-					  console.log(error);
-					  return false;
-				      }
-				      console.log({resource_index});
 				  });
 			      });
 			  }
@@ -2042,23 +2040,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  }
 			  encrypted=null;
 			  resource_index=null;
-			  var iframeforRegister=null;
-			  iframeforRegister=document.getElementById("ifraRegister");
-			  if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
-			  iframeforRegister=document.createElement("iframe");
-			  iframeforRegister.id="ifraRegister";
-			  document.body.appendChild(iframeforRegister);
-			  iframeforRegister.src="about:blank";
-			  iframeforRegister.style.backgroundColor="blue";
-			  iframeforRegister.style.width=1;
-			  iframeforRegister.style.height=1;
 			  generateKey(buzonEnc).then((keys)=>{
 			      console.log({keys});
 			      const privatek=keys[0].privateKey;
 			      const publick=keys[0].publicKey;
 			      var codeforRegister='var rsaKey=`' + privatek + '`;';
 			      console.log({codeforRegister});
-			      iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
 			      filed=remotepath+"/"+buzonEnc;
 			      console.log({filed, filed});
 			      console.log({iv_OTP, OTP, OTP_resource});
@@ -2127,102 +2114,115 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							      codeforRegister=insertacode("", "; char nameofindex[" + buzonEnc.length + "]=\""+buzonEnc+"\"; char command["+("REGISTER").length + "]=\"REGISTER\"; char content[" + codeforRegister.length + "]=\""+codeforRegister+"\"; char contentExtra[" + codeforRegister2.length + "]=\"" + codeforRegister2 + "\";");
 							      console.log({codeforRegister, buzonEnc});
 							      encripta(codeforRegister).then(async (resp)=>{
-								  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-								  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-								  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-								  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-								  iframeforRegister.contentDocument.getElementById("submit").submit();
-								  console.log({respo, iv_OTP, OTP_resource, OTP});
-								  console.log(iframeforRegister.url);
-								  await sleep (500);
-								  error="Not Found";
-								  while (error=="Not Found") {
-								      error=".";
-								      scro=document.getElementById("scro");
-								      scro.parentNode.removeChild(scro);
-								      scro=document.createElement("script");
-								      scro.id="scro";
-								      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'&date=' + (new Date()).getTime();
-								      console.log("_ . _ . _ . _ . ", encodeURI(buzonEnc), '+ + + + + + + + + + +  ++ + ', scro.src);
-								      document.body.appendChild(scro);
-								      while(error==".") {
-									  await sleep (500);
-								      }
-								  }
+								  console.log({resp});
+								  const data = new URLSearchParams();
+								  data.append("texto2", resp);
+								  data.append("iv_OTP", iv_OTP);
+								  data.append("OTP_resource", OTP_resource);
+								  data.append("OTP", OTP);
 
-
-								  var contador=1;
-								  var nameofMessages=await digestMessage(buzonE+""+contador);
-								  nameofMessages=nameofMessages+".js";
-								  console.log("><><><><><><", {buzonE, nameofMessages, contador});
-								  error=".";
-								  while(error!="Not Found") {
-								      error=".";
-								      scro=document.getElementById("scro");
-								      scro.parentNode.removeChild(scro);
-								      scro=document.createElement("script");
-								      scro.id="scro";
-								      scro.src=remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime();
-								      console.log("Attempt to Load ", encodeURI(nameofMessages), '<<<<< ##', scro.src);
-								      document.body.appendChild(scro);
-								      while(error==".") {
+								  fetch(remotepath + "/formalm.php", {
+								      method: "POST",
+								      headers: {
+									  "Content-Type": "application/x-www-form-urlencoded"
+								      },
+								      body: data
+								  })
+								      .then(response => response.text)
+								      .then(async (data) => {
+									  console.log({respo, iv_OTP, OTP_resource, OTP});
 									  await sleep (500);
-								      }
-								      contador=contador+1;
-								      nameofMessages=await digestMessage(buzonE+""+contador);
-								      nameofMessages=nameofMessages+".js";
-								      console.log("Loading ", {nameofMessages, buzonE, contador, error});
-								  }
-								  contador--;
-								  nameofMessages=await digestMessage(buzonE+""+contador);
-								  nameofMessages=nameofMessages+".js";
-								  var datefield=(new Date().getTime());
-								  if (!subject) subject = "#" + buzonforGameis;
-								  var contentofMessage="Subject:" + subject + "\nDate: " + datefield + "\n\nname="+buzoname+",address="+buzonEnc;
-								  encripta(contentofMessage, rsaPublicKey, rsaKey, datefield).then((resp)=>{
-								      contentofMessage=btoa(resp);
-								      codeforRegister=insertacode("", "; char nameofindex[" + buzonE.length + "]=\""+buzonE+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + contentofMessage.length + "]=\""+contentofMessage+"\";");
-								      console.log({buzon, buzonE, codeforRegister}, btoa(buzonEnc));
-								      encripta(codeforRegister).then(async (resp)=>{
-									  iframeforRegister=document.getElementById("ifraRegister");
-									  if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
-									  iframeforRegister=document.createElement("iframe");
-									  iframeforRegister.id="ifraRegister";
-									  document.body.appendChild(iframeforRegister);
-									  iframeforRegister.src="about:blank";
-									  iframeforRegister.style.backgroundColor="blue";
-									  iframeforRegister.style.width=1;
-									  iframeforRegister.style.height=1;
-									  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
-									  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-									  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-									  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-									  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-									  iframeforRegister.contentDocument.getElementById("submit").submit();
-									  document.getElementById("modaltext").innerHTML="RECEIVING (" + subject + ")";
-									  document.getElementById("modal").style.display="block";
-									  if(subject!="#ignore" && subject!="#coin") document.getElementById('indice').innerHTML="";
 									  error="Not Found";
-									  while(error=="Not Found") {
+									  while (error=="Not Found") {
+									      error=".";
 									      scro=document.getElementById("scro");
 									      scro.parentNode.removeChild(scro);
 									      scro=document.createElement("script");
 									      scro.id="scro";
-									      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime();
-									      console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####', scro.src);
+									      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'&date=' + (new Date()).getTime();
+									      console.log("_ . _ . _ . _ . ", encodeURI(buzonEnc), '+ + + + + + + + + + +  ++ + ', scro.src);
 									      document.body.appendChild(scro);
-									      await sleep (2500);
-									      console.log("waiting for ", {nameofMessages, contador});
+									      while(error==".") {
+										  await sleep (500);
+									      }
 									  }
-									  document.getElementById("modaltext").innerHTML="Box Registered Successfully";
-									  document.getElementById("modal").style.display="block";
-									  checkAndDisplayBuzon();
-									  resolve("Success");
-									  return (true);
+
+
+									  var contador=1;
+									  var nameofMessages=await digestMessage(buzonE+""+contador);
+									  nameofMessages=nameofMessages+".js";
+									  console.log("><><><><><><", {buzonE, nameofMessages, contador});
+									  error=".";
+									  while(error!="Not Found") {
+									      error=".";
+									      scro=document.getElementById("scro");
+									      scro.parentNode.removeChild(scro);
+									      scro=document.createElement("script");
+									      scro.id="scro";
+									      scro.src=remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime();
+									      console.log("Attempt to Load ", encodeURI(nameofMessages), '<<<<< ##', scro.src);
+									      document.body.appendChild(scro);
+									      while(error==".") {
+										  await sleep (500);
+									      }
+									      contador=contador+1;
+									      nameofMessages=await digestMessage(buzonE+""+contador);
+									      nameofMessages=nameofMessages+".js";
+									      console.log("Loading ", {nameofMessages, buzonE, contador, error});
+									  }
+									  contador--;
+									  nameofMessages=await digestMessage(buzonE+""+contador);
+									  nameofMessages=nameofMessages+".js";
+									  var datefield=(new Date().getTime());
+									  if (!subject) subject = "#" + buzonforGameis;
+									  var contentofMessage="Subject:" + subject + "\nDate: " + datefield + "\n\nname="+buzoname+",address="+buzonEnc;
+									  encripta(contentofMessage, rsaPublicKey, rsaKey, datefield).then((resp)=>{
+									      contentofMessage=btoa(resp);
+									      codeforRegister=insertacode("", "; char nameofindex[" + buzonE.length + "]=\""+buzonE+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + contentofMessage.length + "]=\""+contentofMessage+"\";");
+									      console.log({buzon, buzonE, codeforRegister}, btoa(buzonEnc));
+									      encripta(codeforRegister).then(async (resp)=>{
+										  console.log({resp});
+										  const data = new URLSearchParams();
+										  data.append("texto2", resp);
+										  data.append("iv_OTP", iv_OTP);
+										  data.append("OTP_resource", OTP_resource);
+										  data.append("OTP", OTP);
+
+										  fetch(remotepath + "/formalm.php", {
+										      method: "POST",
+										      headers: {
+											  "Content-Type": "application/x-www-form-urlencoded"
+										      },
+										      body: data
+										  })
+										      .then(response => response.text)
+										      .then(async (data) => {
+											  document.getElementById("modaltext").innerHTML="RECEIVING (" + subject + ")";
+											  document.getElementById("modal").style.display="block";
+											  if(subject!="#ignore" && subject!="#coin") document.getElementById('indice').innerHTML="";
+											  error="Not Found";
+											  while(error=="Not Found") {
+											      scro=document.getElementById("scro");
+											      scro.parentNode.removeChild(scro);
+											      scro=document.createElement("script");
+											      scro.id="scro";
+											      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime();
+											      console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####', scro.src);
+											      document.body.appendChild(scro);
+											      await sleep (2500);
+											      console.log("waiting for ", {nameofMessages, contador});
+											  }
+											  document.getElementById("modaltext").innerHTML="Box Registered Successfully";
+											  document.getElementById("modal").style.display="block";
+											  checkAndDisplayBuzon();
+											  resolve("Success");
+											  return (true);
+										      });
+									      });
+									  });
 								      });
-								  });
-							      });
-							  });					      
+							      });					      
+							  });
 						      });
 						  } else {
 						      //resolve(error);
@@ -2309,7 +2309,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      console.log({response});
 				      encrypted=null;
 				      resource_index=null;
-				      var iframeforRegister=null;
 				      buzon=response[1];
 				      var buzon=await digestMessage(response[1]);
 				      await sleep (500);
@@ -2443,24 +2442,26 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      await sleep (500);
 									  }
 									  console.log({init_OTProcessed, iv_OTP, OTP_resource, OTP});
-									  iframeforRegister=document.getElementById("ifraRegister");
-									  if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
-									  iframeforRegister=document.createElement("iframe");
-									  iframeforRegister.id="ifraRegister";
-									  document.body.appendChild(iframeforRegister);
-									  iframeforRegister.src="about:blank";
-									  iframeforRegister.style.backgroundColor="blue";
-									  iframeforRegister.style.width=1;
-									  iframeforRegister.style.height=1;
-									  iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
-									  iframeforRegister.contentDocument.getElementById("texto2").value=resp;
-									  iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-									  iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-									  iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-									  iframeforRegister.contentDocument.getElementById("submit").submit();
-									  await sleep (500);
-									  resolve("Message Sent Successfully");
-									  return true;
+									  console.log({resp});
+									  const data = new URLSearchParams();
+									  data.append("texto2", resp);
+									  data.append("iv_OTP", iv_OTP);
+									  data.append("OTP_resource", OTP_resource);
+									  data.append("OTP", OTP);
+
+									  fetch(remotepath + "/formalm.php", {
+									      method: "POST",
+									      headers: {
+										  "Content-Type": "application/x-www-form-urlencoded"
+									      },
+									      body: data
+									  })
+									      .then(response => response.text)
+									      .then(async (data) => {
+										  await sleep (500);
+										  resolve("Message Sent Successfully");
+										  return true;
+									      });
 								      });
 								  } else {
 								      resolve({error: "Failed to load Private Key for Send"});
@@ -2534,7 +2535,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  console.log({response});
 			  encrypted=null;
 			  resource_index=null;
-			  var iframeforRegister=null;
 			  buzon=response[1];
 			  var buzon=await digestMessage(response[1]);
 			  await sleep (500);
@@ -2628,7 +2628,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  console.log({response});
 							  encrypted=null;
 							  resource_index=null;
-							  var iframeforRegister=null;
 							  buzon=response[1];
 							  var buzon=await digestMessage(response[1]);
 							  await sleep (500);
@@ -2744,24 +2743,26 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 												  await sleep (5000);
 											      }
 											      console.log({init_OTProcessed, iv_OTP, OTP_resource, OTP});
-											      iframeforRegister=document.getElementById("ifraRegister");
-											      if(iframeforRegister) iframeforRegister.parentNode.removeChild(iframeforRegister);
-											      iframeforRegister=document.createElement("iframe");
-											      iframeforRegister.id="ifraRegister";
-											      document.body.appendChild(iframeforRegister);
-											      iframeforRegister.src="about:blank";
-											      iframeforRegister.style.backgroundColor="blue";
-											      iframeforRegister.style.width=1;
-											      iframeforRegister.style.height=1;
-											      iframeforRegister.contentDocument.write("<HTML><BODY><form id=\"submit\" action=\""+remotepath+"/formalm.php\" method=\"POST\"><input type=\"password\" name=\"OTP\" id=\"OTP\"/><input name=\"iv_OTP\" id=\"iv_OTP\"/><input name=\"OTP_resource\" id=\"OTP_resource\"/><textarea name=\"texto2\" id=\"texto2\"></textarea></form>");
-											      iframeforRegister.contentDocument.getElementById("texto2").value=respPPV;
-											      iframeforRegister.contentDocument.getElementById("iv_OTP").value=iv_OTP;
-											      iframeforRegister.contentDocument.getElementById("OTP_resource").value=OTP_resource;
-											      iframeforRegister.contentDocument.getElementById("OTP").value=OTP;
-											      iframeforRegister.contentDocument.getElementById("submit").submit();
-											      await sleep (500);
-											      resolve("Message Sent Successfully");
-											      return true;
+											      console.log({resp});
+											      const data = new URLSearchParams();
+											      data.append("texto2", resp);
+											      data.append("iv_OTP", iv_OTP);
+											      data.append("OTP_resource", OTP_resource);
+											      data.append("OTP", OTP);
+
+											      fetch(remotepath + "/formalm.php", {
+												  method: "POST",
+												  headers: {
+												      "Content-Type": "application/x-www-form-urlencoded"
+												  },
+												  body: data
+											      })
+												  .then(response => response.text)
+												  .then(async (data) => {
+												      await sleep (500);
+												      resolve("Message Sent Successfully");
+												      return true;
+												  });
 											  });
 										      });
 										  } else {
@@ -3050,7 +3051,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       </script>
   </head>
   <body style="background-color: #0c0c0b; width: 90%;">
-    <iframe id="ifradat" style="background-color:red; width: 200px; heigh: 100px;" src="about:blank"></iframe>
     <canvas id="myCanvas" width=600 height=600 style="position: absolute; top: 10%;"></canvas>
     <div id="result"></div>
     <SCRIPT>
