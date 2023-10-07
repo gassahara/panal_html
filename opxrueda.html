@@ -625,7 +625,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      if(hb<betslen) cadena+=",";
 	  }
 	  cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
-	  alert(cadena);
 	  encr(cadena);
       }
       var t3=null;
@@ -1116,13 +1115,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      d++;
 	  }
 	  if(ammountforTokens*1>0) {
-	      alert(ammountforTokens);
 	      resolve({error: "NO Change for Ammount Please Consolidate", data: null});
 	      return false;
 	  }
 	  console.log({tokens, c, buzon, command});
-	  alert(c);
-	  alert(ammountforTokens);
 	  if(tokens.length) {
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
@@ -1206,7 +1202,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      console.log(codeforRegister);
 	      encripta(codeforRegister).then(async (resp)=>{
 		  console.log({resp});
-		  alert("!");
 		  const data = new URLSearchParams();
 		  data.append("texto2", resp);
 		  data.append("iv_OTP", iv_OTP);
@@ -1249,7 +1244,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  if(buzonCoin) stampcoins=coins;
 	  else stampcoins=document.getElementById('indice').coins;
 	  console.log({coins,stampcoins, buzonCoin}, document.getElementById('indice').coins);
-	  alert("!");
 	  if(text==null) {
 	      c=0;
 	      for(var key in stampcoins) {
@@ -1288,8 +1282,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  if(buzonCoin) coins=stampcoins;
 	  else document.getElementById('indice').coins=stampcoins;
 	  console.log({tokens, stampcoins, buzonCoin, coins});
-	  alert(">");
-	  
 	  if(tokens.length) {
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
@@ -1690,9 +1682,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      }
 									      if(contentB.data["subject"]) {
 										  if((subject=="#coin" && contentB.data["subject"].trim()=="consolidate") || (subject!="#coin" && contentB.data["subject"].trim()=="#sendcoin")) {
-										      consolidate+="\n"+contentB.data["msg"]+"\n";
 										      console.log({subject}, contentB.data["subject"], {contentB});
-										      if(prevcommand && prevcommand!=indefined && prevcommand!=contentB.data["date"]) {
+										      if(prevcommand!=contentB.data["date"]) {
 											  var contadorTemporal=contador-1;
 											  var nameofMessageTemporal="";
 											  while(contadorTemporal>=0) {
@@ -1715,9 +1706,15 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											  for (let i = 0; i < boxesignored.length; i++) {
 											      msgTemporal += boxesignored[i]+';';
 											  }
+											  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
+											  document.getElementById("modal").style.display="block";
+											  alert(msgTemporal);
 											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
+											  document.getElementById("modaltext").innerHTML="Continue Loading";
+											  document.getElementById("modal").style.display="block";
 											  consolidate="";
-										      }
+										      } 
+										      consolidate+="\n"+contentB.data["msg"]+"\n";
 										      prevcommand=contentB.data["date"];
 										  }
 										  if(subject!="#coin" && contentB.data["subject"].trim()=="verify") {
@@ -1728,7 +1725,16 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      boxesignoredadd(nameofMessage+";");
 										      document.getElementById("boxBalance").innerHTML=coinObj.value;
 										      console.log({contador, coinObj, coins, coinsValue, nameofMessage});
-										      var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", nameofMessage);
+											  var msgTemporal="";
+											  for (let i = 0; i < boxesignored.length; i++) {
+											      msgTemporal += boxesignored[i]+';';
+											  }
+											  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
+											  document.getElementById("modal").style.display="block";
+											  alert(msgTemporal);
+											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
+											  document.getElementById("modaltext").innerHTML="Continue Loading";
+											  document.getElementById("modal").style.display="block";
 										  }
 										  if(subject=="#coin" && contentB.data["subject"].trim()=="verify") {
 										      verifyString+=nameofMessage+";"
@@ -1739,9 +1745,21 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      coins=coinObj.coins;
 										      boxesignoredadd(nameofMessage+";");
 										      console.log({contador, coinObj, coins, coinsValue, nameofMessage});
-										      var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", nameofMessage);
+											  var msgTemporal="";
+											  for (let i = 0; i < boxesignored.length; i++) {
+											      msgTemporal += boxesignored[i]+';';
+											  }
+											  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
+											  document.getElementById("modal").style.display="block";
+											  alert(msgTemporal);
+											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
+											  document.getElementById("modaltext").innerHTML="Continue Loading";
+											  document.getElementById("modal").style.display="block";
+
 										  }
 										  if(subject=="#ignore" && contentB.data["subject"].trim()=="#ignore") {
+										      alert("I");
+										      console.log(contentB.data["msg"]);
 										      boxesignoredadd(contentB.data["msg"]);
 										  }
 									      }
@@ -1762,6 +1780,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      for (let i = 0; i < boxesignored.length; i++) {
 									  msgTemporal += boxesignored[i]+';';
 								      }
+								      
 								      var enviaResult=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
 								  }
 								  if(!consolidate.length) {
@@ -1769,6 +1788,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      document.getElementById("modal").style.display="block";
 								  }
 								  if(consolidate.length) {
+								      document.getElementById("modaltext").innerHTML="There is consolidate Data, Sending to Verify";
+								      document.getElementById("modal").style.display="block";
 								      var isBoxCoin=false;
 								      if( subject=="#coin") {
 									  coins=[];
@@ -1873,7 +1894,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  userPassword().then(async (response)=>{
 	      console.log({response});
 	      if(response.error) {
-		  alert(response.error);
 		  if(tt) clearTimeout(tt);
 		  tt=setTimeout(setscr, 12000);
 	      } else {
@@ -2242,7 +2262,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       
       async function RSA_enviarABuzon(buzonTo=null, fromBuzon=null, subject=null, msg=null) {
 	  console.log({buzonTo, fromBuzon});
-	  alert(buzonTo, fromBuzon);
 	  return new Promise(async (resolve)=>{
 	      console.log({show}, "sending to:", {buzonTo}, " sending from:", {fromBuzon});
 	      var buzoname=buzon;
