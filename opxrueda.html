@@ -1215,8 +1215,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      },
 		      body: data
 		  })
-		      .then(response => response.json())
-		      .then(data => {
+		      .then(response => response.text)
+		      .then(async (data) => {
 			  console.log({resp, iv_OTP, OTP_resource, OTP});
 			  coinsValue-=ammountinTokens*1;
 			  document.getElementById("coins").innerHTML=coinsValue;
@@ -1605,7 +1605,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      var fieldsforText="Message: <TEXTAREA id=\\'texttoSend\\' cols=80 rows=20/></TEXTAREA> <br /> To Box: <input id=\\'buzonToText\\' /> <br /> ";
 								  var functionSendText="RSA_enviarABuzon(document.getElementById('buzonToText').value, \'"+buzonOriginal+"\', \'"+subject+"\', document.getElementById('texttoSend').value).then((resp)=>{document.getElementById(\'fieldsforPPVspan\').innerHTML=\'\';});";
 								  var functionSend="RSA_registrarAPPV(document.getElementById('buzonToPPV').value, \'"+buzonOriginal+"\', \'SEND\', document.getElementById('ammountToPPV').value).then((resp)=>{document.getElementById(\'fieldsforPPVspan\').innerHTML=\'\';});;";
-								  document.getElementById('indice').innerHTML+="<input id=\"ammountSend\"/> <input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(\'"+buzonOriginal+"\', \'SEND\', document.getElementById('ammountSend').value)\" /><p><span id=\"fieldsforPPVspan\"></span><input type=\"button\" value=\"Send File to Box PPV\" onclick=\"if(this.send){this.send=0; "+functionSend+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforPPV+"\';}\" /></p>   <input type=\"button\" value=\"Send Text to Box\" onclick=\"if(this.send){this.send=0; "+functionSendText+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforText+"\';}\" /></p>" + document.getElementById('indice').innerHTML;
+								  document.getElementById('indice').innerHTML+="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p><p><span id=\"fieldsforPPVspan\"></span><input type=\"button\" value=\"Send File to Box PPV\" onclick=\"if(this.send){this.send=0; "+functionSend+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforPPV+"\';}\" /></p>   <input type=\"button\" value=\"Send Text to Box\" onclick=\"if(this.send){this.send=0; "+functionSendText+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforText+"\';}\" /></center>" + document.getElementById('indice').innerHTML;
 								  }
 								  while(error!="Not Found") {
 								      if(!setContador) nameofMessage=null;
@@ -1684,6 +1684,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  if((subject=="#coin" && contentB.data["subject"].trim()=="consolidate") || (subject!="#coin" && contentB.data["subject"].trim()=="#sendcoin")) {
 										      console.log({subject}, contentB.data["subject"], {contentB});
 										      if(prevcommand!=contentB.data["date"]) {
+											  var missingNameinIgonre=false;
+											  var everythingisadded=null;
 											  var contadorTemporal=contador-1;
 											  var nameofMessageTemporal="";
 											  while(contadorTemporal>=0) {
@@ -1698,21 +1700,23 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 												  n++;
 											      }
 											      if(nameofMessageTemporal) {
+												  missingNameinIgonre=true;
 												  boxesignoredadd(nameofMessageTemporal);
 											      }
 											      contadorTemporal=contadorTemporal-1;
 											  }
+											  if(missingNameinIgonre) {
 											  var msgTemporal="";
 											  for (let i = 0; i < boxesignored.length; i++) {
 											      msgTemporal += boxesignored[i]+';';
 											  }
 											  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
 											  document.getElementById("modal").style.display="block";
-											  alert(msgTemporal);
 											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
 											  document.getElementById("modaltext").innerHTML="Continue Loading";
-											  document.getElementById("modal").style.display="block";
-											  consolidate="";
+											      document.getElementById("modal").style.display="block";
+											  }
+											      consolidate="";
 										      } 
 										      consolidate+="\n"+contentB.data["msg"]+"\n";
 										      prevcommand=contentB.data["date"];
@@ -1720,18 +1724,19 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  if(subject!="#coin" && contentB.data["subject"].trim()=="verify") {
 										      verifyString+=nameofMessage+";";
 										      var coinObj=parseCoin(contentB.data["msg"], document.getElementById('indice').coins);
+										      
 										      document.getElementById('indice').coinValue=coinObj.value;
 										      document.getElementById('indice').coins=coinObj.coins;
+										      document.getElementById("boxBalance").innerHTML=document.getElementById('indice').coinValue;										      
 										      boxesignoredadd(nameofMessage+";");
-										      document.getElementById("boxBalance").innerHTML=coinObj.value;
-										      console.log({contador, coinObj, coins, coinsValue, nameofMessage});
+										      console.log({contador, coinObj, nameofMessage},contentB.data["msg"],  "verify");
+										      alert("V");
 											  var msgTemporal="";
 											  for (let i = 0; i < boxesignored.length; i++) {
 											      msgTemporal += boxesignored[i]+';';
 											  }
 											  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
 											  document.getElementById("modal").style.display="block";
-											  alert(msgTemporal);
 											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
 											  document.getElementById("modaltext").innerHTML="Continue Loading";
 											  document.getElementById("modal").style.display="block";
@@ -1751,14 +1756,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											  }
 											  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
 											  document.getElementById("modal").style.display="block";
-											  alert(msgTemporal);
 											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
 											  document.getElementById("modaltext").innerHTML="Continue Loading";
 											  document.getElementById("modal").style.display="block";
 
 										  }
 										  if(subject=="#ignore" && contentB.data["subject"].trim()=="#ignore") {
-										      alert("I");
 										      console.log(contentB.data["msg"]);
 										      boxesignoredadd(contentB.data["msg"]);
 										  }
@@ -1853,7 +1856,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      console.log({line});
 	      if(line.indexOf("VERIFIED:")==0) {
 		  var fname='"'+(line.substring(line.indexOf("VERIFIED:")+("VERIFIED:").length, line.length))+'"';
-		  if (coins.hasOwnProperty(fname)) {
+		  if (parsedcoins.hasOwnProperty(fname)) {
 		      parsedcoins[fname]["verified"]=true;
 		      parsedcoinsValue+=(parsedcoins[fname]["stamps_ammount"]*1);
 		  }
@@ -3080,15 +3083,51 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
          /*============ Defining and storing the geometry =========*/
 
          var vertices = [
-            -2,-2,-2, 2,-2,-2, 1.2, 1.2,-1.2, -1.2, 1.2,-1.2,
-            -1.2,-1.2, 1.2, 2,-2, 2, 2, 2, 2, -1.2, 1.2, 1.2,
-            -1,-1,-1, -1, 1,-1, -1, 1, 1, -1,-1, 1,
-            1,-1,-1, 1, 1,-1, 1, 1, 1, 1,-1, 1,
-            -1,-1,-1, -1,-1, 1, 1,-1, 1, 1,-1,-1,
-            -1, 1,-1, -1, 1, 1, 1, 1, 1, 1, 1,-1, 
-         ];
+	     // Front face
+             -1.0, -1.0,  2.0,
+	     1.0, -1.0,  2.0,
+	     1.0,  1.0,  2.0,
+	     -1.0,  1.0,  2.0,
 
-         var colorsOpengl = [
+	     // Back face
+	     -1.0, -1.0, -2.0,
+	     -1.0,  1.0, -2.0,
+	     1.0,  1.0, -2.0,
+	     1.0, -1.0, -2.0,
+
+	     // Top face
+	     -1.0,  1.0, -2.0,
+	     -1.0,  1.0, 2.0,
+	     1.0,  1.0,  2.0,
+	     1.0,  1.0, -2.0,
+
+	     // Bottom face
+	     -1.0, -1.0, -2.0,
+	     1.0, -1.0, -2.0,
+	     1.0, -1.0,  2.0,
+	     -1.0, -1.0, 2.0,
+
+	     // Right face
+	     1.0, -1.0, -2.0,
+	     1.0,  1.0, -2.0,
+	     1.0,  1.0,  2.0,
+	     1.0, -1.0,  2.0,
+
+	     // Left face
+	     -1.0, -1.0, -2.0,
+	     -1.0, -1.0,  2.0,
+	     -1.0,  1.0,  2.0,
+	     -1.0,  1.0, -2.0,
+	 ];
+
+      const translationMatrix = [
+          1, 0, 0, 0.5,
+	  0, 1, 0, 0,
+	  0, 0, 1, 0,
+	  0, 0, 0, 1,
+      ];
+
+      var colorsOpengl = [
              -15,3,7, 5,3,7, 5,3,7, 5,3,7,
             1,1,3, 1,1,3, 1,1,3, 1,1,3,
             0,0,1, 0,0,1, 0,0,1, 0,0,1,
@@ -3125,10 +3164,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
             'uniform mat4 Vmatrix;'+
             'uniform mat4 Mmatrix;'+
             'attribute vec3 color;'+//the color of the point
-            'varying vec3 vColor;'+
-
+      'varying vec3 vColor;'+
+    'attribute vec3 aPosition;'+
+    'uniform mat4 uTranslationMatrix;'+
             'void main(void) { '+//pre-built function
-               'gl_Position = Pmatrix*Vmatrix*Mmatrix*vec4(position, 1.);'+
+      'gl_Position = Pmatrix*Vmatrix*Mmatrix*vec4(position, 1.);'+
                'vColor = color;'+
             '}';
 
@@ -3186,8 +3226,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 
          var mov_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
          var mov_matrix2 = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
-         var view_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
-
+      var view_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+      var translationMatrixLocation = gl.getUniformLocation(shaderProgram, 'uTranslationMatrix');
          // translating z
          view_matrix[14] = view_matrix[14]-6;//zoom
 
@@ -3195,7 +3235,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 
          function rotateZ(m, angle) {
             var c = Math.cos(angle);
-            var s = Math.sin(angle);
+             var s = Math.sin(angle);
             var mv0 = m[0], mv4 = m[4], mv8 = m[8];
 
             m[0] = c*m[0]-s*m[1];
@@ -3205,6 +3245,17 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
             m[1]=c*m[1]+s*mv0;
             m[5]=c*m[5]+s*mv4;
             m[9]=c*m[9]+s*mv8;
+         }
+
+         function translate(m) {
+	     var mul=0;
+             var ind=0;
+	     var mv0 = m[0], mv4 = m[4], mv8 = m[8];
+	     while(ind<6) {
+		 m[mul] *= 1.001; //c*m[0]-s*m[1];
+		 mul+=3;
+		 ind+=1;
+	     }
          }
 
          function rotateX(m, angle) {
@@ -3258,11 +3309,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
              gl.uniformMatrix4fv(Mmatrix, false, mov_matrix);
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
             gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-            rotateZ(mov_matrix2, dt*-0.003);//time
+
+	     rotateZ(mov_matrix2, dt*-0.003);//time
             rotateY(mov_matrix2, -dt*-0.002);
             rotateX(mov_matrix2, dt*0.001);
             gl.uniformMatrix4fv(Pmatrix, true, proj_matrix);
-            gl.uniformMatrix4fv(Vmatrix, true, view_matrix);
+             gl.uniformMatrix4fv(Vmatrix, true, view_matrix);
+	     translate(mov_matrix2);
              gl.uniformMatrix4fv(Mmatrix, false, mov_matrix2);
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
             gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
@@ -3282,7 +3335,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	     //document.getElementById("result").innerHTML=JSON.stringify(pixels);
              window.requestAnimationFrame(animate);	     
          }
-      animate(0);
+      animate(0.260);
     </SCRIPT>    
 
     <table style="width: 100%; font-family: Sans-Serif; font-size:18pt; background-color: '';">
