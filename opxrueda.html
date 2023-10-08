@@ -1217,7 +1217,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  })
 		      .then(response => response.text)
 		      .then(async (data) => {
-			  console.log({resp, iv_OTP, OTP_resource, OTP});
+			  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
+			  else console.log({data});			  
+			  console.log( {resp, iv_OTP, OTP_resource, OTP});
 			  coinsValue-=ammountinTokens*1;
 			  document.getElementById("coins").innerHTML=coinsValue;
 		      })
@@ -1405,12 +1407,15 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      .then(response => response.text)
 		      .then(async (data) => {
 			  console.log("sending POST");
-			  console.log({resp, iv_OTP, OTP_resource, OTP});
+												      if(data.text!=undefined) console.log(data.text(), "rcv", "data");
+												      else console.log({data});
+			  console.log({ resp, iv_OTP, OTP_resource, OTP});
 			  console.log ({buzon, address});
 			  error=".";
 			  document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
 			  document.getElementById("modal").style.display="block";
 			  error="Not Found";
+			  console.log("waiting for ", {nameforMessage, address, contador});
 			  while(error=="Not Found") {
 			      error=".";
 			      while (error==".") {
@@ -1426,7 +1431,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      await sleep (500);
 				  }
 			      }
-			      console.log("waiting for ", {nameforMessage, address, contador});
 			  }
 			  var subjBox=null;
 			  if(!subjectBox) {
@@ -1964,7 +1968,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  })
 					      .then(response => response.text)
 					      .then(async (data) => {
-						  console.log("sending POST");
+						  if(data.text!=undefined) console.log(data.text(), "POST", "data");
+						  else console.log({data});
 						  await sleep (500);
 						  error="Not Found";
 						  while (error=="Not Found") {
@@ -2153,7 +2158,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  })
 								      .then(response => response.text)
 								      .then(async (data) => {
-									  console.log({respo, iv_OTP, OTP_resource, OTP});
+									  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
+									  else console.log({data});
+									  
+									  console.log({ respo, iv_OTP, OTP_resource, OTP});
 									  await sleep (500);
 									  error="Not Found";
 									  while (error=="Not Found") {
@@ -2220,20 +2228,21 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  })
 										      .then(response => response.text)
 										      .then(async (data) => {
+											  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
+											  else console.log({data});
 											  document.getElementById("modaltext").innerHTML="RECEIVING (" + subject + ")";
 											  document.getElementById("modal").style.display="block";
 											  if(subject!="#ignore" && subject!="#coin") document.getElementById('indice').innerHTML="";
 											  error="Not Found";
+											      console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####', scro.src);
 											  while(error=="Not Found") {
 											      scro=document.getElementById("scro");
 											      scro.parentNode.removeChild(scro);
 											      scro=document.createElement("script");
 											      scro.id="scro";
 											      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime();
-											      console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####', scro.src);
 											      document.body.appendChild(scro);
 											      await sleep (2500);
-											      console.log("waiting for ", {nameofMessages, contador});
 											  }
 											  document.getElementById("modaltext").innerHTML="Box Registered Successfully";
 											  document.getElementById("modal").style.display="block";
@@ -2480,6 +2489,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  })
 									      .then(response => response.text)
 									      .then(async (data) => {
+										  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
+												      else console.log({data});
 										  await sleep (500);
 										  resolve("Message Sent Successfully");
 										  return true;
@@ -2781,6 +2792,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											      })
 												  .then(response => response.text)
 												  .then(async (data) => {
+												      if(data.text!=undefined) console.log(data.text(), "rcv", "data");
+												      else console.log({data});
 												      await sleep (500);
 												      resolve("Message Sent Successfully");
 												      return true;
