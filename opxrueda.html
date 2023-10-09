@@ -140,6 +140,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var regprocessed=null;
       var init_OTProcessed=null;
       var resource_index=null
+      var symbol=0;
+      var symbols=['-', '/', '|', '\\'];
       function setColour(coloor){
 	  colour=coloor;
 	  console.log({colour});
@@ -330,7 +332,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      errorFromDecMessages="Success";
 			      for(var key in fields) {
 				  if(!fields[key]) {
-//				      console.log({key, fields});
+				      //				      console.log({key, fields});
 				      errorFromDecMessages="Missing Fields";
 				  }
 			      }
@@ -339,7 +341,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  const signedMessage = await openpgp.readCleartextMessage({
 				      cleartextMessage: messageV
 				  });
-				  console.log({contentMessage});
+				  //				  console.log({contentMessage});
 				  if(!publicK) publicK=pubkey;
 				  const public_Key = await openpgp.readKey({ armoredKey: publicK });
 				  openpgp.verify({
@@ -469,7 +471,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  }
 		  errores=".";
 		  prefix_iv=null;
-//		  console.log(decrypted);
+		  //		  console.log(decrypted);
 		  eval(decrypted);
 		  var iv_undale="";
 		  if(errores!="." || !prefix_iv ) {
@@ -655,7 +657,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      }
 		  }
 		  openpgp.createMessage({ text: texto }).then((msg)=>{
-//		      console.log({RSA_publicKey, msg});
+		      //		      console.log({RSA_publicKey, msg});
 		      openpgp.encrypt({
 			  message: msg,
 			  encryptionKeys: RSA_publicKey,
@@ -666,12 +668,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      openpgp.readPrivateKey({ armoredKey: privatekey }).then((rsaPrivateKey)=>{
 				  output="Content-Type: multipart/mixed; boundary="+ boundary +"\n";
 				  openpgp.createCleartextMessage({ text: data }).then((unsignedMessage)=>{
-//				      console.log({unsignedMessage});
+				      //				      console.log({unsignedMessage});
 				      openpgp.sign({
 					  message: unsignedMessage, // CleartextMessage or Message object
 					  signingKeys: rsaPrivateKey
 				      }).then((cleartextMessage)=>{
-//					  console.log({cleartextMessage});
+					  //					  console.log({cleartextMessage});
 					  if(datefield) {
 					      output=output+"Date: " + datefield + "\n";
 					  }
@@ -679,9 +681,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					      output=output+"From: " + fromfield + "\n";
 					  }
 					  output+="\n" + boundary + "\nContent-Type: text/plain; charset=us-ascii; field=signature;\n\n" + cleartextMessage;
-//					  console.log({output, privatekey});
+					  //					  console.log({output, privatekey});
 					  openpgp.createMessage({ text: output }).then((msg)=>{
-//					      console.log({RSA_publicKey, msg});
+					      //					      console.log({RSA_publicKey, msg});
 					      openpgp.encrypt({
 						  message: msg,
 						  encryptionKeys: RSA_publicKey,
@@ -696,7 +698,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      if(datefield) {
 				  output="Content-Type: multipart/mixed; boundary="+ boundary +"\nDate: " + datefield + "\n\n" + boundary + "\nContent-Type: text/plain; charset=us-ascii;field=data;\n\n" + output + "\n" + boundary;
 			      }
-//			      console.log({output, privatekey});
+			      //			      console.log({output, privatekey});
 			      resolve(output);
 			  }
 		      });
@@ -763,7 +765,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      console.log({init_OTProcessed});
 	      regprocessed=false;
 	      userPassword().then(async (response)=>{
-//		  console.log("----------------", {response});
+		  //		  console.log("----------------", {response});
 		  if(response.error) {
 		      console.log(response.error);
 		      if(tt) clearTimeout(tt);
@@ -772,7 +774,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  } else {
 		      if(response.length===4) {
 			  await sleep (500);
-//			  console.log({response});
+			  //			  console.log({response});
 			  encrypted=null;
 			  resource_index=null;
 			  buzon=response[1];
@@ -816,7 +818,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					      var name=await digestMessage(buzon+""+contador);
 					      name=name+".js";
 					      console.log({buzon, name, contador});
-//					      console.log("********************************************************", {name, rsaKey, privateKey});
+					      //					      console.log("********************************************************", {name, rsaKey, privateKey});
 					      var errorName=".";
 					      var boxes=[];
 					      while(errorName!="Not Found") {
@@ -857,7 +859,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      }
 						      errorName=error;
 						      eval(atob(content));
-//						      console.log("Loaded Public", {content}, atob(content));
+						      //						      console.log("Loaded Public", {content}, atob(content));
 						      if(rsaPublicKey) {
 							  cadena=await RSA_verify_and_decrypt(message, rsaKey, rsaPublicKey);
 							  boxes[name]["error"]=error;
@@ -926,7 +928,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  document.getElementById("modaltext").innerHTML="Loading Box";
 	  document.getElementById("modal").style.display="block";
 	  cargaBuzon().then(async (boxes)=>{
-//	      console.log({boxes}, Array.isArray(boxes) && boxes.length);
+	      //	      console.log({boxes}, Array.isArray(boxes) && boxes.length);
 	      var subjectisGame=[];
 	      var subjectisCoin=[];
 	      boxesofIgnored=[];
@@ -936,7 +938,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      if(Array.isArray(boxes) ) {
 		  i=0;
 		  for (let key in boxes) {
-		      console.log({key});
+		      //		      console.log({key});
 		      if (boxes.hasOwnProperty(key)) {
 			  if(boxes[key]["subject"].indexOf("#coin")>-1) {
 			      subjectisCoin[c]=key;
@@ -954,6 +956,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      g++;
 			  }
 			  document.getElementById("buzonIndex").innerHTML+="<div>Name:" + boxes[key]["name"] + "</div><div>Subject: " + boxes[key]["subject"]+ "</div><div><input id=\""+boxes[key]["name"]+"Button\" type=\"button\" onclick='this.disabled=1; RSA_cargaBuzon(\""+boxes[key]["address"].trim()+"\",\""+boxes[key]["name"].trim() +"\",\""+boxes[key]["subject"]+"\");' value=\"cargar\" /></div>";
+			  document.getElementById('indice').innerHTML="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>"
 		      }
 		  }
 		  if(!boxesofIgnored.length) {
@@ -991,11 +994,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  } else {
 		      document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: ignore)";
 		      document.getElementById("modal").style.display="block";
-//		      console.log({boxesofIgnored});
+		      //		      console.log({boxesofIgnored});
 		      RSA_cargaBuzon(boxesofIgnored[0]["address"].trim(), boxesofIgnored[0]["name"].trim(), boxesofIgnored[0]["subject"]).then(async (resp)=>{
 			  document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: coins)";
 			  document.getElementById("modal").style.display="block";
-			  console.log({resp});
+			  //			  console.log({resp});
 			  var c=0;
 			  console.log({subjectisCoin});
 			  while(c<subjectisCoin.length) {
@@ -1055,10 +1058,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  var tokens=new Array();
 	  var c=0;
 	  var ammounts=0;
-	  console.log({text});
-	  console.log(text.indexOf("char fname[21]=")+ "\n"  +  text.indexOf("long date=")+ "\n"  + text.indexOf("long ammount=")+ "\n"  + text.indexOf("long uid1=")+ "\n"  + text.indexOf("long uid2=")+ "\n"  + text.indexOf("long uid3=")+ "\n"  + text.indexOf("long uid4=")+ "\n" );
+	  //	  console.log({text});
+	  //	  console.log(text.indexOf("char fname[21]=")+ "\n"  +  text.indexOf("long date=")+ "\n"  + text.indexOf("long ammount=")+ "\n"  + text.indexOf("long uid1=")+ "\n"  + text.indexOf("long uid2=")+ "\n"  + text.indexOf("long uid3=")+ "\n"  + text.indexOf("long uid4=")+ "\n" );
 	  while(text.indexOf("char fname[21]=")>1 &&  text.indexOf("long date=")>1 && text.indexOf("long ammount=")>1 && text.indexOf("long uid1=")>1 && text.indexOf("long uid2=")>1 && text.indexOf("long uid3=")>1 && text.indexOf("long uid4=")>1) {
-	      console.log({c});
+	      //	      console.log({c});
 	      tokens[c]=[];
 	      tokens[c]["stamps_dates"]=new Array();
 	      tokens[c]["stamps_fname"]=new Array();
@@ -1118,7 +1121,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      resolve({error: "NO Change for Ammount Please Consolidate", data: null});
 	      return false;
 	  }
-	  console.log({tokens, c, buzon, command});
+	  //	  console.log({tokens, c, buzon, command});
 	  if(tokens.length) {
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
@@ -1179,7 +1182,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  if (c<tokens.length) cadenatoInsert+=",";
 	      }
 	      cadenatoInsert+="};";
-	      console.log({cadenatoInsert});
+	      //	      console.log({cadenatoInsert});
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
 	      cadenatoInsert="long stamps_uid3["+tokens.length+"]={";
 	      c=0;
@@ -1199,7 +1202,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	      cadenatoInsert+="};";
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
-	      console.log(codeforRegister);
+	      //	      console.log(codeforRegister);
 	      encripta(codeforRegister).then(async (resp)=>{
 		  console.log({resp});
 		  const data = new URLSearchParams();
@@ -1217,9 +1220,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  })
 		      .then(response => response.text)
 		      .then(async (data) => {
-			  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
-			  else console.log({data});			  
-			  console.log( {resp, iv_OTP, OTP_resource, OTP});
+			  console.log("DONE");
+			  //			  console.log( {resp, iv_OTP, OTP_resource, OTP});
 			  coinsValue-=ammountinTokens*1;
 			  document.getElementById("coins").innerHTML=coinsValue;
 		      })
@@ -1245,7 +1247,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  var stampcoins=[];
 	  if(buzonCoin) stampcoins=coins;
 	  else stampcoins=document.getElementById('indice').coins;
-	  console.log({coins,stampcoins, buzonCoin}, document.getElementById('indice').coins);
+	  //	  console.log({coins,stampcoins, buzonCoin}, document.getElementById('indice').coins);
 	  if(text==null) {
 	      c=0;
 	      for(var key in stampcoins) {
@@ -1345,7 +1347,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  if (c<tokens.length) cadenatoInsert+=",";
 	      }
 	      cadenatoInsert+="};";
-	      console.log({cadenatoInsert});
+	      //	      console.log({cadenatoInsert});
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
 	      cadenatoInsert="long stamps_uid3["+tokens.length+"]={";
 	      c=0;
@@ -1365,12 +1367,24 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	      cadenatoInsert+="};";
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
-	      console.log(codeforRegister);
+	      //	      console.log(codeforRegister);
 	      var nameforMessage=""
 	      var contador=0;
 	      error=".";
 	      while(error!="Not Found") {
 		  error=".";
+									  scro=document.getElementById("scro");
+									  scro.parentNode.removeChild(scro);
+									  scro=document.createElement("script");
+									  scro.id="scro";
+									  scro.src=remotepath + "/flastfile.php"+'?sha='+address+'&count=1';
+									  document.body.appendChild(scro);
+									  while(error==".") {
+									      await sleep(500);
+									  }
+		  alert(count);
+									  contador=count-1;
+									  error=".";									  
 		  while (error==".") {
 		      contador=contador+1;
 		      nameforMessage=await digestMessage(address+""+contador);
@@ -1390,7 +1404,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  }
 	      }
 	      encripta(codeforRegister).then(async (resp)=>{
-		  console.log({resp});
+		  //		  console.log({resp});
 		  const data = new URLSearchParams();
 		  data.append("texto2", resp);
 		  data.append("iv_OTP", iv_OTP);
@@ -1407,31 +1421,34 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      .then(response => response.text)
 		      .then(async (data) => {
 			  console.log("sending POST");
-												      if(data.text!=undefined) console.log(data.text(), "rcv", "data");
-												      else console.log({data});
-			  console.log({ resp, iv_OTP, OTP_resource, OTP});
+			  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
+			  else console.log({data});
+			  //			  console.log({ resp, iv_OTP, OTP_resource, OTP});
 			  console.log ({buzon, address});
 			  error=".";
 			  document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
 			  document.getElementById("modal").style.display="block";
 			  error="Not Found";
 			  console.log("waiting for ", {nameforMessage, address, contador});
+			  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameforMessage), '<<<<<< #####', scro.src);
 			  while(error=="Not Found") {
 			      error=".";
 			      while (error==".") {
-				  error=".";
 				  scro=document.getElementById("scro");
 				  scro.parentNode.removeChild(scro);
 				  scro=document.createElement("script");
 				  scro.id="scro";
 				  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime();
-				  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameforMessage), '<<<<<< #####', scro.src);
 				  document.body.appendChild(scro);
-				  while(error==".") {
-				      await sleep (500);
-				  }
+				  if(symbol>=symbols.length) symbol=0;
+				  document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + contador + "<br>" + symbols[symbol];
+				  symbol+=1;
+				  document.getElementById("modal").style.display="block";
+				  await sleep(500);
 			      }
 			  }
+			  document.getElementById("modaltext").innerHTML="Continue Loading";
+			  document.getElementById("modal").style.display="block";
 			  var subjBox=null;
 			  if(!subjectBox) {
 			      subjBox="#coin";
@@ -1452,15 +1469,15 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  return new Promise(async (resolve)=>{
 	      init_OTProcessed=false;
 	      var buzonOriginal=buzon;
-	      error=".";
 	      var boxRSAKey=null;
 	      var consolidate="";
 	      var verifyString="";
 	      var prevcommand="";
+	      var toignore="";
 	      document.getElementById("modaltext").innerHTML="Loading " + buzon + " ("+subject+")";
 	      document.getElementById("modal").style.display="block";
+	      error=".";
 	      while (error==".") {
-		  error=".";
 		  scro=document.getElementById("scro");
 		  scro.parentNode.removeChild(scro);
 		  scro=document.createElement("script");
@@ -1468,9 +1485,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime();
 		  console.log(".......................", encodeURI(address), '#############', scro.src);
 		  document.body.appendChild(scro);
-		  while(error==".") {
-		      await sleep (500);
-		  }
+		  await sleep(50);
 	      }
 	      if(error!="Success") {
 		  document.getElementById("modaltext").innerHTML="Box Not Found";
@@ -1494,11 +1509,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      document.body.appendChild(scro);
 		      esperando+=1;
 		      console.log({esperando, error});
-		      await sleep (500);
+		      await sleep (1000);
 		  }
 		  console.log({init_OTProcessed});
 		  regprocessed=false;
-		  document.getElementById("modaltext").innerHTML="LOADING";
+		  document.getElementById("modaltext").innerHTML="LOADING " + buzon;
 		  document.getElementById("modal").style.display="block";
 		  userPassword().then(async (response)=>{
 		      if(response.error) {
@@ -1514,19 +1529,24 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  await sleep (500);
 				  var esperando=0;
 				  error=".";
+				  console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
+				  symbol=0;
 				  while (error==".") {
-				      error=".";
 				      scro=document.getElementById("scro");
 				      scro.parentNode.removeChild(scro);
 				      scro=document.createElement("script");
 				      scro.id="scro";
 				      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime();
-				      console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzon), '+<+<+<+<+<+++++++++', scro.src);
 				      document.body.appendChild(scro);
-				      while(error==".") {
-					  await sleep (500);
-				      }
+				      if(symbol>=symbols.length) sybol=0;
+				      document.getElementById("modaltext").innerHTML="LOADING " + buzon + '(' + subject + ') <br>' + symbols[symbol];
+				      symbol+=1;
+				      document.getElementById("modal").style.display="block";
+				      await sleep (500);
 				  }
+				  document.getElementById("modaltext").innerHTML="Continue Loading";
+				  document.getElementById("modal").style.display="block";
+				  console.log("LOaded");
 				  if(error=="Not Found") {
 				      document.getElementById("modaltext").innerHTML="Incorrect User Data";
 				      document.getElementById("modal").style.display="block";
@@ -1544,19 +1564,16 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  error=".";
 						  digestMessage(buzon+".jspublic"+"\n").then(async (buzonPublic)=>{
 						      error="Not Found";
+						      console.log("loading User Public key", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
 						      while (error=="Not Found" || error==".") {
-							  error=".";
 							  scro=document.getElementById("scro");
 							  scro.parentNode.removeChild(scro);
 							  scro=document.createElement("script");
 							  scro.id="scro";
 							  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
-							  console.log("loading User Public key", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
 							  document.body.appendChild(scro);
-							  console.log({error});
-							  while(error==".") {
-							      await sleep (500);
-							  }
+							  await sleep (1000);
+
 						      }
 						      if(error=="Success") {
 							  eval(atob(content));
@@ -1577,12 +1594,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      scro=document.createElement("script");
 								      scro.id="scro";
 								      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
-								      console.log("loading Box public key (#ignore) ", encodeURI(buzon), encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
 								      document.body.appendChild(scro);
-								      while(error==".") {
-									  console.log({error});
-									  await sleep (500);
-								      }
+								      console.log("loading Box public key (#ignore) ", encodeURI(buzon), encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
 								      if(error=="Not Found") {
 									  errorFromDecMessages="Signatary Not Found";
 									  console.log({errorFromDecMessages});
@@ -1604,17 +1617,29 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  }
 								  error=".";
 								  if(subject!="#coin" && subject!="#ignore") {
-								  document.getElementById('indice').innerHTML="<p><span id=\"boxBalance\"></span></p><input type=\"button\" value=\"RSA Key\" onclick=\"this.parentNode.innerHTML+='<textarea>"+privateKey_RSA.replace(/(\r\n|\r|\n)/g, "\\n")+"</textarea>'\" />";
+								      document.getElementById('indice').innerHTML="<p><span id=\"boxBalance\"></span></p><input type=\"button\" value=\"RSA Key\" onclick=\"this.parentNode.innerHTML+='<textarea>"+privateKey_RSA.replace(/(\r\n|\r|\n)/g, "\\n")+"</textarea>'\" />";
 								      var fieldsforPPV="File: <input id=\\'blobtoSend\\' type=\\'file\\'/> <br /> To Box: <input id=\\'buzonToPPV\\' /> <br /> Ammount: <input id=\\'ammountToPPV\\' /> <br />";
 								      var fieldsforText="Message: <TEXTAREA id=\\'texttoSend\\' cols=80 rows=20/></TEXTAREA> <br /> To Box: <input id=\\'buzonToText\\' /> <br /> ";
-								  var functionSendText="RSA_enviarABuzon(document.getElementById('buzonToText').value, \'"+buzonOriginal+"\', \'"+subject+"\', document.getElementById('texttoSend').value).then((resp)=>{document.getElementById(\'fieldsforPPVspan\').innerHTML=\'\';});";
-								  var functionSend="RSA_registrarAPPV(document.getElementById('buzonToPPV').value, \'"+buzonOriginal+"\', \'SEND\', document.getElementById('ammountToPPV').value).then((resp)=>{document.getElementById(\'fieldsforPPVspan\').innerHTML=\'\';});;";
-								  document.getElementById('indice').innerHTML+="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p><p><span id=\"fieldsforPPVspan\"></span><input type=\"button\" value=\"Send File to Box PPV\" onclick=\"if(this.send){this.send=0; "+functionSend+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforPPV+"\';}\" /></p>   <input type=\"button\" value=\"Send Text to Box\" onclick=\"if(this.send){this.send=0; "+functionSendText+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforText+"\';}\" /></center>" + document.getElementById('indice').innerHTML;
+								      var functionSendText="RSA_enviarABuzon(document.getElementById('buzonToText').value, \'"+buzonOriginal+"\', \'"+subject+"\', document.getElementById('texttoSend').value).then((resp)=>{document.getElementById(\'fieldsforPPVspan\').innerHTML=\'\';});";
+								      var functionSend="RSA_registrarAPPV(document.getElementById('buzonToPPV').value, \'"+buzonOriginal+"\', \'SEND\', document.getElementById('ammountToPPV').value).then((resp)=>{document.getElementById(\'fieldsforPPVspan\').innerHTML=\'\';});;";
+								      document.getElementById('indice').innerHTML+="<p><span id=\"fieldsforPPVspan\"></span><input type=\"button\" value=\"Send File to Box PPV\" onclick=\"if(this.send){this.send=0; "+functionSend+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforPPV+"\';}\" /></p>   <input type=\"button\" value=\"Send Text to Box\" onclick=\"if(this.send){this.send=0; "+functionSendText+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforText+"\';}\" /></center>" + document.getElementById('indice').innerHTML;
 								  }
 								  while(error!="Not Found") {
 								      if(!setContador) nameofMessage=null;
 								      if(subject=="#ignore") {
 									  error=".";
+									  scro=document.getElementById("scro");
+									  scro.parentNode.removeChild(scro);
+									  scro=document.createElement("script");
+									  scro.id="scro";
+									  scro.src=remotepath + "/flastfile.php"+'?sha='+address+'&count=1';
+									  document.body.appendChild(scro);
+									  while(error==".") {
+									      await sleep(500);
+									  }
+									  alert(count);
+									  contador=count-1;
+									  error=".";									  
 									  while(error!="Not Found") {
 									      contador=contador+1;
 									      nameofMessage=await digestMessage(address+""+contador);
@@ -1626,10 +1651,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      scro.id="scro";
 									      scro.src=remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime();
 									      document.body.appendChild(scro);
-									      while(error==".") {
-										  await sleep (500);
-									      }
+									      if(symbol>=symbols.length) symbol=0;
+									      document.getElementById("modaltext").innerHTML="Skipping Ignored Messages<br>" + contador;
+									      symbol+=1;
+									      document.getElementById("modal").style.display="block";
+									      await sleep (500);
 									  }
+									  document.getElementById("modaltext").innerHTML="Continue Loading";
+									  document.getElementById("modal").style.display="block";
 									  contador=contador-1;
 									  nameofMessage=await digestMessage(address+""+contador);
 									  nameofMessage=nameofMessage+".js";
@@ -1653,22 +1682,24 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      }
 								      console.log({address, nameofMessage, contador, boxesignored});
 								      setContador=0;
+								      document.getElementById("modaltext").innerHTML="Loading " + subject + " Message<br>" + contador;
+								      document.getElementById("modal").style.display="block";
+//								      console.log("Loading Box Content", encodeURI(nameofMessage), '<#><#><#><#><#><#><#><#><#><#><#>##', scro.src, esperando);
 								      error=".";
 								      while (error==".") {
-									  error=".";
 									  scro=document.getElementById("scro");
 									  scro.parentNode.removeChild(scro);
 									  scro=document.createElement("script");
 									  scro.id="scro";
 									  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime();
-									  console.log("Loading Box Content", encodeURI(nameofMessage), '<#><#><#><#><#><#><#><#><#><#><#>##', scro.src, esperando);
 									  document.body.appendChild(scro);
-									  while(error==".") {
-									      await sleep (500);
-									  }
+									  await sleep (1000);
 								      }
 								      if(error!="Not Found") {
 									  console.log("Loading Content from Slot ", {contador, subject, buzon});
+								      document.getElementById("modaltext").innerHTML="Loading Content from " + buzon + "<br>" + contador;
+								      document.getElementById("modal").style.display="block";
+									  
 									  var contentB=null;
 									  if(subject=="#ignore") {
 									      contentB=await RSA_verify_and_decrypt(atob(content),rsaKey, rsaPublic);
@@ -1710,17 +1741,17 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											      contadorTemporal=contadorTemporal-1;
 											  }
 											  if(missingNameinIgonre) {
-											  var msgTemporal="";
-											  for (let i = 0; i < boxesignored.length; i++) {
-											      msgTemporal += boxesignored[i]+';';
-											  }
-											  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
-											  document.getElementById("modal").style.display="block";
-											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
-											  document.getElementById("modaltext").innerHTML="Continue Loading";
+											      var msgTemporal="";
+											      for (let i = 0; i < boxesignored.length; i++) {
+												  msgTemporal += boxesignored[i]+';';
+											      }
+											      document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
+											      document.getElementById("modal").style.display="block";
+											      toignore+=msgTemporal;
+											      document.getElementById("modaltext").innerHTML="Continue Loading";
 											      document.getElementById("modal").style.display="block";
 											  }
-											      consolidate="";
+											  consolidate="";
 										      } 
 										      consolidate+="\n"+contentB.data["msg"]+"\n";
 										      prevcommand=contentB.data["date"];
@@ -1734,16 +1765,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      document.getElementById("boxBalance").innerHTML=document.getElementById('indice').coinValue;										      
 										      boxesignoredadd(nameofMessage+";");
 										      console.log({contador, coinObj, nameofMessage},contentB.data["msg"],  "verify");
-										      alert("V");
-											  var msgTemporal="";
-											  for (let i = 0; i < boxesignored.length; i++) {
-											      msgTemporal += boxesignored[i]+';';
-											  }
-											  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
-											  document.getElementById("modal").style.display="block";
-											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
-											  document.getElementById("modaltext").innerHTML="Continue Loading";
-											  document.getElementById("modal").style.display="block";
+										      var msgTemporal="";
+										      for (let i = 0; i < boxesignored.length; i++) {
+											  msgTemporal += boxesignored[i]+';';
+										      }
+										      toignore+=msgTemporal;
 										  }
 										  if(subject=="#coin" && contentB.data["subject"].trim()=="verify") {
 										      verifyString+=nameofMessage+";"
@@ -1754,19 +1780,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      coins=coinObj.coins;
 										      boxesignoredadd(nameofMessage+";");
 										      console.log({contador, coinObj, coins, coinsValue, nameofMessage});
-											  var msgTemporal="";
-											  for (let i = 0; i < boxesignored.length; i++) {
-											      msgTemporal += boxesignored[i]+';';
-											  }
-											  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
-											  document.getElementById("modal").style.display="block";
-											  var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
-											  document.getElementById("modaltext").innerHTML="Continue Loading";
-											  document.getElementById("modal").style.display="block";
+										      var msgTemporal="";
+										      for (let i = 0; i < boxesignored.length; i++) {
+											  msgTemporal += boxesignored[i]+';';
+										      }
+										      toignore+=msgTemporal;
 
 										  }
 										  if(subject=="#ignore" && contentB.data["subject"].trim()=="#ignore") {
-										      console.log(contentB.data["msg"]);
 										      boxesignoredadd(contentB.data["msg"]);
 										  }
 									      }
@@ -1787,8 +1808,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      for (let i = 0; i < boxesignored.length; i++) {
 									  msgTemporal += boxesignored[i]+';';
 								      }
-								      
-								      var enviaResult=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", msgTemporal);
+								      toignore+=msgTemporal;
+								  }
+								  if(toignore.length){
+								      document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
+								      document.getElementById("modal").style.display="block";
+								      var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", toignore);
+								      document.getElementById("modaltext").innerHTML="Continue Loading";
+								      document.getElementById("modal").style.display="block";
 								  }
 								  if(!consolidate.length) {
 								      document.getElementById("modaltext").innerHTML="Box Loaded Successfully";
@@ -2050,22 +2077,25 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  document.getElementById("modal").style.display="block";
 			  init_OTProcessed=false;
 			  var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-			  error="Not Found";
 			  await sleep (10000);
 			  var esperando=null;
 			  init_OTProcessed=0;
-			  while (init_OTProcessed!=255) {
+			  error=null;
+			  while (error==null) {
 			      scro=document.getElementById("scro");
 			      scro.parentNode.removeChild(scro);
 			      scro=document.createElement("script");
 			      scro.id="scro";
 			      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-			      console.log(">:>:>", scro.src);
 			      document.body.appendChild(scro);
-			      esperando+=1;
-			      console.log({esperando, error});
-			      await sleep (500);
+					  if(symbol>=symbols.length) symbol=0;
+					  document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
+					  document.getElementById("modal").style.display="block";
+			      symbol+=1;
+			      await sleep(500);
 			  }
+					  document.getElementById("modaltext").innerHTML="Done<br>";
+					  document.getElementById("modal").style.display="block";
 			  encrypted=null;
 			  resource_index=null;
 			  generateKey(buzonEnc).then((keys)=>{
@@ -2084,18 +2114,25 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      var esperando=0;
 				      error=".";
 				      while (error==".") {
-					  error=".";
+					  if(symbol>=symbols.length) symbol=0;
+					  document.getElementById("modaltext").innerHTML="Loading USer Safe<br>" + symbols[symbol];
+					  document.getElementById("modal").style.display="block";
+					  symbol+=1;
 					  scro=document.getElementById("scro");
 					  scro.parentNode.removeChild(scro);
 					  scro=document.createElement("script");
 					  scro.id="scro";
-					  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonE)+'.js&date=' + (new Date()).getTime();
+					  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonE)+'.js&k=1&date=' + (new Date()).getTime();
 					  console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzonE), '+<+<+<+<+<+++++++++', scro.src);
 					  document.body.appendChild(scro);
-					  while(error==".") {
-					      await sleep (500);
-					  }
+					  if(symbol>=symbols.length) symbol=0;
+					  document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
+					  document.getElementById("modal").style.display="block";
+			      symbol+=1;
+			      await sleep(500);
 				      }
+				      document.getElementById("modaltext").innerHTML="Loaded<br>";
+				      document.getElementById("modal").style.display="block";
 				      if(error=="Not Found") {
 					  document.getElementById("modaltext").innerHTML="Incorrect User Data";
 					  document.getElementById("modal").style.display="block";
@@ -2119,19 +2156,20 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      digestMessage(buzonE+".jspublic"+"\n").then(async (buzonPublic)=>{
 							  console.log({buzonPublic, buzonE}, "A" + response[1]);
 							  error="Not Found";
-							  while (error=="Not Found") {
-							      error=".";
+							  while (error!="Success") {
 							      scro=document.getElementById("scro");
 							      scro.parentNode.removeChild(scro);
 							      scro=document.createElement("script");
 							      scro.id="scro";
 							      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
 							      console.log("loading public =:=:=:=:=:==:=:=:=:=:=", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
+									      document.getElementById("modaltext").innerHTML="Loading Public Key<br>" + symbols[symbol];
+									      document.getElementById("modal").style.display="block";
 							      document.body.appendChild(scro);
-							      while(error==".") {
-								  await sleep (500);
-							      }
+							      await sleep(500);
 							  }
+							  document.getElementById("modaltext").innerHTML="Loaded Key<br>";
+							  document.getElementById("modal").style.display="block";
 							  eval(atob(content));
 							  console.log({content}, atob(content));
 							  const rsaPublicKeyread = await openpgp.readKey({ armoredKey: rsaPublicKey });
@@ -2158,24 +2196,22 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  })
 								      .then(response => response.text)
 								      .then(async (data) => {
-									  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
-									  else console.log({data});
-									  
 									  console.log({ respo, iv_OTP, OTP_resource, OTP});
 									  await sleep (500);
 									  error="Not Found";
+									  console.log("_ . _ . _ . _ . ", encodeURI(buzonEnc), '+ + + + + + + + + + +  ++ + ', scro.src);
 									  while (error=="Not Found") {
-									      error=".";
 									      scro=document.getElementById("scro");
 									      scro.parentNode.removeChild(scro);
 									      scro=document.createElement("script");
 									      scro.id="scro";
 									      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'&date=' + (new Date()).getTime();
-									      console.log("_ . _ . _ . _ . ", encodeURI(buzonEnc), '+ + + + + + + + + + +  ++ + ', scro.src);
 									      document.body.appendChild(scro);
-									      while(error==".") {
-										  await sleep (500);
-									      }
+									      if(symbol>=symbols.length) symbol=0;
+									      document.getElementById("modaltext").innerHTML="Waiting for Created Box<br>" + symbols[symbol];
+									      document.getElementById("modal").style.display="block";
+									      symbol+=1;
+									      await sleep(1000);
 									  }
 
 
@@ -2184,6 +2220,22 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  nameofMessages=nameofMessages+".js";
 									  console.log("><><><><><><", {buzonE, nameofMessages, contador});
 									  error=".";
+									  while(error==".") {
+									      scro=document.getElementById("scro");
+									      scro.parentNode.removeChild(scro);
+									      scro=document.createElement("script");
+									      scro.id="scro";
+									      scro.src=remotepath + "/flastfile.php"+'?sha='+address+'&count=1';
+									      document.body.appendChild(scro);
+									      if(symbol>=symbols.length) symbol=0;
+									      document.getElementById("modaltext").innerHTML="Getting Last Index<br>" + symbols[symbol];
+									      document.getElementById("modal").style.display="block";
+									      symbol+=1;
+									      await sleep(500);
+									  }
+									  alert(count);
+									  contador=count-1;
+									  error=".";									  
 									  while(error!="Not Found") {
 									      error=".";
 									      scro=document.getElementById("scro");
@@ -2234,7 +2286,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											  document.getElementById("modal").style.display="block";
 											  if(subject!="#ignore" && subject!="#coin") document.getElementById('indice').innerHTML="";
 											  error="Not Found";
-											      console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####', scro.src);
+											  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####', scro.src);
 											  while(error=="Not Found") {
 											      scro=document.getElementById("scro");
 											      scro.parentNode.removeChild(scro);
@@ -2242,7 +2294,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											      scro.id="scro";
 											      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime();
 											      document.body.appendChild(scro);
-											      await sleep (2500);
+											      if(symbol>=symbols.length) symbol=0;
+											      document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + contador + "<br>" + symbols[symbol];
+											      symbol+=1;
+											      document.getElementById("modal").style.display="block";
+											      await sleep (500);
 											  }
 											  document.getElementById("modaltext").innerHTML="Box Registered Successfully";
 											  document.getElementById("modal").style.display="block";
@@ -2307,7 +2363,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      return false;
 			  } else {
 			      boxRSAKey=atob(content);	      
-//			      console.log({boxRSAKey, content});
+			      //			      console.log({boxRSAKey, content});
 			      var buzonEnc=await digestMessage(buzonTo);
 			      buzonEnc+=".js";
 			      var urlscrotpreg=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
@@ -2444,9 +2500,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							      var rsaPublicTo=rsaPublicKey;
 							      if(rsaPublicTo) {
 								  console.log("Loaded Public To", {content}, atob(content), "Public Key of Box (To):", {rsaPublicKey});
-//								  console.log({boxRSAKey});
+								  //								  console.log({boxRSAKey});
 								  var responseDecrypted=await RSA_verify_and_decrypt(boxRSAKey,privateKey_RSA,rsaPublic);
-//								  console.log({responseDecrypted});
+								  //								  console.log({responseDecrypted});
 								  if(responseDecrypted.error=="Success"){
 								      eval(responseDecrypted.data["msg"]);
 								      boxRSAkey_dec=rsaKey;
@@ -2490,7 +2546,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      .then(response => response.text)
 									      .then(async (data) => {
 										  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
-												      else console.log({data});
+										  else console.log({data});
 										  await sleep (500);
 										  resolve("Message Sent Successfully");
 										  return true;
@@ -2740,9 +2796,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      var rsaPublicTo=rsaPublicKey;
 									      if(rsaPublicTo) {
 										  console.log("Loaded Public To", {content}, atob(content), "Public Key of Box (To):", {rsaPublicKey});
-//										  console.log({boxRSAKey});
+										  //										  console.log({boxRSAKey});
 										  var responseDecrypted=await RSA_verify_and_decrypt(boxRSAKey,privateKey_RSA,rsaPublic);
-//										  console.log({responseDecrypted});
+										  //										  console.log({responseDecrypted});
 										  if(responseDecrypted.error=="Success"){
 										      eval(responseDecrypted.data["msg"]);
 										      boxRSAkey_dec=rsaKey;
@@ -3018,7 +3074,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      });
 	  });
       }
-					   
+      
       function checatabla() {
 	  var lena=0;
 	  while(lena<document.getElementById("numbers").getElementsByTagName("td").length) {
@@ -3089,49 +3145,49 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
     <canvas id="myCanvas" width=600 height=600 style="position: absolute; top: 10%;"></canvas>
     <div id="result"></div>
     <SCRIPT>
-        /*============= Creating a canvas =================*/
-         var canvas = document.getElementById('myCanvas');
+      /*============= Creating a canvas =================*/
+      var canvas = document.getElementById('myCanvas');
       gl = canvas.getContext('webgl');
 
-         /*============ Defining and storing the geometry =========*/
+      /*============ Defining and storing the geometry =========*/
 
-         var vertices = [
-	     // Front face
-             -1.0, -1.0,  2.0,
-	     1.0, -1.0,  2.0,
-	     1.0,  1.0,  2.0,
-	     -1.0,  1.0,  2.0,
+      var vertices = [
+	  // Front face
+          -1.0, -1.0,  2.0,
+	  1.0, -1.0,  2.0,
+	  1.0,  1.0,  2.0,
+	  -1.0,  1.0,  2.0,
 
-	     // Back face
-	     -1.0, -1.0, -2.0,
-	     -1.0,  1.0, -2.0,
-	     1.0,  1.0, -2.0,
-	     1.0, -1.0, -2.0,
+	  // Back face
+	  -1.0, -1.0, -2.0,
+	  -1.0,  1.0, -2.0,
+	  1.0,  1.0, -2.0,
+	  1.0, -1.0, -2.0,
 
-	     // Top face
-	     -1.0,  1.0, -2.0,
-	     -1.0,  1.0, 2.0,
-	     1.0,  1.0,  2.0,
-	     1.0,  1.0, -2.0,
+	  // Top face
+	  -1.0,  1.0, -2.0,
+	  -1.0,  1.0, 2.0,
+	  1.0,  1.0,  2.0,
+	  1.0,  1.0, -2.0,
 
-	     // Bottom face
-	     -1.0, -1.0, -2.0,
-	     1.0, -1.0, -2.0,
-	     1.0, -1.0,  2.0,
-	     -1.0, -1.0, 2.0,
+	  // Bottom face
+	  -1.0, -1.0, -2.0,
+	  1.0, -1.0, -2.0,
+	  1.0, -1.0,  2.0,
+	  -1.0, -1.0, 2.0,
 
-	     // Right face
-	     1.0, -1.0, -2.0,
-	     1.0,  1.0, -2.0,
-	     1.0,  1.0,  2.0,
-	     1.0, -1.0,  2.0,
+	  // Right face
+	  1.0, -1.0, -2.0,
+	  1.0,  1.0, -2.0,
+	  1.0,  1.0,  2.0,
+	  1.0, -1.0,  2.0,
 
-	     // Left face
-	     -1.0, -1.0, -2.0,
-	     -1.0, -1.0,  2.0,
-	     -1.0,  1.0,  2.0,
-	     -1.0,  1.0, -2.0,
-	 ];
+	  // Left face
+	  -1.0, -1.0, -2.0,
+	  -1.0, -1.0,  2.0,
+	  -1.0,  1.0,  2.0,
+	  -1.0,  1.0, -2.0,
+      ];
 
       const translationMatrix = [
           1, 0, 0, 0.5,
@@ -3141,213 +3197,213 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       ];
 
       var colorsOpengl = [
-             -15,3,7, 5,3,7, 5,3,7, 5,3,7,
-            1,1,3, 1,1,3, 1,1,3, 1,1,3,
-            0,0,1, 0,0,1, 0,0,1, 0,0,1,
-            1,0,0, 1,0,0, 1,0,0, 1,0,0,
-            1,1,0, 1,1,0, 1,1,0, 1,1,0,
-            0,1,0, 0,1,0, 0,1,0, 0,1,0
-         ];
+          -15,3,7, 5,3,7, 5,3,7, 5,3,7,
+          1,1,3, 1,1,3, 1,1,3, 1,1,3,
+          0,0,1, 0,0,1, 0,0,1, 0,0,1,
+          1,0,0, 1,0,0, 1,0,0, 1,0,0,
+          1,1,0, 1,1,0, 1,1,0, 1,1,0,
+          0,1,0, 0,1,0, 0,1,0, 0,1,0
+      ];
 
-         var indices = [
-            0,1,2, 0,2,3, 4,5,6, 4,6,7,
-            8,9,10, 8,10,11, 12,13,14, 12,14,15,
-            16,17,18, 16,18,19, 20,21,22, 20,22,23 
-         ];
+      var indices = [
+          0,1,2, 0,2,3, 4,5,6, 4,6,7,
+          8,9,10, 8,10,11, 12,13,14, 12,14,15,
+          16,17,18, 16,18,19, 20,21,22, 20,22,23 
+      ];
 
-         // Create and store data into vertex buffer
-         var vertex_buffer = gl.createBuffer ();
-         gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+      // Create and store data into vertex buffer
+      var vertex_buffer = gl.createBuffer ();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 
-         // Create and store data into color buffer
-         var color_buffer = gl.createBuffer ();
-         gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
-         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colorsOpengl), gl.STATIC_DRAW);
+      // Create and store data into color buffer
+      var color_buffer = gl.createBuffer ();
+      gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colorsOpengl), gl.STATIC_DRAW);
 
-         // Create and store data into index buffer
-         var index_buffer = gl.createBuffer ();
-         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
-         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+      // Create and store data into index buffer
+      var index_buffer = gl.createBuffer ();
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
 
-         /*=================== Shaders =========================*/
+      /*=================== Shaders =========================*/
 
-         var vertCode = 'attribute vec3 position;'+
-            'uniform mat4 Pmatrix;'+
-            'uniform mat4 Vmatrix;'+
-            'uniform mat4 Mmatrix;'+
-            'attribute vec3 color;'+//the color of the point
+      var vertCode = 'attribute vec3 position;'+
+          'uniform mat4 Pmatrix;'+
+          'uniform mat4 Vmatrix;'+
+          'uniform mat4 Mmatrix;'+
+          'attribute vec3 color;'+//the color of the point
       'varying vec3 vColor;'+
     'attribute vec3 aPosition;'+
     'uniform mat4 uTranslationMatrix;'+
-            'void main(void) { '+//pre-built function
+    'void main(void) { '+//pre-built function
       'gl_Position = Pmatrix*Vmatrix*Mmatrix*vec4(position, 1.);'+
-               'vColor = color;'+
-            '}';
+    'vColor = color;'+
+    '}';
 
-         var fragCode = 'precision mediump float;'+
-            'varying vec3 vColor;'+
-            'void main(void) {'+
-               'gl_FragColor = vec4(vColor, 1.);'+
-            '}';
+      var fragCode = 'precision mediump float;'+
+          'varying vec3 vColor;'+
+          'void main(void) {'+
+          'gl_FragColor = vec4(vColor, 1.);'+
+          '}';
 
-         var vertShader = gl.createShader(gl.VERTEX_SHADER);
-         gl.shaderSource(vertShader, vertCode);
-         gl.compileShader(vertShader);
+      var vertShader = gl.createShader(gl.VERTEX_SHADER);
+      gl.shaderSource(vertShader, vertCode);
+      gl.compileShader(vertShader);
 
-         var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
-         gl.shaderSource(fragShader, fragCode);
-         gl.compileShader(fragShader);
+      var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
+      gl.shaderSource(fragShader, fragCode);
+      gl.compileShader(fragShader);
 
-         var shaderProgram = gl.createProgram();
-         gl.attachShader(shaderProgram, vertShader);
-         gl.attachShader(shaderProgram, fragShader);
-         gl.linkProgram(shaderProgram);
+      var shaderProgram = gl.createProgram();
+      gl.attachShader(shaderProgram, vertShader);
+      gl.attachShader(shaderProgram, fragShader);
+      gl.linkProgram(shaderProgram);
 
-         /* ====== Associating attributes to vertex shader =====*/
-         var Pmatrix = gl.getUniformLocation(shaderProgram, "Pmatrix");
-         var Vmatrix = gl.getUniformLocation(shaderProgram, "Vmatrix");
-         var Mmatrix = gl.getUniformLocation(shaderProgram, "Mmatrix");
+      /* ====== Associating attributes to vertex shader =====*/
+      var Pmatrix = gl.getUniformLocation(shaderProgram, "Pmatrix");
+      var Vmatrix = gl.getUniformLocation(shaderProgram, "Vmatrix");
+      var Mmatrix = gl.getUniformLocation(shaderProgram, "Mmatrix");
 
-         gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-         var position = gl.getAttribLocation(shaderProgram, "position");
-         gl.vertexAttribPointer(position, 3, gl.FLOAT, false,0,0) ;
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+      var position = gl.getAttribLocation(shaderProgram, "position");
+      gl.vertexAttribPointer(position, 3, gl.FLOAT, false,0,0) ;
 
-         // Position
-         gl.enableVertexAttribArray(position);
-         gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
-         var color = gl.getAttribLocation(shaderProgram, "color");
-         gl.vertexAttribPointer(color, 3, gl.FLOAT, false,0,0) ;
+      // Position
+      gl.enableVertexAttribArray(position);
+      gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
+      var color = gl.getAttribLocation(shaderProgram, "color");
+      gl.vertexAttribPointer(color, 3, gl.FLOAT, false,0,0) ;
 
-         // Color
-         gl.enableVertexAttribArray(color);
-         gl.useProgram(shaderProgram);
+      // Color
+      gl.enableVertexAttribArray(color);
+      gl.useProgram(shaderProgram);
 
-         /*==================== MATRIX =====================*/
+      /*==================== MATRIX =====================*/
 
-         function get_projection(angle, a, zMin, zMax) {
-            var ang = Math.tan((angle*.5)*Math.PI/180);//angle*.5
-            return [
-               0.5/ang, 0 , 0, 0,
-               0, 0.5*a/ang, 0, 0,
-               0, 0, -(zMax+zMin)/(zMax-zMin), -1,
-               0, 0, (-2*zMax*zMin)/(zMax-zMin), 0 
-            ];
-         }
+      function get_projection(angle, a, zMin, zMax) {
+          var ang = Math.tan((angle*.5)*Math.PI/180);//angle*.5
+          return [
+              0.5/ang, 0 , 0, 0,
+              0, 0.5*a/ang, 0, 0,
+              0, 0, -(zMax+zMin)/(zMax-zMin), -1,
+              0, 0, (-2*zMax*zMin)/(zMax-zMin), 0 
+          ];
+      }
 
-         var proj_matrix = get_projection(40, canvas.width/canvas.height, 1, 100);
+      var proj_matrix = get_projection(40, canvas.width/canvas.height, 1, 100);
 
-         var mov_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
-         var mov_matrix2 = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+      var mov_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+      var mov_matrix2 = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
       var view_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
       var translationMatrixLocation = gl.getUniformLocation(shaderProgram, 'uTranslationMatrix');
-         // translating z
-         view_matrix[14] = view_matrix[14]-6;//zoom
+      // translating z
+      view_matrix[14] = view_matrix[14]-6;//zoom
 
-         /*==================== Rotation ====================*/
+      /*==================== Rotation ====================*/
 
-         function rotateZ(m, angle) {
-            var c = Math.cos(angle);
-             var s = Math.sin(angle);
-            var mv0 = m[0], mv4 = m[4], mv8 = m[8];
+      function rotateZ(m, angle) {
+          var c = Math.cos(angle);
+          var s = Math.sin(angle);
+          var mv0 = m[0], mv4 = m[4], mv8 = m[8];
 
-            m[0] = c*m[0]-s*m[1];
-            m[4] = c*m[4]-s*m[5];
-            m[8] = c*m[8]-s*m[9];
+          m[0] = c*m[0]-s*m[1];
+          m[4] = c*m[4]-s*m[5];
+          m[8] = c*m[8]-s*m[9];
 
-            m[1]=c*m[1]+s*mv0;
-            m[5]=c*m[5]+s*mv4;
-            m[9]=c*m[9]+s*mv8;
-         }
+          m[1]=c*m[1]+s*mv0;
+          m[5]=c*m[5]+s*mv4;
+          m[9]=c*m[9]+s*mv8;
+      }
 
-         function translate(m) {
-	     var mul=0;
-             var ind=0;
-	     var mv0 = m[0], mv4 = m[4], mv8 = m[8];
-	     while(ind<6) {
-		 m[mul] *= 1.001; //c*m[0]-s*m[1];
-		 mul+=3;
-		 ind+=1;
-	     }
-         }
+      function translate(m) {
+	  var mul=0;
+          var ind=0;
+	  var mv0 = m[0], mv4 = m[4], mv8 = m[8];
+	  while(ind<6) {
+	      m[mul] *= 1.001; //c*m[0]-s*m[1];
+	      mul+=3;
+	      ind+=1;
+	  }
+      }
 
-         function rotateX(m, angle) {
-            var c = Math.cos(angle);
-            var s = Math.sin(angle);
-            var mv1 = m[1], mv5 = m[5], mv9 = m[9];
+      function rotateX(m, angle) {
+          var c = Math.cos(angle);
+          var s = Math.sin(angle);
+          var mv1 = m[1], mv5 = m[5], mv9 = m[9];
 
-            m[1] = m[1]*c-m[2]*s;
-            m[5] = m[5]*c-m[6]*s;
-            m[9] = m[9]*c-m[10]*s;
+          m[1] = m[1]*c-m[2]*s;
+          m[5] = m[5]*c-m[6]*s;
+          m[9] = m[9]*c-m[10]*s;
 
-            m[2] = m[2]*c+mv1*s;
-            m[6] = m[6]*c+mv5*s;
-            m[10] = m[10]*c+mv9*s;
-         }
+          m[2] = m[2]*c+mv1*s;
+          m[6] = m[6]*c+mv5*s;
+          m[10] = m[10]*c+mv9*s;
+      }
 
-         function rotateY(m, angle) {
-            var c = Math.cos(angle);
-            var s = Math.sin(angle);
-            var mv0 = m[0], mv4 = m[4], mv8 = m[8];
+      function rotateY(m, angle) {
+          var c = Math.cos(angle);
+          var s = Math.sin(angle);
+          var mv0 = m[0], mv4 = m[4], mv8 = m[8];
 
-            m[0] = c*m[0]+s*m[2];
-            m[4] = c*m[4]+s*m[6];
-            m[8] = c*m[8]+s*m[10];
+          m[0] = c*m[0]+s*m[2];
+          m[4] = c*m[4]+s*m[6];
+          m[8] = c*m[8]+s*m[10];
 
-            m[2] = c*m[2]-s*mv0;
-            m[6] = c*m[6]-s*mv4;
-            m[10] = c*m[10]-s*mv8;
-         }
+          m[2] = c*m[2]-s*mv0;
+          m[6] = c*m[6]-s*mv4;
+          m[10] = c*m[10]-s*mv8;
+      }
 
-         /*================= Drawing ===========================*/
-         var time_old = 0;
+      /*================= Drawing ===========================*/
+      var time_old = 0;
 
-         var animate = function(time) {
+      var animate = function(time) {
 
-            var dt = time-time_old;
-            rotateZ(mov_matrix, dt*0.005);//time
-            rotateY(mov_matrix, dt*0.002);
-            rotateX(mov_matrix, dt*0.003);
-            time_old = time;
+          var dt = time-time_old;
+          rotateZ(mov_matrix, dt*0.005);//time
+          rotateY(mov_matrix, dt*0.002);
+          rotateX(mov_matrix, dt*0.003);
+          time_old = time;
 
-            gl.enable(gl.DEPTH_TEST);
-            gl.depthFunc(gl.LEQUAL);
-            gl.clearColor(0.5, 0.5, 0.5, 0.9);
-            gl.clearDepth(1.0);
+          gl.enable(gl.DEPTH_TEST);
+          gl.depthFunc(gl.LEQUAL);
+          gl.clearColor(0.5, 0.5, 0.5, 0.9);
+          gl.clearDepth(1.0);
 
-            gl.viewport(0.0, 0.0, canvas.width, canvas.height);
-            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-            gl.uniformMatrix4fv(Pmatrix, false, proj_matrix);
-            gl.uniformMatrix4fv(Vmatrix, false, view_matrix);
-             gl.uniformMatrix4fv(Mmatrix, false, mov_matrix);
-            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
-            gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+          gl.viewport(0.0, 0.0, canvas.width, canvas.height);
+          gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+          gl.uniformMatrix4fv(Pmatrix, false, proj_matrix);
+          gl.uniformMatrix4fv(Vmatrix, false, view_matrix);
+          gl.uniformMatrix4fv(Mmatrix, false, mov_matrix);
+          gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
+          gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 
-	     rotateZ(mov_matrix2, dt*-0.003);//time
-            rotateY(mov_matrix2, -dt*-0.002);
-            rotateX(mov_matrix2, dt*0.001);
-            gl.uniformMatrix4fv(Pmatrix, true, proj_matrix);
-             gl.uniformMatrix4fv(Vmatrix, true, view_matrix);
-	     translate(mov_matrix2);
-             gl.uniformMatrix4fv(Mmatrix, false, mov_matrix2);
-            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
-            gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-	     const pixels = new Uint8Array(
-		 10*10*4,
-		 //  gl.drawingBufferWidth * gl.drawingBufferHeight * 4,
-);
-	     gl.readPixels(
-		 300,
-		 300,
-		 10, //gl.drawingBufferWidth,
-		 10, //gl.drawingBufferHeight,
-  gl.RGBA,
-  gl.UNSIGNED_BYTE,
-  pixels,
-	     );
-	     //document.getElementById("result").innerHTML=JSON.stringify(pixels);
-             window.requestAnimationFrame(animate);	     
-         }
+	  rotateZ(mov_matrix2, dt*-0.003);//time
+          rotateY(mov_matrix2, -dt*-0.002);
+          rotateX(mov_matrix2, dt*0.001);
+          gl.uniformMatrix4fv(Pmatrix, true, proj_matrix);
+          gl.uniformMatrix4fv(Vmatrix, true, view_matrix);
+	  translate(mov_matrix2);
+          gl.uniformMatrix4fv(Mmatrix, false, mov_matrix2);
+          gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
+          gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+	  const pixels = new Uint8Array(
+	      10*10*4,
+	      //  gl.drawingBufferWidth * gl.drawingBufferHeight * 4,
+	  );
+	  gl.readPixels(
+	      300,
+	      300,
+	      10, //gl.drawingBufferWidth,
+	      10, //gl.drawingBufferHeight,
+	      gl.RGBA,
+	      gl.UNSIGNED_BYTE,
+	      pixels,
+	  );
+	  //document.getElementById("result").innerHTML=JSON.stringify(pixels);
+          window.requestAnimationFrame(animate);	     
+      }
       animate(0.260);
     </SCRIPT>    
 
@@ -3367,28 +3423,28 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  </div>
 	  
 	  <div id="tab0" style="display:block; position:relative; left:5%; background-color: ''; width: 50%; padding: 20px;">
-	  <p id="colors">
- 	   <span class="color" onClick="setColour(this.colour)"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	    <span class="color" onClick="setColour(this.colour);"></span>
-	  </p>
+	    <p id="colors">
+ 	      <span class="color" onClick="setColour(this.colour)"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	      <span class="color" onClick="setColour(this.colour);"></span>
+	    </p>
 	    <p style="font-weight: bolder; color: white;">user: <input id="usuario" /></p>
 	    <p style="font-weight: bolder; color: white;">passphrase: <input id="passphrase" type="password" /></p>
 	    <input id="ingrbutton" value="Ingresar" type="button" onclick="this.disabled=1; checkAndDisplayBuzon();"></input>
@@ -3452,9 +3508,5 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	</td>
       </tr>
     </table>
-
-
-
-    
-  </body>
+   </body>
 </html>

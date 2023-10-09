@@ -54,7 +54,7 @@ if (! isset($_POST["iv_OTP"]) || ! isset($_POST["OTP_resource"]) || ! isset($_PO
     fwrite($fp, $ciphertext);
     fclose($fp);
     */
-    echo "var iv_OTP=\"$iv_OTP\"; var OTP_resource=\"$OTP_resource\"; var OTP=\"$OTP\"; var init_OTProcessed=255;\n";
+    echo "var iv_OTP=\"$iv_OTP\"; var OTP_resource=\"$OTP_resource\"; var OTP=\"$OTP\"; var init_OTProcessed=255;error=\"Success\"\n";
 }
 if ( isset($_POST["iv_OTP"]) &&  isset($_POST["OTP_resource"]) &&  isset($_POST["OTP"]) &&  isset($_POST["texto2"])) {
     $filename = "msgs/" . $_POST["OTP_resource"] . ".js";
@@ -82,6 +82,7 @@ if ( isset($_POST["iv_OTP"]) &&  isset($_POST["OTP_resource"]) &&  isset($_POST[
         $fp = fopen("msgs/" . $filename . ".js", 'w');
         fwrite($fp, $_POST["texto2"]);
         fclose($fp);
+        unlink("msgs/" . $_POST["OTP_resource"] . ".js");
         echo "var error=\"Success\";var filename=\"$filename\"";
     } else {
         echo "var error=\"Could not decrypt $mins $fecha1 $fecha2\";";
