@@ -93,7 +93,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var t=null;
       var scro=null;
       var iv=new Uint8Array();
-      var remotepath="https://curare2019.ddns.net/";
+      var remotepath="http://127.0.0.1/" //"https://curare2019.ddns.net/";
       var esperaencrgrados=null;
       var longitud=0;
       var latitud=0;
@@ -1423,7 +1423,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  console.log("sending POST");
 			  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
 			  else console.log({data});
-			  //			  console.log({ resp, iv_OTP, OTP_resource, OTP});
 			  console.log ({buzon, address});
 			  error=".";
 			  document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
@@ -2088,14 +2087,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      scro.id="scro";
 			      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
 			      document.body.appendChild(scro);
-					  if(symbol>=symbols.length) symbol=0;
-					  document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
-					  document.getElementById("modal").style.display="block";
+			      if(symbol>=symbols.length) symbol=0;
+			      document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
+			      document.getElementById("modal").style.display="block";
 			      symbol+=1;
 			      await sleep(500);
 			  }
-					  document.getElementById("modaltext").innerHTML="Done<br>";
-					  document.getElementById("modal").style.display="block";
+			  document.getElementById("modaltext").innerHTML="Done<br>";
+			  document.getElementById("modal").style.display="block";
 			  encrypted=null;
 			  resource_index=null;
 			  generateKey(buzonEnc).then((keys)=>{
@@ -2179,23 +2178,23 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							      buzonEnc=buzonEnc+".js";
 							      codeforRegister=insertacode("", "; char nameofindex[" + buzonEnc.length + "]=\""+buzonEnc+"\"; char command["+("REGISTER").length + "]=\"REGISTER\"; char content[" + codeforRegister.length + "]=\""+codeforRegister+"\"; char contentExtra[" + codeforRegister2.length + "]=\"" + codeforRegister2 + "\";");
 							      console.log({codeforRegister, buzonEnc});
-							      encripta(codeforRegister).then(async (resp)=>{
-								  console.log({resp});
-								  const data = new URLSearchParams();
-								  data.append("texto2", resp);
-								  data.append("iv_OTP", iv_OTP);
-								  data.append("OTP_resource", OTP_resource);
-								  data.append("OTP", OTP);
-
+							      encripta(codeforRegister).then(async (respU)=>{
+								  console.log({respU});
+								  const dataU = new URLSearchParams();
+								  dataU.append("texto2", respU);
+								  dataU.append("iv_OTP", iv_OTP);
+								  dataU.append("OTP_resource", OTP_resource);
+								  dataU.append("OTP", OTP);
 								  fetch(remotepath + "/formalm.php", {
 								      method: "POST",
 								      headers: {
 									  "Content-Type": "application/x-www-form-urlencoded"
 								      },
-								      body: data
+								      body: dataU
 								  })
 								      .then(response => response.text)
-								      .then(async (data) => {
+								      .then(async (dataT) => {
+									  console.log({dataT});
 									  console.log({ respo, iv_OTP, OTP_resource, OTP});
 									  await sleep (500);
 									  error="Not Found";
@@ -2225,7 +2224,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      scro.parentNode.removeChild(scro);
 									      scro=document.createElement("script");
 									      scro.id="scro";
-									      scro.src=remotepath + "/flastfile.php"+'?sha='+address+'&count=1';
+									      scro.src=remotepath + "/flastfile.php"+'?sha='+buzonE+'&count=1';
 									      document.body.appendChild(scro);
 									      if(symbol>=symbols.length) symbol=0;
 									      document.getElementById("modaltext").innerHTML="Getting Last Index<br>" + symbols[symbol];
@@ -2234,26 +2233,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      await sleep(500);
 									  }
 									  alert(count);
-									  contador=count-1;
-									  error=".";									  
-									  while(error!="Not Found") {
-									      error=".";
-									      scro=document.getElementById("scro");
-									      scro.parentNode.removeChild(scro);
-									      scro=document.createElement("script");
-									      scro.id="scro";
-									      scro.src=remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime();
-									      console.log("Attempt to Load ", encodeURI(nameofMessages), '<<<<< ##', scro.src);
-									      document.body.appendChild(scro);
-									      while(error==".") {
-										  await sleep (500);
-									      }
-									      contador=contador+1;
-									      nameofMessages=await digestMessage(buzonE+""+contador);
-									      nameofMessages=nameofMessages+".js";
-									      console.log("Loading ", {nameofMessages, buzonE, contador, error});
-									  }
-									  contador--;
+									  contador=count;
+									  error=".";
+									  alert(contador+":"+buzonE);
 									  nameofMessages=await digestMessage(buzonE+""+contador);
 									  nameofMessages=nameofMessages+".js";
 									  var datefield=(new Date().getTime());
@@ -2263,25 +2245,39 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      contentofMessage=btoa(resp);
 									      codeforRegister=insertacode("", "; char nameofindex[" + buzonE.length + "]=\""+buzonE+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + contentofMessage.length + "]=\""+contentofMessage+"\";");
 									      console.log({buzon, buzonE, codeforRegister}, btoa(buzonEnc));
-									      encripta(codeforRegister).then(async (resp)=>{
-										  console.log({resp});
-										  const data = new URLSearchParams();
-										  data.append("texto2", resp);
-										  data.append("iv_OTP", iv_OTP);
-										  data.append("OTP_resource", OTP_resource);
-										  data.append("OTP", OTP);
-
+									      encripta(codeforRegister).then(async (respV)=>{
+										  init_OTProcessed=0;
+										  error=null;
+										  while (error==null) {
+										      scro=document.getElementById("scro");
+										      scro.parentNode.removeChild(scro);
+										      scro=document.createElement("script");
+										      scro.id="scro";
+										      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+										      document.body.appendChild(scro);
+										      if(symbol>=symbols.length) symbol=0;
+										      document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
+										      document.getElementById("modal").style.display="block";
+										      symbol+=1;
+										      await sleep(500);
+										  }
+										  console.log({respV});
+										  const dataV = new URLSearchParams();
+										  dataV.append("texto2", respV);
+										  dataV.append("iv_OTP", iv_OTP);
+										  dataV.append("OTP_resource", OTP_resource);
+										  dataV.append("OTP", OTP);
+										  console.log({dataV});
+										  alert("V");
 										  fetch(remotepath + "/formalm.php", {
 										      method: "POST",
 										      headers: {
 											  "Content-Type": "application/x-www-form-urlencoded"
 										      },
-										      body: data
+										      body: dataV
 										  })
 										      .then(response => response.text)
 										      .then(async (data) => {
-											  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
-											  else console.log({data});
 											  document.getElementById("modaltext").innerHTML="RECEIVING (" + subject + ")";
 											  document.getElementById("modal").style.display="block";
 											  if(subject!="#ignore" && subject!="#coin") document.getElementById('indice').innerHTML="";
@@ -2530,18 +2526,18 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  }
 									  console.log({init_OTProcessed, iv_OTP, OTP_resource, OTP});
 									  console.log({resp});
-									  const data = new URLSearchParams();
-									  data.append("texto2", resp);
-									  data.append("iv_OTP", iv_OTP);
-									  data.append("OTP_resource", OTP_resource);
-									  data.append("OTP", OTP);
+									  const dataW = new URLSearchParams();
+									  dataW.append("texto2", resp);
+									  dataW.append("iv_OTP", iv_OTP);
+									  dataW.append("OTP_resource", OTP_resource);
+									  dataW.append("OTP", OTP);
 
 									  fetch(remotepath + "/formalm.php", {
 									      method: "POST",
 									      headers: {
 										  "Content-Type": "application/x-www-form-urlencoded"
 									      },
-									      body: data
+									      body: dataW
 									  })
 									      .then(response => response.text)
 									      .then(async (data) => {
