@@ -62,6 +62,7 @@ if ( isset($_POST["iv_OTP"]) &&  isset($_POST["OTP_resource"]) &&  isset($_POST[
     $fecha2=gmdate("Y-m-d H:i");
     $fecha1 = openssl_decrypt(base64_decode($ciphertext), 'aes-256-ctr', $_POST["OTP"], OPENSSL_RAW_DATA, $_POST["iv_OTP"]);
     $mins=1;
+    unlink($filename);
     if($fecha1 != $fecha2) {
         while($mins<5) {
             $fecha2=minus($mins);
@@ -82,7 +83,6 @@ if ( isset($_POST["iv_OTP"]) &&  isset($_POST["OTP_resource"]) &&  isset($_POST[
         $fp = fopen("msgs/" . $filename . ".js", 'w');
         fwrite($fp, $_POST["texto2"]);
         fclose($fp);
-        unlink("msgs/" . $_POST["OTP_resource"] . ".js");
         echo "var error=\"Success\";var filename=\"$filename\"";
     } else {
         echo "var error=\"Could not decrypt $mins $fecha1 $fecha2\";";
