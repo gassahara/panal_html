@@ -290,12 +290,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  console.log({buzonFromField});
 				  buzonFromFieldPublic=await digestMessage(buzonFromField+".jspublic"+"\n");
 				  error=".";
-				  scro=document.getElementById("scro");
-				  scro.parentNode.removeChild(scro);
-				  scro=document.createElement("script");
-				  scro.id="scro";
-				  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonFromFieldPublic)+'.js&date=' + (new Date()).getTime();
-				  console.log("loading public key from From field ", encodeURI(buzonFromField), encodeURI(buzonFromFieldPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
+				  var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonFromFieldPublic)+'.js&date=' + (new Date()).getTime());
+				  eval(cadenaEval);
 				  document.body.appendChild(scro);
 				  while(error==".") {
 				      console.log({error});
@@ -761,12 +757,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      var esperando=null;
 		      init_OTProcessed=0;
 		      while (init_OTProcessed!=255) {
-			  scro=document.getElementById("scro");
-			  scro.parentNode.removeChild(scro);
-			  scro=document.createElement("script");
-			  scro.id="scro";
-			  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
-			  document.body.appendChild(scro);
+			  var cadenaEval=await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime());
+			  eval(cadenaEval);
 			  if(symbol>=symbols.length) symbol=0;
 			  document.getElementById("modaltext").innerHTML="Pulling Info <br>"+symbols[symbol];
 			  document.getElementById("modal").style.display="block";
@@ -786,11 +778,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      continua=true;
 			      while (continua) {
 				  error=".";
-				  scro=document.getElementById("scro");
-				  scro.parentNode.removeChild(scro);
-				  scro=document.createElement("script");
-				  scro.id="scro";
-				  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonA)+'.js&d=L&date=' + (new Date()).getTime();
+				  var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonA)+'.js&d=L&date=' + (new Date()).getTime());
+				  eval(cadenaEval);
 				  console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(buzonA), '+<+<+<+<+<+++++++++', scro.src);
 				  document.body.appendChild(scro);
 				  while(error==".") {
@@ -845,12 +834,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  while(errorName!="Not Found") {
 					      error=".";
 					      while (error==".") {
-						  scro=document.getElementById("scro");
-						  scro.parentNode.removeChild(scro);
-						  scro=document.createElement("script");
-						  scro.id="scro";
-						  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&date=' + (new Date()).getTime();
-						  document.body.appendChild(scro);
+						  var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&date=' + (new Date()).getTime());
+						  eval(cadenaEval);
 						  if(symbol>=symbols.length) symbol=0;
 						  document.getElementById("modaltext").innerHTML="Loading Box Data<br>"+symbols[symbol];
 						  document.getElementById("modal").style.display="block";
@@ -867,12 +852,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  len2=1;
 						  while (continua) {
 						      error=".";
-						      scro=document.getElementById("scro");
-						      scro.parentNode.removeChild(scro);
-						      scro=document.createElement("script");
-						      scro.id="scro";
-						      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
-						      document.body.appendChild(scro);
+						      var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime());
+						      eval(cadenaEval);
 						      while(error=="."){
 							  if(symbol>=symbols.length) symbol=0;
 							  document.getElementById("modaltext").innerHTML="Loading User Public Key<br>"+symbols[symbol];
@@ -970,7 +951,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  document.getElementById("modaltext").innerHTML="Loading Box";
 	  document.getElementById("modal").style.display="block";
 	  cargaBuzon().then(async (boxes)=>{
-	      //	      console.log({boxes}, Array.isArray(boxes) && boxes.length);
 	      var subjectisGame=[];
 	      var subjectisCoin=[];
 	      boxesofIgnored=[];
@@ -1019,13 +999,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  error=".";
 			  while (error==".") {
 			      error=".";
-			      scro=document.getElementById("scro");
-			      scro.parentNode.removeChild(scro);
-			      scro=document.createElement("script");
-			      scro.id="scro";
-			      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime();
-			      console.log("Setting address for Ignore Box", encodeURI(address), '#############');
-			      document.body.appendChild(scro);
+			      var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime());
+			      eval(cadenaEval);
 			      while(error==".") {
 				  await sleep (500);
 			      }
@@ -1067,11 +1042,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  error=".";
 			  while (error==".") {
 			      error=".";
-			      scro=document.getElementById("scro");
-			      scro.parentNode.removeChild(scro);
-			      scro=document.createElement("script");
-			      scro.id="scro";
-			      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime();
+			      var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime());
+			      eval(cadenaEval);
 			      console.log("Setting address for Coin Box", encodeURI(address), '#############');
 			      document.body.appendChild(scro);
 			      while(error==".") {
@@ -1170,11 +1142,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  if(tokens.length) {
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
-		  scro=document.getElementById("scro");
-		  scro.parentNode.removeChild(scro);
-		  scro=document.createElement("script");
-		  scro.id="scro";
-		  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+		  var cadenaEval=await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime());
+		  eval (cadenaEval);
 		  console.log(">:>:>", scro.src);
 		  document.body.appendChild(scro);
 		  console.log({error});
@@ -1334,11 +1303,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  if(tokens.length) {
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
-		  scro=document.getElementById("scro");
-		  scro.parentNode.removeChild(scro);
-		  scro=document.createElement("script");
-		  scro.id="scro";
-		  scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+		  var cadenaEval=await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime());
+		  eval(cadenaEval);
 		  console.log(">:>:>", scro.src);
 		  document.body.appendChild(scro);
 		  console.log({error});
@@ -1418,34 +1384,24 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      error=".";
 	      while(error!="Not Found") {
 		  error=".";
-									  scro=document.getElementById("scro");
-									  scro.parentNode.removeChild(scro);
-									  scro=document.createElement("script");
-									  scro.id="scro";
-									  scro.src=remotepath + "/flastfile.php"+'?sha='+address+'&count=1';
-									  document.body.appendChild(scro);
-									  while(error==".") {
-									      await sleep(500);
-									  }
+		  var cadenaEval=await fetch(remotepath + "/flastfile.php"+'?sha='+address+'&count=1');
+		  eval(cadenaEval);
+		  while(error==".") {
+		      await sleep(500);
+		  }
 		  alert(count);
-									  contador=count-1;
-									  error=".";									  
+		  contador=count-1;
+		  error=".";									  
 		  while (error==".") {
 		      contador=contador+1;
 		      nameforMessage=await digestMessage(address+""+contador);
 		      nameforMessage=nameforMessage+".js";
 		      console.log("Loading ", {nameforMessage, address, contador, error});
 		      error=".";
-		      scro=document.getElementById("scro");
-		      scro.parentNode.removeChild(scro);
-		      scro=document.createElement("script");
-		      scro.id="scro";
-		      scro.src=remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime();
+		      var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime());
+		      eval (cadenaEval);
 		      console.log("Attempt to Load ", encodeURI(nameforMessage), '<<<<< ##', scro.src);
 		      document.body.appendChild(scro);
-		      while(error==".") {
-			  await sleep (500);
-		      }
 		  }
 	      }
 	      encripta(codeforRegister).then(async (resp)=>{
@@ -1478,12 +1434,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  while(error=="Not Found") {
 			      error=".";
 			      while (error==".") {
-				  scro=document.getElementById("scro");
-				  scro.parentNode.removeChild(scro);
-				  scro=document.createElement("script");
-				  scro.id="scro";
-				  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime();
-				  document.body.appendChild(scro);
+				  var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime());
+				  eval(cadenaEval);
 				  if(symbol>=symbols.length) symbol=0;
 				  document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + contador + "<br>" + symbols[symbol];
 				  symbol+=1;
@@ -1522,11 +1474,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      document.getElementById("modal").style.display="block";
 	      error=".";
 	      while (error==".") {
-		  scro=document.getElementById("scro");
-		  scro.parentNode.removeChild(scro);
-		  scro=document.createElement("script");
-		  scro.id="scro";
-		  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime();
+		  var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime());
+		  eval(cadenaEval);
 		  console.log(".......................", encodeURI(address), '#############', scro.src);
 		  document.body.appendChild(scro);
 		  await sleep(50);
@@ -1544,13 +1493,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  var esperando=null;
 		  init_OTProcessed=0;
 		  while (init_OTProcessed!=255) {
-		      scro=document.getElementById("scro");
-		      scro.parentNode.removeChild(scro);
-		      scro=document.createElement("script");
-		      scro.id="scro";
-		      scro.src=remotepath + "/formalm.php"+'?_=' + (new Date()).getTime();
+		      var cadenaEVal=await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime());
+		      eval(cadenaEval);
 		      console.log(">:>:>", scro.src);
-		      document.body.appendChild(scro);
 		      esperando+=1;
 		      console.log({esperando, error});
 		      await sleep (1000);
@@ -1571,18 +1516,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      digestMessage(response[1]).then(async (bzon)=>{
 				  var esperando=0;
 				  error=".";
-				  console.log(".>.>.>.>.>.>.>.>.>.>.>.>", encodeURI(bzon), '+<+<+<+<+<+++++++++', scro.src);
 				  symbol=0;
 				  len1=0;
 				  len2=1;
 				  continua=true;
 				  while (continua) {
-				      scro=document.getElementById("scro");
-				      scro.parentNode.removeChild(scro);
-				      scro=document.createElement("script");
-				      scro.id="scro";
-				      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(bzon)+'.js&date=' + (new Date()).getTime();
-				      document.body.appendChild(scro);
+				      var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(bzon)+'.js&date=' + (new Date()).getTime());
+				      eval (cadenaEval);
 				      while(error==".") {
 					  if(symbol>=symbols.length) symbol=0;
 					  document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
@@ -1638,17 +1578,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  error=".";
 						  digestMessage(buzon+".jspublic"+"\n").then(async (buzonPublic)=>{
 						      error="Not Found";
-						      console.log("loading User Public key", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
 						      continua=1;
 						      len1=0;
 						      len2=1;
 						      while (continua) {
-							  scro=document.getElementById("scro");
-							  scro.parentNode.removeChild(scro);
-							  scro=document.createElement("script");
-							  scro.id="scro";
-							  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
-							  document.body.appendChild(scro);
+							  var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime());
+							  eval (cadenaEval);
 							  while (error==".") {
 							      if(symbol>=symbols.length) symbol=0;
 							      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
@@ -1699,12 +1634,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      len2=1;
 								      while(continua){
 									  error=".";
-									  scro=document.getElementById("scro");
-									  scro.parentNode.removeChild(scro);
-									  scro=document.createElement("script");
-									  scro.id="scro";
-									  scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
-									  document.body.appendChild(scro);
+									  var cadenaEval=await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime());
+									  eval (cadenaEval);
 									  while (error=="."){
 									      console.log("loading Box public key (#ignore) ", encodeURI(buzon), encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
 									      if(symbol>=symbols.length) symbol=0;
@@ -2304,8 +2235,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  if(symbol>=symbols.length) symbol=0;
 					  document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
 					  document.getElementById("modal").style.display="block";
-			      symbol+=1;
-			      await sleep(500);
+					  symbol+=1;
+					  await sleep(500);
 				      }
 				      document.getElementById("modaltext").innerHTML="Loaded<br>";
 				      document.getElementById("modal").style.display="block";
@@ -2339,8 +2270,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							      scro.id="scro";
 							      scro.src=remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime();
 							      console.log("loading public =:=:=:=:=:==:=:=:=:=:=", encodeURI(buzonPublic), '*:*:*:*:*:*:*:*:*:*:', scro.src);
-									      document.getElementById("modaltext").innerHTML="Loading Public Key<br>" + symbols[symbol];
-									      document.getElementById("modal").style.display="block";
+							      document.getElementById("modaltext").innerHTML="Loading Public Key<br>" + symbols[symbol];
+							      document.getElementById("modal").style.display="block";
 							      document.body.appendChild(scro);
 							      await sleep(500);
 							  }
