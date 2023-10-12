@@ -919,123 +919,121 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       async function checkAndDisplayBuzon() {
 	  document.getElementById("modaltext").innerHTML="Loading Box";
 	  document.getElementById("modal").style.display="block";
-	  cargaBuzon().then(async (boxes)=>{
-	      var subjectisGame=[];
-	      var subjectisCoin=[];
-	      boxesofIgnored=[];
-	      var g=0;
-	      var c=0;
-	      var i=0;
-	      console.log({boxes});
-	      //alert("B");
-	      if(Array.isArray(boxes) ) {
-		  i=0;
-		  for (let key in boxes) {
-		      if (boxes.hasOwnProperty(key)) {
-			  console.log(boxes[key]);
-			  //alert(key);
-			  if(boxes[key]["subject"] && boxes[key]["subject"]!=undefined){
-			      if(boxes[key]["subject"].indexOf("#coin")>-1) {
-				  subjectisCoin[c]=key;
-				  c++;
-			      }
-			      if(boxes[key]["subject"].indexOf("#ignore")>-1) {
-				  boxesofIgnored[i]=[];
-				  boxesofIgnored[i]["address"]=boxes[key]["address"];
-				  boxesofIgnored[i]["name"]=boxes[key]["name"];
-				  boxesofIgnored[i]["subject"]=boxes[key]["subject"];
-				  i++;
-			      }
-			      if(boxes[key]["subject"]=="#" + buzonforGameis) {
-				  subjectisGame[g]=key;
-				  g++;
-			      }
-			      document.getElementById("buzonIndex").innerHTML+="<div>Name:" + boxes[key]["name"] + "</div><div>Subject: " + boxes[key]["subject"]+ "</div><div><input id=\""+boxes[key]["name"]+"Button\" type=\"button\" onclick='this.disabled=1; RSA_cargaBuzon(\""+boxes[key]["address"].trim()+"\",\""+boxes[key]["name"].trim() +"\",\""+boxes[key]["subject"]+"\");' value=\"cargar\" /></div>";
-			      document.getElementById('indice').innerHTML="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>";
-			  }
-		      }
-		  }
-		  if(!boxesofIgnored.length) {
-		      show=1;
-		      if(show) pon('tab1');
-		      document.getElementById("modaltext").innerHTML="Creating Ignore Box";
-		      document.getElementById("modal").style.display="block";
-		      var contador=0;
-		      response=await userPassword();
-		      continua=true;
-		      while(continua){
-			  var buzon=await digestMessage(response[1]+"ignore"+contador);
-			  address=await digestMessage(buzon);
-			  address+=".js";
-			  error=".";
-			  while (error==".") {
-			      error=".";
-			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&nocontent=true&date=' + (new Date()).getTime())).text();
-			      await sleep (500);
-			      eval(cadenaEval);
-			  }
-			  console.log({address, error});
-			  if(error=="Not Found") continua=false;
-			  contador++;
-		      }
-		      await RSA_crearBuzon(buzon, "#ignore");
-		      return true;
-		  } else {
-		      document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: ignore)";
-		      document.getElementById("modal").style.display="block";
-		      //		      console.log({boxesofIgnored});
-		      RSA_cargaBuzon(boxesofIgnored[0]["address"].trim(), boxesofIgnored[0]["name"].trim(), boxesofIgnored[0]["subject"]).then(async (resp)=>{
-			  document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: coins)";
-			  document.getElementById("modal").style.display="block";
-			  //			  console.log({resp});
-			  var c=0;
-			  console.log({subjectisCoin});
-			  while(c<subjectisCoin.length) {
-			      await RSA_cargaBuzon(boxes[subjectisCoin[c]]["address"].trim(), boxes[subjectisCoin[c]]["name"].trim(), boxes[subjectisCoin[c]]["subject"]);
+	  var boxes=await cargaBuzon();
+	  var subjectisGame=[];
+	  var subjectisCoin=[];
+	  boxesofIgnored=[];
+	  var g=0;
+	  var c=0;
+	  var i=0;
+	  console.log({boxes});
+	  if(Array.isArray(boxes) ) {
+	      i=0;
+	      for (let key in boxes) {
+		  if (boxes.hasOwnProperty(key)) {
+		      console.log(boxes[key]);
+		      //alert(key);
+		      if(boxes[key]["subject"] && boxes[key]["subject"]!=undefined){
+			  if(boxes[key]["subject"].indexOf("#coin")>-1) {
+			      subjectisCoin[c]=key;
 			      c++;
 			  }
-		      });
-		  }
-		  if(!subjectisCoin.length) {
-		      show=1;
-		      if(show) pon('tab1');
-		      document.getElementById("modaltext").innerHTML="Creating Coin Box";
-		      document.getElementById("modal").style.display="block";
-		      var contador=0;
-		      response=await userPassword();
-		      continua=true;
-		      while(continua){
-			  var buzon=await digestMessage(response[1]+"coin"+contador);
-			  address=await digestMessage(buzon);
-			  address+=".js"
-			  error=".";
-			  while (error==".") {
-			      error=".";
-			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime())).text();
-			      await sleep (500);
-			      eval(cadenaEval);
-			      console.log("Setting address for Coin Box", encodeURI(address), '#############');
+			  if(boxes[key]["subject"].indexOf("#ignore")>-1) {
+			      boxesofIgnored[i]=[];
+			      boxesofIgnored[i]["address"]=boxes[key]["address"];
+			      boxesofIgnored[i]["name"]=boxes[key]["name"];
+			      boxesofIgnored[i]["subject"]=boxes[key]["subject"];
+			      i++;
 			  }
-			  console.log({address, error});
-			  if(error=="Not Found") continua=false;
-			  contador++;
+			  if(boxes[key]["subject"]=="#" + buzonforGameis) {
+			      subjectisGame[g]=key;
+			      g++;
+			  }
+			  document.getElementById("buzonIndex").innerHTML+="<div>Name:" + boxes[key]["name"] + "</div><div>Subject: " + boxes[key]["subject"]+ "</div><div><input id=\""+boxes[key]["name"]+"Button\" type=\"button\" onclick='this.disabled=1; RSA_cargaBuzon(\""+boxes[key]["address"].trim()+"\",\""+boxes[key]["name"].trim() +"\",\""+boxes[key]["subject"]+"\");' value=\"cargar\" /></div>";
+			  document.getElementById('indice').innerHTML="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>";
 		      }
-		      await RSA_crearBuzon(buzon, "#coin");
-		      return true;
-		  } else {
-		      document.getElementById("buzonIndex").innerHTML+="<textarea id=\"coinfromText\" style=\"display: none; width: 600; height: 600;\"></textarea><input type=\"button\" onclick=\"if(document.getElementById('coinfromText').style.display=='none') {document.getElementById('coinfromText').style.display='block';this.value='load';} else {toStampCollector(document.getElementById('coinfromText').value,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'VERIFY', null, null, true)};\" value=\"Load Coins From Text\"/>";
-		      document.getElementById("buzonIndex").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
-		      document.getElementById("buzonIndex").innerHTML+="<br><input id=\"cambioBills\" /><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
 		  }
-	      } else {
-		  pon('tab0');
-		  document.getElementById("ingrbutton").disabled=0;
-		  document.getElementById("regbutton").disabled=0;
-		  document.getElementById("modaltext").innerHTML=boxes.error;
-		  document.getElementById("modal").style.display="block";
-		  show=0;
 	      }
-	  });
+	      if(!boxesofIgnored.length) {
+		  show=1;
+		  if(show) pon('tab1');
+		  document.getElementById("modaltext").innerHTML="Creating Ignore Box";
+		  document.getElementById("modal").style.display="block";
+		  var contador=0;
+		  response=await userPassword();
+		  continua=true;
+		  while(continua){
+		      var buzon=await digestMessage(response[1]+"ignore"+contador);
+		      address=await digestMessage(buzon);
+		      address+=".js";
+		      error=".";
+		      while (error==".") {
+			  error=".";
+			  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&nocontent=true&date=' + (new Date()).getTime())).text();
+			  await sleep (500);
+			  eval(cadenaEval);
+		      }
+		      console.log({address, error});
+		      if(error=="Not Found") continua=false;
+		      contador++;
+		  }
+		  await RSA_crearBuzon(buzon, "#ignore");
+		  return true;
+	      } else {
+		  document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: ignore)";
+		  document.getElementById("modal").style.display="block";
+		  //		      console.log({boxesofIgnored});
+		  await RSA_cargaBuzon(boxesofIgnored[0]["address"].trim(), boxesofIgnored[0]["name"].trim(), boxesofIgnored[0]["subject"])
+		  document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: coins)";
+		  document.getElementById("modal").style.display="block";
+		  var c=0;
+		  console.log({subjectisCoin});
+		  while(c<subjectisCoin.length) {
+		      await RSA_cargaBuzon(boxes[subjectisCoin[c]]["address"].trim(), boxes[subjectisCoin[c]]["name"].trim(), boxes[subjectisCoin[c]]["subject"]);
+		      c++;
+		  }
+	      }
+	      if(!subjectisCoin.length) {
+		  show=1;
+		  if(show) pon('tab1');
+		  document.getElementById("modaltext").innerHTML="Creating Coin Box";
+		  document.getElementById("modal").style.display="block";
+		  var contador=0;
+		  response=await userPassword();
+		  continua=true;
+		  while(continua){
+		      var buzon=await digestMessage(response[1]+"coin"+contador);
+		      address=await digestMessage(buzon);
+		      address+=".js"
+		      error=".";
+		      while (error==".") {
+			  error=".";
+			  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime())).text();
+			  await sleep (500);
+			  eval(cadenaEval);
+			  console.log("Setting address for Coin Box", encodeURI(address), '#############');
+		      }
+		      console.log({address, error});
+		      if(error=="Not Found") continua=false;
+		      contador++;
+		  }
+		  await RSA_crearBuzon(buzon, "#coin");
+		  return true;
+	      } else {
+		  document.getElementById("buzonIndex").innerHTML+="<textarea id=\"coinfromText\" style=\"display: none; width: 600; height: 600;\"></textarea><input type=\"button\" onclick=\"if(document.getElementById('coinfromText').style.display=='none') {document.getElementById('coinfromText').style.display='block';this.value='load';} else {toStampCollector(document.getElementById('coinfromText').value,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'VERIFY', null, null, true)};\" value=\"Load Coins From Text\"/>";
+		  document.getElementById("buzonIndex").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
+		  document.getElementById("buzonIndex").innerHTML+="<br><input id=\"cambioBills\" /><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
+	      }
+	  } else {
+	      pon('tab0');
+	      document.getElementById("ingrbutton").disabled=0;
+	      document.getElementById("regbutton").disabled=0;
+	      document.getElementById("modaltext").innerHTML=boxes.error;
+	      document.getElementById("modal").style.display="block";
+	      show=0;
+	  }
+	  document.getElementById("modaltext").innerHTML="User Loaded";
+	  document.getElementById("modal").style.display="block";
       }
       function parseTexttoTokens(text) {
 	  var tokens=new Array();
@@ -1646,6 +1644,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  if(!setContador) nameofMessage=null;
 									  if(subject=="#ignore") {
 									      continua=1;
+									      var contador=1;
 									      while(continua) {
 										  error=".";
 										  if(symbol>=symbols.length) symbol=0;
@@ -1653,11 +1652,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  document.getElementById("modal").style.display="block";
 										  symbol+=1;
 										  var cadenaEval=await (await fetch(remotepath + "/flastfile.php"+'?sha='+address+'&count=1')).text();
-										  await sleep (500);
-										  eval(cadenaEval);
 										  try {
-										      var c=0;
-										      c=count;
+										      await sleep (500);
+										      eval(cadenaEval);
+										      contador=count;
 										      continua=false;
 										  } catch (e) {
 										      continua=true;
@@ -1666,24 +1664,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      document.getElementById("modaltext").innerHTML="Last Message is <br>" + count;
 									      document.getElementById("modal").style.display="block";
 									      
-									      contador=count-1;
-									      error=".";									  
-									      while(error!="Not Found") {
-										  contador=contador+1;
-										  nameofMessage=await digestMessage(address+""+contador);
-										  nameofMessage=nameofMessage+".js";
-										  error=".";
-										  if(symbol>=symbols.length) symbol=0;
-										  document.getElementById("modaltext").innerHTML="Skipping Ignored Messages<br>" + contador;
-										  symbol+=1;
-										  document.getElementById("modal").style.display="block";
-										  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?nocontent=true&fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime())).text();
-										  await sleep (500);
-										  eval (cadenaEval);
-									      }
+									      alert("CONTADOR"+contador);
 									      document.getElementById("modaltext").innerHTML="Continue Loading";
 									      document.getElementById("modal").style.display="block";
-									      contador=contador-1;
 									      nameofMessage=await digestMessage(address+""+contador);
 									      nameofMessage=nameofMessage+".js";
 									      console.log("Last name ", encodeURI(nameofMessage), ' in Slot ', contador);
@@ -1864,13 +1847,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      document.getElementById(buzonOriginal+"Button").disabled=0
 								      resolve({error:"Success"});
 								      return true;
-								  } else {
-								      console.log(responseDecrypted.error);
-								      resolve({error: responseDecrypted.error});
-								      return false;
 								  }
 							      } else {
-								  resolve({error: "No Public Key"});
+								  console.log(responseDecrypted.error);
+								  resolve({error: responseDecrypted.error});
 								  return false;
 							      }
 							  } else {
@@ -1882,6 +1862,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  return false;
 						      }
 						  });
+					      } else {
+						  resolve({error: "No User Key"});
+						  return false;
 					      }
 					  }
 				      });
@@ -1893,6 +1876,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	  });
       }
+										     
       function boxesignoredadd(msg) {
 	  msg=msg.replace(/\n/g, ";");
 	  boxesignored=boxesignored.concat(msg.split(';'));
