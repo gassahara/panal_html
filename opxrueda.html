@@ -291,8 +291,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  buzonFromFieldPublic=await digestMessage(buzonFromField+".jspublic"+"\n");
 				  error=".";
 				  while(error==".") {
-				      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?e=I&fname='+encodeURI(buzonFromFieldPublic)+'.js&date=' + (new Date()).getTime())).text();
 				      try {
+					  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?e=I&fname='+encodeURI(buzonFromFieldPublic)+'.js&date=' + (new Date()).getTime())).text();
 					  eval(cadenaEval);
 				      } catch (e) {
 					  error=".";
@@ -729,9 +729,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      var esperando=null;
 		      init_OTProcessed=0;
 		      while (init_OTProcessed!=255) {
+				      try {
 			  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
 			  await sleep (500);
-			  try{
 			      console.log({cadenaEval});
 			      eval(cadenaEval);
 			  } catch (e) {
@@ -755,9 +755,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      continua=true;
 			      while (continua) {
 				  error=".";
+				      try {
 				  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonA)+'.js&d=L&date=' + (new Date()).getTime())).text();
 				  await sleep(500);
-				  try {
 				      eval(cadenaEval);
 				  } catch (e) {
 				      continua=true;
@@ -807,13 +807,17 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  while(errorName!="Not Found") {
 					      error=".";
 					      while (error==".") {
-						  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&M=1&date=' + (new Date()).getTime())).text();
-						  if(symbol>=symbols.length) symbol=0;
-						  document.getElementById("modaltext").innerHTML="Loading Box Data<br>"+symbols[symbol];
-						  document.getElementById("modal").style.display="block";
-						  symbol+=1;
-						  await sleep (500);
-						  eval(cadenaEval);
+						  try {
+						      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&M=1&date=' + (new Date()).getTime())).text();
+						      if(symbol>=symbols.length) symbol=0;
+						      document.getElementById("modaltext").innerHTML="Loading Box Data<br>"+symbols[symbol];
+						      document.getElementById("modal").style.display="block";
+						      symbol+=1;
+						      await sleep (500);
+						      eval(cadenaEval);
+						  } catch (e) {
+						      error=".";
+						  }
 					      }
 					      errorName=error;
 					      console.log({error});
@@ -834,11 +838,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      document.getElementById("modaltext").innerHTML="Loading User Public Key<br>"+symbols[symbol];
 						      document.getElementById("modal").style.display="block";
 						      symbol+=1;
+						      try{
 						      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime())).text();
 						      await sleep (500);
 						      eval(cadenaEval);
 						      console.log({error});
-						      try{
 							  eval(atob(content));
 							  continua=false;
 						      } catch (e) {
@@ -950,7 +954,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      g++;
 			  }
 			  document.getElementById("buzonIndex").innerHTML+="<div>Name:" + boxes[key]["name"] + "</div><div>Subject: " + boxes[key]["subject"]+ "</div><div><input id=\""+boxes[key]["name"]+"Button\" type=\"button\" onclick='this.disabled=1; RSA_cargaBuzon(\""+boxes[key]["address"].trim()+"\",\""+boxes[key]["name"].trim() +"\",\""+boxes[key]["subject"]+"\");' value=\"cargar\" /></div>";
-			  document.getElementById('indice').innerHTML="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>";
 		      }
 		  }
 	      }
@@ -968,10 +971,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      address+=".js";
 		      error=".";
 		      while (error==".") {
-			  error=".";
-			  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&nocontent=true&date=' + (new Date()).getTime())).text();
-			  await sleep (500);
-			  eval(cadenaEval);
+			  try{
+			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&nocontent=true&date=' + (new Date()).getTime())).text();
+			      await sleep (500);
+			      eval(cadenaEval);
+			  } catch (e) {
+			      error="."
+			  }
 		      }
 		      console.log({address, error});
 		      if(error=="Not Found") continua=false;
@@ -1007,11 +1013,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      address+=".js"
 		      error=".";
 		      while (error==".") {
-			  error=".";
-			  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime())).text();
-			  await sleep (500);
-			  eval(cadenaEval);
-			  console.log("Setting address for Coin Box", encodeURI(address), '#############');
+			  try{
+			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime())).text();
+			      await sleep (500);
+			      eval(cadenaEval);
+			      console.log("Setting address for Coin Box", encodeURI(address), '#############');
+			  } catch (e) {
+			      error="."
+			  }
 		      }
 		      console.log({address, error});
 		      if(error=="Not Found") continua=false;
@@ -1023,6 +1032,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  document.getElementById("buzonIndex").innerHTML+="<textarea id=\"coinfromText\" style=\"display: none; width: 600; height: 600;\"></textarea><input type=\"button\" onclick=\"if(document.getElementById('coinfromText').style.display=='none') {document.getElementById('coinfromText').style.display='block';this.value='load';} else {toStampCollector(document.getElementById('coinfromText').value,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'VERIFY', null, null, true)};\" value=\"Load Coins From Text\"/>";
 		  document.getElementById("buzonIndex").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
 		  document.getElementById("buzonIndex").innerHTML+="<br><input id=\"cambioBills\" /><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
+			  document.getElementById('indice').innerHTML="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>";
 	      }
 	  } else {
 	      pon('tab0');
@@ -1040,7 +1050,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  console.log({text});
 	  //	  console.log(text.indexOf("char fname[21]=")+ "\n"  +  text.indexOf("long date=")+ "\n"  + text.indexOf("long ammount=")+ "\n"  + text.indexOf("long uid1=")+ "\n"  + text.indexOf("long uid2=")+ "\n"  + text.indexOf("long uid3=")+ "\n"  + text.indexOf("long uid4=")+ "\n" );
 	  while(text.indexOf("char fname[21]=")>0 &&  text.indexOf("long date=")>0 && text.indexOf("long ammount=")>0 && text.indexOf("long uid1=")>0 && text.indexOf("long uid2=")>0 && text.indexOf("long uid3=")>0 && text.indexOf("long uid4=")>0) {
-	      console.log({c});
 	      tokens[c]=[];
 	      tokens[c]["stamps_dates"]=new Array();
 	      tokens[c]["stamps_fname"]=new Array();
@@ -1104,10 +1113,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  if(tokens.length) {
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
+		  try {
 		  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
 		  eval (cadenaEval);
 		  console.log({error});
-		  await sleep (500);
+		      await sleep (500);
+		  } catch (e) {
+		      init_OTProcessed=0;
+		  }
 	      }
 	      console.log({init_OTProcessed});
 	      var codeforRegister=insertacode("", "; char nameofDestinatary[" + buzon.length + "]=\""+buzon+"\"; ");
@@ -1156,7 +1169,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  if (c<tokens.length) cadenatoInsert+=",";
 	      }
 	      cadenatoInsert+="};";
-	      //	      console.log({cadenatoInsert});
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
 	      cadenatoInsert="long stamps_uid3["+tokens.length+"]={";
 	      c=0;
@@ -1176,7 +1188,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	      cadenatoInsert+="};";
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
-	      //	      console.log(codeforRegister);
 	      encripta(codeforRegister).then(async (resp)=>{
 		  console.log({resp});
 		  const data = new URLSearchParams();
@@ -1184,22 +1195,31 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  data.append("iv_OTP", iv_OTP);
 		  data.append("OTP_resource", OTP_resource);
 		  data.append("OTP", OTP);
-
-		  fetch(remotepath + "/formalm.php", {
-		      method: "POST",
-		      headers: {
-			  "Content-Type": "application/x-www-form-urlencoded"
-		      },
-		      body: data
-		  })
-		      .then(response => response.text)
-		      .then(async (data) => {
-			  console.log("DONE");
-			  //			  console.log( {resp, iv_OTP, OTP_resource, OTP});
-			  coinsValue-=ammountinTokens*1;
-			  document.getElementById("coins").innerHTML=coinsValue;
-		      })
-		      .catch(error => console.error(error));
+		  error="."
+		  while(error==".") {
+		      try {
+			  fetch(remotepath + "/formalm.php", {
+			      method: "POST",
+			      headers: {
+				  "Content-Type": "application/x-www-form-urlencoded"
+			      },
+			      body: data
+			  })
+			      .then(response => response.text)
+			      .then(async (data) => {
+				  console.log("DONE");
+				  coinsValue-=ammountinTokens*1;
+				  document.getElementById("coins").innerHTML=coinsValue;
+				  error="T";
+			      })
+			      .catch((errorA )=> {
+				  console.error(errorA);
+				  error=".";
+			      });
+		      } catch (e) {
+			  error=".";
+		      }
+		  }
 	      });
 	  } else {
 	      document.getElementById("modaltext").innerHTML="All the Tokens have been processed";
@@ -1263,10 +1283,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  if(tokens.length) {
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
+		  try {
 		  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
 		  eval(cadenaEval);
 		  console.log({error});
-		  await sleep (500);
+		      await sleep (500);
+		  } catch (e) {
+		      init_OTProcessed=0;
+		  }
 	      }
 	      console.log({init_OTProcessed});
 	      var codeforRegister=insertacode("", "; char nameofBox[" + buzon.length + "]=\""+buzon+"\"; ");
@@ -1345,9 +1369,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  document.getElementById("modaltext").innerHTML="Getting Last Index of Box<br>"+symbols[symbol];
 		  document.getElementById("modal").style.display="block";
 		  symbol++;
-		  var cadenaEval=await (await fetch(remotepath + "/flastfile.php"+'?sha='+address+'&count=1')).text();
-		  await sleep(500);
 		  try {
+		      var cadenaEval=await (await fetch(remotepath + "/flastfile.php"+'?sha='+address+'&count=1')).text();
+		      await sleep(500);
 		      eval(cadenaEval);
 		  } catch (e) {
 		      error=".";
@@ -1365,50 +1389,57 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  data.append("iv_OTP", iv_OTP);
 		  data.append("OTP_resource", OTP_resource);
 		  data.append("OTP", OTP);
-
-		  fetch(remotepath + "/formalm.php", {
-		      method: "POST",
-		      headers: {
-			  "Content-Type": "application/x-www-form-urlencoded"
-		      },
-		      body: data
-		  })
-		      .then(response => response.text)
-		      .then(async (data) => {
-			  console.log("sending POST");
-			  if(data.text!=undefined) console.log(data.text(), "rcv", "data");
-			  else console.log({data});
-			  console.log ({buzon, address});
-			  error=".";
-			  document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
-			  document.getElementById("modal").style.display="block";
-			  error="Not Found";
-			  console.log("waiting for ", {nameforMessage, address, contador});
-			  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameforMessage), '<<<<<< #####');
-			  while(error=="Not Found") {
-			      error=".";
-			      while (error==".") {
-				  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime())).text();
-				  eval(cadenaEval);
-				  if(symbol>=symbols.length) symbol=0;
-				  document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + contador + "<br>" + symbols[symbol];
-				  symbol+=1;
-				  document.getElementById("modal").style.display="block";
-				  await sleep(500);
-			      }
-			  }
-			  document.getElementById("modaltext").innerHTML="Continue Loading";
-			  document.getElementById("modal").style.display="block";
-			  var subjBox=null;
-			  if(!subjectBox) {
-			      subjBox="#coin";
-			  } else {
-			      subjBox=subjectBox;
-			  }
-			  console.log({address, buzon, subjBox, contador});
-			  RSA_cargaBuzon(address, buzon, subjBox, contador);
+		  try {
+		      fetch(remotepath + "/formalm.php", {
+			  method: "POST",
+			  headers: {
+			      "Content-Type": "application/x-www-form-urlencoded"
+			  },
+			  body: data
 		      })
-		      .catch(error => console.error(error));
+			  .then(response => response.text)
+			  .then(async (data) => {
+			      errorF="T";
+			      console.log("sending POST");
+			      if(data.text!=undefined) console.log(data.text(), "rcv", "data");
+			      else console.log({data});
+			      console.log ({buzon, address});
+			      error=".";
+			      document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
+			      document.getElementById("modal").style.display="block";
+			      error="Not Found";
+			      console.log("waiting for ", {nameforMessage, address, contador});
+			      console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameforMessage), '<<<<<< #####');
+			      while(error=="Not Found") {
+				  error=".";
+				  while (error==".") {
+				      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime())).text();
+				      eval(cadenaEval);
+				      if(symbol>=symbols.length) symbol=0;
+				      document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + contador + "<br>" + symbols[symbol];
+				      symbol+=1;
+				      document.getElementById("modal").style.display="block";
+				      await sleep(500);
+				  }
+			      }
+			      document.getElementById("modaltext").innerHTML="Continue Loading";
+			      document.getElementById("modal").style.display="block";
+			      var subjBox=null;
+			      if(!subjectBox) {
+				  subjBox="#coin";
+			      } else {
+				  subjBox=subjectBox;
+			      }
+			      console.log({address, buzon, subjBox, contador});
+			      RSA_cargaBuzon(address, buzon, subjBox, contador);
+			  })
+			  .catch((error) => {
+			      console.error(error);
+			      errorF=".";
+			  });
+		  } catch (e) {
+		      error=".";
+		  }
 	      });
 	  } else {
 	      document.getElementById("modaltext").innerHTML="All the Tokens have been processed";
@@ -1428,10 +1459,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      document.getElementById("modal").style.display="block";
 	      error=".";
 	      while (error==".") {
-		  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime())).text();
-		  eval(cadenaEval);
-		  console.log(".......................", encodeURI(address), '#############');
-		  await sleep(50);
+		  try {
+		      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime())).text();
+		      eval(cadenaEval);
+		      console.log(".......................", encodeURI(address), '#############');
+		      await sleep(50);
+		  } catch (e) {
+		      error=".";
+		  }
 	      }
 	      if(error!="Success") {
 		  document.getElementById("modaltext").innerHTML="Box Not Found";
@@ -1445,8 +1480,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  var esperando=null;
 		  init_OTProcessed=0;
 		  while (init_OTProcessed!=255) {
-		      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
 		      try {
+			  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
 			  await sleep (500);
 			  console.log({cadenaEval});
 			  eval(cadenaEval);
