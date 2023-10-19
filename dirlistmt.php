@@ -14,7 +14,17 @@ function listdiraux($dir, &$files) { $handle = opendir($dir);
     } closedir($handle);
 }
 $l=listdir("msgs/");
+$maxl=0;
+$lenD=1;
 foreach ($l as &$m) {
-print("$m\n");
+    if(strlen($m)>$maxl) $maxl=strlen($m);
+    $lenD++;
 }
+$i=1;
+echo ("int main() {\nunsigned char files[$lenD][$maxl]={");
+foreach ($l as &$m) {
+    echo("\"$m\",");
+    $i++;
+}
+echo("\"END\"};\n}");
 echo "\n";
