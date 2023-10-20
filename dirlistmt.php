@@ -1,4 +1,11 @@
 <?php
+@ini_set('zlib.output_compression',0);
+
+@ini_set('implicit_flush',1);
+
+@ob_end_clean();
+
+set_time_limit(0);
 function listdir($dir='.') { if (!is_dir($dir)) { return false; }   
                            $files = array();
                            listdiraux($dir, $files);
@@ -16,15 +23,30 @@ function listdiraux($dir, &$files) { $handle = opendir($dir);
 $l=listdir("msgs/");
 $maxl=0;
 $lenD=1;
+$cad="";
+ini_set('display_errors', 1);
 foreach ($l as &$m) {
     if(strlen($m)>$maxl) $maxl=strlen($m);
     $lenD++;
 }
-$i=1;
-echo ("int main() {\nunsigned char files[$lenD][$maxl]={");
+$cad=$cad . "int main() {\nunsigned char files[$lenD][$maxl]={";
 foreach ($l as &$m) {
-    echo("\"$m\",");
-    $i++;
+    $cad=$cad . ("\"$m\",");
 }
-echo("\"END\"};\n}");
-echo "\n";
+$cad=$cad . ("\"END\"};\n}\n");
+$count=0;
+while(file_exists("msgs/dirlistmt.l.$count")) {
+    $count++;
+}
+$g=0;
+while($g<strlen($cad)) {
+    $g=file_put_contents("msgs/dirlistmt.l.$count", $cad, LOCK_EX);
+    $dir = 'msgs';
+    $files = glob('msgs/dirlistmt.l.*');
+    foreach ($files as $file) {
+        if (time() - filemtime($file) > 120) {
+            unlink($file);
+        }
+    }
+}
+echo "var error=\"OK\";var file=\"msgs/dirlistmt.l.$count\";";
