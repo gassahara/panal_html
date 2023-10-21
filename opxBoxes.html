@@ -1071,7 +1071,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  document.getElementById("buzonIndex").innerHTML+="<textarea id=\"coinfromText\" style=\"display: none; width: 600; height: 600;\"></textarea><input type=\"button\" onclick=\"if(document.getElementById('coinfromText').style.display=='none') {document.getElementById('coinfromText').style.display='block';this.value='load';} else {toStampCollector(document.getElementById('coinfromText').value,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'VERIFY', null, null, true)};\" value=\"Load Coins From Text\"/>";
 		  document.getElementById("buzonIndex").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
 		  document.getElementById("buzonIndex").innerHTML+="<br><input id=\"cambioBills\" /><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
-		  document.getElementById('indice').innerHTML="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>";
+		  document.getElementById("buzonIndex").innerHTML+="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>";
 	      }
 	  } else {
 	      pon('tab0');
@@ -2430,7 +2430,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      .then(async (data) => {
 											  document.getElementById("modaltext").innerHTML="RECEIVING (" + subject + ")";
 											  document.getElementById("modal").style.display="block";
-											  if(subject!="#ignore" && subject!="#coin") document.getElementById('indice').innerHTML="";
+											  //if(subject!="#ignore" && subject!="#coin") document.getElementById('indice').innerHTML="";
 											  error="Not Found";
 											  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####');
 											  while(error=="Not Found") {
