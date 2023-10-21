@@ -1802,10 +1802,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      await sleep (1000);
 									      eval(cadenaEval);
 									      if(!cadenaEval.length) {
-										  continua=true;
+										  error=".";
 										  continue;
 									      }
-
 									  } catch(e){
 									      error=".";
 									  }
@@ -3214,10 +3213,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  document.getElementById("modaltext").innerHTML="Pulling Info... <br>" + symbols[symbol];
 		  document.getElementById("modal").style.display="block";
 		  symbol++;
+		  try {
 		  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
 		  error=".";
 		  await sleep (500);
-		  try {
 		      eval(cadenaEval);
 		      if(!cadenaEval.length) {
 			  continua=true;
