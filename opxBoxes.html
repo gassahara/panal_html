@@ -729,9 +729,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      var esperando=null;
 		      init_OTProcessed=0;
 		      while (init_OTProcessed!=255) {
-				      try {
-			  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
-			  await sleep (500);
+			  try {
+			      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
+			      await sleep (500);
 			      console.log({cadenaEval});
 			      eval(cadenaEval);
 			  } catch (e) {
@@ -755,9 +755,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      continua=true;
 			      while (continua) {
 				  error=".";
-				      try {
-				  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonA)+'.js&d=L&date=' + (new Date()).getTime())).text();
-				  await sleep(500);
+				  try {
+				      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonA)+'.js&d=L&date=' + (new Date()).getTime())).text();
+				      await sleep(500);
 				      eval(cadenaEval);
 				  } catch (e) {
 				      continua=true;
@@ -1726,9 +1726,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      document.getElementById("modal").style.display="block";
 								      error=".";
 								      while (error==".") {
-									  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime())).text();
-									  await sleep (1000);
 									  try {
+									      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime())).text();
+									      await sleep (1000);
 									      eval(cadenaEval);
 									  } catch(e){
 									      error=".";
@@ -1950,9 +1950,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      document.getElementById("modaltext").innerHTML="Pulling Info <br>"+symbols[symbol];
 	      document.getElementById("modal").style.display="block";
 	      symbol+=1;
-	      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
-	      await sleep (500);
 	      try {
+		  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
+		  await sleep (500);
 		  eval(cadenaEval);
 	      } catch (e) {
 		  init_OTProcessed=0;
@@ -1978,9 +1978,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  while(error==".") {
 			      document.getElementById("modaltext").innerHTML="Finding if ", encodeURI(buzon), 'is Available';
 			      document.getElementById("modal").style.display="block";
-			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime())).text();
-			      await sleep (500);
 			      try {
+				  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime())).text();
+				  await sleep (500);
 				  eval(cadenaEval);
 			      } catch (e) {
 				  error=".";
@@ -2036,9 +2036,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      document.getElementById("modaltext").innerHTML="Waiting for Safe <br>"+symbols[symbol];
 						      document.getElementById("modal").style.display="block";
 						      symbol++;
-						      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'&date=' + (new Date()).getTime())).text();
-						      await sleep (500);
 						      try {
+							  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'&date=' + (new Date()).getTime())).text();
+							  await sleep (500);
 							  eval(cadenaEval);
 							  if(error=="Not Found") {
 							      continua=true;
@@ -2093,9 +2093,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      error=".";
 		      esperando=0;
 		      while (error==".") {
-			  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'.js&date=' + (new Date()).getTime())).text();
-			  await sleep (500);
 			  try {
+			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'.js&date=' + (new Date()).getTime())).text();
+			      await sleep (500);
 			      eval(cadenaEval);
 			  } catch (e) {
 			      error=".";
@@ -2120,9 +2120,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
 			      document.getElementById("modal").style.display="block";
 			      symbol+=1;
-			      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
-			      await sleep(500);
 			      try {
+				  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
+				  await sleep(500);
 				  eval(cadenaEval);
 			      } catch (e) {
 				  error=null;
@@ -2153,9 +2153,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
 					  document.getElementById("modal").style.display="block";
 					  symbol+=1;
-					  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonE)+'.js&k=1&date=' + (new Date()).getTime())).text();
-					  await sleep(500);
 					  try {
+					      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonE)+'.js&k=1&date=' + (new Date()).getTime())).text();
+					      await sleep(500);
 					      eval(cadenaEval);
 					  } catch (e) {
 					      error=".";
@@ -2191,9 +2191,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							      document.getElementById("modaltext").innerHTML="Loading Public Key<br>" + symbols[symbol];
 							      document.getElementById("modal").style.display="block";
 							      symbol++;
-							      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime())).text();
-							      await sleep(500);
 							      try {
+								  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime())).text();
+								  await sleep(500);
 								  eval(cadenaEval);
 							      } catch (e) {
 								  error=".";
