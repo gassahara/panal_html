@@ -1760,7 +1760,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      continua=true;
 										      continue;
 										  }
-
 										  contador=count-1;
 										  continua=false;
 									      } catch (e) {
@@ -1769,8 +1768,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  }
 									  document.getElementById("modaltext").innerHTML="Last Message is <br>" + count;
 									  document.getElementById("modal").style.display="block";
-									  
-									  //alert("CONTADOR"+contador);
+
 									  document.getElementById("modaltext").innerHTML="Continue Loading";
 									  document.getElementById("modal").style.display="block";
 									  nameofMessage=await digestMessage(address+""+contador);
@@ -1879,9 +1877,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      
 										      document.getElementById('indice').coinValue=coinObj.value;
 										      document.getElementById('indice').coins=coinObj.coins;
-										      document.getElementById("boxBalance").innerHTML=document.getElementById('indice').coinValue;										      
+										      document.getElementById("boxBalance").innerHTML=document.getElementById('indice').coinValue;
+										      document.getElementById('indice').innerHTML="<input type=\"button\" value=\"RETIRAR\" onclick=\"toStampCollector(tokens=document.getElementById(\'indice\').coins, " + buzonOriginal + "," + address + "," + "\'CONSOLIDATE\', null, null, true);\" /> " + document.getElementById('indice').innerHTML;
 										      boxesignoredadd(nameofMessage+";");
-										      console.log({contador, coinObj, nameofMessage},contentB.data["msg"],  "verify");
 										      var msgTemporal="";
 										      for (let i = 0; i < boxesignored.length; i++) {
 											  msgTemporal += boxesignored[i]+';';
@@ -1890,7 +1888,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  }
 										  if(subject=="#coin" && contentB.data["subject"].trim()=="verify") {
 										      verifyString+=nameofMessage+";"
-										      console.log({subject}, contentB.data["subject"], "verificationmessage", contentB.data["msg"], coins);
 										      var coinObj=parseCoin(contentB.data["msg"], coins);
 										      coinsValue=coinObj.value;
 										      document.getElementById("coins").innerHTML=coinsValue;
@@ -1908,13 +1905,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      boxesignoredadd(contentB.data["msg"]);
 										  }
 									      }
-									      if(subject.trim()!="#ignore" && !(subject!="#coin" && contentB.data["subject"].trim().substring(0, ("#sendcoin").length)=="#sendcoin") && !(subject=="#coin" && contentB.data["subject"].trim().substring(0, ("consolidate").length)=="consolidate") && ! (subject=="#coin" && contentB.data["subject"].trim()=="verify")) document.getElementById("indice").innerHTML+="<p><pre>" + contentB.data["msg"] + "</pre></p>";
+									      if(subject.trim()!="#ignore" && !(subject!="#coin" && contentB.data["subject"].trim().substring(0, ("#sendcoin").length)=="#sendcoin") && !(subject=="#coin" && contentB.data["subject"].trim().substring(0, ("consolidate").length)=="consolidate") && ! (contentB.data["subject"].trim()=="verify")) document.getElementById("indice").innerHTML+="<p><pre>" + contentB.data["msg"] + "</pre></p>";
 									  }
 								      } else {
 									  console.log("DONE", {contador});
 								      }
-								      esperando=0;
-								      console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", {nameofMessage, address, contador, esperando, error, name});
 								      nameofMessage=null;
 								      if(subject=="#ignore") {
 									  error="Not Found";
@@ -1954,6 +1949,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      }
 								      console.log({subjBox: subject});
 								      toStampCollector(consolidate, buzonOriginal, address, 'VERIFY', null, subject, isBoxCoin);
+								      
 								  }
 								  document.getElementById(buzonOriginal+"Button").disabled=0
 								  resolve({error:"Success"});
