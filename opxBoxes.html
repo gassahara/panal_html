@@ -1797,11 +1797,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  try {
 									      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime())).text();
 									      await sleep (1000);
-									      eval(cadenaEval);
 									      if(!cadenaEval.length) {
 										  error=".";
 										  continue;
 									      }
+									      eval(cadenaEval);
 									  } catch(e){
 									      error=".";
 									  }
