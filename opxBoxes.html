@@ -294,6 +294,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      try {
 					  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?e=I&fname='+encodeURI(buzonFromFieldPublic)+'.js&date=' + (new Date()).getTime())).text();
 					  eval(cadenaEval);
+					  if(!cadenaEval.length) {
+					      continua=true;
+					      continue;
+					  }
+
 				      } catch (e) {
 					  error=".";
 				      }
@@ -734,6 +739,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      await sleep (500);
 			      console.log({cadenaEval});
 			      eval(cadenaEval);
+			      if(!cadenaEval.length) {
+				  continua=true;
+				  continue;
+			      }
+
 			  } catch (e) {
 			      init_OTProcessed=0;
 			  }
@@ -759,6 +769,15 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonA)+'.js&d=L&date=' + (new Date()).getTime())).text();
 				      await sleep(500);
 				      eval(cadenaEval);
+				      if(!cadenaEval.length) {
+					  continua=true;
+					  continue;
+				      }
+
+				      if(!cadenaEval.length) {
+					  continua=true;
+					  continue;
+				      }
 				  } catch (e) {
 				      continua=true;
 				      continue;
@@ -815,6 +834,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      symbol+=1;
 						      await sleep (500);
 						      eval(cadenaEval);
+						      if(!cadenaEval.length) {
+							  continua=true;
+							  continue;
+						      }
+
 						  } catch (e) {
 						      error=".";
 						  }
@@ -842,6 +866,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime())).text();
 							  await sleep (500);
 							  eval(cadenaEval);
+							  if(!cadenaEval.length) {
+							      continua=true;
+							      continue;
+							  }
+
 							  console.log({error});
 							  eval(atob(content));
 							  continua=false;
@@ -865,8 +894,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  if(cadena.data["subject"]) boxes[name]["subject"]=cadena.data["subject"];
 							  if(cadena.data["date"]) boxes[name]["date"]=cadena.data["date"];
 							  cadena=cadena.data["msg"];
-						      console.log({cadena});
-						      ////alert("F");
+							  console.log({cadena});
+							  ////alert("F");
 							  var header=cadena.substring(0, cadena.indexOf("\n\n")+1);
 							  var headerRest=header;
 							  while(headerRest.indexOf("\n")>1) {
@@ -975,6 +1004,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&nocontent=true&date=' + (new Date()).getTime())).text();
 			      await sleep (500);
 			      eval(cadenaEval);
+			      if(!cadenaEval.length) {
+				  continua=true;
+				  continue;
+			      }
+
 			  } catch (e) {
 			      error="."
 			  }
@@ -1017,6 +1051,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime())).text();
 			      await sleep (500);
 			      eval(cadenaEval);
+			      if(!cadenaEval.length) {
+				  continua=true;
+				  continue;
+			      }
+
 			      console.log("Setting address for Coin Box", encodeURI(address), '#############');
 			  } catch (e) {
 			      error="."
@@ -1032,7 +1071,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  document.getElementById("buzonIndex").innerHTML+="<textarea id=\"coinfromText\" style=\"display: none; width: 600; height: 600;\"></textarea><input type=\"button\" onclick=\"if(document.getElementById('coinfromText').style.display=='none') {document.getElementById('coinfromText').style.display='block';this.value='load';} else {toStampCollector(document.getElementById('coinfromText').value,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'VERIFY', null, null, true)};\" value=\"Load Coins From Text\"/>";
 		  document.getElementById("buzonIndex").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
 		  document.getElementById("buzonIndex").innerHTML+="<br><input id=\"cambioBills\" /><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
-			  document.getElementById('indice').innerHTML="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>";
+		  document.getElementById('indice').innerHTML="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>";
 	      }
 	  } else {
 	      pon('tab0');
@@ -1114,9 +1153,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
 		  try {
-		  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
-		  eval (cadenaEval);
-		  console.log({error});
+		      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
+		      eval (cadenaEval);
+		      console.log({error});
 		      await sleep (500);
 		  } catch (e) {
 		      init_OTProcessed=0;
@@ -1284,9 +1323,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
 		  try {
-		  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
-		  eval(cadenaEval);
-		  console.log({error});
+		      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
+		      eval(cadenaEval);
+		      if(!cadenaEval.length) {
+			  continua=true;
+			  continue;
+		      }
+
+		      console.log({error});
 		      await sleep (500);
 		  } catch (e) {
 		      init_OTProcessed=0;
@@ -1373,6 +1417,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      var cadenaEval=await (await fetch(remotepath + "/flastfile.php"+'?sha='+address+'&count=1')).text();
 		      await sleep(500);
 		      eval(cadenaEval);
+		      if(!cadenaEval.length) {
+			  continua=true;
+			  continue;
+		      }
+
 		  } catch (e) {
 		      error=".";
 		  }
@@ -1415,6 +1464,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  while (error==".") {
 				      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime())).text();
 				      eval(cadenaEval);
+				      if(!cadenaEval.length) {
+					  continua=true;
+					  continue;
+				      }
+
 				      if(symbol>=symbols.length) symbol=0;
 				      document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + contador + "<br>" + symbols[symbol];
 				      symbol+=1;
@@ -1462,6 +1516,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  try {
 		      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(address)+'&date=' + (new Date()).getTime())).text();
 		      eval(cadenaEval);
+		      if(!cadenaEval.length) {
+			  continua=true;
+			  continue;
+		      }
+
 		      console.log(".......................", encodeURI(address), '#############');
 		      await sleep(50);
 		  } catch (e) {
@@ -1485,6 +1544,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  await sleep (500);
 			  console.log({cadenaEval});
 			  eval(cadenaEval);
+			  if(!cadenaEval.length) {
+			      continua=true;
+			      continue;
+			  }
+
 		      } catch (e) {
 			  init_OTProcessed=0;
 		      }
@@ -1515,32 +1579,32 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      document.getElementById("modal").style.display="block";
 				      symbol+=1;
 				      try {
-				      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(bzon)+'.js&date=' + (new Date()).getTime())).text();
-				      await sleep (500);
-				      eval (cadenaEval);
-				      if(error=="Not Found") {
-					  error="Incorrect User Data";
-					  resolve({error});
-					  return(false);
-				      } else {
-					  try {
-					      while(len1!=len2 || !content) {
-						  if(content) len2=content.length;
-						  await sleep(500);
-						  console.log({error});
-						  if(symbol>=symbols.length) symbol=0;
-						  document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
-						  document.getElementById("modal").style.display="block";
-						  symbol+=1;
-						  if(content) len1=content.length;
+					  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(bzon)+'.js&date=' + (new Date()).getTime())).text();
+					  await sleep (500);
+					  eval (cadenaEval);
+					  if(error=="Not Found") {
+					      error="Incorrect User Data";
+					      resolve({error});
+					      return(false);
+					  } else {
+					      try {
+						  while(len1!=len2 || !content) {
+						      if(content) len2=content.length;
+						      await sleep(500);
+						      console.log({error});
+						      if(symbol>=symbols.length) symbol=0;
+						      document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
+						      document.getElementById("modal").style.display="block";
+						      symbol+=1;
+						      if(content) len1=content.length;
+						  }
+						  console.log(atob(content));
+						  eval(atob(content));
+						  continua=false;
+					      } catch (e) {
+						  continua=true;
 					      }
-					      console.log(atob(content));
-					      eval(atob(content));
-					      continua=false;
-					  } catch (e) {
-					      continua=true;
 					  }
-				      }
 				      } catch (e) {
 					  continua=true;
 				      }
@@ -1692,6 +1756,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      try {
 										  await sleep (500);
 										  eval(cadenaEval);
+										  if(!cadenaEval.length) {
+										      continua=true;
+										      continue;
+										  }
+
 										  contador=count-1;
 										  continua=false;
 									      } catch (e) {
@@ -1734,6 +1803,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessage)+'&date=' + (new Date()).getTime())).text();
 									      await sleep (1000);
 									      eval(cadenaEval);
+									      if(!cadenaEval.length) {
+										  continua=true;
+										  continue;
+									      }
+
 									  } catch(e){
 									      error=".";
 									  }
@@ -1909,7 +1983,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	  });
       }
-										     
+      
       function boxesignoredadd(msg) {
 	  msg=msg.replace(/\n/g, ";");
 	  boxesignored=boxesignored.concat(msg.split(';'));
@@ -1958,6 +2032,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
 		  await sleep (500);
 		  eval(cadenaEval);
+		  if(!cadenaEval.length) {
+		      continua=true;
+		      continue;
+		  }
+
 	      } catch (e) {
 		  init_OTProcessed=0;
 	      }
@@ -1986,6 +2065,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime())).text();
 				  await sleep (500);
 				  eval(cadenaEval);
+				  if(!cadenaEval.length) {
+				      continua=true;
+				      continue;
+				  }
+
 			      } catch (e) {
 				  error=".";
 			      }
@@ -2044,6 +2128,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'&date=' + (new Date()).getTime())).text();
 							  await sleep (500);
 							  eval(cadenaEval);
+							  if(!cadenaEval.length) {
+							      continua=true;
+							      continue;
+							  }
+
 							  if(error=="Not Found") {
 							      continua=true;
 							      continue;
@@ -2101,6 +2190,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonEnc)+'.js&date=' + (new Date()).getTime())).text();
 			      await sleep (500);
 			      eval(cadenaEval);
+			      if(!cadenaEval.length) {
+				  continua=true;
+				  continue;
+			      }
+
 			  } catch (e) {
 			      error=".";
 			  }
@@ -2128,6 +2222,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
 				  await sleep(500);
 				  eval(cadenaEval);
+				  if(!cadenaEval.length) {
+				      continua=true;
+				      continue;
+				  }
+
 			      } catch (e) {
 				  error=null;
 			      }
@@ -2161,6 +2260,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonE)+'.js&k=1&date=' + (new Date()).getTime())).text();
 					      await sleep(500);
 					      eval(cadenaEval);
+					      if(!cadenaEval.length) {
+						  continua=true;
+						  continue;
+					      }
+
 					  } catch (e) {
 					      error=".";
 					  }
@@ -2199,6 +2303,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime())).text();
 								  await sleep(500);
 								  eval(cadenaEval);
+								  if(!cadenaEval.length) {
+								      continua=true;
+								      continue;
+								  }
+
 							      } catch (e) {
 								  error=".";
 							      }
@@ -2242,6 +2351,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      await sleep(500);
 									      try {
 										  eval(cadenaEval);
+										  if(!cadenaEval.length) {
+										      continua=true;
+										      continue;
+										  }
+
 									      } catch (e) {
 										  error=".";
 									      }
@@ -2260,6 +2374,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      await sleep(500);
 									      try {
 										  eval(cadenaEval);
+										  if(!cadenaEval.length) {
+										      continua=true;
+										      continue;
+										  }
+
 									      } catch (e) {
 										  error=".";
 									      }
@@ -2288,6 +2407,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      await sleep(500);
 										      try {
 											  eval(cadenaEval);
+											  if(!cadenaEval.length) {
+											      continua=true;
+											      continue;
+											  }
+
 										      } catch (e) {
 											  error=null;
 										      }
@@ -2323,6 +2447,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											      await sleep (500);
 											      try {
 												  eval(cadenaEval);
+												  if(!cadenaEval.length) {
+												      continua=true;
+												      continue;
+												  }
+
 											      } catch (e) {
 												  error="Not Found";
 											      }
@@ -2380,6 +2509,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      await sleep (500);
 			      try {
 				  eval(cadenaEval);
+				  if(!cadenaEval.length) {
+				      continua=true;
+				      continue;
+				  }
+
 			      } catch (e) {
 				  error=".";
 			      }
@@ -2407,6 +2541,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  await sleep (500);
 				  try {
 				      eval(cadenaEval);
+				      if(!cadenaEval.length) {
+					  continua=true;
+					  continue;
+				      }
+
 				  } catch (e) {
 				      init_OTProcessed=0;
 				  }				  
@@ -2439,6 +2578,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  await sleep (500);
 					  try {
 					      eval(cadenaEval);
+					      if(!cadenaEval.length) {
+						  continua=true;
+						  continue;
+					      }
+
 					  } catch (e) {
 					      error=".";
 					  }
@@ -2473,6 +2617,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      await sleep (500);
 						      try {
 							  eval(cadenaEval);
+							  if(!cadenaEval.length) {
+							      continua=true;
+							      continue;
+							  }
+
 						      } catch (e) {
 							  error=".";
 						      }
@@ -2500,6 +2649,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  await sleep (500);
 							  try {
 							      eval(cadenaEval);
+							      if(!cadenaEval.length) {
+								  continua=true;
+								  continue;
+							      }
+
 							  } catch (e) {
 							      error=".";
 							  }
@@ -2524,6 +2678,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  await sleep (500);
 								  try {
 								      eval(cadenaEval);
+								      if(!cadenaEval.length) {
+									  continua=true;
+									  continue;
+								      }
+
 								  } catch (e) {
 								      error=".";
 								  }
@@ -2556,6 +2715,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
 									      try {
 										  eval(cadenaEval);
+										  if(!cadenaEval.length) {
+										      continua=true;
+										      continue;
+										  }
+
 									      } catch (e) {
 										  await sleep (500);
 										  init_OTProcessed=0;
@@ -2671,6 +2835,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      await sleep (500);
 			      try {
 				  eval(cadenaEval);
+				  if(!cadenaEval.length) {
+				      continua=true;
+				      continue;
+				  }
+
 			      } catch (e) {
 				  error=".";
 			      }
@@ -2707,6 +2876,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					      await sleep (500);
 					      try {
 						  eval(cadenaEval);
+						  if(!cadenaEval.length) {
+						      continua=true;
+						      continue;
+						  }
+
 					      } catch (e) {
 						  error=".";
 					      }
@@ -2737,6 +2911,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      await sleep (500);
 						      try {
 							  eval(cadenaEval);
+							  if(!cadenaEval.length) {
+							      continua=true;
+							      continue;
+							  }
+
 						      } catch (e) {
 							  init_OTProcessed=0;
 						      }
@@ -2771,6 +2950,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							      await sleep (500);
 							      try {
 								  eval(cadenaEval);
+								  if(!cadenaEval.length) {
+								      continua=true;
+								      continue;
+								  }
+
 							      } catch (e) {
 								  error=".";
 							      }
@@ -2808,6 +2992,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  await sleep (500);
 									  try {
 									      eval(cadenaEval);
+									      if(!cadenaEval.length) {
+										  continua=true;
+										  continue;
+									      }
+
 									  } catch (e) {
 									      error=".";
 									  }
@@ -2834,6 +3023,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      await sleep (500);
 									      try {
 										  eval(cadenaEval);
+										  if(!cadenaEval.length) {
+										      continua=true;
+										      continue;
+										  }
+
 									      } catch (e) {
 										  error=".";
 									      }
@@ -2879,6 +3073,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 												  await sleep (500);
 												  try {
 												      eval(cadenaEval);
+												      if(!cadenaEval.length) {
+													  continua=true;
+													  continue;
+												      }
+
 												  } catch (e) {
 												      init_OTProcessed=0;
 												  }
@@ -3024,12 +3223,17 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  await sleep (500);
 		  try {
 		      eval(cadenaEval);
+		      if(!cadenaEval.length) {
+			  continua=true;
+			  continue;
+		      }
+
 		  } catch (e) {
 		      init_OTProcessed=0;
 		  }
 	      }
-		  document.getElementById("modaltext").innerHTML="Pulled... <br>" + symbols[symbol];
-		  document.getElementById("modal").style.display="block";
+	      document.getElementById("modaltext").innerHTML="Pulled... <br>" + symbols[symbol];
+	      document.getElementById("modal").style.display="block";
 	      resolve([iv_OTP, OTP, OTP_resource]);
 	  });
       }
@@ -3558,5 +3762,5 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	</td>
       </tr>
     </table>
-   </body>
+  </body>
 </html>
