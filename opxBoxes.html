@@ -768,12 +768,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  try {
 				      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonA)+'.js&d=L&date=' + (new Date()).getTime())).text();
 				      await sleep(500);
-				      eval(cadenaEval);
 				      if(!cadenaEval.length) {
 					  continua=true;
 					  continue;
 				      }
-
+				      eval(cadenaEval);
 				      if(!cadenaEval.length) {
 					  continua=true;
 					  continue;
@@ -851,7 +850,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  boxes[name]["status"]="reading";
 						  var message=atob(content);
 						  console.log({message});
-						  ////alert("C");
 						  buzonPublic=await digestMessage(buzonA+".jspublic"+"\n");
 						  len1=0;
 						  len2=1;
@@ -865,12 +863,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      try{
 							  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime())).text();
 							  await sleep (500);
-							  eval(cadenaEval);
 							  if(!cadenaEval.length) {
 							      continua=true;
 							      continue;
 							  }
-
+							  eval(cadenaEval);
 							  console.log({error});
 							  eval(atob(content));
 							  continua=false;
