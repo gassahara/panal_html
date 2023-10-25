@@ -1741,7 +1741,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  }
 								  while(error!="Not Found") {
 								      if(!setContador) nameofMessage=null;
-								      if(subject=="#ignore") {
 									  continua=1;
 									  var contador=1;
 									  while(continua) {
@@ -1768,7 +1767,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  document.getElementById("modal").style.display="block";
 
 									  document.getElementById("modaltext").innerHTML="Continue Loading";
-									  document.getElementById("modal").style.display="block";
+								      document.getElementById("modal").style.display="block";
+								      if(subject=="#ignore") {
 									  nameofMessage=await digestMessage(address+""+contador);
 									  nameofMessage=nameofMessage+".js";
 									  console.log("Last name ", encodeURI(nameofMessage), ' in Slot ', contador);
@@ -1791,7 +1791,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      }
 								      console.log({address, nameofMessage, contador, boxesignored});
 								      setContador=0;
-								      document.getElementById("modaltext").innerHTML="Loading " + subject + " Message<br>" + contador;
+								      document.getElementById("modaltext").innerHTML="Loading " + subject + " Message<br>" + contador + "/" + (count-1);
 								      document.getElementById("modal").style.display="block";
 								      error=".";
 								      while (error==".") {
