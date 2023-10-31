@@ -93,7 +93,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var t=null;
       var scro=null;
       var iv=new Uint8Array();
-      var remotepath="http://127.0.0.1/"; //"https://curare2019.ddns.net/";
+      var remotepath="https://curare2019.ddns.net/";
       var esperaencrgrados=null;
       var longitud=0;
       var latitud=0;
@@ -1763,7 +1763,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  continua=true;
 									      }
 									  }
-									  document.getElementById("modaltext").innerHTML="Last Message is <br>" + count;
+									  document.getElementById("modaltext").innerHTML="Last Message is <br>" + contador;
 									  document.getElementById("modal").style.display="block";
 
 									  document.getElementById("modaltext").innerHTML="Continue Loading";
@@ -1791,7 +1791,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      }
 								      console.log({address, nameofMessage, contador, boxesignored});
 								      setContador=0;
-								      document.getElementById("modaltext").innerHTML="Loading " + subject + " Message<br>" + contador + "/" + (count-1);
+								      document.getElementById("modaltext").innerHTML="Loading " + subject + " Message<br>" + contador;
 								      document.getElementById("modal").style.display="block";
 								      error=".";
 								      while (error==".") {

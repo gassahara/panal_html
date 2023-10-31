@@ -1,10 +1,7 @@
 <?php
 @ini_set('zlib.output_compression',0);
-
 @ini_set('implicit_flush',1);
-
 @ob_end_clean();
-
 set_time_limit(0);
 function listdir($dir='.') { if (!is_dir($dir)) { return false; }   
                            $files = array();

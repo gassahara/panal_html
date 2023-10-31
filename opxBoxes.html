@@ -1277,7 +1277,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  var stampcoins=[];
 	  if(buzonCoin) stampcoins=coins;
 	  else stampcoins=document.getElementById('indice').coins;
-	  //	  console.log({coins,stampcoins, buzonCoin}, document.getElementById('indice').coins);
 	  if(text==null) {
 	      c=0;
 	      for(var key in stampcoins) {
@@ -1381,7 +1380,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  if (c<tokens.length) cadenatoInsert+=",";
 	      }
 	      cadenatoInsert+="};";
-	      //	      console.log({cadenatoInsert});
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
 	      cadenatoInsert="long stamps_uid3["+tokens.length+"]={";
 	      c=0;
@@ -1401,7 +1399,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	      cadenatoInsert+="};";
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
-	      //	      console.log(codeforRegister);
 	      var nameforMessage=""
 	      var contador=0;
 	      error=".";
@@ -1874,7 +1871,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      document.getElementById('indice').coinValue=coinObj.value;
 										      document.getElementById('indice').coins=coinObj.coins;
 										      document.getElementById("boxBalance").innerHTML=document.getElementById('indice').coinValue;
-										      document.getElementById('indice').innerHTML="<input type=\"button\" value=\"RETIRAR\" onclick=\"toStampCollector(document.getElementById(\'indice\').coins, \'" + buzonOriginal + "\',\'" + address + "\'," + "\'CONSOLIDATE\', null, null, true);\" /> " + document.getElementById('indice').innerHTML;
+										      document.getElementById('indice').innerHTML="<input type=\"button\" value =\"RETIRAR\" onclick=\"toStampCollector(document.getElementById(\'indice\').coins, \'" + buzonOriginal + "\',\'" + address + "\'," + "\'CONSOLIDATE\', null, null, false);\" /> " + document.getElementById('indice').innerHTML;
 										      boxesignoredadd(nameofMessage+";");
 										      var msgTemporal="";
 										      for (let i = 0; i < boxesignored.length; i++) {
