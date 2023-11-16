@@ -110,6 +110,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var buzonforGameis="RUEDA";
       var gameBuzon=[];
       var continua=false;
+      var coinbox=null;
 
       const colors = [
 	  ["red", "#FF0000"],
@@ -1066,6 +1067,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  await RSA_crearBuzon(buzon, "#coin");
 		  return true;
 	      } else {
+		  if(!coinbox) coinbox=boxes[subjectisCoin[subjectisCoin.length-1]]["name"];
 		  document.getElementById("buzonIndex").innerHTML+="<textarea id=\"coinfromText\" style=\"display: none; width: 600; height: 600;\"></textarea><input type=\"button\" onclick=\"if(document.getElementById('coinfromText').style.display=='none') {document.getElementById('coinfromText').style.display='block';this.value='load';} else {toStampCollector(document.getElementById('coinfromText').value,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'VERIFY', null, null, true); document.getElementById('coinfromText').style.display='none'; document.getElementById('coinfromText').style.display='block';this.value='Load Coins From Text'; };\" value=\"Load Coins From Text\"/>";
 		  document.getElementById("buzonIndex").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
 		  document.getElementById("buzonIndex").innerHTML+="<br><input id=\"cambioBills\" /><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
@@ -1116,26 +1118,30 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  return tokens;
       }
       // - - - -
-      async function toStampContractBox(buzon, command, ammountinTokens) {
+      async function toStampContractBox(buzon, command, ammountinTokens, buzonCoin=null) {
 	  document.getElementById("modaltext").innerHTML="Collecting Tokens";
 	  document.getElementById("modal").style.display="block";
 	  if(coinsValue*1<ammountinTokens*1) {
-	      return({error: "Insuficient Funds", data: null});
+	      document.getElementById("modaltext").innerHTML="Insuficient Funds";
+	      document.getElementById("modal").style.display="block";
 	  }
 	  var ammountArray=new Array(1000000, 500000, 250000, 200000, 125000, 100000, 50000, 25000, 20000, 12500, 10000, 5000, 2500, 2000, 1250, 1000, 500, 250, 200, 125, 100, 50, 25, 20, 10, 5, 2, 1);
 	  var d=0
 	  var c=0;
 	  var ammountforTokens=ammountinTokens*1;
+	  var stampcoins=[];
+	  if(buzonCoin) stampcoins=coins;
+	  else stampcoins=document.getElementById('indiceTab').coins;
 	  var tokens=new Array();
 	  c=0;
 	  while(d<ammountArray.length) {
-	      for(var key in coins) {
-		  if(ammountArray[d]<=ammountforTokens*1 && coins[key]["verified"] && coins[key]["stamps_ammount"]*1==ammountArray[d]*1) {
-		      ammountforTokens=(ammountforTokens*1)-(coins[key]["stamps_ammount"]*1);
+	      for(var key in stampcoins) {
+		  if(ammountArray[d]<=ammountforTokens*1 && stampcoins[key]["verified"] && stampcoins[key]["stamps_ammount"]*1==ammountArray[d]*1) {
+		      ammountforTokens=(ammountforTokens*1)-(stampcoins[key]["stamps_ammount"]*1);
 		      tokens[c]=[];
-		      for(var keyc in coins[key]) {
-			  tokens[c][keyc]=coins[key][keyc];
-			  coins[key]["verified"]=false;
+		      for(var keyc in stampcoins[key]) {
+			  tokens[c][keyc]=stampcoins[key][keyc];
+			  stampcoins[key]["verified"]=false;
 		      }
 		      console.log({key});
 		      c++;
@@ -1837,10 +1843,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  
 									      }
 									      if(contentB.data["subject"]) {
-										  if(subject!="#coin" && contentB.data["subject"].trim()=="#sendcoin") {
+										  if(subject!="#coin" && (contentB.data["subject"].trim()=="#sendcoin" || contentB.data["subject"].trim()=="consolidate")) {
 										      consolidate+="\n"+contentB.data["msg"]+"\n";
 										  }
-										  if((subject=="#coin" && contentB.data["subject"].trim()=="consolidate") ) {
+										  if((subject=="#coin" && (contentB.data["subject"].trim()=="#sendcoin" || contentB.data["subject"].trim()=="consolidate")) ) {
 										      console.log({subject}, contentB.data["subject"], {contentB});
 										      if(prevcommand!=contentB.data["date"]) {
 											  var missingNameinIgonre=false;
@@ -1885,7 +1891,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      document.getElementById('indiceTab').coinValue=coinObj.value;
 										      document.getElementById('indiceTab').coins=coinObj.coins;
 										      document.getElementById("boxBalance").innerHTML=document.getElementById('indiceTab').coinValue;
-										      if(document.getElementById("boxBalance").innerHTML.indexOf("\"RETIRAR\"")<0) document.getElementById("boxBalance").innerHTML+=" &nbsp;  &nbsp; <input type=\"button\" value =\"RETIRAR\" onclick=\"toStampCollector(null, \'" + buzonOriginal + "\',\'" + address + "\'," + "\'CONSOLIDATE\', null, null, false);\" /> ";
+										      if(document.getElementById("boxBalance").innerHTML.indexOf("\"RETIRAR\"")<0) document.getElementById("boxBalance").innerHTML+=" &nbsp;  &nbsp;  <input id=\"ammountSendBox\" type=\"text\" /> <input type=\"button\" value =\"RETIRAR\" onclick=\"toStampContractBox(\'" + coinbox + "\', \'SEND\', document.getElementById('ammountSendBox').value);\" /> ";
 										      boxesignoredadd(nameofMessage+";");
 										      var msgTemporal="";
 										      for (let i = 0; i < boxesignored.length; i++) {
