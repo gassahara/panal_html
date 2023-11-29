@@ -93,7 +93,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var t=null;
       var scro=null;
       var iv=new Uint8Array();
-      var remotepath="http://127.0.0.1/"; //https://curare2019.ddns.net/";
+      var remotepath = window.location.href.split('//')[0] + '//' +  (window.location.href.split('//')[1]).split('/')[0];
       var esperaencrgrados=null;
       var longitud=0;
       var latitud=0;
@@ -1843,10 +1843,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  
 									      }
 									      if(contentB.data["subject"]) {
-										  if(subject!="#coin" && (contentB.data["subject"].trim()=="#sendcoin" || contentB.data["subject"].trim()=="consolidate")) {
+										  if(contentB.data["subject"].trim()=="#sendcoin"  || (subject!="#coin" && contentB.data["subject"].trim()=="consolidate")) {
 										      consolidate+="\n"+contentB.data["msg"]+"\n";
 										  }
-										  if((subject=="#coin" && (contentB.data["subject"].trim()=="#sendcoin" || contentB.data["subject"].trim()=="consolidate")) ) {
+										  if(subject=="#coin" && contentB.data["subject"].trim()=="consolidate") {
 										      console.log({subject}, contentB.data["subject"], {contentB});
 										      if(prevcommand!=contentB.data["date"]) {
 											  var missingNameinIgonre=false;
@@ -3413,22 +3413,21 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
   </head>
   <body style="background-color: #0c0c0b; width: 90%;">
     <div id="result"></div>
+    <div id="modal" style="position: absolute; background-color: red; z-index: 1000; display:none; width: 30%; height: 200px;  top: 25%; left: 40%; ">
+      <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;" id="modaltext"> MODAL </p>
+      <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;"><input id="modalok" style="border-width: 0; width: 60px; font-size: 14pt; font-weight: bolder; " type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"/> </p>
+    </div>
     <table style="width: 100%; font-family: Sans-Serif; font-size:18pt; background-color: '';">
       <tr>
 	<td>
-	  <span style="padding: 20px; background-color: #88e088; position: relative; left: 130px;"><a href="javascript:if(show) pon('tab1')">  Monedas</a></span>
+	  <span style="padding: 20px; background-color: #88e088; position: relative; left: 130px;"><a href="javascript:if(show) pon('tab1')">  Mensajes </a></span>
 	  <span style="padding: 20px; background-color: #8888e0; position: relative; left: 130px;;"><a href="javascript:if(show) {pon('tab2'); setscrgrados();}">Juego</a></span>
 	  <span id="coins" style="padding: 20px; background-color: #8888e0; position: relative; left: 130px;;"></span>
 	</td>
       </tr>
       <tr>
-	<td style="background-color: ''; width: 80%;">
-	  <div id="modal" style="position: absolute; background-color: red; z-index: 1000; display:none; width: 30%; height: 200px;  top: 25%; left: 40%; ">
-	    <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;" id="modaltext"> MODAL </p>
-	    <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;"><input id="modalok" style="border-width: 0; width: 60px; font-size: 14pt; font-weight: bolder; " type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"/> </p>
-	  </div>
-	  
-	  <div id="tab0" style="display:block; position:relative; left:25%; background-color: blue; width: 40%; padding: 20px;">
+	<td style="background-color: ''; width: 80%;">	  
+	  <div id="tab0" style="display:block; position:relative; top: 20%; left:30%; background-color: blue; width: 40%; padding: 20px;">
 	    <p id="colors">
  	      <span class="color" onClick="setColour(this.colour)"></span>
 	      <span class="color" onClick="setColour(this.colour);"></span>
@@ -3456,7 +3455,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	    <input id="ingrbutton" value="Ingresar" type="button" onclick="this.disabled=1; checkAndDisplayBuzon();"></input>
 	    <input id="regbutton" value="Registrar" type="button" onclick="this.disabled=1; crearBuzonRegistro();"></input>
 	  </div>
-	  <div id="tab1" style="display:none; position:absolute; left:5%; top:65%; background-color: #060807; width: 90%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+	  <div id="tab1" style="display:none; position:absolute; left:5%; background-color: #060807; width: 90%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
 	    <p style="background-color: white; width: 30%; padding: 20px; display: inline-block; float: left;">
 	      <span style="width: 100%; font-size: 20pt; ">
 		<input name="buzonName" id="buzonName" /> <input type="button" onclick="RSA_crearBuzon(document.getElementById('buzonName').value);" value="Crear Buzon" />
@@ -3464,9 +3463,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      <span id="buzonIndex" name="buzonIndex"></span>
 	    </p>
 	    <p id="indiceTab" style="background-color: white; display: inline-block; float: left; position: relative; left: 5%; width: 40%; padding: 20px; overflow: auto"> 	   
- <span style="width: 100%; font-size: 20pt; "> &nbsp; </span> </p>
+	      <span style="width: 100%; font-size: 20pt; "> &nbsp; </span> </p>
 	    <p id="indice" style="background-color: white; display: inline-block; float: left; position: relative; left: 5%; width: 40%; padding: 20px; overflow: auto">
- <span style="width: 100%; font-size: 20pt; "> &nbsp; ... </span> </p>
+	      <span style="width: 100%; font-size: 20pt; "> &nbsp; ... </span> </p>
 	    <input style="display: inline-block; float: right; position: relative; " type="button" value="Ocultar" onclick="if(this.value=='Mostrar') { document.getElementById('indice').style.display='inline'; this.value='Ocultar'; } else { document.getElementById('indice').style.display='none'; this.value='Mostrar'; }  "/>
 	  </div>
 	  <div id="tab2" border=1 style="display:none; position:absolute; left:5%; top:15%; background-color: #060807; width:60%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">

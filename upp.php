@@ -39,7 +39,7 @@ if ( $_POST["namo"] &&  $_POST["signature"] &&  $_POST["content"] &&  $_POST["da
                     echo "var error=\"Cannot write to file ($filename)\";";
                     exit;
                 }
-                echo "var error=\"Success, wrote ($somecontent) to file ($filename)\";";
+                echo "var error=\"Success, wrote ($content) to file ($filename)\";";
                 fclose($fp);
             echo "var error=\"Success\"; var filename=\"$filename\";";
         } else {
