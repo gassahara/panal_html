@@ -2,37 +2,237 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>TICKETS</title>
     <STYLE>
-      iframe {
-	  width: 250px;
-	  height: 50px;
-	  border-width: 0;
+
+      textarea {
+	  height: 500;
+	  width: 50%;
       }
-      a {
-	  text-decoration: none;
-	  color: blue;
-	  font-weight: bolder;
-      }
-      p, span {
-	  color: #d2a059;
-	  font-family: Sans-Serif;
-	  font-size: 18pt;
-      }
-      td {
-	  font-size: 20pt; padding: 5; text-align: center;
-      }
-      input {
-	  font-family: Sans-Serif;
-	  font-size: 18pt;
-	  
-      }
-      .color {
-          display: inline-block;
-          width: 50px;
-          height: 50px;
-          margin: 5px;
-          border: 1px solid black;
-	  background-color: white;
-      }
+    input[type="button"] {
+      background-color: #4dAd50;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+
+    .boxesList {
+	background-color: #5eAda0;
+	transition: background-color 0.3s;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%; /* 80% of the width */
+	max-width: 600px;
+	border-radius: 10px; /* Rounded corners */
+	white-space: pre-line;
+	overflow: scroll;
+	justify-content: center;
+	align-items: center;
+	color: white;
+    }
+
+    .boxesList:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    button:hover {
+	background-color: #2e8e41;
+    }
+
+    .chat-bubble {
+	position: relative;
+	display: inline-block;
+	margin: 0 10px;
+	padding: 20px;
+	width: 45%;
+	background-color: #c1c1f1;
+	border-radius: 10px;
+    }
+
+    .chat-bubble-text {
+	margin-bottom: 10px;
+	text-align: left;
+    }
+
+    .chat-bubble-time {
+	position: relative;
+	text-align: right;
+	bottom: -20px;
+	right: 0;
+	font-size: 12px;
+	color: #999;
+    }
+    
+    .modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0,0,0,0.4); /* Black with opacity */
+    }
+
+    /* Modal content */
+    .modal-content {
+	background-color: #fefefe;
+	display: flex;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%; /* 80% of the width */
+	max-width: 600px;
+	border-radius: 10px; /* Rounded corners */
+	white-space: pre-line;
+	overflow: scroll;
+	justify-content: center;
+	align-items: center;
+    }
+
+    /* The close button */
+    .close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+    }
+
+    .pagination button {
+	background-color: #f1f1f1;
+	float: left;
+	border: 1px solid #ccc;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+	border-radius: 12px 12px 0 0; /* Curved corners for the top of the tab */
+    }
+
+    .coins:empty {
+	display: none;
+    }
+    .coins {
+	background-color: #f1f0a0;
+	float: right;
+	border: 1px solid #ccc;
+	outline: none;
+	cursor: pointer;
+	position: relative;
+	right: 150;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+	color: #222222;
+	display: inline-box;
+	border-radius: 12px 12px 12px 12px; /* Curved corners for the top of the tab */
+    }
+
+    .pagination button:hover {
+	background-color: #ddd;
+    }
+
+    .pagination button.active {
+	background-color: #ccc;
+    }
+
+    iframe {
+	width: 250px;
+	height: 50px;
+	border-width: 0;
+    }
+    a {
+	text-decoration: none;
+	color: blue;
+	font-weight: bolder;
+    }
+    p, span {
+	color: #d2a059;
+	font-family: Sans-Serif;
+	font-size: 18pt;
+    }
+    td {
+	font-size: 20pt; padding: 15; text-align: center;
+    }
+    input {
+	font-family: Sans-Serif;
+	font-size: 18pt;
+	
+    }
+    .color {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        border: 1px solid black;
+	background-color: white;
+    }
+
+    body {
+        background-color: #3c3c3c;
+        font-family: Arial, sans-serif;
+    }
+
+    .form {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin: 0 auto;
+        max-width: 600px;
+        padding: 25px;
+	width: 50%;
+    }
+    .panel1 {
+        background-color: #50e9f5;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin: 1 auto;
+        padding: 25px;
+	display: flex;	
+	width: 90%;
+    }
+    h1 {
+        text-align: center;
+    }
+    label {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+	width: 20%;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="color"] {
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 75%;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+        padding: 10px;
+        width: 100%;
+    }
+    input[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
     </STYLE>
     <script src="openpgpjs/dist/openpgp.min.js" type="text/javascript" charset="utf-8"></script>
     <script>
@@ -111,6 +311,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var gameBuzon=[];
       var continua=false;
       var coinbox=null;
+      var emptyMessage="Nothing to Show (yet...)";
 
       const colors = [
 	  ["red", "#FF0000"],
@@ -146,9 +347,18 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var symbols=['-', '/', '|', '\\'];
       var len1=0;
       var len2=1;
-      function setColour(coloor){
+      function setColour(coloor, obj){
 	  colour=coloor;
 	  console.log({colour});
+	  const parent=obj.parentNode;
+	  const spans=parent.getElementsByTagName("span");
+	  var i=0;
+	  while(i<spans.length) {
+	      if(spans[i].style.borderWidth.startsWith('5')) spans[i].style.borderWidth=1;
+	      spans[i].style.borderColor='black';
+	      i++;
+	  }
+	  obj.style.borderWidth=5;
       }
       
       function importSecretKey(rawKeyz) {
@@ -242,11 +452,17 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       
       function pon(obj) {
 	  divs=0;
+	  console.log({show});
 	  while(divs<document.getElementsByTagName("div").length ) {
-	      document.getElementsByTagName("div")[divs].style.display="none";
+	      if(document.getElementsByTagName("div")[divs].id.startsWith("tab")) {
+		  if(document.getElementsByTagName("div")[divs].displayOriginal == undefined) document.getElementsByTagName("div")[divs].displayOriginal = document.getElementsByTagName("div")[divs].style.display;
+		  document.getElementsByTagName("div")[divs].style.display="none";
+		  if(document.getElementById("boton"+document.getElementsByTagName("div")[divs].id) && document.getElementById("boton"+document.getElementsByTagName("div")[divs].id) != undefined) document.getElementById("boton"+document.getElementsByTagName("div")[divs].id).style="";
+	      }
 	      divs++;
 	  }
-	  document.getElementById(obj).style.display='inline-block';
+	  document.getElementById(obj).style.display=document.getElementById(obj).displayOriginal;
+	  document.getElementById("boton"+obj).style.backgroundColor='#40e0e0';
       }
       function isArray(obj) {
 	  return Object.prototype.toString.call(obj) === '[object Array]';
@@ -377,9 +593,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					      data["subject"]=subject;
 					      var headerRest=headerM;
 					      while(headerRest.indexOf("\n")>1) {
-						  var field=headerRest.substring(0, headerRest.indexOf(":")).trim();
+						  var field=headerRest.substring(0, headerRest.indexOf(":")).trim().toLowerCase();
 						  if(field.length) {
-						      data[field]=headerRest.substring(headerRest.indexOf(":"), headerRest.indexOf("\n"));
+						      data[field]=headerRest.substring(headerRest.indexOf(":")+1, headerRest.indexOf("\n"));
 						  }
 						  headerRest=headerRest.substring(headerRest.indexOf("\n")+1, headerRest.length);
 					      }
@@ -749,7 +965,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      init_OTProcessed=0;
 			  }
 			  if(symbol>=symbols.length) symbol=0;
-			  document.getElementById("modaltext").innerHTML="Pulling Info <br>"+symbols[symbol];
+			  document.getElementById("modaltext").innerHTML="Pulling Info (init) <br>"+symbols[symbol];
 			  document.getElementById("modal").style.display="block";
 			  symbol+=1;
 		      }
@@ -891,15 +1107,16 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  boxes[name]["error"]=cadena.error;
 							  boxes[name]["data"]=cadena.data["msg"];
 							  if(cadena.data["subject"]) boxes[name]["subject"]=cadena.data["subject"];
-							  if(cadena.data["date"]) boxes[name]["date"]=cadena.data["date"];
+							  /*
+							  if(cadena.data["date"]) boxes[name]["date"]=cadena.data["date"];*/
 							  cadena=cadena.data["msg"];
 							  ////alert("F");
 							  var header=cadena.substring(0, cadena.indexOf("\n\n")+1);
 							  var headerRest=header;
 							  while(headerRest.indexOf("\n")>1) {
-							      var field=headerRest.substring(0, headerRest.indexOf(":")).trim();
+							      var field=headerRest.substring(0, headerRest.indexOf(":")).trim().toLowerCase();
 							      if(field.length) {
-								  boxes[name][field]=headerRest.substring(headerRest.indexOf(":"), headerRest.indexOf("\n"));
+								  boxes[name][field]=headerRest.substring(headerRest.indexOf(":")+1, headerRest.indexOf("\n"));
 							      }
 							      headerRest=headerRest.substring(headerRest.indexOf("\n")+1, headerRest.length);
 							  }
@@ -951,6 +1168,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       async function checkAndDisplayBuzon() {
 	  document.getElementById("modaltext").innerHTML="Loading Box";
 	  document.getElementById("modal").style.display="block";
+	  document.getElementById("boxesList").innerHTML="";
 	  var boxes=await cargaBuzon();
 	  var subjectisGame=[];
 	  var subjectisCoin=[];
@@ -981,7 +1199,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      subjectisGame[g]=key;
 			      g++;
 			  }
-			  if(boxes[key]["subject"]!="#coin" && boxes[key]["subject"]!="#ignore" ) document.getElementById("buzonIndex").innerHTML+="<div>Name:" + boxes[key]["name"] + "</div><div>Subject: " + boxes[key]["subject"]+ "</div><div><input id=\""+boxes[key]["name"]+"Button\" type=\"button\" onclick='this.disabled=1; RSA_cargaBuzon(\""+boxes[key]["address"].trim()+"\",\""+boxes[key]["name"].trim() +"\",\""+boxes[key]["subject"]+"\");' value=\"cargar\" /></div>";
+			  if(boxes[key]["subject"]!="#coin" && boxes[key]["subject"]!="#ignore" ) document.getElementById("boxesList").innerHTML+="<div class=\"boxesList\" onclick=\"RSA_cargaBuzon('" + boxes[key]["address"].trim()+"','"+boxes[key]["name"].trim() +"','"+boxes[key]["subject"]+"');\" >Name:" + boxes[key]["name"] + "<br>Subject: " + boxes[key]["subject"]+ "</div>";
 		      }
 		  }
 	      }
@@ -1067,11 +1285,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  await RSA_crearBuzon(buzon, "#coin");
 		  return true;
 	      } else {
-		  if(!coinbox) coinbox=boxes[subjectisCoin[subjectisCoin.length-1]]["name"];
-		  document.getElementById("buzonIndex").innerHTML+="<textarea id=\"coinfromText\" style=\"display: none; width: 600; height: 600;\"></textarea><input type=\"button\" onclick=\"if(document.getElementById('coinfromText').style.display=='none') {document.getElementById('coinfromText').style.display='block';this.value='load';} else {toStampCollector(document.getElementById('coinfromText').value,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'VERIFY', null, null, true); document.getElementById('coinfromText').style.display='none'; document.getElementById('coinfromText').style.display='block';this.value='Load Coins From Text'; };\" value=\"Load Coins From Text\"/>";
-		  document.getElementById("buzonIndex").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
-		  document.getElementById("buzonIndex").innerHTML+="<br><input id=\"cambioBills\" /><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
-		  document.getElementById("buzonIndex").innerHTML+="<p>Ammount <input id=\"ammountSend\"/></p><p> To Box <input id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value)\" /></p>";
+		  if(!coinbox) coinbox=boxes[subjectisCoin[subjectisCoin.length-1]];
+		  if(document.getElementById("boxesTools").innerHTML.indexOf("coinsLoader")<0) {
+		      document.getElementById("boxesTools").innerHTML+="<span id=\"coinsLoader\"> <textarea id=\"coinfromText\" style=\"display: none; position: relative; left: 30%; width: 40%; height: 350;\"></textarea><input id=\"coinCancel\" style=\"display: none;\" type='button' value='Cancel' onclick=\"document.getElementById('coinsLoader').className=''; document.getElementById('coinsLoader').style=''; document.getElementById('coinsLoadButton').value='Load Coins From Text';    document.getElementById('coinfromText').style.display='none'; document.getElementById('coinfromText').style.display='none';this.style.display='none';\" /><input id=\"coinsLoadButton\" type=\"button\" onclick=\"if(document.getElementById('coinfromText').style.display=='none') {document.getElementById('coinfromText').style.display='block';  document.getElementById('coinCancel').style.display='';   document.getElementById('coinsLoader').className='modal'; document.getElementById('coinsLoader').style.display='block'; this.value='load';} else {document.getElementById('coinsLoader').className=''; document.getElementById('coinCancel').style.display='none'; document.getElementById('coinsLoadButton').value='Load Coins From Text'; document.getElementById('coinfromText').style.display='none';toStampCollector(document.getElementById('coinfromText').value,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'VERIFY', null, null, true); this.value='Load Coins From Text'; };\" value=\"Load Coins From Text\"/></span>";
+		  document.getElementById("boxesTools").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
+//		  document.getElementById("boxesTools").innerHTML+="<br><input id=\"cambioBills\" /><input style=\"width:30%\" type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
+		      document.getElementById("buzonIndex").innerHTML+="<p>Ammount <input  style=\"width:30%\" id=\"ammountSend\"/> To Box <input  style=\"width:30%\"  id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value, true)\" /></p>";
+		  }
 	      }
 	  } else {
 	      pon('tab0');
@@ -1088,7 +1308,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  var ammounts=0;
 	  console.log({text});
 	  //	  console.log(text.indexOf("char fname[21]=")+ "\n"  +  text.indexOf("long date=")+ "\n"  + text.indexOf("long ammount=")+ "\n"  + text.indexOf("long uid1=")+ "\n"  + text.indexOf("long uid2=")+ "\n"  + text.indexOf("long uid3=")+ "\n"  + text.indexOf("long uid4=")+ "\n" );
-	  while(text.indexOf("char fname[21]=")>0 &&  text.indexOf("long date=")>0 && text.indexOf("long ammount=")>0 && text.indexOf("long uid1=")>0 && text.indexOf("long uid2=")>0 && text.indexOf("long uid3=")>0 && text.indexOf("long uid4=")>0) {
+	  while((text.indexOf("char fname[21]=")>0 || text.indexOf("char fname[20]=")>0) &&  text.indexOf("long date=")>0 && text.indexOf("long ammount=")>0 && text.indexOf("long uid1=")>0 && text.indexOf("long uid2=")>0 && text.indexOf("long uid3=")>0 && text.indexOf("long uid4=")>0) {
 	      tokens[c]=[];
 	      tokens[c]["stamps_dates"]=new Array();
 	      tokens[c]["stamps_fname"]=new Array();
@@ -1119,12 +1339,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       }
       // - - - -
       async function toStampContractBox(buzon, command, ammountinTokens, buzonCoin=null) {
+	  var error=null;
 	  document.getElementById("modaltext").innerHTML="Collecting Tokens";
 	  document.getElementById("modal").style.display="block";
-	  if(coinsValue*1<ammountinTokens*1) {
-	      document.getElementById("modaltext").innerHTML="Insuficient Funds";
-	      document.getElementById("modal").style.display="block";
-	  }
 	  var ammountArray=new Array(1000000, 500000, 250000, 200000, 125000, 100000, 50000, 25000, 20000, 12500, 10000, 5000, 2500, 2000, 1250, 1000, 500, 250, 200, 125, 100, 50, 25, 20, 10, 5, 2, 1);
 	  var d=0
 	  var c=0;
@@ -1149,13 +1366,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	      d++;
 	  }
-	  if(ammountforTokens*1>0) {
-	      document.getElementById("modaltext").innerHTML="NO Change for Ammount Please Consolidate";
-	      document.getElementById("modal").style.display="block";
-	      return({error: "NO Change for Ammount Please Consolidate", data: null});
-	  }
-	  //	  console.log({tokens, c, buzon, command});
-	  if(tokens.length) {
+	  if(tokens.length && ammountforTokens==0) {
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
 		  try {
@@ -1251,8 +1462,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  .then(response => response.text)
 			  .then(async (data) => {
 			      console.log("DONE");
-			      coinsValue-=ammountinTokens*1;
-			      document.getElementById("coins").innerHTML=coinsValue;
+			      if(buzonCoin) {
+				  coinsValue-=ammountinTokens*1;
+				  document.getElementById("coins").innerHTML=coinsValue;
+			      } else {
+				  document.getElementById('indiceTab').coinValue-=(ammountinTokens*1);
+				  document.getElementById('boxBalanceValue').innerHTML=document.getElementById('indiceTab').coinValue;
+			      }
 			      error="T";
 			      document.getElementById("modaltext").innerHTML="SENT";
 			      document.getElementById("modal").style.display="block";
@@ -1270,13 +1486,19 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      document.getElementById("modaltext").innerHTML="All the Tokens have been processed";
 	      document.getElementById("modal").style.display="block";
 	  }
-      }
-
+      }      
       // - - - - 
 
 
 
       async function toStampCollector(text, buzon, address, command, ammountBillsArg=null, subjectBox=null, buzonCoin=null) {
+	  var subjBox=null;
+	  var error=null;
+	  if(!subjectBox) {
+	      subjBox="#coin";
+	  } else {
+	      subjBox=subjectBox;
+	  }
 	  var ammountBills=null;
 	  if(ammountBillsArg) {
 	      ammountBills=document.getElementById("cambioBills").value*1;
@@ -1286,7 +1508,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  var stampcoins=[];
 	  if(buzonCoin) stampcoins=coins;
 	  else stampcoins=document.getElementById('indiceTab').coins;
-	  //	  console.log({coins,stampcoins, buzonCoin}, document.getElementById('indice').coins);
+	  console.log({command, coins,stampcoins, buzonCoin}, document.getElementById('indice').coins);
 	  if(text==null) {
 	      c=0;
 	      for(var key in stampcoins) {
@@ -1300,8 +1522,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	      console.log({tokens, c});
 	      if(c<1) {
-		  document.getElementById("modaltext").innerHTML="There are not any Coins Loaded";
-		  document.getElementById("modal").style.display="block";
+		  if(subjBox!="#coin") {
+		      document.getElementById("modaltext").innerHTML="There are not any Coins Loaded";
+		      document.getElementById("modal").style.display="block";
+		  }
 		  return (false);
 	      }
 	  } else {
@@ -1412,12 +1636,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      codeforRegister=insertacode(codeforRegister, "; "+cadenatoInsert);
 	      //	      console.log(codeforRegister);
 	      var nameforMessage=""
-	      var contador=0;
+	      var cntdr=0;
 	      error=".";
 	      while(error==".") {
 		  if(symbol>=symbols.length) symbol=0;
+		  if(subjBox!="#coin") {
 		  document.getElementById("modaltext").innerHTML="Getting Last Index of Box<br>"+symbols[symbol];
-		  document.getElementById("modal").style.display="block";
+		      document.getElementById("modal").style.display="block";
+		  }
 		  symbol++;
 		  try {
 		      var cadenaEval=await (await fetch(remotepath + "/flastfile.php"+'?sha='+address+'&count=1')).text();
@@ -1432,69 +1658,61 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      error=".";
 		  }
 	      }
-	      var contador=count;
-	      nameforMessage=await digestMessage(address+""+contador);
+	      var cntdr=count;
+	      nameforMessage=await digestMessage(address+""+cntdr);
 	      nameforMessage=nameforMessage+".js";
+	      console.log({codeforRegister});
+	      var passes=0;
 	      encripta(codeforRegister).then(async (resp)=>{
-		  //		  console.log({resp});
-		  const data = new URLSearchParams();
-		  data.append("texto2", resp);
-		  data.append("iv_OTP", iv_OTP);
-		  data.append("OTP_resource", OTP_resource);
-		  data.append("OTP", OTP);
+		  console.log({codeforRegister, resp});
+		  const dataB = new URLSearchParams();
+		  dataB.append("texto2", resp);
+		  dataB.append("iv_OTP", iv_OTP);
+		  dataB.append("OTP_resource", OTP_resource);
+		  dataB.append("OTP", OTP);
 		  try {
-		      fetch(remotepath + "/formalm.php", {
+		      const response = await fetch(remotepath + "/formalm.php", {
 			  method: "POST",
 			  headers: {
 			      "Content-Type": "application/x-www-form-urlencoded"
 			  },
-			  body: data
-		      })
-			  .then(response => response.text)
-			  .then(async (data) => {
-			      errorF="T";
-			      console.log("sending POST");
-			      if(data.text!=undefined) console.log(data.text(), "rcv", "data");
-			      else console.log({data});
-			      console.log ({buzon, address});
-			      error=".";
-			      document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
-			      document.getElementById("modal").style.display="block";
-			      error="Not Found";
-			      console.log("waiting for ", {nameforMessage, address, contador});
-			      console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameforMessage), '<<<<<< #####');
-			      while(error=="Not Found") {
-				  error=".";
-				  while (error==".") {
-				      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime())).text();
-				      eval(cadenaEval);
-				      if(!cadenaEval.length) {
-					  continua=true;
-					  continue;
-				      }
-
-				      if(symbol>=symbols.length) symbol=0;
-				      document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + contador + "<br>" + symbols[symbol];
-				      symbol+=1;
-				      document.getElementById("modal").style.display="block";
-				      await sleep(500);
-				  }
+			  body: dataB
+		      });
+		      const data = await response.text();
+		      errorF="T";
+		      console.log("sending POST");
+		      console.log ({buzon, address});
+		      error=".";
+		      if(subjBox!="#coin") {
+			  document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
+			  document.getElementById("modal").style.display="block";
+		      }
+		      error="Not Found";
+		      console.log("waiting for ", {nameforMessage, address, cntdr});
+		      console.log("Receiveing Msg on Slot ", cntdr, " ", encodeURI(nameforMessage), '<<<<<< #####');
+		      continua=false;
+		      while(error=="Not Found") {
+			  error=".";
+			  while (error==".") {
+			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameforMessage)+'&date=' + (new Date()).getTime())).text();
+			      eval(cadenaEval);
+			      if(!cadenaEval.length) {
+				  continue;
 			      }
-			      document.getElementById("modaltext").innerHTML="Continue Loading";
-			      document.getElementById("modal").style.display="block";
-			      var subjBox=null;
-			      if(!subjectBox) {
-				  subjBox="#coin";
-			      } else {
-				  subjBox=subjectBox;
+			      if(symbol>=symbols.length) symbol=0;
+			      if(subjBox!="#coin") {
+				  document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + cntdr + "<br>" + symbols[symbol];
+				  symbol+=1;
+				  document.getElementById("modal").style.display="block";
 			      }
-			      console.log({address, buzon, subjBox, contador});
-			      RSA_cargaBuzon(address, buzon, subjBox, contador);
-			  })
-			  .catch((error) => {
-			      console.error(error);
-			      errorF=".";
-			  });
+			      await sleep(500);
+			      passes+=1;
+			  }
+		      }
+		      document.getElementById("modaltext").innerHTML="Continue Loading";
+		      document.getElementById("modal").style.display="block";
+		      console.log({address, buzon, subjBox, cntdr});
+		      RSA_cargaBuzon(address, buzon, subjBox, cntdr);
 		  } catch (e) {
 		      error=".";
 		  }
@@ -1513,8 +1731,20 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      var verifyString="";
 	      var prevcommand="";
 	      var toignore="";
-	      document.getElementById("modaltext").innerHTML="Loading " + buzon + " ("+subject+")";
-	      document.getElementById("modal").style.display="block";
+	      var error=null;
+	      var content=null;
+	      if(!setContador) document.getElementById("indice").innerHTML=emptyMessage;
+	      if(document.getElementById("coins").contador==undefined) document.getElementById("coins").contador=0;
+	      if(document.getElementById("indice").contador==undefined) document.getElementById("indice").contador=0;
+	      if(subject!="#coin" && subject!="#ignore") {
+		  document.getElementById("indice").box={address, buzon, subject};
+		  document.getElementById("modaltext").innerHTML="Loading " + buzon + " ("+subject+")";
+		  document.getElementById("modal").style.display="block";
+	      }
+	      if(!setContador) {
+//		  if(subject=="#coin" && document.getElementById("coins").contador) setContador=document.getElementById("coins").contador*1;
+//		  if(subject=="#"+buzonforGameis && document.getElementById("indice").contador) setContador=document.getElementById("indice").contador*1;
+	      }
 	      error=".";
 	      while (error==".") {
 		  try {
@@ -1537,7 +1767,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  resolve({error: "Box Not Found"});
 		  return false;
 	      } else {
-		  boxRSAKey=atob(content);	      
+		  boxRSAKey=atob(content);
 		  error="Not Found";
 		  await sleep (500);
 		  var esperando=null;
@@ -1559,8 +1789,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  }
 		  console.log({init_OTProcessed});
 		  regprocessed=false;
-		  document.getElementById("modaltext").innerHTML="LOADING " + buzon;
-		  document.getElementById("modal").style.display="block";
+		  if(subject!="#coin" && subject!="#ignore") {
+		      document.getElementById("modaltext").innerHTML="LOADING " + buzon;
+		      document.getElementById("modal").style.display="block";
+		  }
 		  userPassword().then(async (response)=>{
 		      if(response.error) {
 			  console.log(response.error);
@@ -1579,8 +1811,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  continua=true;
 				  while (continua) {
 				      if(symbol>=symbols.length) symbol=0;
-				      document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
-				      document.getElementById("modal").style.display="block";
+				      if(subject!="#coin" && subject!="#ignore") {
+					  document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
+					  document.getElementById("modal").style.display="block";
+				      }
 				      symbol+=1;
 				      try {
 					  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(bzon)+'.js&date=' + (new Date()).getTime())).text();
@@ -1597,9 +1831,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      await sleep(500);
 						      console.log({error});
 						      if(symbol>=symbols.length) symbol=0;
-						      document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
-						      document.getElementById("modal").style.display="block";
-						      symbol+=1;
+						      if(subject!="#coin" && subject!="#ignore") {
+							  document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
+							  document.getElementById("modal").style.display="block";
+							  symbol+=1;
+						      }
 						      if(content) len1=content.length;
 						  }
 						  console.log(atob(content));
@@ -1614,8 +1850,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      }
 				  }
 				  var buzon=bzon;
-				  document.getElementById("modaltext").innerHTML="Continue Loading";
-				  document.getElementById("modal").style.display="block";
+				  if(subject!="#coin" && subject!="#ignore") {
+				      document.getElementById("modaltext").innerHTML="Continue Loading";
+				      document.getElementById("modal").style.display="block";
+				  }
 				  console.log("LOaded");
 				  if(error=="Not Found") {
 				      document.getElementById("modaltext").innerHTML="Incorrect User Data";
@@ -1644,9 +1882,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  eval (cadenaEval);
 							  while (error==".") {
 							      if(symbol>=symbols.length) symbol=0;
-							      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
-							      document.getElementById("modal").style.display="block";
-							      symbol+=1;
+							      if(subject!="#coin" && subject!="#ignore") {
+								  document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
+								  document.getElementById("modal").style.display="block";
+								  symbol+=1;
+							      }
 							      await sleep (500);
 							  }
 							  if(error=="Not Found"){
@@ -1661,9 +1901,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  await sleep(500);
 								  console.log({error});
 								  if(symbol>=symbols.length) symbol=0;
-								  document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
-								  document.getElementById("modal").style.display="block";
-								  symbol+=1;
+								  if(subject!="#coin" && subject!="#ignore") {
+								      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
+								      document.getElementById("modal").style.display="block";
+								      symbol+=1;
+								  }
 								  if(content) len1=content.length;
 							      }
 							      console.log(atob(content));
@@ -1691,9 +1933,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      while(continua){
 									  error=".";
 									  if(symbol>=symbols.length) symbol=0;
-									  document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
-									  document.getElementById("modal").style.display="block";
-									  symbol+=1;
+									  if(subject!="#coin" && subject!="#ignore") {
+									      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
+									      document.getElementById("modal").style.display="block";
+									      symbol+=1;
+									  }
 									  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime())).text();
 									  await sleep (500);
 									  eval (cadenaEval);
@@ -1710,9 +1954,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  await sleep(500);
 										  console.log({error});
 										  if(symbol>=symbols.length) symbol=0;
-										  document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
-										  document.getElementById("modal").style.display="block";
-										  symbol+=1;
+										  if(subject!="#coin") {
+
+										      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
+										      document.getElementById("modal").style.display="block";
+										      symbol+=1;
+										  }
 										  if(content) len1=content.length;
 									      }
 									      console.log(atob(content));
@@ -1737,13 +1984,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      nameofMessage=nameofMessage+".js";
 								  }
 								  error=".";
-								  if(subject!="#coin" && subject!="#ignore") {
-								      document.getElementById('indiceTab').innerHTML="<p><span id=\"boxBalance\"></span></p><input type=\"button\" value=\"RSA Key\" onclick=\"this.parentNode.innerHTML+='<textarea>"+privateKey_RSA.replace(/(\r\n|\r|\n)/g, "\\n")+"</textarea>'\" />";
-								      var fieldsforPPV="File: <input id=\\'blobtoSend\\' type=\\'file\\'/> <br /> To Box: <input id=\\'buzonToPPV\\' /> <br /> Ammount: <input id=\\'ammountToPPV\\' /> <br />";
-								      var fieldsforText="Message: <TEXTAREA id=\\'texttoSend\\' cols=80 rows=20/></TEXTAREA> <br /> To Box: <input id=\\'buzonToText\\' /> <br /> ";
+								  if(subject!="#coin" && subject!="#ignore" && !setContador) {
+								      document.getElementById('indiceTab').innerHTML="<p><span id=\""+buzon+"boxBalance\"></span></p><input type=\"button\" value=\"RSA KEY\" onclick=\"if(document.getElementById('textAreaRSAKey').innerHTML.indexOf(\'<textarea>\')<0) document.getElementById('textAreaRSAKey').innerHTML='<br><textarea>"+privateKey_RSA.replace(/(\r\n|\r|\n)/g, "\\n")+"</textarea>'; else document.getElementById('textAreaRSAKey').innerHTML='' \" /><span id=\"textAreaRSAKey\"></span>";
+								      var fieldsforPPV="File: <input id=\'blobtoSend\' type=\'file\'/> <br /> To Box: <input id=\\'buzonToPPV\\' /> <br /> Ammount: <input id=\\'ammountToPPV\\' /> <br />";
+								      var fieldsforText="Message: <TEXTAREA id=\\'texttoSend\\' cols=80 rows=20/></TEXTAREA> <br /> To Box: <input id='buzonToText' /> <br /> ";
 								      var functionSendText="RSA_enviarABuzon(document.getElementById('buzonToText').value, \'"+buzonOriginal+"\', \'"+subject+"\', document.getElementById('texttoSend').value).then((resp)=>{document.getElementById(\'fieldsforPPVspan\').innerHTML=\'\';});";
 								      var functionSend="RSA_registrarAPPV(document.getElementById('buzonToPPV').value, \'"+buzonOriginal+"\', \'SEND\', document.getElementById('ammountToPPV').value).then((resp)=>{document.getElementById(\'fieldsforPPVspan\').innerHTML=\'\';});;";
-								      document.getElementById('indiceTab').innerHTML+="<p><span id=\"fieldsforPPVspan\"></span><input type=\"button\" value=\"Send File to Box PPV\" onclick=\"if(this.send){this.send=0; "+functionSend+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforPPV+"\';}\" /></p>   <input type=\"button\" value=\"Send Text to Box\" onclick=\"if(this.send){this.send=0; "+functionSendText+"  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').innerHTML=\'"+fieldsforText+"\';}\" /></center>" + document.getElementById('indiceTab').innerHTML;
+								      document.getElementById('indiceTab').innerHTML+="<p><span id=\"fieldsforPPVspan\" style=\"display: none\">"+fieldsforPPV+"<br><input type=\"button\" value=\"Cancel\" onclick=\"document.getElementById('fieldsforPPVspan').style.display='none';\" /> </span><input type=\"button\" value=\"Send File to Box PPV\" onclick=\"if(this.send){this.send=0; document.getElementById('fieldsforPPVspan').style.display='none'  } else {this.send=1; document.getElementById(\'fieldsforPPVspan\').style.display='block';}\" /></p><p><span id=\"fieldsforTextspan\" style=\"display: none\">"+fieldsforText+"<br><input type=\"button\" value=\"Cancel\" onclick=\"document.getElementById('fieldsforTextspan').style.display='none';\" /> </span><input type=\"button\" value=\"Send Text to Box\" onclick=\"if(this.send){this.send=0;"+functionSendText+";document.getElementById('fieldsforTextspan').style.display='none';   } else {this.send=1;document.getElementById('fieldsforTextspan').style.display='block';}\" /></p></center>";
 								  }
 								  while(error!="Not Found") {
 								      if(!setContador) nameofMessage=null;
@@ -1753,9 +2000,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  while(continua) {
 									      error=".";
 									      if(symbol>=symbols.length) symbol=0;
-									      document.getElementById("modaltext").innerHTML="Getting LAst Message of "+subject+"<br>"+symbols[symbol];
-									      document.getElementById("modal").style.display="block";
-									      symbol+=1;
+									      if(subject!="#coin") {
+										  document.getElementById("modaltext").innerHTML="Getting LAst Message of "+subject+"<br>"+symbols[symbol];
+										  document.getElementById("modal").style.display="block";
+										  symbol+=1;
+									      }
 									      var cadenaEval=await (await fetch(remotepath + "/flastfile.php"+'?sha='+address+'&count=1')).text();
 									      try {
 										  await sleep (500);
@@ -1770,11 +2019,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  continua=true;
 									      }
 									  }
-									  document.getElementById("modaltext").innerHTML="Last Message is <br>" + count;
-									  document.getElementById("modal").style.display="block";
+									  if(subject!="#coin") {
 
-									  document.getElementById("modaltext").innerHTML="Continue Loading";
-									  document.getElementById("modal").style.display="block";
+									      document.getElementById("modaltext").innerHTML="Last Message is <br>" + count;
+									      document.getElementById("modal").style.display="block";
+
+									      document.getElementById("modaltext").innerHTML="Continue Loading";
+									      document.getElementById("modal").style.display="block";
+									  }
 									  nameofMessage=await digestMessage(address+""+contador);
 									  nameofMessage=nameofMessage+".js";
 									  console.log("Last name ", encodeURI(nameofMessage), ' in Slot ', contador);
@@ -1796,8 +2048,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      }
 								      console.log({address, nameofMessage, contador, boxesignored});
 								      setContador=0;
-								      document.getElementById("modaltext").innerHTML="Loading " + subject + " Message<br>" + contador;
-								      document.getElementById("modal").style.display="block";
+								      if(subject!="#coin") {
+									  document.getElementById("modaltext").innerHTML="Loading " + subject + " Message<br>" + contador;
+									  document.getElementById("modal").style.display="block";
+								      }
 								      error=".";
 								      while (error==".") {
 									  try {
@@ -1813,9 +2067,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  }
 								      }
 								      if(error!="Not Found") {
+									  var elementsInside="";
 									  console.log("Loading Content from Slot ", {contador, subject, buzon});
-									  document.getElementById("modaltext").innerHTML="Loading Content from " + buzon + "<br>" + contador;
-									  document.getElementById("modal").style.display="block";
+									  if(subject!="#coin") {
+
+									      document.getElementById("modaltext").innerHTML="Loading Content from " + buzon + "<br>" + contador;
+									      document.getElementById("modal").style.display="block";
+									  }
 									  
 									  var contentB=null;
 									  if(subject=="#ignore") {
@@ -1837,7 +2095,25 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  }
 										  if(n==boxesignored.length) {
 										      for (var key in contentB.data) {
-											  if(key!=="msg") document.getElementById("indice").innerHTML+="<p>"+key+": "+contentB.data[key]+"</p>";
+											  if(key=="date" || key=="Date") {
+											      var date;
+											      if(key=="date") date=new Date(contentB.data[key]*1000);
+											      else date=new Date(contentB.data[key].substring(2)*1000);
+											      console.log({date}, contentB.data[key]);
+											      const hours = date.getHours();
+											      const minutes = date.getMinutes();
+											      const seconds = date.getSeconds();
+											      const day = date.getDate();
+											      const month = date.getMonth() + 1; // Month is 0-based
+											      const year = date.getFullYear();
+											      const formattedDate = [hours, minutes, seconds].join(':');
+											      const formattedDay = ("00" + day).slice(-2);
+											      const formattedMonth = ("00" + month).slice(-2);
+											      const formattedYear = ("00" + year).slice(-2);
+											      const finalDate = formattedDate + " " + formattedDay + "/" + formattedMonth + "/" + formattedYear;
+											      elementsInside+="<div class='chat-bubble-time'>"+finalDate+"</div>";
+											  }
+											  if(key!=="msg" && key!="date" && key!="Date") elementsInside+="<div class='chat-bubble-time'>"+contentB.data[key]+"</div>";
 										      }
 										  }
 										  
@@ -1846,12 +2122,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  if(contentB.data["subject"].trim()=="#sendcoin"  || (subject!="#coin" && contentB.data["subject"].trim()=="consolidate")) {
 										      consolidate+="\n"+contentB.data["msg"]+"\n";
 										  }
+
 										  if(subject=="#coin" && contentB.data["subject"].trim()=="consolidate") {
 										      console.log({subject}, contentB.data["subject"], {contentB});
 										      if(prevcommand!=contentB.data["date"]) {
-											  var missingNameinIgonre=false;
+											  var missingNameinIgnore=false;
 											  var everythingisadded=null;
-											  var contadorTemporal=contador-1;
+											  var contadorTemporal=contador-2;
 											  var nameofMessageTemporal="";
 											  while(contadorTemporal>=0) {
 											      nameofMessageTemporal=await digestMessage(address+""+contadorTemporal);
@@ -1865,21 +2142,26 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 												  n++;
 											      }
 											      if(nameofMessageTemporal) {
-												  missingNameinIgonre=true;
+												  missingNameinIgnore=true;
 												  boxesignoredadd(nameofMessageTemporal);
 											      }
 											      contadorTemporal=contadorTemporal-1;
 											  }
-											  if(missingNameinIgonre) {
+											  if(missingNameinIgnore) {
 											      var msgTemporal="";
 											      for (let i = 0; i < boxesignored.length; i++) {
 												  msgTemporal += boxesignored[i]+';';
 											      }
-											      document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
-											      document.getElementById("modal").style.display="block";
+											      if(subject!="#coin") {
+
+												  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
+												  document.getElementById("modal").style.display="block";
+											      }
 											      toignore+=msgTemporal;
-											      document.getElementById("modaltext").innerHTML="Continue Loading";
-											      document.getElementById("modal").style.display="block";
+											      if(subject!="#coin") {
+												  document.getElementById("modaltext").innerHTML="Continue Loading";
+												  document.getElementById("modal").style.display="block";
+											      }
 											  }
 											  consolidate="";
 										      } 
@@ -1887,11 +2169,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      prevcommand=contentB.data["date"];
 										  }
 										  if(subject!="#coin" && contentB.data["subject"].trim()=="verify") {
+										      alert('...');
+										      if(subject=="#"+buzonforGameis) document.getElementById("indice").contador=contador+1;
 										      var coinObj=parseCoin(contentB.data["msg"], document.getElementById('indiceTab').coins);
 										      document.getElementById('indiceTab').coinValue=coinObj.value;
 										      document.getElementById('indiceTab').coins=coinObj.coins;
-										      document.getElementById("boxBalance").innerHTML=document.getElementById('indiceTab').coinValue;
-										      if(document.getElementById("boxBalance").innerHTML.indexOf("\"RETIRAR\"")<0) document.getElementById("boxBalance").innerHTML+=" &nbsp;  &nbsp;  <input id=\"ammountSendBox\" type=\"text\" /> <input type=\"button\" value =\"RETIRAR\" onclick=\"toStampContractBox(\'" + coinbox + "\', \'SEND\', document.getElementById('ammountSendBox').value);\" /> ";
+										      document.getElementById(buzon+"boxBalance").innerHTML="<span id='boxBalanceValue'>"+document.getElementById('indiceTab').coinValue+"</span>";
+										      if(document.getElementById(buzon+"boxBalance").innerHTML.indexOf("\"RETIRAR\"")<0) document.getElementById(buzon+"boxBalance").innerHTML+=" &nbsp;  &nbsp;  <input id=\"ammountSendBox\" type=\"text\" style='width: 30%;' /> <input style='width: 30%;' type=\"button\" value =\"RETIRAR\" onclick=\"toStampContractBox(\'" + coinbox["name"] + "\', \'SEND\', document.getElementById('ammountSendBox').value);\" /> ";
 										      boxesignoredadd(nameofMessage+";");
 										      var msgTemporal="";
 										      for (let i = 0; i < boxesignored.length; i++) {
@@ -1900,28 +2184,31 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      toignore+=msgTemporal;
 										  }
 										  if(subject=="#coin" && contentB.data["subject"].trim()=="verify") {
+										      document.getElementById("coins").contador=contador+1;
 										      verifyString+=nameofMessage+";"
 										      var coinObj=parseCoin(contentB.data["msg"], coins);
 										      coinsValue=coinObj.value;
 										      document.getElementById("coins").innerHTML=coinsValue;
 										      coins=coinObj.coins;
 										      boxesignoredadd(nameofMessage+";");
-										      console.log({contador, coinObj, coins, coinsValue, nameofMessage});
+										      console.log({coinObj, contador, coinObj, coins, coinsValue, nameofMessage});
+										      alert(coinsValue);
 										      var msgTemporal="";
 										      for (let i = 0; i < boxesignored.length; i++) {
 											  msgTemporal += boxesignored[i]+';';
 										      }
 										      toignore+=msgTemporal;
-
 										  }
 										  if(subject=="#ignore" && contentB.data["subject"].trim()=="#ignore") {
 										      boxesignoredadd(contentB.data["msg"]);
 										  }
 									      }
-									      if(subject.trim()!="#ignore" && !(subject!="#coin" && contentB.data["subject"].trim().substring(0, ("#sendcoin").length)=="#sendcoin") && !(subject=="#coin" && contentB.data["subject"].trim().substring(0, ("consolidate").length)=="consolidate") && ! (contentB.data["subject"].trim()=="verify")) {
+									      if(subject.trim()!="#ignore" && contentB.data["subject"].trim().substring(0, ("#sendcoin").length)!="#sendcoin" && contentB.data["subject"].trim().substring(0, ("consolidate").length)!="consolidate" && contentB.data["subject"].trim()!=="verify") {
 										  var testStr="data:image";
-										  if(document.getElementById("indice").innerHTML.substring(0, testStr.length)) document.getElementById("indice").innerHTML+="<p><img src=\"" + contentB.data["msg"] + "\"> </img></p>";
-										  else document.getElementById("indice").innerHTML+="<p><pre>" + contentB.data["msg"] + "</pre></p>";
+										  if(document.getElementById(buzon+"boxBalance") && document.getElementById(address+"boxBalance")!=undefined) {
+										      if(document.getElementById("indice").innerHTML.substring(0, testStr.length)<0) document.getElementById("indice").innerHTML+="<div class='chat-bubble'><div class='chat-bubble-text'><p><img src=\"" + contentB.data["msg"] + "\"> </img></p></div>"+elementsInside+"</div></div>";
+										      else document.getElementById("indice").innerHTML+="<div class='chat-bubble'><div class='chat-bubble-text'><p>" + contentB.data["msg"] + "</div>"+elementsInside+"</div></div>";
+										  }
 									      }
 									  }
 								      } else {
@@ -1932,43 +2219,52 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  error="Not Found";
 								      }
 								  }
-								  // if(verifyString.length) {
-								  //     var msgTemporal="";
-								  //     for (let i = 0; i < boxesignored.length; i++) {
-								  // 	  msgTemporal += boxesignored[i]+';';
-								  //     }
-								  //     toignore+=msgTemporal;
-								  // }
+								  
 								  if(toignore.length){
-								      document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
-								      document.getElementById("modal").style.display="block";
+								      if(subject!="#coin") {
+									  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
+									  document.getElementById("modal").style.display="block";
+								      }
 								      var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", toignore);
-								      document.getElementById("modaltext").innerHTML="Continue Loading";
-								      document.getElementById("modal").style.display="block";
+								      if(subject!="#coin") {
+									  document.getElementById("modaltext").innerHTML="Continue Loading";
+									  document.getElementById("modal").style.display="block";
+								      }
 								  }
 								  if(!consolidate.length) {
-								      document.getElementById("modaltext").innerHTML="Box Loaded Successfully";
-								      document.getElementById("modal").style.display="block";
+								      if(subject!="#coin") {
+									  document.getElementById("modaltext").innerHTML="Box Loaded Successfully";
+									  document.getElementById("modal").style.display="none";
+								      }
 								  }
 								  if(consolidate.length) {
-								      document.getElementById("modaltext").innerHTML="There is consolidate Data, Sending to Verify";
-								      document.getElementById("modal").style.display="block";
+								      if(subject!="#coin") {
+
+									  document.getElementById("modaltext").innerHTML="There is consolidate Data, Sending to Verify";
+									  document.getElementById("modal").style.display="block";
+								      }
 								      var isBoxCoin=false;
 								      if( subject=="#coin") {
-									  coins=[];
+									  /*coins=[];
 									  coinsValue=0;
-									  document.getElementById("coins").innerHTML=coinsValue;
+									  document.getElementById("coins").innerHTML=coinsValue;*/
 									  isBoxCoin=true;
 								      } else {
 									  document.getElementById('indiceTab').coinValue=0;
 									  document.getElementById('indiceTab').coins=[];
-									  document.getElementById("boxBalance").innerHTML=document.getElementById('indiceTab').coinValue;
+									  document.getElementById(buzon+"boxBalance").innerHTML=document.getElementById('indiceTab').coinValue;
 								      }
 								      console.log({subjBox: subject});
 								      toStampCollector(consolidate, buzonOriginal, address, 'VERIFY', null, subject, isBoxCoin);
-								      
 								  }
-								  if(document.getElementById(buzonOriginal+"Button")) document.getElementById(buzonOriginal+"Button").disabled=0
+								  if(document.getElementById(buzonOriginal+"Button")) document.getElementById(buzonOriginal+"Button").disabled=0;
+								  document.getElementById("modal").style.display="none";
+								  if(subject=="#coin" && document.getElementById("coins").contador) {
+								      setTimeout("RSA_cargaBuzon(\""+address+"\", \""+buzon+"\", \""+subject+"\", "+document.getElementById("coins").contador+")", 50000);
+								  }
+								  if(subject=="#"+buzonforGameis && document.getElementById("indice").contador) {
+								      setTimeout("RSA_cargaBuzon(\""+address+"\", \""+buzon+"\", \""+subject+"\", "+document.getElementById("indice").contador+")", 50000);
+								  }
 								  resolve({error:"Success"});
 								  return true;
 							      }
@@ -2009,18 +2305,20 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  var parsedcoins=[];
 	  var line="";
 	  if(parsedcoinSet) parsedcoins=parsedcoinSet;
+	  console.log({msg, parsedcoinSet});
 	  while(msg.indexOf(";")>=0) {
 	      line=msg.substring(0, msg.indexOf(";"));
 	      console.log({line});
 	      if(line.indexOf("VERIFIED:")==0) {
 		  var fname='"'+(line.substring(line.indexOf("VERIFIED:")+("VERIFIED:").length, line.length))+'"';
+		  console.log({line, fname}, parsedcoins[fname]);
 		  if (parsedcoins.hasOwnProperty(fname)) {
 		      parsedcoins[fname]["verified"]=true;
 		      parsedcoinsValue+=(parsedcoins[fname]["stamps_ammount"]*1);
 		  }
 	      }
 	      if(line.indexOf("NOT VERIFIED:")==0) {
-		  var fname=(line.substring(line.indexOf("NOT VERIFIED:")+("NOT VERIFIED:").length, line.length));
+		  var fname='"'+(line.substring(line.indexOf("NOT VERIFIED:")+("NOT VERIFIED:").length, line.length))+'"';
 		  if (parsedcoins.hasOwnProperty(fname)) {
 		      parsedcoins[fname]["verified"]=false;
 		  }
@@ -2038,7 +2336,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  init_OTProcessed=0;
 	  while (init_OTProcessed!=255) {
 	      if(symbol>=symbols.length) symbol=0;
-	      document.getElementById("modaltext").innerHTML="Pulling Info <br>"+symbols[symbol];
+	      document.getElementById("modaltext").innerHTML="Pulling Info (reg) <br>"+symbols[symbol];
 	      document.getElementById("modal").style.display="block";
 	      symbol+=1;
 	      try {
@@ -2229,7 +2527,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  error=null;
 			  while (error==null) {
 			      if(symbol>=symbols.length) symbol=0;
-			      document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
+			      document.getElementById("modaltext").innerHTML="Pulling Info (Creating...) <br>" + symbols[symbol];
 			      document.getElementById("modal").style.display="block";
 			      symbol+=1;
 			      try {
@@ -2267,7 +2565,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      while (error==".") {
 					  if(symbol>=symbols.length) symbol=0;
 					  if(symbol>=symbols.length) symbol=0;
-					  document.getElementById("modaltext").innerHTML="Pulling Info<br>" + symbols[symbol];
+					  document.getElementById("modaltext").innerHTML="Pulling Info (Creating) <br>" + symbols[symbol];
 					  document.getElementById("modal").style.display="block";
 					  symbol+=1;
 					  try {
@@ -2446,16 +2744,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  })
 										      .then(response => response.text)
 										      .then(async (data) => {
-											  document.getElementById("modaltext").innerHTML="RECEIVING (" + subject + ")";
-											  document.getElementById("modal").style.display="block";
-											  //if(subject!="#ignore" && subject!="#coin") document.getElementById('indice').innerHTML="";
 											  error="Not Found";
 											  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####');
 											  while(error=="Not Found") {
 											      if(symbol>=symbols.length) symbol=0;
-											      document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + contador + "<br>" + symbols[symbol];
-											      symbol+=1;
+											      document.getElementById("modaltext").innerHTML="RECEIVING (" + subject + ")";
 											      document.getElementById("modal").style.display="block";
+											      symbol+=1;
 											      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime())).text();
 											      await sleep (500);
 											      try {
@@ -2546,7 +2841,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      init_OTProcessed=0;
 			      while (init_OTProcessed!=255) {
 				  if(symbol>=symbols.length) symbol=0;
-				  document.getElementById("modaltext").innerHTML="Pulling Info ... <br>" + symbols[symbol];
+				  document.getElementById("modaltext").innerHTML="Pulling Info (env) ... "+subject+" <br>" + symbols[symbol];
 				  document.getElementById("modal").style.display="block";
 				  symbol++;
 				  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
@@ -2650,7 +2945,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      error=".";
 						      var buzonPublicFrom=await digestMessage(addressFrom+"public"+"\n");
 						      console.log({buzonPublicFrom, addressFrom});
-//						      console.log("loading Sender Box Public key", encodeURI(buzonPublicFrom), '.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:');
+						      //						      console.log("loading Sender Box Public key", encodeURI(buzonPublicFrom), '.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:');
 						      error=".";
 						      while(error=="."){
 							  if(symbol>=symbols.length) symbol=0;
@@ -2672,14 +2967,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  }
 						      }
 						      if(error=="Success") {
-//							  console.log({content, error});
+							  //							  console.log({content, error});
 							  eval(atob(content));
 							  var rsaPublicFrom=rsaPublicKey;
 							  if(rsaPublicFrom) {
 							      console.log("Loaded Sender Public From ");
 							      var buzonPublicTo=await digestMessage(addressTo+"public"+"\n");
 							      console.log({buzonPublicTo, addressTo});
-//							      console.log("", encodeURI(buzonPublicTo), '.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:');
+							      //							      console.log("", encodeURI(buzonPublicTo), '.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:.-.:');
 							      error=".";
 							      while(error=="."){
 								  if(symbol>=symbols.length) symbol=0;
@@ -2702,11 +2997,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							      }
 							  }
 							  if(error=="Success") {
-//							      console.log("Loaded Destinatary Public To", {content, error});
+							      //							      console.log("Loaded Destinatary Public To", {content, error});
 							      eval(atob(content));
 							      var rsaPublicTo=rsaPublicKey;
 							      if(rsaPublicTo) {
-//								  console.log("Loaded Public To", {content}, atob(content), "Public Key of Box (To):", {rsaPublicKey});
+								  //								  console.log("Loaded Public To", {content}, atob(content), "Public Key of Box (To):", {rsaPublicKey});
 								  //								  console.log({boxRSAKey});
 								  var responseDecrypted=await RSA_verify_and_decrypt(boxRSAKey,privateKey_RSA,rsaPublic);
 								  //								  console.log({responseDecrypted});
@@ -2748,16 +3043,18 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  error=".";
 									  while(error==".") {
 									      try {
-										  var resp=await (await fetch(remotepath + "/formalm.php", {
+										  const response = await fetch(remotepath + "/formalm.php", {
 										      method: "POST",
 										      headers: {
 											  "Content-Type": "application/x-www-form-urlencoded"
 										      },
 										      body: dataW
-										  })).text();
+										  });
+										  const resp = await response.text();
 										  await sleep (500);
 										  error="";
 										  resolve("Message Sent Successfully");
+										  console.log("Message Sent Successfully");
 										  return true;
 									      } catch(e) {
 										  console.error(error);
@@ -3231,13 +3528,10 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      init_OTProcessed=0;
 	      while (init_OTProcessed!=255) {
 		  if(symbol>=symbols.length) symbol=0;
-		  document.getElementById("modaltext").innerHTML="Pulling Info... <br>" + symbols[symbol];
-		  document.getElementById("modal").style.display="block";
-		  symbol++;
 		  try {
-		  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
-		  error=".";
-		  await sleep (500);
+		      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
+		      error=".";
+		      await sleep (500);
 		      eval(cadenaEval);
 		      if(!cadenaEval.length) {
 			  continua=true;
@@ -3248,8 +3542,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      init_OTProcessed=0;
 		  }
 	      }
-	      document.getElementById("modaltext").innerHTML="Pulled... <br>" + symbols[symbol];
-	      document.getElementById("modal").style.display="block";
 	      resolve([iv_OTP, OTP, OTP_resource]);
 	  });
       }
@@ -3411,64 +3703,70 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var epoch=0;
       </script>
   </head>
-  <body style="background-color: #0c0c0b; width: 90%;">
+  <!--<body style="background-color: #0c0c0b; width: 90%;">-->
+  <body>
     <div id="result"></div>
-    <div id="modal" style="position: absolute; background-color: red; z-index: 1000; display:none; width: 30%; height: 200px;  top: 25%; left: 40%; ">
-      <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;" id="modaltext"> MODAL </p>
-      <p style="text-align: center;font-family: Sans-Serif; font-size: 16pt;"><input id="modalok" style="border-width: 0; width: 60px; font-size: 14pt; font-weight: bolder; " type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"/> </p>
+    <div id="modal" class="modal" >
+      <span class="modal-content" >
+	<p id="modaltext"> MODAL </p>
+	<p style="text-align: 'center'"> <input id="modalok" type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"/> </p>
+      </span>
     </div>
+    <div class="pagination" style="align: center; position: relative; left: 45%;">
+      <button id="botontab0" onclick="if(show){ pon('tab0');}"> Ingreso </button>
+      <button id="botontab1" onclick="if(show) {pon('tab1');}"> Mensajes </button>
+      <button id="botontab2" onclick="if(show) {pon('tab2');}"> Juego </button>
+    </div>
+      <span id="coins" class="coins"></span>
     <table style="width: 100%; font-family: Sans-Serif; font-size:18pt; background-color: '';">
       <tr>
-	<td>
-	  <span style="padding: 20px; background-color: #88e088; position: relative; left: 130px;"><a href="javascript:if(show) pon('tab1')">  Mensajes </a></span>
-	  <span style="padding: 20px; background-color: #8888e0; position: relative; left: 130px;;"><a href="javascript:if(show) {pon('tab2'); setscrgrados();}">Juego</a></span>
-	  <span id="coins" style="padding: 20px; background-color: #8888e0; position: relative; left: 130px;;"></span>
-	</td>
-      </tr>
-      <tr>
-	<td style="background-color: ''; width: 80%;">	  
-	  <div id="tab0" style="display:block; position:relative; top: 20%; left:30%; background-color: blue; width: 40%; padding: 20px;">
+	<td style="background-color: ''; width: 80%;">
+	  <div id="tab0" class="form" >
 	    <p id="colors">
- 	      <span class="color" onClick="setColour(this.colour)"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
-	      <span class="color" onClick="setColour(this.colour);"></span>
+ 	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span><br>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span><br>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
+	      <span class="color" onClick="setColour(this.colour, this)"></span>
 	    </p>
-	    <p style="font-weight: bolder; color: white;">user: <input id="usuario" /></p>
-	    <p style="font-weight: bolder; color: white;">passphrase: <input id="passphrase" type="password" /></p>
-	    <input id="ingrbutton" value="Ingresar" type="button" onclick="this.disabled=1; checkAndDisplayBuzon();"></input>
-	    <input id="regbutton" value="Registrar" type="button" onclick="this.disabled=1; crearBuzonRegistro();"></input>
+	    <label for="username">user: </label><input id="usuario" type="text" /><br>
+	    <label for="passphrase">passphrase:</label> <input id="passphrase" type="password" /><br>
+	    <input id="ingrbutton" value="Ingresar" type="button" onclick="this.disabled=1; checkAndDisplayBuzon();"></input><br>
+	    <input id="regbutton" value="Registrar" type="button" onclick="this.disabled=1; crearBuzonRegistro();"></input><br>
 	  </div>
-	  <div id="tab1" style="display:none; position:absolute; left:5%; background-color: #060807; width: 90%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
-	    <p style="background-color: white; width: 30%; padding: 20px; display: inline-block; float: left;">
-	      <span style="width: 100%; font-size: 20pt; ">
-		<input name="buzonName" id="buzonName" /> <input type="button" onclick="RSA_crearBuzon(document.getElementById('buzonName').value);" value="Crear Buzon" />
-	      </span>
-	      <span id="buzonIndex" name="buzonIndex"></span>
-	    </p>
-	    <p id="indiceTab" style="background-color: white; display: inline-block; float: left; position: relative; left: 5%; width: 40%; padding: 20px; overflow: auto"> 	   
-	      <span style="width: 100%; font-size: 20pt; "> &nbsp; </span> </p>
-	    <p id="indice" style="background-color: white; display: inline-block; float: left; position: relative; left: 5%; width: 40%; padding: 20px; overflow: auto">
-	      <span style="width: 100%; font-size: 20pt; "> &nbsp; ... </span> </p>
-	    <input style="display: inline-block; float: right; position: relative; " type="button" value="Ocultar" onclick="if(this.value=='Mostrar') { document.getElementById('indice').style.display='inline'; this.value='Ocultar'; } else { document.getElementById('indice').style.display='none'; this.value='Mostrar'; }  "/>
+	  <div id="tab1" class="panel1">
+	    <div id="buzonIndex" name="buzonIndex">
+	      <input name="buzonName" id="buzonName" /> <input type="button" onclick="RSA_crearBuzon(document.getElementById('buzonName').value);" value="Crear Buzon" />
+	      <div id="boxesList">
+	      </div>
+	      <div id="boxesTools">
+	      </div>
+	    </div>
+	    <div style="display: flex; flex-direction: column; width: 60%;">
+	      <p id="indiceTab" style="background-color: #eee9d6; float: left; position: relative; left: 5%; width: 90%; padding: 20px; overflow: auto;"> 		      <span style="width: 100%; font-size: 20pt; "> &nbsp; </span>
+	      </p>
+	      <p id="indice" style="background-color: #e7eef4; float: left; position: relative; left: 5%; width: 90%; padding: 20px; overflow: auto">
+		<span style="width: 100%; font-size: 20pt; "> &nbsp; ... </span>
+	      </p>
+	    </div>
+	    <input type="button" value="Ocultar/Mostrar" onclick="var em=`${emptyMessage}`; if(this.mostrar=='Mostrar') { document.getElementById('indice').innerHTML=document.getElementById('indice').content; this.mostrar='Ocultar'; } else { document.getElementById('indice').content=document.getElementById('indice').innerHTML; document.getElementById('indice').innerHTML=em; this.mostrar='Mostrar'; }" />
 	  </div>
-	  <div id="tab2" border=1 style="display:none; position:absolute; left:5%; top:15%; background-color: #060807; width:60%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+	  <div id="tab2" class="panel1">
 	    <table style="position:relative; width: 100%;">
 	      <tr>
 		<td colspan=3>
@@ -3508,10 +3806,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      var i=0;
 	      while(i<obj.length && i < colors.length) {
 		  obj[i].style.backgroundColor=colors[i][1];
-		  obj[i].innerHTML=colors[i][0];
+		  //obj[i].innerHTML=colors[i][0];
 		  obj[i].colour=colors[i][0];
 		  i++;
 	      }
+	      pon('tab0');
 	    </script>	    
 	</td>
       </tr>
