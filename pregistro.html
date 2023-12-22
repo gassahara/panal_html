@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Preregistro Al Toque (Rides & Delivery)</title>
+    <style>
+      /* Estilos CSS para el formulario */
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input[type="text"], input[type="email"], select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      input[type="button"] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      input[type="button"]:hover {
+        background-colorx: #45a049;
+      }
+    </style>
+    <STYLE>
+
+      textarea {
+	  height: 500;
+	  width: 50%;
+      }
+      .boxesList {
+	  background-color: #5eAda0;
+	  transition: background-color 0.3s;
+	  padding: 20px;
+	  border: 1px solid #888;
+	  width: 80%; /* 80% of the width */
+	  max-width: 600px;
+	  border-radius: 10px; /* Rounded corners */
+	  white-space: pre-line;
+	  overflow: scroll;
+	  justify-content: center;
+	  align-items: center;
+	  color: white;
+      }
+
+      .boxesList:hover {
+	  background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .chat-bubble {
+	  position: relative;
+	  display: inline-block;
+	  margin: 5px 5px 5px 5px;
+	  padding: 20px;
+	  width: 45%;
+	  background-color: #c1c1f1;
+	  word-break: break-all;
+	  border-radius: 10px;
+      }
+
+      .chat-bubble-text {
+	  word-break: break-all;
+	  margin-bottom: 10px;
+	  text-align: left;
+      }
+
+      .chat-bubble-time {
+	  position: relative;
+	  text-align: right;
+	  bottom: -20px;
+	  right: 0;
+	  font-size: 12px;
+	  color: #999;
+      }
+      
+      .modal {
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* Full width */
+	  height: 100%; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgba(0,0,0,0.4); /* Black with opacity */
+      }
+
+      /* Modal content */
+      .modal-content {
+	  background-color: #fefefe;
+	  display: flex;
+	  margin: 15% auto; /* 15% from the top and centered */
+	  padding: 20px;
+	  border: 1px solid #888;
+	  width: 80%; /* 80% of the width */
+	  max-width: 600px;
+	  border-radius: 10px; /* Rounded corners */
+	  white-space: pre-line;
+	  overflow: scroll;
+	  justify-content: center;
+	  align-items: center;
+      }
+
+      /* The close button */
+      .close {
+	  color: #aaa;
+	  float: right;
+	  font-size: 28px;
+	  font-weight: bold;
+      }
+
+      .pagination button {
+	  background-color: #f1f1f1;
+	  float: left;
+	  border: 1px solid #ccc;
+	  outline: none;
+	  cursor: pointer;
+	  padding: 14px 16px;
+	  transition: 0.3s;
+	  font-size: 17px;
+	  border-radius: 12px 12px 0 0; /* Curved corners for the top of the tab */
+      }
+
+      .coins:empty {
+	  display: none;
+      }
+      .coins {
+	  background-color: #f1f0a0;
+	  float: right;
+	  border: 1px solid #ccc;
+	  outline: none;
+	  cursor: pointer;
+	  position: relative;
+	  right: 150;
+	  padding: 14px 16px;
+	  transition: 0.3s;
+	  font-size: 17px;
+	  color: #222222;
+	  display: inline-box;
+	  border-radius: 12px 12px 12px 12px; /* Curved corners for the top of the tab */
+      }
+
+      .pagination button:hover {
+	  background-color: #ddd;
+      }
+
+      .pagination button.active {
+	  background-color: #ccc;
+      }
+
+      iframe {
+	  width: 250px;
+	  height: 50px;
+	  border-width: 0;
+      }
+      a {
+	  text-decoration: none;
+	  color: blue;
+	  font-weight: bolder;
+      }
+      p, span {
+	  color: #d2a059;
+	  font-family: Sans-Serif;
+	  font-size: 18pt;
+      }
+      td {
+	  font-size: 20pt; padding: 15; text-align: center;
+      }
+      input {
+	  font-family: Sans-Serif;
+	  font-size: 18pt;
+	  
+      }
+      .color {
+          display: inline-block;
+          width: 50px;
+          height: 50px;
+          margin: 5px;
+          border: 1px solid black;
+	  background-color: white;
+      }
+
+      body {
+          background-color: #3c3c3c;
+          font-family: Arial, sans-serif;
+      }
+
+      .form {
+          background-color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          margin: 0 auto;
+          max-width: 600px;
+          padding: 25px;
+	  width: 50%;
+      }
+      .panel1 {
+          background-color: #50e9f5;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          margin: 1 auto;
+          padding: 25px;
+	  display: flex;	
+	  width: 90%;
+      }
+      h1 {
+          text-align: center;
+      }
+      label {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 10px;
+	  width: 80%;
+	  color: white;
+      }
+      input[type="text"],
+      input[type="password"],
+      input[type="color"] {
+          border: none;
+          border-radius: 5px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+          font-size: 16px;
+          margin-bottom: 20px;
+          padding: 10px;
+          width: 75%;
+      }
+      input[type="submit"] {
+          background-color: #4CAF50;
+          border: none;
+          border-radius: 5px;
+          color: #fff;
+          cursor: pointer;
+          font-size: 18px;
+          font-weight: bold;
+          margin-top: 20px;
+          padding: 10px;
+          width: 100%;
+      }
+      input[type="submit"]:hover {
+          background-color: #3e8e41;
+      }
+    </STYLE>
+    <script src="openpgpjs/dist/openpgp.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      var pubkey=`-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGTROLIBEAC1irDz//mqF2O2HyzpqMZMzC5Uq8bQ3KuPcjyvEqWf5u+20Vku
++h9IHtccyD86GcJEtIiUO2oeAFMy8bxaDDlAOzYFtXn4wkt/626PqTehFf53tcBl
+sYD/JKidqNvujqb2QrjHMQ3zjPI1KlwsmSVVMh0rmQ6969VB9wJOEmy18D76hdEU
+B1HAsoMscInyLAb4ms1NwxWxRLtMvbZYClGNNndutnkloLZOjSGdA0eMtMJ7l314
+z3Wj5eqlFlzwMtFO3m54CptUcUnzqhCCj5nxB7IpB6+DGQPTDAonvrAxK/XBBuRZ
+UMJkwE3+o14hQIAS2yiyJ+3VLl8OwVUOP7WHHdx3rJRWTGewWE+DHhyxq0/w7JRb
+eC0n9bv7woU7O4xs3ozTeHrCf4/60gHOGjDKBylQxAdxQTvvPTqoCzRrL6tqHMaU
+vfw1ONj22vEhxwOp8p2iAD85KgQKgoM6iv9bJm0pCReHKWMaFOrEhsUHdCXKtkKG
+t4wUMKyC5gSnwh3+J7sRvqy6tJxEnLbHsTbf5npls/9L97W3fOi0cOvNuyTWeZPt
+U4CqYrfi813g/g+H7e9XfjgyZY7bTVNsiukz67FmnatW+rPntKo4/jIye3HMvOOd
+lVfM8i926X5dUfzSQWdwzpkPXktFIj60pIhXy8Z3kwdd1oQFhQ7RuOz8qwARAQAB
+tBxzZXJ2ZXIgPGdhc3NhaGFyYUBnbWFpbC5jb20+iQJOBBMBCgA4FiEEIngSmu0B
+tQlv+mNPIMupDmS0wwwFAmTROLICGwMFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AA
+CgkQIMupDmS0wwyssRAAhHah0Iwe71Ne17/Qal04UWcPMzQw3XMzlynp+q9Pn4n4
+bIElkgSSapZOtj788RnAQlKf8yjTzQxxCiNEMyg7CMq0wEw27xmgYpBLdqYS859Q
+l+TYgCQ0SiplOEi0FVd44ZK2lvDNJPvvKsY/7wLlu6WJou1ExoEZ7IzDhQ/V60Kn
+rRTVE3dQLTXX+S/5N1e97HdXd0ARNuo+mwtOArViTqHUdhC1tz8U/b8BiKGRJL+A
+AE72FygnTAHEKYOs5Qpa9PxraAeU+wEpU0INQ+6zDIVOjxT8AAFTZIwaI2LePbBz
+4ukxIyLiBzcIFqbgn4t0jwLITaDYOOTJCoobndPvcKRmCTDdzVnJogH8lhfDhgzu
+3aG2Qaw6DI35m3k5A2TQyhZr0WJ9VYZ9hCWORgNkdtIaTR1cHYoNuEHcMdhJTZ7v
+jg6TK8w1XTPYM7qS8A0eZQdezBBkgI/KntX350ndtzlgMcofMCIqxk1PFfUj5yTV
+FtXPnxZV/1bGdvW0l0BAgdf+Y0fbe1vhQadiYs0oSLYFNqw+Z2tglipAguqolb/l
+xAFeqTSRNdWSjoSfImLTCxlFKlViZp6Fx31b3Vn5elbjPAAdoPajNmzxWNjWKzDe
+KaielIO6teDZs2Qg35d2q8ATNyNlGSFOruAMoUw4Hny1kVsW0DTGgZbIrvfEX8W5
+Ag0EZNE4sgEQAPFd5nhQD6fsu9IF99gOFSAHsQCEsRd2mfUY/XM/Z8J0Wj1RPHVk
+jpi7khpPiq9sqOTcngZe+JENev2DN6S4bFqgipwQeujUA+YWDMNdoaMI1yqARwoj
+/AHs6mIg158zvs7Ct7tggWObq6sUpilU3yD8H2WokweHo6jGhQNhvIJLE/vYJ/yt
+5bHsP5tYA5C0piVks1NJF2801853p+SzzT6iDhhIvqZOvV50WW+8ds08eaIl7Kmn
+gb2sL2gq+QdgQe10RkIK7d1OVj0jvts3Xi6vDUhyzYx9rPPNTBHXSDMekcnls1Jx
+7YbCghZ74JAEZe/+tOPZvIt2So0e3mA26aFiTPUS/OQBf80Nw1jqOVBBpiBjgrn9
+fgDVbGZXfbEaDmXh5F5xuE8pLFio/awnJeb4KnHlxhJNA3IKWX3VOqN/TLbhsYUB
+jve9XQF2WxMCeHxXk1yf4MyX3HD8NNrDyceS+wwXIwk3tqM11JWUQe8jCeiNgKKC
+3jPvdjYIFSrlze5xxtPRoYEnhjs3t8ui3F5x8aYGcX3MqkV8rHG4zppTX47AKIZV
+zC1QYRdwVDPac45D/j10kdOoEt49LWh/mCBl9ugKEpbymvoFhts2kIRRBSRVEOWl
+R94WK7TLxInBQ9khffqcl7HmGAAe3bCFclz8nS3lwHkpMxTV+cJuLvBtABEBAAGJ
+AjYEGAEKACAWIQQieBKa7QG1CW/6Y08gy6kOZLTDDAUCZNE4sgIbDAAKCRAgy6kO
+ZLTDDAeSD/42r3Q/Iwf3F2QME8ccO2c0GjgK9BzSkoD7yTAuQJUXw/oJIxwm40RU
+kw3Ac5BHmzIk89tzwLEhsc/b+s8N6nkHzgRD3gdYxhagWO1O0YotrbUAppHZ5SqO
+/KilK6Wj2mIzJZg75b2U7Fb4jBmtsijcFkYFTJkhUzqebVhwJNdpzKxhRmhCAGDB
+zB3f2sr0QZ2E0bqLxIs8UJ/4oNC2KhwVmulvk3001d/X0ZqJDAB36mKMsQH4+f0i
+IiKqs8/b2AStkDseLhUsqz+/zxCVapIGOs57YkmTleeZWT3TnRG2BGa5sbSaw3ty
+bVANQDIY4rDm7+2Rm7OVDw7M88N/Tv+TYysh2mgG5/tiWdlgOgtnJxusSM2ELO5Y
+NIuKWuyk7CKZUQEAR5FiGNrA5/0BYfL9g8IYIR/6jqD5Pd9zF7XIbQ4/QEmtDOeL
+q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
+1kZ0i7rN1yK9sFVDK4zyKg5RXS8M24JjyHwclhafsT5HPKAAAMQ9s0M8QrO5cwxd
+51QyMSI3sQHFPsplnEBC89w599zlbKQ6DmIyQdKhU44AXZImn3og3bF647k1QR3J
+/dZqcWTPaYGpmR5tkr1d75qU7NWxhqL+rzzvv/VAptljHJnH4IkuQg==
+=5EZI
+-----END PGP PUBLIC KEY BLOCK-----`;
+
+      var encrypted=new Uint8Array();
+      var passw="";
+      var t=null;
+      var scro=null;
+      var iv=new Uint8Array();
+      var remotepath = window.location.href.split('//')[0] + '//' +  (window.location.href.split('//')[1]).split('/')[0];
+      var esperaencrgrados=null;
+      var longitud=0;
+      var latitud=0;
+      var c=0;
+      var errores=null;
+      var ci=0;
+      var pk_global_full=null;
+      var previo=null;
+      var numeros=[];
+      var fechas=[];
+      var bets=[];
+      var show=null;
+      var rsaPublicKey=null;
+      var buzonforGameis="RUEDA";
+      var gameBuzon=[];
+      var continua=false;
+      var coinbox=null;
+      var emptyMessage="Nothing to Show (yet...)";
+
+      function aleatoria() {
+	  var longitudcadenaaleatoria=Math.random() * (260 - 35) + 35;
+	  var cadenaaleatoria="";
+	  var letra=47;
+	  while(longitudcadenaaleatoria>=0) {
+ 	      while(letra<5 || letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='/'||String.fromCharCode(letra)=='*'||String.fromCharCode(letra)=='+'||String.fromCharCode(letra)==';'||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+	      cadenaaleatoria=cadenaaleatoria+String.fromCharCode(letra);
+	      longitudcadenaaleatoria--;
+	      letra=47;
+	  }
+	  return cadenaaleatoria;
+      }
+
+      function isArray(obj) {
+	  return Object.prototype.toString.call(obj) === '[object Array]';
+      }
+
+      async function digestMessage(message) {
+	  const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+	  const hashBuffer = await crypto.subtle.digest('SHA-512', msgUint8);           // hash the message
+	  const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+	  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+	  return hashHex;
+      }
+      //-----------------------------------------------
+
+      async function datosn() {
+	  let cb=0;
+	  let cadena="";
+	  while(cb<bytes.length) {
+	      cadena+=bytes[cb];
+	      cb++;
+	      if(c<bytes.length) cadena+=",";
+	  }
+	  cadena+="};/*"+aleatoria()+'*'+'/'+"\nchar *email=" + '"' + document.getElementById("usuario").value + '"' + ";\n/*"+aleatoria()+" */";
+	  cadena+="/*"+aleatoria()+'*'+'/'+"\nchar numeros[" + numeros.length + "]={";		      
+	  let hb=0;
+	  while(hb<numeros.length) {
+	      cadena+=numeros[hb];
+	      hb++;
+	      if(hb<numeroslen) cadena+=",";
+	  }
+	  cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
+	  cadena+="/*"+aleatoria()+'*'+'/'+"\nlong dates[" + fechas.length + "]={";
+	  hb=0;
+	  while(hb<fechas.length) {
+	      cadena+=fechas[hb];
+	      hb++;
+	      if(hb<fechaslen) cadena+=",";
+	  }
+	  cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
+	  cadena+="/*"+aleatoria()+'*'+'/'+"\ndouble bets[" + bets.length + "]={";
+	  hb=0;
+	  while(hb<bets.length) {
+	      cadena+=bets[hb];
+	      hb++;
+	      if(hb<betslen) cadena+=",";
+	  }
+	  cadena+="};/*"+aleatoria()+" */;\n/*"+aleatoria()+" */";
+	  encr(cadena);
+      }
+      var t3=null;
+      function insertacode(texto, code) {
+	  if(texto.indexOf("(int argc, char *argv[]){")<0) texto=aleatoria()+'*'+'/'+" \n#include <stdio.h>\n/*"+aleatoria()+'*'+'/'+"#include <time.h>\n/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){/*"+aleatoria()+'*'+'/'+texto + "} /*" + aleatoria()+'*'+'/';
+	  return texto.substring(0, texto.indexOf("(int argc, char *argv[]){")+("(int argc, char *argv[]){").length) + '/*'+aleatoria()+'*'+'/'+code+ '/*'+aleatoria()+'*'+'/'+texto.substring(texto.indexOf("(int argc, char *argv[]){")+("(int argc, char *argv[]){").length, texto.length) ;
+      }
+      function encripta(texto, publickey=pubkey, privatekey=null, datefield=null, fromfield=null) {
+	  if(privatekey && !datefield) datefield=(new Date()).getTime();
+	  return new Promise(async (resolve)=>{
+	      openpgp.readKey({ armoredKey: publickey }).then((RSA_publicKey)=>{
+		  if(privatekey) {
+		      if(texto.indexOf("\n\n")>0 && texto.substring(0, 4)!="var " && texto.substring(0, ('-----BEGIN PGP PRIVATE KEY BLOCK-----').length)!= '-----BEGIN PGP PRIVATE KEY BLOCK-----') {
+			  var headerM=texto.substring(0, texto.indexOf("\n\n")+2);
+			  if(headerM.indexOf("Date:")<0) {
+			      headerM=headerM.substring(0, headerM.indexOf("\n"))+"Date: " + datefield + "\n"+headerM.substring(headerM.indexOf("\n"), headerM.length);
+			      texto=headerM+texto.substring(texto.indexOf("\n\n")+2, texto.length)
+			  }
+			  // - - - - 
+			  if(fromfield) {
+			      if(headerM.indexOf("From:")<0) {
+				  headerM=headerM.substring(0, headerM.indexOf("\n"))+"\nFrom: " + fromfield + headerM.substring(headerM.indexOf("\n"), headerM.length);
+				  texto=headerM+texto.substring(texto.indexOf("\n\n")+2, texto.length)
+			      }
+			  }
+		      } else {
+			  texto="Date: " + datefield + "\n\n"+texto
+		      }
+		  }
+		  openpgp.createMessage({ text: texto }).then((msg)=>{
+		      //		      console.log({RSA_publicKey, msg});
+		      openpgp.encrypt({
+			  message: msg,
+			  encryptionKeys: RSA_publicKey,
+		      }).then((data)=>{
+			  var output=data;
+			  var boundary="-------" + (Math.floor(Math.random() * 900000000000) + 100000000000);
+			  if(privatekey){
+			      openpgp.readPrivateKey({ armoredKey: privatekey }).then((rsaPrivateKey)=>{
+				  output="Content-Type: multipart/mixed; boundary="+ boundary +"\n";
+				  openpgp.createCleartextMessage({ text: data }).then((unsignedMessage)=>{
+				      //				      console.log({unsignedMessage});
+				      openpgp.sign({
+					  message: unsignedMessage, // CleartextMessage or Message object
+					  signingKeys: rsaPrivateKey
+				      }).then((cleartextMessage)=>{
+					  //					  console.log({cleartextMessage});
+					  if(datefield) {
+					      output=output+"Date: " + datefield + "\n";
+					  }
+					  if(fromfield) {
+					      output=output+"From: " + fromfield + "\n";
+					  }
+					  output+="\n" + boundary + "\nContent-Type: text/plain; charset=us-ascii; field=signature;\n\n" + cleartextMessage;
+					  //					  console.log({output, privatekey});
+					  openpgp.createMessage({ text: output }).then((msg)=>{
+					      //					      console.log({RSA_publicKey, msg});
+					      openpgp.encrypt({
+						  message: msg,
+						  encryptionKeys: RSA_publicKey,
+					      }).then((data)=>{
+						  resolve(data);
+					      });
+					  });
+				      });
+				  });
+			      });
+			  } else {
+			      if(datefield) {
+				  output="Content-Type: multipart/mixed; boundary="+ boundary +"\nDate: " + datefield + "\n\n" + boundary + "\nContent-Type: text/plain; charset=us-ascii;field=data;\n\n" + output + "\n" + boundary;
+			      }
+			      //			      console.log({output, privatekey});
+			      resolve(output);
+			  }
+		      });
+		  });
+	      });
+	  });
+      }
+      var processed=false;
+      var tt=null;
+      var ttgrados=null;
+      var t5=null;
+      var t6=null;
+      function sleep(ms) {
+	  return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      var espera=false;
+      var cuantos=0;
+      var esperaencr=false;
+      var t4=null;
+      function encr(cadenat, pgp=null, rsapublic=pubkey) {
+	  return new Promise((resolve)=>{
+	      userPassword().then((rawKey)=>{
+		  console.log({rawKey});
+		  setOTP_SRC().then((response_array)=>{
+		      iv_OTP=response_array[0];
+		      OTP=response_array[1];
+		      OTP_resource=response_array[2];
+		      importSecretKey(rawKey[3]).then(async (kkey)=>{
+			  c=0;
+			  var bb="";
+			  var siz=128;
+			  var sizarr=cadenat.length;
+			  var arraylen=Math.ceil(sizarr/siz);
+			  while((arraylen*siz)<sizarr) arraylen++;
+			  var buflen=Math.ceil((sizarr+4)/arraylen);
+			  while((arraylen*buflen)<sizarr) buflen++;
+			  cadenat+="//";
+			  while(arraylen*buflen>cadenat.length) {
+			      letra=47;
+			      while(letra==10 || letra==13 || letra==47 || letra==42||letra==127||letra==123||letra==125||String.fromCharCode(letra)=='}'||String.fromCharCode(letra)=='{')letra=Math.random() * (254 - 32) + 32;
+			      cadenat+=String.fromCharCode(letra);
+			  }
+			  var cadarray=new Uint8Array(buflen);
+			  var arrayindex=0;
+			  arrayindex=0;
+			  var buffers="";
+			  var ivs="";
+			  var bb=aleatoria()+'*'+'/'+"#include <stdio.h>\n"+"/*"+aleatoria()+'*'+'/'+"int main(int argc, char *argv[]){\n"+"/*"+aleatoria()+'*'+'/'+";\n";
+			  if(!arraylen) arraylen=1;
+			  while(arrayindex<arraylen) {
+			      let iv = window.crypto.getRandomValues(new Uint8Array(16));
+			      counter = window.crypto.getRandomValues(new Uint8Array(16));
+			      ci=buflen*arrayindex;
+			      c=0;
+			      while(ci<buflen*(arrayindex+1)) {
+				  if(ci>=cadenat.length) break;
+				  cadarray[c]=cadenat.charCodeAt(ci);
+				  c++;
+				  ci++;
+			      }
+			      ciphertext = await window.crypto.subtle.encrypt(
+				  {
+				      name: "AES-CTR",
+				      counter:iv,
+				      length: 128
+				  },
+				  kkey,
+				  cadarray
+			      );
+			      const buffer = new Uint8Array(ciphertext, 0, ciphertext.byteLength);
+			      c=0;
+			      if(arrayindex!=0) buffers+=",";
+			      buffers+="{";
+			      while(c<buffer.length) {
+				  buffers+=buffer[c];
+				  c++;
+				  if(c<buffer.length)buffers+=",";
+			      }
+			      buffers+="}"
+			      if(arrayindex!=0) ivs+=",";
+			      ivs+="{";
+			      c=0;
+			      while(c<iv.length) {
+				  ivs+=iv[c];
+				  c++;
+				  if(c<iv.length)ivs+=",";
+			      }
+			      ivs+="}"
+			      arrayindex++;
+			  }
+			  
+			  bb+="/*"+aleatoria()+'*'+'/'+"\nint encrypted[" + (arraylen) + "]["+buflen+"]={"+buffers+"};"+"/*"+aleatoria()+'*'+'/'+"\nint iv["+(arraylen)+"][16]={"+ivs+"};"+"/*"+aleatoria()+'*'+'/'+"\n"; 
+			  bb+="};\n"
+			  if(pgp) {
+			      const { data: encryptedv } = await openpgp.encrypt({
+				  message: openpgp.message.fromText(bb),
+				  publicKeys: (await openpgp.key.readArmored(rsapublic)).keys
+			      });
+			      resolve(encryptedv);
+			  } else resolve(bb);
+		      });
+		  });
+	      });
+	  });
+      }
+
+      function enviar() {
+	  setOTP_SRC().then((response_array)=>{
+	      iv_OTP=response_array[0];
+	      OTP=response_array[1];
+	      OTP_resource=response_array[2];
+	      document.getElementById("modaltext").innerHTML="Reuniendo Datos";
+	      document.getElementById("modal").style.display="block";
+	      var fullname=document.getElementById("fullname").value;
+	      var phone=document.getElementById("phone").value;
+	      var uso=document.getElementById("uso").value;
+	      var transport=document.getElementById("transport").value;
+	      var subscription=document.getElementById("subscription").value;
+	      var servicio=document.getElementById("servicio").value;
+	      var payment=document.getElementById("payment").value;
+	      if(fullname && phone && uso && transport && subscription && servicio && payment){
+		  var codeforRegister=insertacode("", "; char fullname[" + fullname.length + "]=\""+fullname+"\"; ");
+		  codeforRegister=insertacode(codeforRegister, "; char phone["+phone.length + "]=\""+phone+"\"; ");
+		  codeforRegister=insertacode(codeforRegister, "; char uso["+uso.length + "]=\""+uso+"\"; ");
+		  codeforRegister=insertacode(codeforRegister, "; char transport["+transport.length + "]=\""+transport+"\"; ");
+		  codeforRegister=insertacode(codeforRegister, "; char subscription["+subscription.length + "]=\""+subscription+"\"; ");
+		  codeforRegister=insertacode(codeforRegister, "; char servicio["+servicio.length + "]=\""+servicio+"\"; ");
+		  codeforRegister=insertacode(codeforRegister, "; char payment["+payment.length + "]=\""+payment+"\"; ");
+		  encripta(codeforRegister).then(async (resp)=>{
+		      console.log({resp});
+		      const data = new URLSearchParams();
+		      data.append("texto2", resp);
+		      data.append("iv_OTP", iv_OTP);
+		      data.append("OTP_resource", OTP_resource);
+		      data.append("OTP", OTP);
+		      document.getElementById("modaltext").innerHTML="Enviando ...";
+		      document.getElementById("modal").style.display="block";
+		      try {
+			  fetch(remotepath + "/formalm.php", {
+			      method: "POST",
+			      headers: {
+				  "Content-Type": "application/x-www-form-urlencoded"
+			      },
+			      body: data
+			  })
+			      .then(response => response.text)
+			      .then(async (data) => {
+				  console.log("DONE");
+				  document.getElementById("modaltext").innerHTML="Enviado";
+				  document.getElementById("modal").style.display="block";
+			      })
+			      .catch((errorA )=> {
+				  document.getElementById("modaltext").innerHTML="Error Enviando";
+				  document.getElementById("modal").style.display="block";
+				  console.error(errorA);
+				  error=".";
+			      });
+		      } catch (e) {
+		      }
+		  });
+	      } else {
+		  document.getElementById("modaltext").innerHTML="Por Favor Complete Todos los Datos";
+		  document.getElementById("modal").style.display="block";
+	      }
+	  });
+      }
+      async function setOTP_SRC() {
+	  return new Promise(async(resolve) => {
+	      init_OTProcessed=0;
+	      while (init_OTProcessed!=255) {
+		  try {
+		      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
+		      error=".";
+		      await sleep (500);
+		      eval(cadenaEval);
+		      if(!cadenaEval.length) {
+			  continua=true;
+			  continue;
+		      }
+
+		  } catch (e) {
+		      init_OTProcessed=0;
+		  }
+	      }
+	      resolve([iv_OTP, OTP, OTP_resource]);
+	  });
+      }
+
+      </script>
+  </head>
+  <body>
+    <form>
+      <label for="fullname">Nombre completo:</label>
+      <input type="text" id="fullname" name="fullname" required>
+      
+      <label for="phone">Teléfono:</label>
+      <input type="text" id="phone" name="phone" required>
+      
+      
+      <label for="transport">Tipo de Transporte</label>
+      <select id="transport" name="transport" required>
+        <option value="">Selecciona un Tipo de Transporte</option>
+        <option value="Bicicleta">Bicicleta</option>
+        <option value="Vehiculo">Vehiculo</option>
+        <option value="Moto">Moto</option>
+      </select>
+
+
+      <label for="servicio">¿Qué servicio te interesa más?</label>
+      <select id="servicio" name="servicio" required>
+        <option value="">Selecciona un servicio</option>
+        <option value="Rides">Rides</option>
+        <option value="Delivery">Delivery</option>
+      </select>
+      
+      <label for="payment">¿Qué medio de pago prefieres?</label>
+      <select id="payment" name="payment" required>
+        <option value="">Selecciona un medio de pago</option>
+        <option value="efectivo">Efectivo</option>
+        <option value="pagmomovil">Pago Movil</option>
+        <option value="transferencia">Transferencia</option>
+        <option value="electronico">Pago Electronico</option>
+      </select>
+      
+      <label for="uso">¿Con qué frecuencia usarías el servicio?</label>
+      <select id="uso" name="uso" required>
+        <option value="">Selecciona una frecuencia</option>
+        <option value="Diario">Diario</option>
+        <option value="Semanal">Semanal</option>
+        <option value="Mensual">Mensual</option>
+        <option value="Ocasional">Ocasional</option>
+      </select>
+      
+      <label for="subscription">¿Qué tipo de subscripcion usarías?</label>
+      <select id="subscription" name="subscription" required>
+        <option value="">Selecciona un tipo de Subscripcion </option>
+        <option value="carrera">Por Carrera/Evio (Pago Electronico) </option>
+        <option value="Semanal">Semanal</option>
+        <option value="Mensual">Mensual</option>
+        <option value="Ocasional">Ocasional</option>
+      </select>
+      
+      <input type="button" value="Enviar" onclick="enviar();">
+    </form>
+    <div id="modal" class="modal" >
+      <span class="modal-content" >
+	<p id="modaltext"> MODAL </p>
+	<p style="text-align: 'center'"> <input id="modalok" type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"/> </p>
+      </span>
+    </div>
+  </body>
+</html>
