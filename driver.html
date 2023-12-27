@@ -1,0 +1,345 @@
+<html>
+  <head>
+    <STYLE>
+
+      textarea {
+	  height: 500;
+	  width: 50%;
+      }
+    input[type="button"] {
+      background-color: #4dAd50;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+
+    .boxesList {
+	background-color: #5eAda0;
+	transition: background-color 0.3s;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%; /* 80% of the width */
+	max-width: 600px;
+	border-radius: 10px; /* Rounded corners */
+	white-space: pre-line;
+	overflow: scroll;
+	justify-content: center;
+	align-items: center;
+	color: white;
+    }
+
+    .boxesList:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    button:hover {
+	background-color: #2e8e41;
+    }
+
+    .language-selector {
+	position: relative;
+	display: inline-block;
+    }
+    
+    .language-list {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 100px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+    }
+    
+    .language-selector:hover .language-list {
+	display: block;
+    }
+
+    .chat-bubble {
+	position: relative;
+	display: inline-block;
+	margin: 5px 5px 5px 5px;
+	padding: 20px;
+	width: 45%;
+	background-color: #c1c1f1;
+	word-break: break-all;
+	border-radius: 10px;
+    }
+
+    .chat-bubble-text {
+	word-break: break-all;
+	margin-bottom: 10px;
+	text-align: left;
+    }
+
+    .chat-bubble-time {
+	position: relative;
+	text-align: right;
+	bottom: -20px;
+	right: 0;
+	font-size: 12px;
+	color: #999;
+    }
+    
+    .modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0,0,0,0.4); /* Black with opacity */
+    }
+
+    /* Modal content */
+    .modal-content {
+	background-color: #fefefe;
+	display: flex;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%; /* 80% of the width */
+	max-width: 600px;
+	border-radius: 10px; /* Rounded corners */
+	white-space: pre-line;
+	overflow: scroll;
+	justify-content: center;
+	align-items: center;
+    }
+
+    /* The close button */
+    .close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+    }
+
+    .pagination button {
+	background-color: #f1f1f1;
+	float: left;
+	border: 1px solid #ccc;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+	border-radius: 12px 12px 0 0; /* Curved corners for the top of the tab */
+    }
+
+    .coins:empty {
+	display: none;
+    }
+    .coins {
+	background-color: #f1f0a0;
+	float: right;
+	border: 1px solid #ccc;
+	outline: none;
+	cursor: pointer;
+	position: relative;
+	right: 150;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+	color: #222222;
+	display: inline-box;
+	border-radius: 12px 12px 12px 12px; /* Curved corners for the top of the tab */
+    }
+
+    .pagination button:hover {
+	background-color: #ddd;
+    }
+
+    .pagination button.active {
+	background-color: #ccc;
+    }
+
+    iframe {
+	width: 250px;
+	height: 50px;
+	border-width: 0;
+    }
+    a {
+	text-decoration: none;
+	color: blue;
+	font-weight: bolder;
+    }
+    p, span {
+	color: #d2a059;
+	font-family: Sans-Serif;
+	font-size: 18pt;
+    }
+    td {
+	font-size: 20pt; padding: 15; text-align: center;
+    }
+    input {
+	font-family: Sans-Serif;
+	font-size: 18pt;
+	
+    }
+    .color {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        border: 1px solid black;
+	background-color: white;
+    }
+
+    .animage {
+	max-width: 100%;
+	height: auto;
+	cursor: pointer;
+	transition: all 0.5s ease;
+    }
+    .animage.enlarge {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	z-index: 9999;
+    }
+
+    body {
+	background-color: #3c3c3c;
+	font-family: Arial, sans-serif;
+    }
+
+    .form {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin: 0 auto;
+        max-width: 600px;
+        padding: 25px;
+	width: 50%;
+    }
+    .panel1 {
+        background-color: #d0e9f5;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin: 1 auto;
+        padding: 25px;
+	display: flex;	
+	width: 90%;
+    }
+    h1 {
+        text-align: center;
+    }
+    label {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+	width: 20%;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="color"] {
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 75%;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+        padding: 10px;
+        width: 100%;
+    }
+    input[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+    </STYLE>
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
+    <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
+    <script>
+      var location=null;
+      function successCallback(position){
+	  location = position;
+	  var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	  var osm = new L.TileLayer(osmUrl, {minZoom:2, maxZoom:19});
+	  var googleStreets = new L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{minZoom:1, maxZoom:19, subdomains:['mt0','mt1','mt2','mt3']});
+	  var googleSat = new L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{minZoom:1, maxZoom: 21,subdomains:['mt0','mt1','mt2','mt3']});
+	  var map = L.map('map', { doubleClickZoom:true, zoomControl:true}).setView([position.coords.latitude, position.coords.longitude], 15);
+	  //var map = new L.Map('map', { doubleClickZoom:false, zoomControl:false, maxBounds:([[90,-270],[-90,270]]) });
+	  L.control.layers({"OSM (Mapnik)": osm, "Google Street": googleStreets, "Google Earth": googleSat}).addTo(map);
+	  map.addLayer(osm);
+	  var map_set = "osm";	  
+	  encryptPasswordAndSubmit();
+      }
+      var remote="http://127.0.0.1:8888/setLocation";
+      async function digestMessage(message) {
+	  const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+	  const hashBuffer = await crypto.subtle.digest('SHA-512', msgUint8);           // hash the message
+	  const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+	  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+	  return hashHex;
+      }
+      async function postData(url = '', data = {}) {
+	  try {
+	      const response = await fetch(url, {
+		  method: 'POST',
+		  headers: {
+		      'Content-Type': 'application/json'
+		  },
+		  body: JSON.stringify(data)
+	      });
+	      console.log(response);
+	  } catch (e) {
+	      console.log(e);
+	  }
+	  return response.json();
+      }
+      async function encryptPasswordAndSubmit() {
+	  var password = document.getElementById("password").value;
+	  var user = document.getElementById("username").value;
+	  alert(password)
+	  if(password!=undefined && user!=undefined && location) {
+	      var encryptedPassword = await digestMessage(password);
+	      console.log(await (await postData(remote, {'user': user, 'key': encryptedPassword, 'latitude': location.latitude, 'longitude': location.longitude})));
+	  }
+      }
+      function load() {
+	  if(navigator.geolocation) { // if the browser supports geolocation
+	  navigator.geolocation.getCurrentPosition(
+              this.successCallback,
+              this.errorCallback
+	  ) // get the user's location
+	  let result = document.querySelector("#result");
+	  result.style.display = "block";
+	  result.innerText = "Getting the position information..."
+      }else{
+	  alert('Your browser does not support geolocation') // if the browser doesn't support geolocation
+      }
+      }
+
+    </script>
+  </head>
+  <body>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username"><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password"><br><br>
+      <input type="button" value="Enviar" onclick="load()" style="width: 100%;">
+      <div id="map" style="width:100%;height: 800px;"></div>
+  </body>
+</html>

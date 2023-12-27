@@ -1,0 +1,384 @@
+<html>
+  <head>
+    <STYLE>
+      textarea {
+	  height: 500;
+	  width: 50%;
+      }
+    input[type="button"], select {
+      background-color: #4dAd50;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+
+    .boxesList {
+	background-color: #5eAda0;
+	transition: background-color 0.3s;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%; /* 80% of the width */
+	max-width: 600px;
+	border-radius: 10px; /* Rounded corners */
+	white-space: pre-line;
+	overflow: scroll;
+	justify-content: center;
+	align-items: center;
+	color: white;
+    }
+
+    .boxesList:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    button:hover {
+	background-color: #2e8e41;
+    }
+
+    .language-selector {
+	position: relative;
+	display: inline-block;
+    }
+    
+    .language-list {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 100px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+    }
+    
+    .language-selector:hover .language-list {
+	display: block;
+    }
+
+    .chat-bubble {
+	position: relative;
+	display: inline-block;
+	margin: 5px 5px 5px 5px;
+	padding: 20px;
+	width: 45%;
+	background-color: #c1c1f1;
+	word-break: break-all;
+	border-radius: 10px;
+    }
+
+    .chat-bubble-text {
+	word-break: break-all;
+	margin-bottom: 10px;
+	text-align: left;
+    }
+
+    .chat-bubble-time {
+	position: relative;
+	text-align: right;
+	bottom: -20px;
+	right: 0;
+	font-size: 12px;
+	color: #999;
+    }
+    
+    .modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0,0,0,0.4); /* Black with opacity */
+    }
+
+    /* Modal content */
+    .modal-content {
+	background-color: #fefefe;
+	display: flex;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%; /* 80% of the width */
+	max-width: 600px;
+	border-radius: 10px; /* Rounded corners */
+	white-space: pre-line;
+	overflow: scroll;
+	justify-content: center;
+	align-items: center;
+    }
+
+    /* The close button */
+    .close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+    }
+
+    .pagination button {
+	background-color: #f1f1f1;
+	float: left;
+	border: 1px solid #ccc;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+	border-radius: 12px 12px 0 0; /* Curved corners for the top of the tab */
+    }
+
+    .coins:empty {
+	display: none;
+    }
+    .coins {
+	background-color: #f1f0a0;
+	float: right;
+	border: 1px solid #ccc;
+	outline: none;
+	cursor: pointer;
+	position: relative;
+	right: 150;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+	color: #222222;
+	display: inline-box;
+	border-radius: 12px 12px 12px 12px; /* Curved corners for the top of the tab */
+    }
+
+    .pagination button:hover {
+	background-color: #ddd;
+    }
+
+    .pagination button.active {
+	background-color: #ccc;
+    }
+
+    iframe {
+	width: 250px;
+	height: 50px;
+	border-width: 0;
+    }
+    a {
+	text-decoration: none;
+	color: blue;
+	font-weight: bolder;
+    }
+    p, span {
+	color: #d2a059;
+	font-family: Sans-Serif;
+	font-size: 18pt;
+    }
+    td {
+	font-size: 20pt; padding: 15; text-align: center;
+    }
+    input {
+	font-family: Sans-Serif;
+	font-size: 18pt;
+	
+    }
+    .color {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        border: 1px solid black;
+	background-color: white;
+    }
+
+    .animage {
+	max-width: 100%;
+	height: auto;
+	cursor: pointer;
+	transition: all 0.5s ease;
+    }
+    .animage.enlarge {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	z-index: 9999;
+    }
+
+    body {
+	background-color: #3c3c3c;
+	font-family: Arial, sans-serif;
+    }
+
+    .form {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin: 0 auto;
+        max-width: 600px;
+        padding: 25px;
+	width: 50%;
+    }
+    .panel1 {
+        background-color: #d0e9f5;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin: 1 auto;
+        padding: 25px;
+	display: flex;	
+	width: 90%;
+    }
+    h1 {
+        text-align: center;
+    }
+    label {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+	width: 20%;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="color"] {
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 75%;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+        padding: 10px;
+        width: 100%;
+    }
+    input[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+    </STYLE>
+    <script>
+      var remote="http://127.0.0.1:8888/register";
+      async function digestMessage(message) {
+	  const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+	  const hashBuffer = await crypto.subtle.digest('SHA-512', msgUint8);           // hash the message
+	  const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+	  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+	  return hashHex;
+      }
+      async function streamToString(stream) {
+	  const reader = stream.getReader();
+	  const decoder = new TextDecoder();
+	  let result = '';
+	  while (true) {
+	      const { done, value } = await reader.read();
+	      if (done) {
+		  return result;
+	      }
+	      result += decoder.decode(value);
+	  }
+      }
+      function postData(url = '', data = {}) {
+	  return new Promise((resolve)=>{
+	      try {
+		  fetch(url, {
+		      method: 'POST',
+		      headers: {
+			  'Content-Type': 'application/json'
+		      },
+		      body: JSON.stringify(data)
+		  }).then((response)=>{
+		      console.log(response);
+		      streamToString(response.body).then((responseStream)=>{
+			  resolve (responseStream);
+		      });
+		  });
+	      } catch (e) {
+		  console.log(e);
+		  resolve (JSON.stringy({e}));
+	      }
+	  });
+      }
+      async function encryptPasswordAndSubmit() {
+	  var password = document.getElementById("password").value;
+	  var user = document.getElementById("username").value;
+	  var key = await digestMessage(password);
+	  var vehicle  = document.getElementById("vehicle").value;
+	  var brand  = document.getElementById("brand").value;
+	  var phone  = document.getElementById("phone").value;
+	  if(password && user && vehicle && brand && phone) {
+	      document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
+	      document.getElementById("modal").style.display="block";
+	      var ride=await postData(remote, {user, key, vehicle, brand, phone});
+	      console.log({ride});
+	      document.getElementById("modaltext").innerHTML="Enviado";
+	      document.getElementById("modal").style.display="block";
+	  } else {
+	      document.getElementById("modaltext").innerHTML="Por favor llene todos los campos";
+	      document.getElementById("modal").style.display="block";
+	  }
+      }
+      function populateBrands() {
+	  const vehicle = document.getElementById('vehicle').value;
+	  const brandSelect = document.getElementById('brand');
+	  // Clear the current options
+	  brandSelect.innerHTML = '';
+	  // Add new options based on the selected vehicle
+	  if (vehicle === 'car') {
+              const carBrands = ['Toyota', 'Honda', 'Ford'];
+              carBrands.forEach(brand => {
+		  const option = document.createElement('option');
+		  option.value = brand;
+		  option.text = brand;
+		  brandSelect.appendChild(option);
+              });
+	  } else if (vehicle === 'motorcycle') {
+              const motorcycleBrands = ['Yamaha', 'Suzuki', 'Kawasaki'];
+              motorcycleBrands.forEach(brand => {
+		  const option = document.createElement('option');
+		  option.value = brand;
+		  option.text = brand;
+		  brandSelect.appendChild(option);
+              });
+	  }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="modal" class="modal" >
+      <span class="modal-content" >
+	<p id="modaltext"> MODAL </p>
+	<p style="text-align: 'center'"> <input id="modalok" type="button" value="OK" onclick="document.getElementById('modal').style.display='none';"/> </p>
+      </span>
+    </div>
+    <form id="myForm" action="http://127.0.0.1:8888/register" method="post" style="position: relative; width: 50%; left: 30%;">
+      <label for="username">Usuario:</label>
+      <input type="text" id="username" name="username"><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password"><br><br>
+      <label for="phone">Telefono:</label>
+      <input type="text" id="phone" name="phone"><br><br>
+      <label for="vehiculo">Vehiculo:</label>
+      <select id="vehicle" onchange="populateBrands()">
+	<option value="">Seleccione un Tipo de Vehiculo</option>
+	<option value="car">Automovil</option>
+	<option value="motorcycle">Moto</option>
+	<option value="bicicle">Bicileta</option>
+      </select>
+      <label for="brand">Escoja una Marca:</label>
+      <select id="brand"></select>
+      <input type="button" value="Registrar" onclick="encryptPasswordAndSubmit()" style="width: 100%;">
+    </form>
+  </body>
+</html>

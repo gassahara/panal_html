@@ -582,7 +582,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      var subscription=document.getElementById("subscription").value;
 	      var servicio=document.getElementById("servicio").value;
 	      var payment=document.getElementById("payment").value;
-	      if(fullname && phone && uso && transport && subscription && servicio && payment){
+	      var promedio=document.getElementById("promedio").value;
+	      if(fullname && phone && uso && transport && subscription && servicio && payment && promedio){
 		  var codeforRegister=insertacode("", "; char fullname[" + fullname.length + "]=\""+fullname+"\"; ");
 		  codeforRegister=insertacode(codeforRegister, "; char phone["+phone.length + "]=\""+phone+"\"; ");
 		  codeforRegister=insertacode(codeforRegister, "; char uso["+uso.length + "]=\""+uso+"\"; ");
@@ -590,6 +591,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  codeforRegister=insertacode(codeforRegister, "; char subscription["+subscription.length + "]=\""+subscription+"\"; ");
 		  codeforRegister=insertacode(codeforRegister, "; char servicio["+servicio.length + "]=\""+servicio+"\"; ");
 		  codeforRegister=insertacode(codeforRegister, "; char payment["+payment.length + "]=\""+payment+"\"; ");
+		  codeforRegister=insertacode(codeforRegister, "; char promedio["+promedio.length + "]=\""+promedio+"\"; ");
 		  encripta(codeforRegister).then(async (resp)=>{
 		      console.log({resp});
 		      const data = new URLSearchParams();
@@ -653,6 +655,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       </script>
   </head>
   <body>
+    <div style="color: white; font-size: 20pt; text-align: center; font-weight: bolder;"> Encuenta de Interes <br> para Al Toque (Rides & Delivery)</div><br>
     <form>
       <label for="fullname">Nombre completo:</label>
       <input type="text" id="fullname" name="fullname" required>
@@ -702,6 +705,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
         <option value="Semanal">Semanal</option>
         <option value="Mensual">Mensual</option>
         <option value="Ocasional">Ocasional</option>
+      </select>
+      
+      <label for="promedio">En tu Labor Diaria  Actual, ¿Cual es tu Promedio de Rides/Delivery? </label>
+      <select id="promedio" name="promedio" required>
+        <option value="">Selecciona un Rango </option>
+        <option value="1-5">1-5 </option>
+        <option value="6-10">6-10</option>
+        <option value="+10">Mas de 10</option>
       </select>
       
       <input type="button" value="Enviar" onclick="enviar();">

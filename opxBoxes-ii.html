@@ -7,235 +7,278 @@
 	  height: 500;
 	  width: 50%;
       }
-    input[type="button"] {
-      background-color: #4dAd50;
-      border: none;
-      color: #fff;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 12px;
-    }
+      input[type="button"] {
+	  background-color: #Ad4d50;
+	  border: none;
+	  color: #fff;
+	  padding: 10px 20px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  cursor: pointer;
+	  border-radius: 12px;
+      }
 
-    .boxesList {
-	background-color: #5eAda0;
-	transition: background-color 0.3s;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 80%; /* 80% of the width */
-	max-width: 600px;
-	border-radius: 10px; /* Rounded corners */
-	white-space: pre-line;
-	overflow: scroll;
-	justify-content: center;
-	align-items: center;
-	color: white;
-    }
+      .boxesList {
+	  background-color: #5eAda0;
+	  transition: background-color 0.3s;
+	  padding: 20px;
+	  border: 1px solid #888;
+	  width: 80%; /* 80% of the width */
+	  max-width: 600px;
+	  border-radius: 10px; /* Rounded corners */
+	  white-space: pre-line;
+	  overflow: scroll;
+	  justify-content: center;
+	  align-items: center;
+	  color: white;
+      }
 
-    .boxesList:hover {
-	background-color: rgba(0, 0, 0, 0.5);
-    }
+      .boxesList:hover {
+	  background-color: rgba(0, 0, 0, 0.5);
+      }
 
-    button:hover {
-	background-color: #2e8e41;
-    }
+      button:hover {
+	  background-color: #2e8e41;
+      }
 
-    .chat-bubble {
-	position: relative;
-	display: inline-block;
-	margin: 5px 5px 5px 5px;
-	padding: 20px;
-	width: 45%;
-	background-color: #c1c1f1;
-	word-break: break-all;
-	border-radius: 10px;
-    }
+      .language-selector {
+	  position: relative;
+	  display: inline-block;
+      }
+      
+      .language-list {
+	  display: none;
+	  position: absolute;
+	  background-color: #f9f9f9;
+	  min-width: 100px;
+	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	  z-index: 1;
+      }
+      
+      .language-selector:hover .language-list {
+	  display: block;
+      }
 
-    .chat-bubble-text {
-	word-break: break-all;
-	margin-bottom: 10px;
-	text-align: left;
-    }
+      .chat-bubble {
+	  position: relative;
+	  display: inline-block;
+	  margin: 5px 5px 5px 5px;
+	  padding: 20px;
+	  width: 45%;
+	  background-color: #c1c1f1;
+	  word-break: break-all;
+	  border-radius: 10px;
+      }
 
-    .chat-bubble-time {
-	position: relative;
-	text-align: right;
-	bottom: -20px;
-	right: 0;
-	font-size: 12px;
-	color: #999;
-    }
-    
-    .modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgba(0,0,0,0.4); /* Black with opacity */
-    }
+      .chat-bubble-text {
+	  word-break: break-all;
+	  margin-bottom: 10px;
+	  text-align: left;
+      }
 
-    /* Modal content */
-    .modal-content {
-	background-color: #fefefe;
-	display: flex;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 80%; /* 80% of the width */
-	max-width: 600px;
-	border-radius: 10px; /* Rounded corners */
-	white-space: pre-line;
-	overflow: scroll;
-	justify-content: center;
-	align-items: center;
-    }
+      .chat-bubble-time {
+	  position: relative;
+	  text-align: right;
+	  bottom: -20px;
+	  right: 0;
+	  font-size: 12px;
+	  color: #999;
+      }
+      
+      .modal {
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1000; /* Sit on top */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* Full width */
+	  height: 100%; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgba(0,0,0,0.4); /* Black with opacity */
+      }
 
-    /* The close button */
-    .close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-    }
+      /* Modal content */
+      .modal-content {
+	  background-color: #fefefe;
+	  display: flex;
+	  margin: 15% auto; /* 15% from the top and centered */
+	  padding: 20px;
+	  border: 1px solid #888;
+	  width: 80%; /* 80% of the width */
+	  max-width: 600px;
+	  border-radius: 10px; /* Rounded corners */
+	  white-space: pre-line;
+	  overflow: scroll;
+	  justify-content: center;
+	  align-items: center;
+      }
 
-    .pagination button {
-	background-color: #f1f1f1;
-	float: left;
-	border: 1px solid #ccc;
-	outline: none;
-	cursor: pointer;
-	padding: 14px 16px;
-	transition: 0.3s;
-	font-size: 17px;
-	border-radius: 12px 12px 0 0; /* Curved corners for the top of the tab */
-    }
+      /* The close button */
+      .close {
+	  color: #aaa;
+	  float: right;
+	  font-size: 28px;
+	  font-weight: bold;
+      }
 
-    .coins:empty {
-	display: none;
-    }
-    .coins {
-	background-color: #f1f0a0;
-	float: right;
-	border: 1px solid #ccc;
-	outline: none;
-	cursor: pointer;
-	position: relative;
-	right: 150;
-	padding: 14px 16px;
-	transition: 0.3s;
-	font-size: 17px;
-	color: #222222;
-	display: inline-box;
-	border-radius: 12px 12px 12px 12px; /* Curved corners for the top of the tab */
-    }
+      .pagination button {
+	  background-color: #f1f1f1;
+	  float: left;
+	  border: 1px solid #ccc;
+	  outline: none;
+	  cursor: pointer;
+	  padding: 14px 16px;
+	  transition: 0.3s;
+	  font-size: 17px;
+	  border-radius: 12px 12px 0 0; /* Curved corners for the top of the tab */
+      }
 
-    .pagination button:hover {
-	background-color: #ddd;
-    }
+      .coins:empty {
+	  display: none;
+      }
+      .coins {
+	  background-color: #f1f0a0;
+	  float: right;
+	  border: 1px solid #ccc;
+	  outline: none;
+	  cursor: pointer;
+	  position: relative;
+	  right: 150;
+	  padding: 14px 16px;
+	  transition: 0.3s;
+	  font-size: 17px;
+	  color: #222222;
+	  display: inline-box;
+	  border-radius: 12px 12px 12px 12px; /* Curved corners for the top of the tab */
+      }
 
-    .pagination button.active {
-	background-color: #ccc;
-    }
+      .pagination button:hover {
+	  background-color: #ddd;
+      }
 
-    iframe {
-	width: 250px;
-	height: 50px;
-	border-width: 0;
-    }
-    a {
-	text-decoration: none;
-	color: blue;
-	font-weight: bolder;
-    }
-    p, span {
-	color: #d2a059;
-	font-family: Sans-Serif;
-	font-size: 18pt;
-    }
-    td {
-	font-size: 20pt; padding: 15; text-align: center;
-    }
-    input {
-	font-family: Sans-Serif;
-	font-size: 18pt;
-	
-    }
-    .color {
-        display: inline-block;
-        width: 50px;
-        height: 50px;
-        margin: 5px;
-        border: 1px solid black;
-	background-color: white;
-    }
+      .pagination button.active {
+	  background-color: #ccc;
+      }
 
-    body {
-        background-color: #3c3c3c;
-        font-family: Arial, sans-serif;
-    }
+      iframe {
+	  width: 250px;
+	  height: 50px;
+	  border-width: 0;
+      }
+      a {
+	  text-decoration: none;
+	  color: blue;
+	  font-weight: bolder;
+      }
+      p, span {
+	  color: #d2a059;
+	  font-family: Sans-Serif;
+	  font-size: 18pt;
+      }
+      td {
+	  font-size: 20pt; padding: 15; text-align: center;
+      }
+      input {
+	  font-family: Sans-Serif;
+	  font-size: 18pt;
+	  
+      }
+      .color {
+          display: inline-block;
+          width: 50px;
+          height: 50px;
+          margin: 5px;
+          border: 1px solid black;
+	  background-color: white;
+      }
 
-    .form {
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        margin: 0 auto;
-        max-width: 600px;
-        padding: 25px;
-	width: 50%;
-    }
-    .panel1 {
-        background-color: #50e9f5;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        margin: 1 auto;
-        padding: 25px;
-	display: flex;	
-	width: 90%;
-    }
-    h1 {
-        text-align: center;
-    }
-    label {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 10px;
-	width: 20%;
-    }
-    input[type="text"],
-    input[type="password"],
-    input[type="color"] {
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        font-size: 16px;
-        margin-bottom: 20px;
-        padding: 10px;
-        width: 75%;
-    }
-    input[type="submit"] {
-        background-color: #4CAF50;
-        border: none;
-        border-radius: 5px;
-        color: #fff;
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 20px;
-        padding: 10px;
-        width: 100%;
-    }
-    input[type="submit"]:hover {
-        background-color: #3e8e41;
-    }
+      .animage {
+	  max-width: 100%;
+	  height: auto;
+	  cursor: pointer;
+	  transition: all 0.5s ease;
+      }
+      .animage.enlarge {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  object-fit: contain;
+	  z-index: 9999;
+      }
+
+      body {
+	  background-color: #3c3c3c;
+	  font-family: Arial, sans-serif;
+      }
+
+      .form {
+          background-color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          margin: 0 auto;
+          max-width: 600px;
+          padding: 25px;
+	  width: 50%;
+      }
+      .panel1 {
+          background-color: #d0e9f5;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          margin: 1 auto;
+          padding: 25px;
+	  display: flex;	
+	  width: 90%;
+      }
+      h1 {
+          text-align: center;
+      }
+      label {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 10px;
+	  width: 20%;
+      }
+      input[type="text"],
+      input[type="password"],
+      input[type="color"] {
+          border: none;
+          border-radius: 5px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+          font-size: 16px;
+          margin-bottom: 20px;
+          padding: 10px;
+          width: 75%;
+      }
+      input[type="submit"] {
+          background-color: #4CAF50;
+          border: none;
+          border-radius: 5px;
+          color: #fff;
+          cursor: pointer;
+          font-size: 18px;
+          font-weight: bold;
+          margin-top: 20px;
+          padding: 10px;
+          width: 100%;
+      }
+      input[type="submit"]:hover {
+          background-color: #3e8e41;
+      }
     </STYLE>
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <script src="openpgpjs/dist/openpgp.min.js" type="text/javascript" charset="utf-8"></script>
     <script>
       var pubkey=`-----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -314,6 +357,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var continua=false;
       var coinbox=null;
       var emptyMessage="Nothing to Show (yet...)";
+      var stbox=null;
+      var stcoin=null;
+      var languages=['en', 'es'];
+      var language='es';
+      var dictionary = {'usersecurity': {'es': 'Nombre de usuario debe tener al Menos 8 caracteres', 'en': 'Username Must Be at least 8 characters long' }, 'passwordsecurity': {'es': 'La Clave debe Tener al menos 10 caracteres', 'en': 'Password must be at least 10 characters long'}, 'selectcolor': {'en': 'Please Select a Color as part of the Identity', 'es': 'Por favor Selecciona un Color como parte de la Identidad'}, 'incorrectuserdata': {'en': 'Incorrect User Data', 'es': 'Datos de Usuario Incorrectos'} };
 
       const colors = [
 	  ["red", "#FF0000"],
@@ -349,6 +397,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       var symbols=['-', '/', '|', '\\'];
       var len1=0;
       var len2=1;
+      var indiceTab="indiceTab";
       function setColour(coloor, obj){
 	  colour=coloor;
 	  console.log({colour});
@@ -409,7 +458,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       function userPassword() {
 	  return new Promise((resolve)=>{
 	      if(document.getElementById('usuario').value.length<8) {
-		  document.getElementById("modaltext").innerHTML="Username Must Be At Least 8 Characters Long";
+		  document.getElementById("modaltext").innerHTML=dictionary['usersecurity'][language];
 		  document.getElementById("modal").style.display="block";
 		  document.getElementById("ingrbutton").disabled=0;
 		  document.getElementById("regbutton").disabled=0;
@@ -417,7 +466,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  return false;
 	      }
 	      if(document.getElementById('passphrase').value.length<10) {
-		  document.getElementById("modaltext").innerHTML="Password Must Be At Least 10 Characters Long";
+		  document.getElementById("modaltext").innerHTML=dictionary['passwordsecurity'][language];
 		  document.getElementById("modal").style.display="block";
 		  document.getElementById("ingrbutton").disabled=0;
 		  document.getElementById("regbutton").disabled=0;
@@ -425,7 +474,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  return false;
 	      }
 	      if(colour==null || colour=="" || colour.length<2) {
-		  document.getElementById("modaltext").innerHTML="Please Select a Color";
+		  document.getElementById("modaltext").innerHTML=dictionary['selectcolor'][language];
 		  document.getElementById("ingrbutton").disabled=0;
 		  document.getElementById("regbutton").disabled=0;
 		  document.getElementById("modal").style.display="block";
@@ -465,7 +514,81 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  }
 	  document.getElementById(obj).style.display=document.getElementById(obj).displayOriginal;
 	  document.getElementById("boton"+obj).style.backgroundColor='#40e0e0';
+	  if(obj=='tab1') indiceTab="indiceTab";
+	  if(obj=='tab2') indiceTab="indiceGame";
+	  if(obj=='tab3') indiceTab="indiceMapa";
+
+	  if(obj=='tab3') {
+              if(navigator.geolocation) { // if the browser supports geolocation
+		  navigator.geolocation.getCurrentPosition(
+                      this.successCallback,
+                      this.errorCallback
+		  ) // get the user's location
+		  let result = document.querySelector("#result");
+		  result.style.display = "block";
+		  result.innerText = "Getting the position information..."
+              }else{
+		  alert('Your browser does not support geolocation') // if the browser doesn't support geolocation
+              }
+	  }
       }
+
+      function successCallback(position){
+	  var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	  var osm = new L.TileLayer(osmUrl, {minZoom:2, maxZoom:23});
+	  var googleStreets = new L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{minZoom:1, maxZoom:19, subdomains:['mt0','mt1','mt2','mt3']});
+	  var googleSat = new L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{minZoom:1, maxZoom: 21,subdomains:['mt0','mt1','mt2','mt3']});
+	  var map = L.map('map', { doubleClickZoom:true, zoomControl:true}).setView([position.coords.latitude, position.coords.longitude], 17);
+	  //var map = new L.Map('map', { doubleClickZoom:false, zoomControl:false, maxBounds:([[90,-270],[-90,270]]) });
+	  L.control.layers({"OSM (Mapnik)": osm, "Google Street": googleStreets, "Google Earth": googleSat}).addTo(map);
+	  map.addLayer(googleStreets);
+	  var map_set = "googleStreets";
+	  //	    map.fitBounds([[0,-180],[0,180]]);
+          if (theMarker && theMarker != undefined) {
+	      map.removeLayer(theMarker);
+          };
+	  theMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+	  document.getElementById("mapride").position={latitude: position.coords.latitude, longitude: position.coords.longitude};
+	  map.on('click', function(event) {
+	      var latlng = event.latlng;	      
+	      console.log("You clicked the map at LAT: "+ latlng.lat+" and LONG: "+latlng.lng );
+              if (theMarker && theMarker != undefined) {
+		  map.removeLayer(theMarker);
+              };
+	      theMarker = L.marker([latlng.lat,latlng.lng]).addTo(map);
+	      document.getElementById("mapride").position={latitude: latlng.lat, longitude: latlng.lng};
+	      document.getElementById("mapride").disabled=false;
+	  });
+	  var searchControl = new L.Control.Search({
+	      layer: markersLayer,
+	      propertyName: 'name',
+	      marker: false,
+	      moveToLocation: function(latlng, title, map) {
+		  // move the map to the searched location
+		  map.setView(latlng, 13);
+	      }
+	  });
+	  map.addControl(searchControl);
+      }
+      var theMarker=null;
+      async function rideto(coords) {
+	  var remote="http://127.0.0.1:8888/ride";
+	  var ride=JSON.parse(await postData(remote, {'latitude': coords.latitude, 'longitude': coords.longitude}));
+	  var table="<table class=\"tableRides\">"
+	  for (obj in ride) {
+	      console.log({obj});
+	      table+="<tr onclick=\"\">";
+	      for (key in obj) {
+		  table+="<td>"+obj[key]+"</td>";
+	      }
+	      table+="</tr>";
+	  }
+	  table+="</table>";
+	  document.getElementById("modaltext").innerHTML=table;
+	  document.getElementById("modal").style.display="block";
+	  console.log({ride});
+      }
+      
       function isArray(obj) {
 	  return Object.prototype.toString.call(obj) === '[object Array]';
       }
@@ -495,121 +618,124 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      //	      console.log({encrypted, rsaPrivateKey, rsaPublicKey});
 	      RSA_decrypt(encrypted, rsaPrivateKey).then(async (message)=>{
 		  try {
-		  if(message.indexOf("\n\n")>0) {
-		      //		      console.log(message.indexOf("\n\n"));
-		      var header=message.substring(0, message.indexOf("\n\n")+2);
-		      console.log({header});
-		      if(header.indexOf("boundary=")>=0) {
-			  //			  console.log(header.indexOf("boundary="));
-			  if(header.indexOf("Date:")>=0 ) {
-			      var datefield=header.substring(header.indexOf("Date:")+("Date:").length, header.length).substring(0, header.substring(header.indexOf("Date:")+("Date:").length, header.length).indexOf("\n")).trim();
+		      if(message.indexOf("\n\n")>0) {
+			  //		      console.log(message.indexOf("\n\n"));
+			  var header=message.substring(0, message.indexOf("\n\n")+2);
+			  console.log({header});
+			  if(header.indexOf("boundary=")>=0) {
+			      //			  console.log(header.indexOf("boundary="));
+			      if(header.indexOf("Date:")>=0 ) {
+				  var datefield=header.substring(header.indexOf("Date:")+("Date:").length, header.length).substring(0, header.substring(header.indexOf("Date:")+("Date:").length, header.length).indexOf("\n")).trim();
 
-			      if(header.indexOf("From:")>=0 && !rsaPublicKey ) {
-				  var buzonFromField=header.substring(header.indexOf("From:")+("From:").length, header.length).substring(0, header.substring(header.indexOf("From:")+("From:").length, header.length).indexOf("\n")).trim();
-				  console.log("Decrypting", {header, buzonFromField});
-				  buzonFromField=await digestMessage(buzonFromField);
-				  console.log({buzonFromField});
-				  buzonFromFieldPublic=await digestMessage(buzonFromField+".jspublic"+"\n");
-				  error=".";
-				  while(error==".") {
-				      try {
-					  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?e=I&fname='+encodeURI(buzonFromFieldPublic)+'.js&date=' + (new Date()).getTime())).text();
-					  eval(cadenaEval);
-					  if(!cadenaEval.length) {
-					      continua=true;
-					      continue;
+				  if(header.indexOf("From:")>=0 && !rsaPublicKey ) {
+				      var buzonFromField=header.substring(header.indexOf("From:")+("From:").length, header.length).substring(0, header.substring(header.indexOf("From:")+("From:").length, header.length).indexOf("\n")).trim();
+				      console.log("Decrypting", {header, buzonFromField});
+				      buzonFromField=await digestMessage(buzonFromField);
+				      console.log({buzonFromField});
+				      buzonFromFieldPublic=await digestMessage(buzonFromField+".jspublic"+"\n");
+				      error=".";
+				      while(error==".") {
+					  try {
+					      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?e=I&fname='+encodeURI(buzonFromFieldPublic)+'.js&date=' + (new Date()).getTime())).text();
+					      eval(cadenaEval);
+					      if(!cadenaEval.length) {
+						  continua=true;
+						  continue;
+					      }
+
+					  } catch (e) {
+					      error=".";
 					  }
-
-				      } catch (e) {
-					  error=".";
 				      }
+				      
+				      if(error=="Not Found") {
+					  errorFromDecMessages="Signatary Not Found";
+					  resolve({error: errorFromDecMessages, data});
+					  return false;
+				      }
+				      errorFromDecMessagesName=errorFromDecMessages;
+				      eval(atob(content));
+				      publicK=rsaPublicKey;
+				      console.log("Loaded Public ('From:' Field)");
 				  }
 				  
-				  if(error=="Not Found") {
-				      errorFromDecMessages="Signatary Not Found";
-				      resolve({error: errorFromDecMessages, data});
-				      return false;
+				  var boundary=header.substring(header.indexOf("boundary=")+("boundary=").length, header.length);
+				  if(boundary.indexOf("\n")>0) boundary=boundary.substring(0, boundary.indexOf("\n"));
+				  if(boundary.indexOf(";")>0) boundary=boundary.substring(0, boundary.indexOf(";"));
+				  var fields=new Object();
+				  fields["signature"]=null;
+				  var contentMessage=message.substring(header.length, message.length).split(boundary);
+				  //			      console.log({fields, contentMessage, boundary});
+				  var i=1;
+				  var k=0;
+				  while(i<contentMessage.length) {
+				      var j=0;
+				      while(contentMessage[i].charAt(0)=='\n' && contentMessage[i].length>0) contentMessage[i]=contentMessage[i].substring(1, contentMessage[i].length);
+				      for(var key in fields) {
+					  if(fields[key]==null && contentMessage[i].substring(0,contentMessage[i].indexOf("\n")).indexOf("field="+key)>=0) {
+					      fields[key]=i;
+					  }
+					  j++;
+				      }
+				      i++;
 				  }
-				  errorFromDecMessagesName=errorFromDecMessages;
-				  eval(atob(content));
-				  publicK=rsaPublicKey;
-				  console.log("Loaded Public ('From:' Field)");
-			      }
-			      
-			      var boundary=header.substring(header.indexOf("boundary=")+("boundary=").length, header.length);
-			      if(boundary.indexOf("\n")>0) boundary=boundary.substring(0, boundary.indexOf("\n"));
-			      if(boundary.indexOf(";")>0) boundary=boundary.substring(0, boundary.indexOf(";"));
-			      var fields=new Object();
-			      fields["signature"]=null;
-			      var contentMessage=message.substring(header.length, message.length).split(boundary);
-			      //			      console.log({fields, contentMessage, boundary});
-			      var i=1;
-			      var k=0;
-			      while(i<contentMessage.length) {
-				  var j=0;
-				  while(contentMessage[i].charAt(0)=='\n' && contentMessage[i].length>0) contentMessage[i]=contentMessage[i].substring(1, contentMessage[i].length);
+				  errorFromDecMessages="Success";
 				  for(var key in fields) {
-				      if(fields[key]==null && contentMessage[i].substring(0,contentMessage[i].indexOf("\n")).indexOf("field="+key)>=0) {
-					  fields[key]=i;
+				      if(!fields[key]) {
+					  //				      console.log({key, fields});
+					  errorFromDecMessages="Missing Fields";
 				      }
-				      j++;
 				  }
-				  i++;
-			      }
-			      errorFromDecMessages="Success";
-			      for(var key in fields) {
-				  if(!fields[key]) {
-				      //				      console.log({key, fields});
-				      errorFromDecMessages="Missing Fields";
-				  }
-			      }
-			      if(errorFromDecMessages!="Missing Fields") {
-				  var messageV=contentMessage[fields["signature"]];
-				  const signedMessage = await openpgp.readCleartextMessage({
-				      cleartextMessage: messageV
-				  });
-				  //				  console.log({contentMessage});
-				  if(!publicK) publicK=pubkey;
-				  const public_Key = await openpgp.readKey({ armoredKey: publicK });
-				  openpgp.verify({
-				      message: signedMessage,
-				      verificationKeys: public_Key,
-				  }).then(async (verificationResult)=> {
-				      try {
-					  await verificationResult.signatures[0].verified; // throws on invalid signature
-				      } catch (e) {
-					  errorFromDecMessages=('Signature could not be verified: ' + e.message);
-					  resolve({error: errorFromDecMessages, data});
-				      }
-				      errorFromDecMessages = "Message Mismatch";
-				      messageV=signedMessage.text;
-				      RSA_decrypt(messageV, rsaPrivateKey).then((response)=>{
-					  var messageD=response;
-					  var headerM=messageD.substring(0, messageD.indexOf("\n\n")+2);
-					  var datefieldM=headerM.substring(headerM.indexOf("Date:")+("Date:").length, headerM.length).substring(0, headerM.substring(headerM.indexOf("Date:")+("Date:").length, headerM.length).indexOf("\n")).trim();
-					  var subject=headerM.substring(headerM.indexOf("Subject:")+("Subject:").length, headerM.length).substring(0, headerM.substring(headerM.indexOf("Subject:")+("Subject:").length, headerM.length).indexOf("\n"));
-					  messageD=messageD.substring(headerM.length, messageD.length);
-					  if(datefield==datefieldM) {
-					      errorFromDecMessages="Success";
-					      data=[];
-					      data["msg"]=messageD;
-					      data["date"]=datefieldM;
-					      data["subject"]=subject;
-					      var headerRest=headerM;
-					      while(headerRest.indexOf("\n")>1) {
-						  var field=headerRest.substring(0, headerRest.indexOf(":")).trim().toLowerCase();
-						  if(field.length) {
-						      data[field]=headerRest.substring(headerRest.indexOf(":")+1, headerRest.indexOf("\n"));
-						  }
-						  headerRest=headerRest.substring(headerRest.indexOf("\n")+1, headerRest.length);
-					      }
-					      resolve({error: errorFromDecMessages, data});
-					  } else {
+				  if(errorFromDecMessages!="Missing Fields") {
+				      var messageV=contentMessage[fields["signature"]];
+				      const signedMessage = await openpgp.readCleartextMessage({
+					  cleartextMessage: messageV
+				      });
+				      //				  console.log({contentMessage});
+				      if(!publicK) publicK=pubkey;
+				      const public_Key = await openpgp.readKey({ armoredKey: publicK });
+				      openpgp.verify({
+					  message: signedMessage,
+					  verificationKeys: public_Key,
+				      }).then(async (verificationResult)=> {
+					  try {
+					      await verificationResult.signatures[0].verified; // throws on invalid signature
+					  } catch (e) {
+					      errorFromDecMessages=('Signature could not be verified: ' + e.message);
 					      resolve({error: errorFromDecMessages, data});
 					  }
+					  errorFromDecMessages = "Message Mismatch";
+					  messageV=signedMessage.text;
+					  RSA_decrypt(messageV, rsaPrivateKey).then((response)=>{
+					      var messageD=response;
+					      var headerM=messageD.substring(0, messageD.indexOf("\n\n")+2);
+					      var datefieldM=headerM.substring(headerM.indexOf("Date:")+("Date:").length, headerM.length).substring(0, headerM.substring(headerM.indexOf("Date:")+("Date:").length, headerM.length).indexOf("\n")).trim();
+					      var subject=headerM.substring(headerM.indexOf("Subject:")+("Subject:").length, headerM.length).substring(0, headerM.substring(headerM.indexOf("Subject:")+("Subject:").length, headerM.length).indexOf("\n"));
+					      messageD=messageD.substring(headerM.length, messageD.length);
+					      if(datefield==datefieldM) {
+						  errorFromDecMessages="Success";
+						  data=[];
+						  data["msg"]=messageD;
+						  data["date"]=datefieldM;
+						  data["subject"]=subject;
+						  var headerRest=headerM;
+						  while(headerRest.indexOf("\n")>1) {
+						      var field=headerRest.substring(0, headerRest.indexOf(":")).trim().toLowerCase();
+						      if(field.length) {
+							  data[field]=headerRest.substring(headerRest.indexOf(":")+1, headerRest.indexOf("\n"));
+						      }
+						      headerRest=headerRest.substring(headerRest.indexOf("\n")+1, headerRest.length);
+						  }
+						  resolve({error: errorFromDecMessages, data});
+					      } else {
+						  resolve({error: errorFromDecMessages, data});
+					      }
+					  });
 				      });
-				  });
-			      } else {
+				  } else {
+				      resolve({error: errorFromDecMessages, data});
+				  }
+			      }  else {
 				  resolve({error: errorFromDecMessages, data});
 			      }
 			  }  else {
@@ -618,9 +744,6 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      }  else {
 			  resolve({error: errorFromDecMessages, data});
 		      }
-		  }  else {
-		      resolve({error: errorFromDecMessages, data});
-		  }
 		  } catch (e) {
 		      resolve(e.toString());
 		  }
@@ -972,7 +1095,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      init_OTProcessed=0;
 			  }
 			  if(symbol>=symbols.length) symbol=0;
-			  document.getElementById("modaltext").innerHTML="Pulling Info (init) <br>"+symbols[symbol];
+			  document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />"+symbols[symbol];
 			  document.getElementById("modal").style.display="block";
 			  symbol+=1;
 		      }
@@ -1016,7 +1139,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					      await sleep(500);
 					      console.log({error});
 					      if(symbol>=symbols.length) symbol=0;
-					      document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
+					      document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" /> <br>"+symbols[symbol];
 					      document.getElementById("modal").style.display="block";
 					      symbol+=1;
 					      if(content) len1=content.length;
@@ -1030,7 +1153,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      }
 			      decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
 				  if(respo.indexOf("var")<0) {
-				      document.getElementById("modaltext").innerHTML="Incorrect User Data";
+				      document.getElementById("modaltext").innerHTML=dictionary['incorrectuserdata'][language];
 				      document.getElementById("modal").style.display="block";
 				      error="Incorrect User Data";
 				      resolve({error});
@@ -1053,7 +1176,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  try {
 						      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(name)+'&M=1&date=' + (new Date()).getTime())).text();
 						      if(symbol>=symbols.length) symbol=0;
-						      document.getElementById("modaltext").innerHTML="Loading Box Data<br>"+symbols[symbol];
+						      document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" /> <br>"+symbols[symbol];
 						      document.getElementById("modal").style.display="block";
 						      symbol+=1;
 						      await sleep (500);
@@ -1081,7 +1204,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  while (continua) {
 						      error=".";
 						      if(symbol>=symbols.length) symbol=0;
-						      document.getElementById("modaltext").innerHTML="Loading User Public Key<br>"+symbols[symbol];
+						      document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" /><br>"+symbols[symbol];
 						      document.getElementById("modal").style.display="block";
 						      symbol+=1;
 						      try{
@@ -1152,8 +1275,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  }
 					  show=1;
 					  if(show) pon('tab1');
-					  document.getElementById("modaltext").innerHTML="User Loaded Successfully";
-					  document.getElementById("modal").style.display="block";
+					  // document.getElementById("modaltext").innerHTML="User Loaded Successfully";
+					  // document.getElementById("modal").style.display="block";
 					  resolve(boxesR);
 					  return true;
 				      }
@@ -1167,7 +1290,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  });
       }
       async function checkAndDisplayBuzon() {
-	  document.getElementById("modaltext").innerHTML="Loading Box";
+	  document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
 	  document.getElementById("modal").style.display="block";
 	  document.getElementById("boxesList").innerHTML="";
 	  var boxes=await cargaBuzon();
@@ -1200,14 +1323,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      subjectisGame[g]=key;
 			      g++;
 			  }
-			  if(boxes[key]["subject"]!="#coin" && boxes[key]["subject"]!="#ignore" ) document.getElementById("boxesList").innerHTML+="<div class=\"boxesList\" onclick=\"document.getElementById('indice').buzon='"+boxes[key]["address"].trim()+"'; RSA_cargaBuzon('" + boxes[key]["address"].trim()+"','"+boxes[key]["name"].trim() +"','"+boxes[key]["subject"]+"');\" >Name:" + boxes[key]["name"] + "<br>Subject: " + boxes[key]["subject"]+ "</div>";
+			  if(boxes[key]["subject"]!="#coin" && boxes[key]["subject"]!="#ignore" ) document.getElementById("boxesList").innerHTML+="<div class=\"boxesList\" onclick=\"document.getElementById('indice').buzon='"+boxes[key]["address"].trim()+"'; RSA_cargaBuzon('" + boxes[key]["address"].trim()+"','"+boxes[key]["name"].trim() +"','"+boxes[key]["subject"]+"');\" >" + boxes[key]["name"] + "<br> " + boxes[key]["subject"]+ "</div>";
 		      }
 		  }
 	      }
 	      if(!boxesofIgnored.length) {
 		  show=1;
 		  if(show) pon('tab1');
-		  document.getElementById("modaltext").innerHTML="Creating Ignore Box";
+		  document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
 		  document.getElementById("modal").style.display="block";
 		  var contador=0;
 		  response=await userPassword();
@@ -1238,12 +1361,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  await RSA_crearBuzon(buzon, "#ignore");
 		  return true;
 	      } else {
-		  document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: ignore)";
+		  document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
 		  document.getElementById("modal").style.display="block";
 		  //		      console.log({boxesofIgnored});
 		  document.getElementById("indice").buzon=null;
 		  await RSA_cargaBuzon(boxesofIgnored[0]["address"].trim(), boxesofIgnored[0]["name"].trim(), boxesofIgnored[0]["subject"])
-		  document.getElementById("modaltext").innerHTML="Loading Boxes (Subject: coins)";
+		  document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
 		  document.getElementById("modal").style.display="block";
 		  var c=0;
 		  console.log({subjectisCoin});
@@ -1255,7 +1378,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      if(!subjectisCoin.length) {
 		  show=1;
 		  if(show) pon('tab1');
-		  document.getElementById("modaltext").innerHTML="Creating Coin Box";
+		  document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
 		  document.getElementById("modal").style.display="block";
 		  var contador=0;
 		  response=await userPassword();
@@ -1290,8 +1413,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  if(!coinbox) coinbox=boxes[subjectisCoin[subjectisCoin.length-1]];
 		  if(document.getElementById("boxesTools").innerHTML.indexOf("coinsLoader")<0) {
 		      document.getElementById("boxesTools").innerHTML+="<span id=\"coinsLoader\"> <textarea id=\"coinfromText\" style=\"display: none; position: relative; left: 30%; width: 40%; height: 350;\"></textarea><input id=\"coinCancel\" style=\"display: none;\" type='button' value='Cancel' onclick=\"document.getElementById('coinsLoader').className=''; document.getElementById('coinsLoader').style=''; document.getElementById('coinsLoadButton').value='Load Coins From Text';    document.getElementById('coinfromText').style.display='none'; document.getElementById('coinfromText').style.display='none';this.style.display='none';\" /><input id=\"coinsLoadButton\" type=\"button\" onclick=\"if(document.getElementById('coinfromText').style.display=='none') {document.getElementById('coinfromText').style.display='block';  document.getElementById('coinCancel').style.display='';   document.getElementById('coinsLoader').className='modal'; document.getElementById('coinsLoader').style.display='block'; this.value='load';} else {document.getElementById('coinsLoader').className=''; document.getElementById('coinCancel').style.display='none'; document.getElementById('coinsLoadButton').value='Load Coins From Text'; document.getElementById('coinfromText').style.display='none';toStampCollector(document.getElementById('coinfromText').value,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'VERIFY', null, null, true); this.value='Load Coins From Text'; };\" value=\"Load Coins From Text\"/></span>";
-		  document.getElementById("boxesTools").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
-//		  document.getElementById("boxesTools").innerHTML+="<br><input id=\"cambioBills\" /><input style=\"width:30%\" type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
+		      document.getElementById("boxesTools").innerHTML+="<br><input type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', null, null, true);\" value=\"Consolidate Tokens\"/>";
+		      //		  document.getElementById("boxesTools").innerHTML+="<br><input id=\"cambioBills\" /><input style=\"width:30%\" type=\"button\" onclick=\"toStampCollector(tokens=null,'"+boxes[subjectisCoin[subjectisCoin.length-1]]["name"]+"','"+boxes[subjectisCoin[subjectisCoin.length-1]]["address"]+"', 'CONSOLIDATE', 1);\" value=\"Change\"/>";
 		      document.getElementById("buzonIndex").innerHTML+="<p>Ammount <input  style=\"width:30%\" id=\"ammountSend\"/> To Box <input  style=\"width:30%\"  id=\"boxtoSend\"/> </p><center><input type=\"button\" value=\"Send Coins to Box\" onclick=\"toStampContractBox(document.getElementById('boxtoSend').value, \'SEND\', document.getElementById('ammountSend').value, true)\" /></p>";
 		  }
 	      }
@@ -1343,14 +1466,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 
       async function toStampContractBox(buzon, command, ammountinTokens, buzonCoin=null) {
 	  var error=null;
-	  document.getElementById("modaltext").innerHTML="Collecting Tokens";
+	  document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
 	  document.getElementById("modal").style.display="block";
 	  var d=0
 	  var c=0;
 	  var ammountforTokens=ammountinTokens*1;
 	  var stampcoins=[];
 	  if(buzonCoin) stampcoins=coins;
-	  else stampcoins=document.getElementById('indiceTab').coins;
+	  else stampcoins=document.getElementById(indiceTab).coins;
 	  var tokens=new Array();
 	  c=0;
 	  var sigue=1;
@@ -1475,8 +1598,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  coinsValue-=ammountinTokens*1;
 				  document.getElementById("coins").innerHTML=coinsValue;
 			      } else {
-				  document.getElementById('indiceTab').coinValue-=(ammountinTokens*1);
-				  document.getElementById('boxBalanceValue').innerHTML=document.getElementById('indiceTab').coinValue;
+				  document.getElementById(indiceTab).coinValue-=(ammountinTokens*1);
+				  document.getElementById('boxBalanceValue').innerHTML=document.getElementById(indiceTab).coinValue;
 			      }
 			      error="T";
 			      document.getElementById("modaltext").innerHTML="SENT";
@@ -1516,7 +1639,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  var c=0;
 	  var stampcoins=[];
 	  if(buzonCoin) stampcoins=coins;
-	  else stampcoins=document.getElementById('indiceTab').coins;
+	  else stampcoins=document.getElementById(indiceTab).coins;
 	  console.log({command, coins,stampcoins, buzonCoin}, document.getElementById('indice').coins);
 	  if(text==null) {
 	      c=0;
@@ -1556,7 +1679,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      }
 	  }
 	  if(buzonCoin) coins=stampcoins;
-	  else document.getElementById('indiceTab').coins=stampcoins;
+	  else document.getElementById(indiceTab).coins=stampcoins;
 	  console.log({tokens, stampcoins, buzonCoin, coins});
 	  if(tokens.length) {
 	      init_OTProcessed=0;
@@ -1650,7 +1773,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      while(error==".") {
 		  if(symbol>=symbols.length) symbol=0;
 		  if(subjBox!="#coin") {
-		  document.getElementById("modaltext").innerHTML="Getting Last Index of Box<br>"+symbols[symbol];
+		      document.getElementById("modaltext").innerHTML="Getting Last Index of Box<br>"+symbols[symbol];
 		      document.getElementById("modal").style.display="block";
 		  }
 		  symbol++;
@@ -1693,7 +1816,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      console.log ({buzon, address});
 		      error=".";
 		      if(subjBox!="#coin") {
-			  document.getElementById("modaltext").innerHTML="RECEIVING (" + command + ")";
+			  document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
 			  document.getElementById("modal").style.display="block";
 		      }
 		      error="Not Found";
@@ -1710,15 +1833,15 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			      }
 			      if(symbol>=symbols.length) symbol=0;
 			      if(subjBox!="#coin") {
-				  document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + cntdr + "<br>" + symbols[symbol];
+				  //document.getElementById("modaltext").innerHTML="Receiveing Msg on Slot " + cntdr + "<br>" + symbols[symbol];
 				  symbol+=1;
-				  document.getElementById("modal").style.display="block";
+				  //document.getElementById("modal").style.display="block";
 			      }
 			      await sleep(500);
 			      passes+=1;
 			  }
 		      }
-		      document.getElementById("modaltext").innerHTML="Continue Loading";
+		      document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
 		      document.getElementById("modal").style.display="block";
 		      console.log({address, buzon, subjBox, cntdr});
 		      RSA_cargaBuzon(address, buzon, subjBox, cntdr);
@@ -1748,12 +1871,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      if(document.getElementById("indice").contador==undefined) document.getElementById("indice").contador=0;
 	      if(subject!="#coin" && subject!="#ignore" && !setContador) {
 		  document.getElementById("indice").box={address, buzon, subject};
-		  document.getElementById("modaltext").innerHTML="Loading " + buzon + " ("+subject+")";
-		  document.getElementById("modal").style.display="block";
+		  //		  document.getElementById("modaltext").innerHTML="Loading " + buzon + " ("+subject+")";
+		  //		  document.getElementById("modal").style.display="block";
 	      }
 	      if(!setContador) {
-//		  if(subject=="#coin" && document.getElementById("coins").contador) setContador=document.getElementById("coins").contador*1;
-//		  if(subject=="#"+buzonforGameis && document.getElementById("indice").contador) setContador=document.getElementById("indice").contador*1;
+		  //		  if(subject=="#coin" && document.getElementById("coins").contador) setContador=document.getElementById("coins").contador*1;
+		  //		  if(subject=="#"+buzonforGameis && document.getElementById("indice").contador) setContador=document.getElementById("indice").contador*1;
 	      }
 	      error=".";
 	      while (error==".") {
@@ -1772,8 +1895,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  }
 	      }
 	      if(error!="Success") {
-		  document.getElementById("modaltext").innerHTML="Box Not Found";
-		  document.getElementById("modal").style.display="block";
+		  //		  document.getElementById("modaltext").innerHTML="Box Not Found";
+		  //		  document.getElementById("modal").style.display="block";
 		  resolve({error: "Box Not Found"});
 		  return false;
 	      } else {
@@ -1800,8 +1923,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		  console.log({init_OTProcessed});
 		  regprocessed=false;
 		  if(subject!="#coin" && subject!="#ignore" && !setContador) {
-		      document.getElementById("modaltext").innerHTML="LOADING " + buzon;
-		      document.getElementById("modal").style.display="block";
+		      //		      document.getElementById("modaltext").innerHTML="LOADING " + buzon;
+		      //		      document.getElementById("modal").style.display="block";
 		  }
 		  userPassword().then(async (response)=>{
 		      if(response.error) {
@@ -1821,8 +1944,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  while (cntinuaM) {
 				      if(symbol>=symbols.length) symbol=0;
 				      if(subject!="#coin" && subject!="#ignore" && !setContador) {
-					  document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
-					  document.getElementById("modal").style.display="block";
+					  //					  document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
+					  //					  document.getElementById("modal").style.display="block";
 				      }
 				      symbol+=1;
 				      try {
@@ -1841,8 +1964,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						      console.log({error});
 						      if(symbol>=symbols.length) symbol=0;
 						      if(subject!="#coin" && subject!="#ignore"  && !setContador) {
-							  document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
-							  document.getElementById("modal").style.display="block";
+							  //							  document.getElementById("modaltext").innerHTML="Loading User Safe <br>"+symbols[symbol];
+							  //							  document.getElementById("modal").style.display="block";
 							  symbol+=1;
 						      }
 						      if(content) len1=content.length;
@@ -1860,8 +1983,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				  }
 				  var buzon=bzon;
 				  if(subject!="#coin" && subject!="#ignore"  && !setContador) {
-				      document.getElementById("modaltext").innerHTML="Continue Loading";
-				      document.getElementById("modal").style.display="block";
+				      //				      document.getElementById("modaltext").innerHTML="Continue Loading";
+				      //				      document.getElementById("modal").style.display="block";
 				  }
 				  console.log("LOaded");
 				  if(error=="Not Found") {
@@ -1873,8 +1996,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 				      eval(atob(content));
 				      decr(prefix_rsa, prefix_ivRsa).then(async (respo)=>{
 					  if(respo.indexOf("var")<0) {
-					      document.getElementById("modaltext").innerHTML="Incorrect User Data";
-					      document.getElementById("modal").style.display="block";
+					      //					      document.getElementById("modaltext").innerHTML="Incorrect User Data";
+					      //					      document.getElementById("modal").style.display="block";
 					  } else {
 					      eval(respo);
 					      if(rsaKey) {
@@ -1892,8 +2015,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  while (error==".") {
 							      if(symbol>=symbols.length) symbol=0;
 							      if(subject!="#coin" && subject!="#ignore"  && !setContador) {
-								  document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
-								  document.getElementById("modal").style.display="block";
+								  //								  document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
+								  //								  document.getElementById("modal").style.display="block";
 								  symbol+=1;
 							      }
 							      await sleep (500);
@@ -1911,8 +2034,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  console.log({error});
 								  if(symbol>=symbols.length) symbol=0;
 								  if(subject!="#coin" && subject!="#ignore"  && !setContador) {
-								      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
-								      document.getElementById("modal").style.display="block";
+								      //								      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
+								      //								      document.getElementById("modal").style.display="block";
 								      symbol+=1;
 								  }
 								  if(content) blen1=content.length;
@@ -1943,8 +2066,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  error=".";
 									  if(symbol>=symbols.length) symbol=0;
 									  if(subject!="#coin" && subject!="#ignore"  && !setContador) {
-									      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
-									      document.getElementById("modal").style.display="block";
+									      //									      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
+									      //									      document.getElementById("modal").style.display="block";
 									      symbol+=1;
 									  }
 									  var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzonPublic)+'.js&date=' + (new Date()).getTime())).text();
@@ -1965,8 +2088,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										  if(symbol>=symbols.length) symbol=0;
 										  if(subject!="#coin"  && !setContador) {
 
-										      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
-										      document.getElementById("modal").style.display="block";
+										      //										      document.getElementById("modaltext").innerHTML="Loading User Public Key <br>"+symbols[symbol];
+										      //										      document.getElementById("modal").style.display="block";
 										      symbol+=1;
 										  }
 										  if(content) len1=content.length;
@@ -1992,13 +2115,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      nameofMessage=nameofMessage+".js";
 								  }
 								  error=".";
-								  if(subject!="#coin" && subject!="#ignore" && !setContador) {
-								      document.getElementById('indiceTab').innerHTML="<p><span id=\""+buzon+"boxBalance\"></span></p><input type=\"button\" value=\"RSA KEY\" onclick=\"if(document.getElementById('textAreaRSAKey').innerHTML.indexOf(\'<textarea>\')<0) document.getElementById('textAreaRSAKey').innerHTML='<br><textarea>"+privateKey_RSA.replace(/(\r\n|\r|\n)/g, "\\n")+"</textarea>'; else document.getElementById('textAreaRSAKey').innerHTML='' \" /><span id=\"textAreaRSAKey\"></span>";
+								  if(subject!="#coin" && subject!="#ignore") {
+								      document.getElementById(indiceTab).innerHTML="<p><span id=\""+buzon+"boxBalance\"></span></p><input type=\"button\" value=\"RSA KEY\" onclick=\"if(document.getElementById('textAreaRSAKey').innerHTML.indexOf(\'<textarea>\')<0) document.getElementById('textAreaRSAKey').innerHTML='<br><textarea>"+privateKey_RSA.replace(/(\r\n|\r|\n)/g, "\\n")+"</textarea>'; else document.getElementById('textAreaRSAKey').innerHTML='' \" /><span id=\"textAreaRSAKey\"></span>";
 								      var fieldsforPPV="File: <input id='blobtoSend' type='file'/> <br /> To Box: <input id='buzonToPPV' /> <br /> Ammount: <input id='ammountToPPV' /> <br />";
 								      var fieldsforText="Message: <TEXTAREA id='texttoSend' cols=80 rows=20/></TEXTAREA> <br /> To Box: <input id='buzonToText' /> <br /> ";
 								      var functionSendText="RSA_enviarABuzon(document.getElementById('buzonToText').value, \'"+buzonOriginal+"\', \'"+subject+"\', document.getElementById('texttoSend').value).then((resp)=>{document.getElementById('fieldsforPPVspan').style.display='none';});";
 								      var functionSend="RSA_registrarAPPV(document.getElementById('buzonToPPV').value, \'"+buzonOriginal+"\', \'SEND\', document.getElementById('ammountToPPV').value).then((resp)=>{document.getElementById('fieldsforPPVspan').style.display='none';});;";
-								      document.getElementById('indiceTab').innerHTML+="<p><span id=\"fieldsforPPVspan\" style=\"display: none\">"+fieldsforPPV+"<br><input type=\"button\" value=\"Cancel\" onclick=\"document.getElementById('fieldsforPPVspan').style.display='none';\" /> </span><input type=\"button\" value=\"Send File to Box PPV\" onclick=\"if(this.send){this.send=0; "+functionSend+"document.getElementById('fieldsforPPVspan').style.display='none';  } else {this.send=1; document.getElementById('fieldsforPPVspan').style.display='block';}\" /></p><p><span id=\"fieldsforTextspan\" style=\"display: none\">"+fieldsforText+"<br><input type=\"button\" value=\"Cancel\" onclick=\"document.getElementById('fieldsforTextspan').style.display='none';\" /> </span><input type=\"button\" value=\"Send Text to Box\" onclick=\"if(this.send){this.send=0;"+functionSendText+";document.getElementById('fieldsforTextspan').style.display='none';   } else {this.send=1;document.getElementById('fieldsforTextspan').style.display='block';}\" /></p></center>";
+								      document.getElementById(indiceTab).innerHTML+="<p><span id=\"fieldsforPPVspan\" style=\"display: none\">"+fieldsforPPV+"<br><input type=\"button\" value=\"Cancel\" onclick=\"document.getElementById('fieldsforPPVspan').style.display='none';\" /> </span><input type=\"button\" value=\"Send File to Box PPV\" onclick=\"if(this.send){this.send=0; "+functionSend+"document.getElementById('fieldsforPPVspan').style.display='none';  } else {this.send=1; document.getElementById('fieldsforPPVspan').style.display='block';}\" /></p><p><span id=\"fieldsforTextspan\" style=\"display: none\">"+fieldsforText+"<br><input type=\"button\" value=\"Cancel\" onclick=\"document.getElementById('fieldsforTextspan').style.display='none';\" /> </span><input type=\"button\" value=\"Send Text to Box\" onclick=\"if(this.send){this.send=0;"+functionSendText+";document.getElementById('fieldsforTextspan').style.display='none';   } else {this.send=1;document.getElementById('fieldsforTextspan').style.display='block';}\" /></p></center>";
 								  }
 								  while(error!="Not Found") {
 								      if(!setContador) nameofMessage=null;
@@ -2008,8 +2131,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      error=".";
 									      if(symbol>=symbols.length) symbol=0;
 									      if(subject!="#coin"  && !setContador) {
-										  document.getElementById("modaltext").innerHTML="Getting LAst Message of "+subject+"<br>"+symbols[symbol];
-										  document.getElementById("modal").style.display="block";
+										  //										  document.getElementById("modaltext").innerHTML="Getting LAst Message of "+subject+"<br>"+symbols[symbol];
+										  //										  document.getElementById("modal").style.display="block";
 										  symbol+=1;
 									      }
 									      var cadenaEval=await (await fetch(remotepath + "/flastfile.php"+'?sha='+address+'&count=1')).text();
@@ -2028,11 +2151,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  }
 									  if(subject!="#coin"  && !setContador) {
 
-									      document.getElementById("modaltext").innerHTML="Last Message is <br>" + count;
-									      document.getElementById("modal").style.display="block";
+									      //									      document.getElementById("modaltext").innerHTML="Last Message is <br>" + count;
+									      //									      document.getElementById("modal").style.display="block";
 
-									      document.getElementById("modaltext").innerHTML="Continue Loading";
-									      document.getElementById("modal").style.display="block";
+									      //									      document.getElementById("modaltext").innerHTML="Continue Loading";
+									      //									      document.getElementById("modal").style.display="block";
 									  }
 									  nameofMessage=await digestMessage(address+""+contador);
 									  nameofMessage=nameofMessage+".js";
@@ -2056,8 +2179,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								      console.log({address, nameofMessage, contador, boxesignored});
 								      setContador=0;
 								      if(subject!="#coin"  && !setContador) {
-									  document.getElementById("modaltext").innerHTML="Loading " + subject + " Message<br>" + contador;
-									  document.getElementById("modal").style.display="block";
+									  //									  document.getElementById("modaltext").innerHTML="Loading " + subject + " Message<br>" + contador;
+									  //									  document.getElementById("modal").style.display="block";
 								      }
 								      error=".";
 								      while (error==".") {
@@ -2078,8 +2201,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									  console.log("Loading Content from Slot ", {contador, subject, buzon});
 									  if(subject!="#coin") {
 
-									      document.getElementById("modaltext").innerHTML="Loading Content from " + buzon + "<br>" + contador;
-									      document.getElementById("modal").style.display="block";
+									      //									      document.getElementById("modaltext").innerHTML="Loading Content from " + buzon + "<br>" + contador;
+									      //									      document.getElementById("modal").style.display="block";
 									  }
 									  
 									  var contentB=null;
@@ -2105,7 +2228,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											  if(key=="date" || key=="Date") {
 											      var date;
 											      if(key=="date") date=new Date(contentB.data[key]*1000);
-											      else date=new Date(contentB.data[key].substring(2)*1000);
+											      else date=new Date(contentB.data[key]*1000);
 											      console.log({date}, contentB.data[key]);
 											      const hours = date.getHours();
 											      const minutes = date.getMinutes();
@@ -2161,13 +2284,13 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											      }
 											      if(subject!="#coin") {
 
-												  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
-												  document.getElementById("modal").style.display="block";
+												  //												  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
+												  //												  document.getElementById("modal").style.display="block";
 											      }
 											      toignore+=msgTemporal;
 											      if(subject!="#coin") {
-												  document.getElementById("modaltext").innerHTML="Continue Loading";
-												  document.getElementById("modal").style.display="block";
+												  //												  document.getElementById("modaltext").innerHTML="Continue Loading";
+												  //												  document.getElementById("modal").style.display="block";
 											      }
 											  }
 											  consolidate="";
@@ -2176,12 +2299,12 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      prevcommand=contentB.data["date"];
 										  }
 										  if(subject!="#coin" && contentB.data["subject"].trim()=="verify") {
-										      alert('...');
+										      //										      alert('...');
 										      if(subject=="#"+buzonforGameis) document.getElementById("indice").contador=contador+1;
-										      var coinObj=parseCoin(contentB.data["msg"], document.getElementById('indiceTab').coins);
-										      document.getElementById('indiceTab').coinValue=coinObj.value;
-										      document.getElementById('indiceTab').coins=coinObj.coins;
-										      document.getElementById(buzon+"boxBalance").innerHTML="<span id='boxBalanceValue'>"+document.getElementById('indiceTab').coinValue+"</span>";
+										      var coinObj=parseCoin(contentB.data["msg"], document.getElementById(indiceTab).coins);
+										      document.getElementById(indiceTab).coinValue=coinObj.value;
+										      document.getElementById(indiceTab).coins=coinObj.coins;
+										      document.getElementById(buzon+"boxBalance").innerHTML="<span id='boxBalanceValue'>"+document.getElementById(indiceTab).coinValue+"</span>";
 										      if(document.getElementById(buzon+"boxBalance").innerHTML.indexOf("\"RETIRAR\"")<0) document.getElementById(buzon+"boxBalance").innerHTML+=" &nbsp;  &nbsp;  <input id=\"ammountSendBox\" type=\"text\" style='width: 30%;' /> <input style='width: 30%;' type=\"button\" value =\"RETIRAR\" onclick=\"toStampContractBox(\'" + coinbox["name"] + "\', \'SEND\', document.getElementById('ammountSendBox').value);\" /> ";
 										      boxesignoredadd(nameofMessage+";");
 										      var msgTemporal="";
@@ -2191,7 +2314,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      toignore+=msgTemporal;
 										  }
 										  if(subject=="#coin" && contentB.data["subject"].trim()=="verify") {
-										      document.getElementById("coins").contador=contador+1;
+										      document.getElementById("coins").contador=contador;
 										      verifyString+=nameofMessage+";"
 										      var coinObj=parseCoin(contentB.data["msg"], coins);
 										      coinsValue=coinObj.value;
@@ -2199,7 +2322,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 										      coins=coinObj.coins;
 										      boxesignoredadd(nameofMessage+";");
 										      console.log({coinObj, contador, coinObj, coins, coinsValue, nameofMessage});
-										      alert(coinsValue);
+										      //										      alert(coinsValue);
 										      var msgTemporal="";
 										      for (let i = 0; i < boxesignored.length; i++) {
 											  msgTemporal += boxesignored[i]+';';
@@ -2213,7 +2336,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 									      if(subject.trim()!="#ignore" && contentB.data["subject"].trim().substring(0, ("#sendcoin").length)!="#sendcoin" && contentB.data["subject"].trim().substring(0, ("consolidate").length)!="consolidate" && contentB.data["subject"].trim()!=="verify") {
 										  var testStr="data:image";
 										  if(document.getElementById("indice").innerHTML==emptyMessage) document.getElementById("indice").innerHTML="";
-										  if(contentB.data["msg"].substring(0, testStr.length)==testStr) document.getElementById("indice").innerHTML+="<div class='chat-bubble'><div class='chat-bubble-text'><p><img src=\"" + contentB.data["msg"] + "\"> </img></p></div>"+elementsInside+"</div></div>";
+										  if(contentB.data["msg"].substring(0, testStr.length)==testStr) document.getElementById("indice").innerHTML+="<div class='chat-bubble'><div class='chat-bubble-text'><p><img class='animage' onclick=\"if (this.classList.contains('enlarge')) { this.classList.remove('enlarge'); } else { this.classList.add('enlarge');}\" src=\"" + contentB.data["msg"] + "\"> </img></p></div>"+elementsInside+"</div></div>";
 										  else document.getElementById("indice").innerHTML+="<div class='chat-bubble'><div class='chat-bubble-text'><p>" + contentB.data["msg"] + "</div>"+elementsInside+"</div></div>";
 									      }
 									  }
@@ -2228,37 +2351,37 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  
 								  if(toignore.length){
 								      if(subject!="#coin"  && !setContador) {
-									  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
-									  document.getElementById("modal").style.display="block";
+									  //									  document.getElementById("modaltext").innerHTML="Putting Previous messages on ignore";
+									  //									  document.getElementById("modal").style.display="block";
 								      }
 								      var enviaResultTemp=await RSA_enviarABuzon(boxesofIgnored[0]["name"], boxesofIgnored[0]["name"], "#ignore", toignore);
 								      if(subject!="#coin"  && !setContador) {
-									  document.getElementById("modaltext").innerHTML="Continue Loading";
-									  document.getElementById("modal").style.display="block";
+									  //									  document.getElementById("modaltext").innerHTML="Continue Loading";
+									  //									  document.getElementById("modal").style.display="block";
 								      }
 								  }
 								  if(!consolidate.length) {
 								      if(subject!="#coin"  && !setContador) {
-									  document.getElementById("modaltext").innerHTML="Box Loaded Successfully";
-									  document.getElementById("modal").style.display="none";
+									  //									  document.getElementById("modaltext").innerHTML="Box Loaded Successfully";
+									  //									  document.getElementById("modal").style.display="none";
 								      }
 								  }
 								  if(consolidate.length) {
 								      if(subject!="#coin"  && !setContador) {
 
-									  document.getElementById("modaltext").innerHTML="There is consolidate Data, Sending to Verify";
-									  document.getElementById("modal").style.display="block";
+									  //									  document.getElementById("modaltext").innerHTML="There is consolidate Data, Sending to Verify";
+									  //									  document.getElementById("modal").style.display="block";
 								      }
 								      var isBoxCoin=false;
 								      if( subject=="#coin") {
 									  /*coins=[];
-									  coinsValue=0;
-									  document.getElementById("coins").innerHTML=coinsValue;*/
+									    coinsValue=0;
+									    document.getElementById("coins").innerHTML=coinsValue;*/
 									  isBoxCoin=true;
 								      } else {
-									  document.getElementById('indiceTab').coinValue=0;
-									  document.getElementById('indiceTab').coins=[];
-									  document.getElementById(buzon+"boxBalance").innerHTML=document.getElementById('indiceTab').coinValue;
+									  document.getElementById(indiceTab).coinValue=0;
+									  document.getElementById(indiceTab).coins=[];
+									  document.getElementById(buzon+"boxBalance").innerHTML=document.getElementById(indiceTab).coinValue;
 								      }
 								      console.log({subjBox: subject});
 								      await toStampCollector(consolidate, buzonOriginal, address, 'VERIFY', null, subject, isBoxCoin);
@@ -2266,12 +2389,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 								  if(document.getElementById(buzonOriginal+"Button")) document.getElementById(buzonOriginal+"Button").disabled=0;
 								  document.getElementById("modal").style.display="none";
 								  if(subject=="#coin" && document.getElementById("coins").contador) {
-								     setTimeout("RSA_cargaBuzon(\""+address+"\", \""+buzon+"\", \""+subject+"\", "+document.getElementById("coins").contador+")", 50000);
+								      if(stcoin) clearTimeout(stcoin);
+								      stcoin=setTimeout("RSA_cargaBuzon(\""+address+"\", \""+buzon+"\", \""+subject+"\", "+document.getElementById("coins").contador+")", 50000);
 								  }
 								  if(subject=="#"+buzonforGameis) {
 								      console.log("buzon", {buzon, address}, document.getElementById("indice").buzon);
 								      if(address==document.getElementById("indice").buzon) {
-									  setTimeout("RSA_cargaBuzon(\""+address+"\", \""+buzon+"\", \""+subject+"\", "+(contador+1)+")", 50000);
+									  if(stbox) clearTimeout(stbox);
+									  stbox=setTimeout("RSA_cargaBuzon(\""+address+"\", \""+buzon+"\", \""+subject+"\", "+contador+")", 50000);
 								      }
 								  }
 								  resolve({error:"Success"});
@@ -2441,7 +2566,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  error="Not Found";
 						  while (continua) {
 						      if(symbol>=symbols.length) symbol=0;
-						      document.getElementById("modaltext").innerHTML="Waiting for Safe <br>"+symbols[symbol];
+						      document.getElementById("modaltext").innerHTML="<img src=\"l2.gif\" style=\"width: 100%;\" /> "+symbols[symbol];
 						      document.getElementById("modal").style.display="block";
 						      symbol++;
 						      try {
@@ -2757,7 +2882,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											  console.log("Receiveing Msg on Slot ", contador, " ", encodeURI(nameofMessages), '<<<<<< #####');
 											  while(error=="Not Found") {
 											      if(symbol>=symbols.length) symbol=0;
-											      document.getElementById("modaltext").innerHTML="RECEIVING (" + subject + ")";
+											      document.getElementById("modaltext").innerHTML="<img style=\"width: 100%;\" src=\"l.gif\" />";
 											      document.getElementById("modal").style.display="block";
 											      symbol+=1;
 											      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(nameofMessages)+'&date=' + (new Date()).getTime())).text();
@@ -3145,7 +3270,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 			  error=".";
 			  while(error=="."){
 			      if(symbol>=symbols.length) symbol=0;
-			      document.getElementById("modaltext").innerHTML="Loading User Safe... <br>" + symbols[symbol];
+			      document.getElementById("modaltext").innerHTML="<img src=\"l2.gif\" style=\"width: 100%;\" /> <br>" + symbols[symbol];
 			      document.getElementById("modal").style.display="block";
 			      symbol++;
 			      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime())).text();
@@ -3186,7 +3311,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 					  error=".";
 					  while(error=="."){
 					      if(symbol>=symbols.length) symbol=0;
-					      document.getElementById("modaltext").innerHTML="Loading User Safe... <br>" + symbols[symbol];
+					      document.getElementById("modaltext").innerHTML="<img src=\"l2.gif\" style=\"width: 100%;\" />  <br>" + symbols[symbol];
 					      document.getElementById("modal").style.display="block";
 					      symbol++;
 					      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+addressFrom+'&date=' + (new Date()).getTime())).text();
@@ -3222,7 +3347,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 						  init_OTProcessed=0;
 						  while (init_OTProcessed!=255) {
 						      if(symbol>=symbols.length) symbol=0;
-						      document.getElementById("modaltext").innerHTML="Loading User Safe... <br>" + symbols[symbol];
+						      document.getElementById("modaltext").innerHTML="<img src=\"l2.gif\" style=\"width: 100%;\" />  <br>" + symbols[symbol];
 						      document.getElementById("modal").style.display="block";
 						      symbol++;
 						      var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
@@ -3260,7 +3385,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 							  error=".";
 							  while(error=="."){
 							      if(symbol>=symbols.length) symbol=0;
-							      document.getElementById("modaltext").innerHTML="Loading User Safe... <br>" + symbols[symbol];
+							      document.getElementById("modaltext").innerHTML="<img src=\"l2.gif\" style=\"width: 100%;\" />  <br>" + symbols[symbol];
 							      document.getElementById("modal").style.display="block";
 							      symbol++;
 							      var cadenaEval=await (await fetch(remotepath + "/fretfile.php"+'?fname='+encodeURI(buzon)+'.js&date=' + (new Date()).getTime())).text();
@@ -3384,7 +3509,7 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 											      init_OTProcessed=0;
 											      while (init_OTProcessed!=255) {
 												  if(symbol>=symbols.length) symbol=0;
-												  document.getElementById("modaltext").innerHTML="Loading User Safe... <br>" + symbols[symbol];
+												  document.getElementById("modaltext").innerHTML="<img src=\"l2.gif\" style=\"width: 100%;\" />  <br>" + symbols[symbol];
 												  document.getElementById("modal").style.display="block";
 												  symbol++;
 												  var cadenaEval=await (await fetch(remotepath + "/formalm.php"+'?_=' + (new Date()).getTime())).text();
@@ -3495,13 +3620,20 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  if(pev) eval(pev);
 	  continua=0;
 	  document.getElementById("tabula").innerHTML="<p>grados: " + grados + "</p><p>date: " + date + "</p>";
+	  rotateImage("ruedaimg", grados);
 	  var i=0;
 	  var x = document.getElementById("date_select")
 	  x.innerHTML="";
 	  while(i<events.length) {
 	      var option = document.createElement("option");
 	      option.value = events[i];
-	      option.text = new Date(Date.parse(events[i]));
+	      var optionDate=new Date(Date.parse(events[i]));
+	      var year=optionDate.getFullYear();
+	      var month=optionDate.getMonth();
+	      var day=optionDate.getDate();
+	      var hour=optionDate.getHours();
+	      var minute=optionDate.getMinutes();
+	      option.text = year + "/" + month + "/" + day + " " + hour + ":" + minute;
 	      x.add(option, x[i]);
 	      i++;
 	  }
@@ -3533,13 +3665,14 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 		      const b = parseInt(hex.substring(5, 7), 16);
 		      const cl = `rgb(${r}, ${g}, ${b})`;
 		      cell.style.backgroundColor=cl;
-		      cell.innerHTML=""+colornames[Object.keys(colorset)[cells]];
+		      cell.innerHTML="&nbsp;"; //+colornames[Object.keys(colorset)[cells]];
 		  }
 		  cells++;
 		  j++;
 	      }
 	      i++;
 	  }
+	  setInterval(updateTimer, 1000);
       }
 
       async function setOTP_SRC() {
@@ -3655,6 +3788,29 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      });
 	  });
       }
+
+
+
+      function updateTimer() {
+	  const now = new Date();
+	  const minutes = now.getMinutes();
+	  const seconds = now.getSeconds();
+	  let countdown;
+	  if (minutes < 30) {
+	      countdown = (30 - minutes) * 60 - seconds;
+	  } else {
+	      countdown = (60 - minutes) * 60 - seconds;
+	  }
+	  document.getElementById("timer").innerHTML = formatTime(countdown);
+      }
+
+      function formatTime(time) {
+	  const minutes = Math.floor(time / 60);
+	  const seconds = time % 60;
+	  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+
+
       
       function checatabla() {
 	  var lena=0;
@@ -3672,8 +3828,27 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      i++;
 	  }
       }
+      function rotateImage(imageId, angle) {
+	  let currentAngle = 0;
+	  const image = document.getElementById(imageId);
+	  const interval = 5;
+	  const totalFrames = 300;
+	  const frameAngle = angle / totalFrames;
+	  
+	  const rotate = () => {
+	      if (currentAngle <= angle) {
+		  image.style.transform = `rotate(${currentAngle}deg)`;
+		  currentAngle += frameAngle;
+		  setTimeout(rotate, interval);
+	      }
+	  };
+	  
+	  rotate();
+      }
+
+
       function agarradatos(event) {
-	  document.getElementById("numbers").value=event.target.innerHTML*1;
+	  document.getElementById("numbers").value=event.target.innerHTML;
 	  lena=0;
 	  for(var prop in numeros) {
 	      lena++;
@@ -3690,14 +3865,11 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      h++;
 	  }
 	  if(h==lena) {
-	      console.log(document.getElementById("numbers").value);
-	      console.log(numeros);
-	      console.log(document.getElementById("numbers").getElementsByTagName("td")[document.getElementById("numbers").value].style.backgroundColor="yellow");
 	      numeros.push(document.getElementById("numbers").value);
 	      fechas.push(document.getElementById("date_select").value);
 	      bets.push(document.getElementById("qty").value);
 	  }
-	  content=insertacode("", "; char numeros[" + numeros.length + "]={" + (""+numeros).replace(/(\[|\])/g, "") + "}; ");
+	  content=insertacode("", "; char numeros[" + numeros.length + "][10]={" + (""+numeros).replace(/(\[|\])/g, "").split(',').map(element => '"' + element +'"').join(',') + "}; ");
 	  var fechasl=[];
 	  for(i=0; i<fechas.length; i++) {
 	      fechasl[i]=Math.round(new Date(fechas[i]).getTime() / 1000)
@@ -3708,7 +3880,40 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  content=btoa(content);
 	  codeforRegister=insertacode("", "; char nameofindex[" + buzonforGameis.length + "]=\""+buzonforGameis+"\"; char command["+("APPEND").length + "]=\"APPEND\"; char content[" + content.length + "]=\""+content+"\";");
 	  console.log({codeforRegister});
-	  RSA_enviarABuzon(codeforRegister, buzonGameofUser, buzonforGameis);
+	  //RSA_enviarABuzon(codeforRegister, buzonGameofUser, buzonforGameis);
+      }
+      async function streamToString(stream) {
+	  const reader = stream.getReader();
+	  const decoder = new TextDecoder();
+	  let result = '';
+	  while (true) {
+	      const { done, value } = await reader.read();
+	      if (done) {
+		  return result;
+	      }
+	      result += decoder.decode(value);
+	  }
+      }
+      function postData(url = '', data = {}) {
+	  return new Promise((resolve)=>{
+	      try {
+		  fetch(url, {
+		      method: 'POST',
+		      headers: {
+			  'Content-Type': 'application/json'
+		      },
+		      body: JSON.stringify(data)
+		  }).then((response)=>{
+		      console.log(response);
+		      streamToString(response.body).then((responseStream)=>{
+			  resolve (responseStream);
+		      });
+		  });
+	      } catch (e) {
+		  console.log(e);
+		  resolve (JSON.stringy({e}));
+	      }
+	  });
       }
       function seteaboton(objeto, id, tag, change, same) {
 	  i=0;
@@ -3718,6 +3923,9 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      i++;
 	  }
 	  objetos.getElementById(id).backgroundColor=change;
+      }
+      function setLanguage(lang){
+	  language=lang;	  
       }
       var epoch=0;
       </script>
@@ -3735,8 +3943,17 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
       <button id="botontab0" onclick="if(show){ pon('tab0');}"> Ingreso </button>
       <button id="botontab1" onclick="if(show) {pon('tab1');}"> Mensajes </button>
       <button id="botontab2" onclick="if(show) {pon('tab2');setscrgrados();}"> Juego </button>
+      <button id="botontab3" onclick="if(show) {pon('tab3');}"> Ride </button>
+      <span class="language-selector">
+	<button><img style="width: 20px;" src="sp.png" />/<img style="width: 20px;" src="en.png" /></button>
+	<div class="language-list">
+	  <a href="#" onclick="setLanguage('en');"><img style="width: 50%;" src="en.png" /></a>
+	  <a href="#" onclick="setLanguage('es');"><img style="width: 50%;" src="sp.png" /></a>
+	  <!-- Add more language options as needed -->
+	</div>
+      </span>
     </div>
-      <span id="coins" class="coins"></span>
+    <span id="coins" class="coins"></span>
     <table style="width: 100%; font-family: Sans-Serif; font-size:18pt; background-color: '';">
       <tr>
 	<td style="background-color: ''; width: 80%;">
@@ -3777,7 +3994,8 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	      </div>
 	    </div>
 	    <div style="display: flex; flex-direction: column; width: 60%;">
-	      <p id="indiceTab" style="background-color: #eee9d6; float: left; position: relative; left: 5%; width: 90%; padding: 20px; overflow: auto;"> 		      <span style="width: 100%; font-size: 20pt; "> &nbsp; </span>
+	      <p id="indiceTab" style="background-color: #eee9d6; float: left; position: relative; left: 5%; width: 90%; padding: 20px; overflow: auto;">
+		<span style="width: 100%; font-size: 20pt; "> &nbsp; </span>
 	      </p>
 	      <p id="indice" style="background-color: #e7eef4; float: left; position: relative; left: 5%; width: 90%; padding: 20px; overflow: auto">
 		<span style="width: 100%; font-size: 20pt; "> &nbsp; ... </span>
@@ -3788,57 +4006,56 @@ q3lMi/dkigKdKtuqbPifjrJuqUr77m1zGk2o4xe2hDiYoV3um/H6sGMV5natwep7
 	  <div id="tab2" class="panel1">
 	    <table style="position:relative; width: 100%;">
 	      <tr>
-		<td colspan=3>
+		<td colspan=1>
 		  <table id="numbers" style="left:10%; color: white; width: 60%;"  onclick="agarradatos(event)">
 		    <tr>
 		      <td></td>
 		    </tr>
 		  </table>
-		</td>
-	      </tr>
-	      <tr>
-		<td>
 		  <select id="date_select" onchange="checatabla();">
 		  </select>
-		</td>
-	      </tr>
-	      <tr>
-		<td>
-		  <div id="tabula" style="display: inline; flex: 2; top:100px; background-color: #060807; width: 45%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;"> </div>
-		  <div id="rueda" style="display: inline; background-color: ''; flex: 2; width: 45%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
-		    <img src="rueda.png" style="width: 100%;" />
-		  </div>
-		  <p style="font-weight: bolder; ">Cantidad: <input value=1 min=1 max=10 step="1" id="qty" style="width:100" type="number" ></p>
-		  <span id="total" style="background-color: white; font-size: 30pt;">
-		    <p style="font-weight: bolder; "></p>
-		  </span>
-		</td>
-	      </tr>
-	      <tr>
-		<td>
+		  <p style="font-weight: bolder; ">Cantidad: </p></td><td><input value=1 min=1 max=10 step="1" id="qty" style="width:100" type="number" ><br>
+		  <span id="total" style="background-color: white; font-size: 30pt;"><p style="font-weight: bolder; "></span><br>
 		  <input value="COLOCAR" type="button" onclick="agarradatos(); document.getElementById('tab4').style.display='block';"></input>
 		</td>
+		<td>
+		  <p id="indiceGame" style="background-color: #e7eef4; float: left; position: relative; left: 5%; width: 90%; padding: 20px; overflow: auto">
+		</td>
+		<td>
+		  <div id="tabula" style="display: inline; top:100px; background-color: #060807; width: 45%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;"> </div>
+		  <div id="rueda" style="display: inline; background-color: ''; width: 45%; padding: 20px;border-color: #9c802d; border-width:5px; border-collapse: collapse;">
+		    <img id="ruedaimg" src="rueda.png" style="width: 100%;" />
+		    <div id="timer" style="top:-150%; width: 50%; background-color: (33, 44, 120, 0.3); " ></div>
+		  </div>
+		</td>
 	      </tr>
-	    </table>	    
-	    <div id="response" style="display: none;">
-	    </div>
-	    <script id="scro" >
-	    </script>
-	    <script id="scrotp" >
-	    </script>
-	    <script id="scrogrados" >
-	    </script>
-	    <script>
-	      var obj=document.getElementById('colors').getElementsByTagName("span");
-	      var i=0;
-	      while(i<obj.length && i < colors.length) {
-		  obj[i].style.backgroundColor=colors[i][1];
-		  //obj[i].innerHTML=colors[i][0];
-		  obj[i].colour=colors[i][0];
-		  i++;
-	      }
-	      pon('tab0');
-	    </script>	    
+	    </table>
+	  </div>
+	  <div id="tab3" class="panel1">
+	    <div style="width:150px">
+	      <input id="mapride" type="button" disabled="true" onclick="rideto(this.position);" style="position: relative; top: 30%; left: 0; width: 100%; height: 100px; z-index: 100; " value="Pedir Ride"/>
+	      </div>
+	    <div id="map" style="width:100%;height: 800px;"></div>
+	  </div>
+	  <div id="response" style="display: none;">
+	  </div>
+	  <script id="scro" >
+	  </script>
+	  <script id="scrotp" >
+	  </script>
+	  <script id="scrogrados" >
+	  </script>
+	  <script>
+	    var obj=document.getElementById('colors').getElementsByTagName("span");
+	    var i=0;
+	    while(i<obj.length && i < colors.length) {
+		obj[i].style.backgroundColor=colors[i][1];
+		//obj[i].innerHTML=colors[i][0];
+		obj[i].colour=colors[i][0];
+		i++;
+	    }
+	    pon('tab0');
+	  </script>	    
 	</td>
       </tr>
     </table>
